@@ -124,21 +124,21 @@ as:
 namespace size GB * replicas * hours pinned
 ```
 
-The effective rate used here is inferred from Turbopuffer's public pricing
-calculator, not copied from an explicit rate-card line item:
+The effective rate used here comes from actual Turbopuffer billing:
 
 ```text
-$2,476/month / 256 GB = $9.671875 per GB-month
+Pinned Namespace Storage (GB hours): 292.856667 x $0.0132465753
+$0.0132465753 per GB-hour * 720 = $9.537534216 per GB-month
 ```
 
 For LAION 100M with f32 vectors:
 
 ```text
 pin_size_GB = 100,000,000 * 768 * 4 / 1e9 = 307.2 GB
-pin_fixed_monthly = 307.2 * $9.671875 = $2,971.20/month
-pin_fixed_hourly = $2,971.20 / 720 = $4.1267/hour
+pin_fixed_hourly = 307.2 * $0.0132465753 = $4.0693/hour
+pin_fixed_monthly = $4.0693 * 720 = $2,929.93/month
 returned_bytes_cost = QPS * 3600 * $1e-7
-pin_cost_per_hour = $4.1267 + QPS * $0.00036
+pin_cost_per_hour = $4.0693 + QPS * $0.00036
 ```
 
 Prior non-pin Turbopuffer query cost for LAION 100M:
@@ -150,8 +150,8 @@ non_pin_cost_per_hour = QPS * $0.1883664
 Non-pin vs pin break-even:
 
 ```text
-0.1883664 * QPS = 4.1267 + 0.00036 * QPS
-QPS = 21.95
+0.1883664 * QPS = 4.0693 + 0.00036 * QPS
+QPS = 21.64
 ```
 
 So pin mode becomes cheaper than non-pin Turbopuffer at about 22 QPS, assuming
@@ -163,10 +163,10 @@ Replica cost scales linearly:
 
 | Replicas | Fixed cost per hour | Fixed cost per month |
 |---:|---:|---:|
-| 1 | $4.13 | $2,971 |
-| 2 | $8.25 | $5,942 |
-| 4 | $16.51 | $11,885 |
-| 8 | $33.01 | $23,770 |
+| 1 | $4.07 | $2,930 |
+| 2 | $8.14 | $5,860 |
+| 4 | $16.28 | $11,720 |
+| 8 | $32.55 | $23,439 |
 
 ## Proposed Next Tests
 
@@ -185,6 +185,6 @@ For each replica count, measure:
 ## Sources
 
 - Turbopuffer pinning docs: https://turbopuffer.com/docs/pinning
-- Turbopuffer pricing calculator: https://turbopuffer.com/pricing
+- User-provided Turbopuffer billing line: `Pinned Namespace Storage (GB hours) 292.856667 x $0.0132465753`
 - Completed run log: `/tmp/tpuf_pin_bench_20260509T053538Z.log`
 - Active rerun log: `/tmp/tpuf_pin_bench_rerun_20260509T072456Z.log`
