@@ -275,25 +275,75 @@ source for official leaderboard ingestion.
 
 | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
 |---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| IDs only | `search/raw_results/zilliz_cloud_capacity_12cu/unfiltered/na/ids_only/serial_recall/result_20260511_17d87c351af745ceab0738d3155af9ac_zillizcloud.json` | 0.9723 | 0.975 | `search/raw_results/zilliz_cloud_capacity_12cu/unfiltered/na/ids_only/concurrent_qps/result_20260511_8ee5908066ca48f8848b56f01285c6fb_zillizcloud.json` | 366.5669 | 376.0070 | 376.0070 | 0.1626s / 0.2108s | 0.1940s / 0.2748s | 0.2097s / 0.2993s | measured |
+| scalar label | `search/raw_results/zilliz_cloud_capacity_12cu/unfiltered/na/scalar_label/serial_recall/result_20260511_220657bd87e148ad95531a7601d23253_zillizcloud.json` | 0.9723 | 0.975 | `search/raw_results/zilliz_cloud_capacity_12cu/unfiltered/na/scalar_label/concurrent_qps/result_20260511_3ed9191186a84f0d83f5a15b98f1d42e_zillizcloud.json` | 379.4628 | 370.1937 | 379.4628 | 0.1571s / 0.2141s | 0.1940s / 0.2739s | 0.2043s / 0.2929s | measured |
+| vector | `search/raw_results/zilliz_cloud_capacity_12cu/unfiltered/na/vector/serial_recall/result_20260511_a7261239b0234060be1d349b9174d4f8_zillizcloud.json` | 0.9723 | 0.975 | `search/raw_results/zilliz_cloud_capacity_12cu/unfiltered/na/vector/concurrent_qps/result_20260511_259a2d53626a4011bbde5c1cf0d7f82d_zillizcloud.json` | 219.3919 | 229.4362 | 229.4362 | 0.2719s / 0.3455s | 0.3412s / 0.4440s | 0.3889s / 0.4977s | measured |
 
 ### Integer Filtered Search
 
 | Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
 |---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.1% | IDs only | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/0_1p/ids_only/serial_recall/result_20260511_c935770a90e7408c90528fa1bd77b672_zillizcloud.json` | 0.9781 | 0.9815 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/0_1p/ids_only/concurrent_qps/result_20260511_cfb93e52a67d480f8c435f6ed76d85e0_zillizcloud.json` | 1210.8837 | 1380.2318 | 1380.2318 | 0.0492s / 0.0574s | 0.0839s / 0.0873s | 0.0912s / 0.0921s | measured |
+| 0.1% | scalar label | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/0_1p/scalar_label/serial_recall/result_20260511_77bff551f0e44f958e3dce5026b461c0_zillizcloud.json` | 0.9781 | 0.9815 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/0_1p/scalar_label/concurrent_qps/result_20260511_f32a550f1836499aa466c467b0d1b30d_zillizcloud.json` | 1183.8423 | 1338.3295 | 1338.3295 | 0.0504s / 0.0592s | 0.0826s / 0.0871s | 0.0880s / 0.0926s | measured |
+| 0.1% | vector | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/0_1p/vector/serial_recall/result_20260511_81b48162610c47ecbab8d5984a1c863c_zillizcloud.json` | 0.9781 | 0.9815 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/0_1p/vector/concurrent_qps/result_20260511_1d8cddb8d8c2460d9c74fe031cf52223_zillizcloud.json` | 861.6848 | 933.0460 | 933.0460 | 0.0691s / 0.0848s | 0.0975s / 0.1086s | 0.1061s / 0.1182s | measured |
+| 0.2% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.2% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.2% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.5% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.5% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.5% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 1% | IDs only | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/1p/ids_only/serial_recall/result_20260511_905cb61feb424875910fec08da5bcd5f_zillizcloud.json` | 0.9809 | 0.9841 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/1p/ids_only/concurrent_qps/result_20260511_566d53410fdf4a4c8e150cf52f108f22_zillizcloud.json` | 730.0303 | 792.0219 | 792.0219 | 0.0816s / 0.0999s | 0.1026s / 0.1637s | 0.1081s / 0.1702s | measured |
+| 1% | scalar label | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/1p/scalar_label/serial_recall/result_20260511_0c02402812de4d5eaee14ba795a552d0_zillizcloud.json` | 0.9809 | 0.9841 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/1p/scalar_label/concurrent_qps/result_20260511_2f29f98a1dad4130bdcf3e7c00e1eee9_zillizcloud.json` | 719.5956 | 785.7993 | 785.7993 | 0.0828s / 0.1008s | 0.1031s / 0.1635s | 0.1090s / 0.1718s | measured |
+| 1% | vector | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/1p/vector/serial_recall/result_20260511_13c0324af6514d31a670c811da3436fb_zillizcloud.json` | 0.9809 | 0.9841 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/1p/vector/concurrent_qps/result_20260511_60b35e08ec914ef187a0818c5ec73c1a_zillizcloud.json` | 542.7760 | 572.6737 | 572.6737 | 0.1098s / 0.1382s | 0.1664s / 0.1869s | 0.1764s / 0.1953s | measured |
+| 2% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 2% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 2% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 5% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 5% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 5% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 10% | IDs only | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/10p/ids_only/serial_recall/result_20260511_e130c430a3414dbcb5912636f3ffb91f_zillizcloud.json` | 0.9852 | 0.9869 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/10p/ids_only/concurrent_qps/result_20260511_dc8405bde48d4779a9027437bb77dcd8_zillizcloud.json` | 717.1534 | 820.8570 | 820.8570 | 0.0831s / 0.0965s | 0.1012s / 0.1156s | 0.1055s / 0.1635s | measured |
+| 10% | scalar label | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/10p/scalar_label/serial_recall/result_20260511_7bb497b835d8456491d6fe9e585f00a4_zillizcloud.json` | 0.9852 | 0.9869 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/10p/scalar_label/concurrent_qps/result_20260511_530f75bd4831409aa6338c2726b1b70a_zillizcloud.json` | 701.5481 | 756.5890 | 756.5890 | 0.0849s / 0.1046s | 0.1029s / 0.1619s | 0.1078s / 0.1706s | measured |
+| 10% | vector | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/10p/vector/serial_recall/result_20260511_cc9cbc49618b4c0dab8336c04e788111_zillizcloud.json` | 0.9852 | 0.9869 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/10p/vector/concurrent_qps/result_20260511_676a35c5b8644afaaf31e4865fe4f173_zillizcloud.json` | 488.2515 | 517.2106 | 517.2106 | 0.1220s / 0.1530s | 0.1738s / 0.1939s | 0.1839s / 0.2037s | measured |
+| 20% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 20% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 20% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 50% | IDs only | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/50p/ids_only/serial_recall/result_20260511_9c7de03e08064f0aa58fa9c1aa899818_zillizcloud.json` | 0.9838 | 0.9852 | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/50p/ids_only/concurrent_qps/result_20260511_a2630a165b35455aaa7090b589a4b865_zillizcloud.json` | 322.8739 | 337.8539 | 337.8539 | 0.1847s / 0.2346s | 0.2065s / 0.2837s | 0.2468s / 0.2978s | measured |
+| 50% | scalar label | `search/raw_results/zilliz_cloud_capacity_12cu/int_filter/50p/scalar_label/serial_recall/result_20260511_a75369c0f8284e8ebb3aa4612fbd6101_zillizcloud.json` | 0.9838 | 0.9852 | TBD | TBD | TBD | TBD | TBD | TBD | TBD | recall measured; throughput pending |
+| 50% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Scalar Label Filtered Search
 
+1% selectivity means `label == "label_1p"`, approximately 1M matched rows.
+
 | Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
 |---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---:|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.1% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.1% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.1% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.2% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.2% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.2% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.5% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.5% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 0.5% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 1% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 1% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 1% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 2% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 2% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 2% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 5% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 5% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 5% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 10% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 10% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 10% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 20% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 20% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 20% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 50% | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 50% | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| 50% | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Pinecone Serverless
 
