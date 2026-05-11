@@ -192,9 +192,9 @@ source for official leaderboard ingestion.
 
 | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
 |---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
-| IDs only | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result_20260511_6342b75c2e3a42f08701f5102d4d627d_zillizcloud.json` | 0.951 | 0.9617 | TBD | TBD | TBD | TBD | TBD | TBD | TBD | recall measured; throughput pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/vector/concurrent_qps/result_20260509_6b3cbbfcc62d4752b1afbdc2f0874ee3_zillizcloud.json` | 32.8253 | 44.0385 | 44.0385 | 1.8196s / 1.7981s | 2.2119s / 2.0263s | 11.5227s / 2.7943s | throughput measured; recall pending |
+| IDs only | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result_20260511_6342b75c2e3a42f08701f5102d4d627d_zillizcloud.json` | 0.951 | 0.9617 | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result_20260511_f3b2fc7a2a864a91a570bd623c1b57a1_zillizcloud.json` | 44.8981 | 49.1625 | 49.1625 | 1.3286s / 1.6187s | 1.4682s / 1.8900s | 5.5715s / 2.2987s | measured |
+| scalar label | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/scalar_label/serial_recall/result_20260511_93415d2ccee247e390e6d75bc720937e_zillizcloud.json` | 0.951 | 0.9617 | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/scalar_label/concurrent_qps/result_20260511_37330a1870d54c81af133464d39ae6a1_zillizcloud.json` | 49.0737 | 49.8156 | 49.8156 | 1.2135s / 1.5885s | 1.4760s / 1.9036s | 1.6034s / 2.0174s | measured |
+| vector | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/vector/serial_recall/result_20260511_4d7523cc67104f3bb8bf87ecf8252ab3_zillizcloud.json` | 0.951 | 0.9617 | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/vector/concurrent_qps/result_20260509_6b3cbbfcc62d4752b1afbdc2f0874ee3_zillizcloud.json` | 32.8253 | 44.0385 | 44.0385 | 1.8196s / 1.7981s | 2.2119s / 2.0263s | 11.5227s / 2.7943s | measured |
 
 ### Integer Filtered Search
 
