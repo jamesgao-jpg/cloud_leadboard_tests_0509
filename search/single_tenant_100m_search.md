@@ -9,9 +9,12 @@ The matrix is designed to separate three effects:
 - Whether the search is unfiltered or filtered.
 - Which filter type is used: integer range filter or string scalar label filter.
 - Which payload is returned: IDs only, scalar label field, or vector field.
+- What recall/ndcg each exact product, filter, and payload combination gets
+  before measuring concurrent QPS.
 
 All rows should use the same dataset shape unless a product cannot support it:
-LAION 100M, 768 dimensions, L2, topK 100, concurrent search only unless noted.
+LAION 100M, 768 dimensions, L2, topK 100, with a serial recall phase followed
+by a concurrent QPS phase unless noted.
 
 ## Table of Contents
 
@@ -30,17 +33,17 @@ LAION 100M, 768 dimensions, L2, topK 100, concurrent search only unless noted.
 
 Each product section should eventually contain this full matrix.
 
-| Search mode | Filter flag | Filter expression | Payload profile | VDBBench payload flag | Status |
+| Search mode | Filter flag | Filter expression | Payload profile | Required phases | Status |
 |---|---|---|---|---|---|
-| Unfiltered | none | none | IDs only | `--payload-profile ids_only` | pending |
-| Unfiltered | none | none | scalar label | `--payload-profile scalar_label` | pending |
-| Unfiltered | none | none | vector | `--payload-profile vector` | pending |
-| Integer filtered | `--cloud-filter-rate <rate>` | `id >= int(dataset_size * rate)` | IDs only | `--payload-profile ids_only` | pending |
-| Integer filtered | `--cloud-filter-rate <rate>` | `id >= int(dataset_size * rate)` | scalar label | `--payload-profile scalar_label` | pending |
-| Integer filtered | `--cloud-filter-rate <rate>` | `id >= int(dataset_size * rate)` | vector | `--payload-profile vector` | pending |
-| Scalar label filtered | `--cloud-label-percentage <rate>` | `label == "label_<rate>"` | IDs only | `--payload-profile ids_only` | Tiered 4CU 1% measured |
-| Scalar label filtered | `--cloud-label-percentage <rate>` | `label == "label_<rate>"` | scalar label | `--payload-profile scalar_label` | Tiered 4CU 1% measured |
-| Scalar label filtered | `--cloud-label-percentage <rate>` | `label == "label_<rate>"` | vector | `--payload-profile vector` | Tiered 4CU 1% measured |
+| Unfiltered | none | none | IDs only | serial recall, then concurrent QPS | pending |
+| Unfiltered | none | none | scalar label | serial recall, then concurrent QPS | pending |
+| Unfiltered | none | none | vector | serial recall, then concurrent QPS | pending |
+| Integer filtered | `--cloud-filter-rate <rate>` | `id >= int(dataset_size * rate)` | IDs only | serial recall, then concurrent QPS | pending |
+| Integer filtered | `--cloud-filter-rate <rate>` | `id >= int(dataset_size * rate)` | scalar label | serial recall, then concurrent QPS | pending |
+| Integer filtered | `--cloud-filter-rate <rate>` | `id >= int(dataset_size * rate)` | vector | serial recall, then concurrent QPS | pending |
+| Scalar label filtered | `--cloud-label-percentage <rate>` | `label == "label_<rate>"` | IDs only | serial recall, then concurrent QPS | Tiered 4CU 1% throughput measured; recall pending |
+| Scalar label filtered | `--cloud-label-percentage <rate>` | `label == "label_<rate>"` | scalar label | serial recall, then concurrent QPS | Tiered 4CU 1% throughput measured; recall pending |
+| Scalar label filtered | `--cloud-label-percentage <rate>` | `label == "label_<rate>"` | vector | serial recall, then concurrent QPS | Tiered 4CU 1% throughput measured; recall pending |
 
 Planned selectivities:
 
@@ -57,10 +60,10 @@ Planned selectivities:
 | Dimensions | 768 |
 | Metric | L2 |
 | TopK | 100 |
-| Search mode | concurrent only |
+| Search phases | serial recall first, then concurrent QPS |
 | Default concurrency list | `60,80` |
 | Default duration | 60s per concurrency |
-| Serial search | skipped unless recall/ndcg is explicitly needed |
+| Serial search | required for every product and every matrix row |
 | Result repo | `cloud_leadboard_tests_0509` |
 | VDBBench repo | `/home/ubuntu/vdbbenchleadboard2/VectorDBBench` |
 | VDBBench branch | `cloud-payload-search-case` |
@@ -85,7 +88,25 @@ export ZILLIZ_PASSWORD='<password>'
 export ZILLIZ_TOKEN='<token>'
 ```
 
-Base Zilliz command:
+Every case needs two runs. Run serial search first to capture recall/ndcg for
+the exact product, filter, and payload combination. Then run concurrent search
+for QPS and latency.
+
+Base Zilliz serial recall command:
+
+```bash
+.venv/bin/python -X faulthandler -m vectordb_bench.cli.vectordbbench zillizautoindex \
+  --uri '<zilliz-uri>' \
+  --user-name db_admin \
+  --case-type CloudPayloadSearchCase \
+  --payload-profile '<ids_only|scalar_label|vector>' \
+  --collection-name '<collection-name>' \
+  --skip-drop-old --skip-load \
+  --search-serial --skip-search-concurrent \
+  --db-label '<run-label>_serial_recall'
+```
+
+Base Zilliz concurrent QPS command:
 
 ```bash
 .venv/bin/python -X faulthandler -m vectordb_bench.cli.vectordbbench zillizautoindex \
@@ -114,6 +135,11 @@ Add exactly one filter flag for filtered runs:
 Product-specific commands for Pinecone and Turbopuffer should be filled after
 their CloudPayloadSearchCase support and collection layout are validated.
 
+Do not combine serial and concurrent in one run for this matrix. The current
+runner initializes both stages together and executes concurrent search before
+serial search when both are enabled, while this test plan requires serial recall
+to be captured first.
+
 ## Result JSON Interpretation
 
 Each run produces a JSON file under:
@@ -138,7 +164,15 @@ Read these fields:
 | `results[0].metrics.conc_latency_p95_list` | P95 latency at each concurrency level |
 | `results[0].metrics.conc_latency_p99_list` | P99 latency at each concurrency level |
 | `results[0].metrics.payload_estimated_bytes_per_query` | Estimated returned bytes/query |
-| `results[0].metrics.recall`, `results[0].metrics.ndcg` | `0.0` when serial search is skipped |
+| `results[0].metrics.recall`, `results[0].metrics.ndcg` | Recall and NDCG from the serial run |
+| `results[0].metrics.serial_latency_p99`, `results[0].metrics.serial_latency_p95` | Serial latency from the recall run |
+
+A case is complete only when both artifacts are recorded:
+
+| Artifact | Required contents |
+|---|---|
+| Serial recall JSON | recall, ndcg, serial p95, serial p99 |
+| Concurrent QPS JSON | max QPS, per-concurrency QPS, average/p95/p99 latency |
 
 ## Zilliz Cloud Tiered 4CU
 
@@ -151,32 +185,32 @@ Read these fields:
 
 ### Unfiltered Search
 
-| Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---|---|---|---:|---:|---:|---|---|---|---|
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | `tiered4cu_payload_vector_sync_c60c80_60s_20260509` | `result_20260509_6b3cbbfcc62d4752b1afbdc2f0874ee3_zillizcloud.json` | 32.8253 | 44.0385 | 44.0385 | 1.8196s / 1.7981s | 2.2119s / 2.0263s | 11.5227s / 2.7943s | measured |
+| Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| vector | pending | pending | pending | `result_20260509_6b3cbbfcc62d4752b1afbdc2f0874ee3_zillizcloud.json` | 32.8253 | 44.0385 | 44.0385 | 1.8196s / 1.7981s | 2.2119s / 2.0263s | 11.5227s / 2.7943s | throughput measured; recall pending |
 
 ### Integer Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Scalar Label Filtered Search
 
 1% selectivity means `label == "label_1p"`, approximately 1M matched rows.
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---:|---|
-| 1% | IDs only | `tiered4cu_scalar_filter_ids_only_c60c80_60s_20260511` | `result_20260511_256d6ebeeaae45a8b269a97c3175b254_zillizcloud.json` | 81.3103 | 89.6180 | 89.6180 | 0.7346s / 0.8844s | 0.8674s / 0.9983s | 2.2083s / 1.1814s | 2,000 | measured |
-| 1% | scalar label | `tiered4cu_scalar_filter_scalar_label_c60c80_60s_20260511` | `result_20260511_9bfaa3afe288417eb9a550605e2affec_zillizcloud.json` | 79.6971 | 84.9877 | 84.9877 | 0.7479s / 0.9323s | 0.8925s / 1.1024s | 1.0073s / 1.2081s | 3,600 | measured |
-| 1% | vector | `tiered4cu_scalar_filter_vector_c60c80_60s_20260511` | `result_20260511_129cbbc9f61f464193a990d90f239fbb_zillizcloud.json` | 57.3345 | 62.8719 | 62.8719 | 1.0400s / 1.2610s | 1.4088s / 1.5810s | 1.7919s / 1.7895s | 309,200 | measured |
-| other | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| other | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| other | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---:|---|
+| 1% | IDs only | pending | pending | pending | `result_20260511_256d6ebeeaae45a8b269a97c3175b254_zillizcloud.json` | 81.3103 | 89.6180 | 89.6180 | 0.7346s / 0.8844s | 0.8674s / 0.9983s | 2.2083s / 1.1814s | 2,000 | throughput measured; recall pending |
+| 1% | scalar label | pending | pending | pending | `result_20260511_9bfaa3afe288417eb9a550605e2affec_zillizcloud.json` | 79.6971 | 84.9877 | 84.9877 | 0.7479s / 0.9323s | 0.8925s / 1.1024s | 1.0073s / 1.2081s | 3,600 | throughput measured; recall pending |
+| 1% | vector | pending | pending | pending | `result_20260511_129cbbc9f61f464193a990d90f239fbb_zillizcloud.json` | 57.3345 | 62.8719 | 62.8719 | 1.0400s / 1.2610s | 1.4088s / 1.5810s | 1.7919s / 1.7895s | 309,200 | throughput measured; recall pending |
+| other | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| other | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| other | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Zilliz Cloud Capacity 12CU
 
@@ -189,27 +223,27 @@ Read these fields:
 
 ### Unfiltered Search
 
-| Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---|---|---|---:|---:|---:|---|---|---|---|
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Integer Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Scalar Label Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---:|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Pinecone Serverless
 
@@ -218,27 +252,27 @@ be validated before running this section.
 
 ### Unfiltered Search
 
-| Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---|---|---|---:|---:|---:|---|---|---|---|
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Integer Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Scalar Label Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---:|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Turbopuffer Unpinned
 
@@ -247,27 +281,27 @@ validated before running this section.
 
 ### Unfiltered Search
 
-| Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---|---|---|---:|---:|---:|---|---|---|---|
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Integer Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Scalar Label Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---:|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Turbopuffer Pinned
 
@@ -276,27 +310,27 @@ explicit instruction.
 
 ### Unfiltered Search
 
-| Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---|---|---|---:|---:|---:|---|---|---|---|
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Integer Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ### Scalar Label Filtered Search
 
-| Selectivity | Payload | Run label | Result JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
-|---:|---|---|---|---:|---:|---:|---|---|---|---:|---|
-| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Run Queue
 
@@ -310,6 +344,8 @@ Before running more jobs, select the next subset explicitly. Suggested axes:
 | Payload | IDs only, scalar label, vector |
 | Concurrency | default `60,80` unless changed |
 | Duration | default 60s unless changed |
+| Required order | serial recall first, concurrent QPS second |
 
 The current pause point is after Tiered 4CU scalar label filter at 1% for all
-three payload profiles.
+three payload profiles. Those three rows have concurrent throughput results,
+but still need serial recall runs before they count as complete matrix rows.
