@@ -68,7 +68,7 @@ def cell_link(cell: str) -> str:
 
 
 def is_pending(value: str) -> bool:
-    return clean_cell(value) in PENDING
+    return cell_label(value) in PENDING
 
 
 def selectivity_id(value: str) -> str:
@@ -132,7 +132,7 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
                 continue
             case_id = f"{product}__{filter_type}__{selectivity}__{payload}"
 
-            serial_path = data.get("Serial JSON", "") or cell_link(row[0])
+            serial_path = data.get("Serial JSON", "") or cell_link(data.get("Recall", "")) or cell_link(row[0])
             if serial_path and not is_pending(serial_path):
                 entries[(case_id, "serial_recall")] = ReportEntry(
                     case_id=case_id,
@@ -141,7 +141,7 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
                     fields={k: data[k] for k in ("Recall", "NDCG") if k in data},
                 )
 
-            concurrent_path = data.get("Concurrent JSON", "")
+            concurrent_path = data.get("Concurrent JSON", "") or cell_link(data.get("Max QPS", ""))
             if concurrent_path and not is_pending(concurrent_path):
                 fields = {
                     key: data[key]
@@ -184,7 +184,7 @@ def metric(raw: dict[str, Any]) -> dict[str, Any]:
 
 
 def same_display(raw_value: float, shown: str) -> bool:
-    shown = clean_cell(shown).rstrip("s")
+    shown = cell_label(shown).rstrip("s")
     if shown in PENDING:
         return True
     if not re.fullmatch(r"-?\d+(?:\.\d+)?", shown):
@@ -194,7 +194,7 @@ def same_display(raw_value: float, shown: str) -> bool:
 
 
 def split_pair(value: str) -> list[str]:
-    return [part.strip() for part in clean_cell(value).split("/")]
+    return [part.strip() for part in cell_label(value).split("/")]
 
 
 def compare_float(errors: list[str], label: str, raw_value: float, shown: str) -> None:

@@ -84,9 +84,9 @@ class VerifySearchResultsTest(unittest.TestCase):
             (root / "search/single_tenant_100m_search.md").write_text(
                 """## Zilliz Cloud Tiered 4CU
 ### Unfiltered Search
-| Payload | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---|---:|---:|---|---:|---:|---:|---|---|---|---|
-| [IDs only](search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result.json) | 0.951 | 0.9617 | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json` | 10.1234 | 12.3456 | 12.3456 | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
+| Payload | Recall | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---|---:|---:|---:|---:|---|---|---|---|
+| IDs only | [0.951](search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result.json) | 10.1234 | 12.3456 | [12.3456](search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
 """
             )
 
@@ -119,9 +119,9 @@ class VerifySearchResultsTest(unittest.TestCase):
             (root / "search/single_tenant_100m_search.md").write_text(
                 """## Zilliz Cloud Tiered 4CU
 ### Unfiltered Search
-| Payload | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-|---|---:|---:|---|---:|---:|---:|---|---|---|---|
-| IDs only | pending | pending | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json` | 99.0000 | 12.3456 | 12.3456 | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
+| Payload | Recall | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
+|---|---:|---:|---:|---:|---|---|---|---|
+| IDs only | pending | 99.0000 | 12.3456 | [12.3456](search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
 """
             )
 
