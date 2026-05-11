@@ -174,6 +174,11 @@ A case is complete only when both artifacts are recorded:
 | Serial recall JSON | recall, ndcg, serial p95, serial p99 |
 | Concurrent QPS JSON | max QPS, per-concurrency QPS, average/p95/p99 latency |
 
+Raw JSON outputs copied into this repository are stored under
+`search/raw_results/` and indexed by
+`search/raw_results/manifest.jsonl`. Use the manifest as the machine-readable
+source for official leaderboard ingestion.
+
 ## Zilliz Cloud Tiered 4CU
 
 | Item | Value |
@@ -189,7 +194,7 @@ A case is complete only when both artifacts are recorded:
 |---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
 | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | pending | pending | pending | `result_20260509_6b3cbbfcc62d4752b1afbdc2f0874ee3_zillizcloud.json` | 32.8253 | 44.0385 | 44.0385 | 1.8196s / 1.7981s | 2.2119s / 2.0263s | 11.5227s / 2.7943s | throughput measured; recall pending |
+| vector | pending | pending | pending | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/vector/concurrent_qps/result_20260509_6b3cbbfcc62d4752b1afbdc2f0874ee3_zillizcloud.json` | 32.8253 | 44.0385 | 44.0385 | 1.8196s / 1.7981s | 2.2119s / 2.0263s | 11.5227s / 2.7943s | throughput measured; recall pending |
 
 ### Integer Filtered Search
 
@@ -205,9 +210,9 @@ A case is complete only when both artifacts are recorded:
 
 | Selectivity | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
 |---:|---|---|---:|---:|---|---:|---:|---:|---|---|---|---:|---|
-| 1% | IDs only | pending | pending | pending | `result_20260511_256d6ebeeaae45a8b269a97c3175b254_zillizcloud.json` | 81.3103 | 89.6180 | 89.6180 | 0.7346s / 0.8844s | 0.8674s / 0.9983s | 2.2083s / 1.1814s | 2,000 | throughput measured; recall pending |
-| 1% | scalar label | pending | pending | pending | `result_20260511_9bfaa3afe288417eb9a550605e2affec_zillizcloud.json` | 79.6971 | 84.9877 | 84.9877 | 0.7479s / 0.9323s | 0.8925s / 1.1024s | 1.0073s / 1.2081s | 3,600 | throughput measured; recall pending |
-| 1% | vector | pending | pending | pending | `result_20260511_129cbbc9f61f464193a990d90f239fbb_zillizcloud.json` | 57.3345 | 62.8719 | 62.8719 | 1.0400s / 1.2610s | 1.4088s / 1.5810s | 1.7919s / 1.7895s | 309,200 | throughput measured; recall pending |
+| 1% | IDs only | pending | pending | pending | `search/raw_results/zilliz_cloud_tiered_4cu/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260511_256d6ebeeaae45a8b269a97c3175b254_zillizcloud.json` | 81.3103 | 89.6180 | 89.6180 | 0.7346s / 0.8844s | 0.8674s / 0.9983s | 2.2083s / 1.1814s | 2,000 | throughput measured; recall pending |
+| 1% | scalar label | pending | pending | pending | `search/raw_results/zilliz_cloud_tiered_4cu/scalar_label_filter/1p/scalar_label/concurrent_qps/result_20260511_9bfaa3afe288417eb9a550605e2affec_zillizcloud.json` | 79.6971 | 84.9877 | 84.9877 | 0.7479s / 0.9323s | 0.8925s / 1.1024s | 1.0073s / 1.2081s | 3,600 | throughput measured; recall pending |
+| 1% | vector | pending | pending | pending | `search/raw_results/zilliz_cloud_tiered_4cu/scalar_label_filter/1p/vector/concurrent_qps/result_20260511_129cbbc9f61f464193a990d90f239fbb_zillizcloud.json` | 57.3345 | 62.8719 | 62.8719 | 1.0400s / 1.2610s | 1.4088s / 1.5810s | 1.7919s / 1.7895s | 309,200 | throughput measured; recall pending |
 | other | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | other | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | other | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |

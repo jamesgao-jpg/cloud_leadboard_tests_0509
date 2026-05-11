@@ -1,0 +1,55 @@
+# Search Raw Results Archive
+
+This directory stores raw VDBBench JSON outputs for the single-tenant 100M
+search matrix. The Markdown report summarizes results for humans; this archive
+keeps the source artifacts needed to import results into an official VDBBench
+cloud leaderboard.
+
+## Layout
+
+```text
+raw_results/
+  manifest.jsonl
+  <product>/
+    <filter_type>/
+      <selectivity>/
+        <payload_profile>/
+          <phase>/
+            result_<date>_<run_id>_<product>.json
+```
+
+Path components:
+
+| Component | Values |
+|---|---|
+| `product` | `zilliz_cloud_tiered_4cu`, `zilliz_cloud_capacity_12cu`, `pinecone_serverless`, `turbopuffer_unpinned`, `turbopuffer_pinned` |
+| `filter_type` | `unfiltered`, `int_filter`, `scalar_label_filter` |
+| `selectivity` | `na` for unfiltered, otherwise labels such as `1p`, `0_5p`, `20p` |
+| `payload_profile` | `ids_only`, `scalar_label`, `vector` |
+| `phase` | `serial_recall`, `concurrent_qps` |
+
+## Manifest
+
+`manifest.jsonl` has one JSON object per raw result file. It is the machine
+index for ingestion. Do not add lines for missing or planned files.
+
+Required fields:
+
+| Field | Meaning |
+|---|---|
+| `case_id` | Stable matrix key: `<product>__<filter_type>__<selectivity>__<payload_profile>` |
+| `product` | Product directory name |
+| `filter_type` | Filter mode directory name |
+| `selectivity` | Selectivity directory name |
+| `payload_profile` | Payload profile directory name |
+| `phase` | `serial_recall` or `concurrent_qps` |
+| `raw_json` | Path to the raw JSON, relative to repo root |
+| `run_id` | VDBBench run id |
+| `db_label` | VDBBench run label |
+| `framework_repo` | Source framework repository |
+| `framework_branch` | Source framework branch |
+| `framework_commit` | Source framework commit |
+| `framework_state` | `clean` or a concise description of local changes |
+
+Raw result JSONs must be copied exactly as VDBBench emitted them. Credentials
+must remain redacted in the JSON before committing.
