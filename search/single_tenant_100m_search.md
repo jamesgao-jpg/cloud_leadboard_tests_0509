@@ -192,7 +192,7 @@ source for official leaderboard ingestion.
 
 | Payload | Serial JSON | Recall | NDCG | Concurrent JSON | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
 |---|---|---:|---:|---|---:|---:|---:|---|---|---|---|
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| IDs only | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result_20260511_6342b75c2e3a42f08701f5102d4d627d_zillizcloud.json` | 0.951 | 0.9617 | TBD | TBD | TBD | TBD | TBD | TBD | TBD | recall measured; throughput pending |
 | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | vector | pending | pending | pending | `search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/vector/concurrent_qps/result_20260509_6b3cbbfcc62d4752b1afbdc2f0874ee3_zillizcloud.json` | 32.8253 | 44.0385 | 44.0385 | 1.8196s / 1.7981s | 2.2119s / 2.0263s | 11.5227s / 2.7943s | throughput measured; recall pending |
 
