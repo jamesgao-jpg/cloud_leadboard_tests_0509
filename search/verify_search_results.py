@@ -45,12 +45,34 @@ def clean_cell(cell: str) -> str:
     return cell.strip()
 
 
+def markdown_link(cell: str) -> tuple[str, str] | None:
+    cell = clean_cell(cell)
+    match = re.fullmatch(r"\[([^\]]+)\]\(([^)]+)\)", cell)
+    if not match:
+        return None
+    return match.group(1).strip(), match.group(2).strip()
+
+
+def cell_label(cell: str) -> str:
+    link = markdown_link(cell)
+    if link:
+        return link[0]
+    return clean_cell(cell)
+
+
+def cell_link(cell: str) -> str:
+    link = markdown_link(cell)
+    if link:
+        return link[1]
+    return ""
+
+
 def is_pending(value: str) -> bool:
     return clean_cell(value) in PENDING
 
 
 def selectivity_id(value: str) -> str:
-    value = clean_cell(value)
+    value = cell_label(value)
     if value in {"", "TBD", "other"}:
         return value
     value = value.strip("%")
@@ -61,6 +83,13 @@ def selectivity_id(value: str) -> str:
 
 def split_row(line: str) -> list[str]:
     return [clean_cell(part) for part in line.strip().strip("|").split("|")]
+
+
+def is_separator_row(line: str) -> bool:
+    if not line.startswith("|"):
+        return False
+    cells = [part.strip() for part in line.strip().strip("|").split("|")]
+    return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
 
 
 def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
@@ -83,7 +112,7 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
             filter_type = FILTER_TYPES.get(title)
             i += 1
             continue
-        if not (product and filter_type and line.startswith("|") and i + 1 < len(lines) and lines[i + 1].startswith("|---")):
+        if not (product and filter_type and line.startswith("|") and i + 1 < len(lines) and is_separator_row(lines[i + 1])):
             i += 1
             continue
 
@@ -95,7 +124,7 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
             if len(row) != len(header):
                 continue
             data = dict(zip(header, row))
-            payload = PAYLOADS.get(data.get("Payload", ""))
+            payload = PAYLOADS.get(cell_label(data.get("Payload", "")))
             if not payload:
                 continue
             selectivity = "na" if filter_type == "unfiltered" else selectivity_id(data.get("Selectivity", ""))
@@ -103,7 +132,7 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
                 continue
             case_id = f"{product}__{filter_type}__{selectivity}__{payload}"
 
-            serial_path = data.get("Serial JSON", "")
+            serial_path = data.get("Serial JSON", "") or cell_link(row[0])
             if serial_path and not is_pending(serial_path):
                 entries[(case_id, "serial_recall")] = ReportEntry(
                     case_id=case_id,
