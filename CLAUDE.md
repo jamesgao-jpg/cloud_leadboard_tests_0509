@@ -16,6 +16,7 @@ artifacts for cloud leaderboard work prepared around 2026-05-09.
 | Folder | Purpose |
 |---|---|
 | `turbopuffer_pinned_test/` | Turbopuffer namespace pinning behavior, cost model, and LAION 100M search results. |
+| `cloud_insert/` | CloudInsertCase raw results and summary for cloud leaderboard insert-only runs. |
 
 ## Report Rules
 
