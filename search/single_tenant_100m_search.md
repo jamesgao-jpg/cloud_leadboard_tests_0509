@@ -319,16 +319,23 @@ cell links to the serial recall JSON when that artifact is present; the
 
 ## Pinecone Serverless
 
-Collection/index layout and CloudPayloadSearchCase compatibility still need to
-be validated before running this section.
+Index layout and CloudPayloadSearchCase compatibility validated on
+`vdbbench-laion-100m-768d-l2` with 100,000,000 vectors, 768 dimensions, and L2
+metric. Metadata fields used for payload tests: `label`, `label_2kb`, and
+`meta`.
+
+Pinecone unfiltered concurrent search was run at concurrency `3,4` with
+VDBBench Pinecone query retry/backoff enabled. These concurrency levels are
+lower than the default `60,80` because the serverless index returned 429
+rate-limit responses at higher unpaced concurrency.
 
 ### Unfiltered Search
 
-| Payload | Recall | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
-| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
-| IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| Payload | Recall | QPS @3 | QPS @4 | Max QPS | Avg latency @3/@4 | P95 @3/@4 | P99 @3/@4 | Payload bytes/query | Status |
+| --- | ---: | ---: | ---: | ---: | --- | --- | --- | ---: | --- |
+| IDs only | [0.9609](search/raw_results/pinecone_serverless/unfiltered/na/ids_only/serial_recall/result_20260513_pinecone_serverless_unfiltered_na_ids_only_serial_recall_20260513_pinecone.json) | 4.5642 | 4.1479 | [4.5642](search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result_20260513_pinecone_serverless_unfiltered_na_ids_only_concurrent_qps_c3c4_20260513_pinecone.json) | 0.6546s / 0.9537s | 2.0774s / 3.0967s | 2.6046s / 4.8496s | 2,000 | measured retry-enabled |
+| scalar label | [0.9609](search/raw_results/pinecone_serverless/unfiltered/na/scalar_label/serial_recall/result_20260513_pinecone_serverless_unfiltered_na_scalar_label_serial_recall_20260513_pinecone.json) | 4.5139 | 4.1723 | [4.5139](search/raw_results/pinecone_serverless/unfiltered/na/scalar_label/concurrent_qps/result_20260513_pinecone_serverless_unfiltered_na_scalar_label_concurrent_qps_c3c4_20260513_pinecone.json) | 0.6592s / 0.9486s | 2.0939s / 2.6068s | 2.6436s / 4.3413s | 3,600 | measured retry-enabled |
+| vector | [0.961](search/raw_results/pinecone_serverless/unfiltered/na/vector/serial_recall/result_20260513_pinecone_serverless_unfiltered_na_vector_serial_recall_20260513_pinecone.json) | 4.4830 | 4.1931 | [4.483](search/raw_results/pinecone_serverless/unfiltered/na/vector/concurrent_qps/result_20260513_pinecone_serverless_unfiltered_na_vector_concurrent_qps_c3c4_20260513_pinecone.json) | 0.6623s / 0.9412s | 1.0895s / 2.0901s | 1.6160s / 2.6097s | 309,200 | measured retry-enabled |
 
 ### Integer Filtered Search
 

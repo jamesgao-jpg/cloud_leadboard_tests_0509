@@ -143,19 +143,14 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
 
             concurrent_path = data.get("Concurrent JSON", "") or cell_link(data.get("Max QPS", ""))
             if concurrent_path and not is_pending(concurrent_path):
-                fields = {
-                    key: data[key]
-                    for key in (
-                        "QPS @60",
-                        "QPS @80",
-                        "Max QPS",
-                        "Avg latency @60/@80",
-                        "P95 @60/@80",
-                        "P99 @60/@80",
-                        "Payload bytes/query",
-                    )
-                    if key in data
-                }
+                fields = {}
+                for key, value in data.items():
+                    if (
+                        re.fullmatch(r"QPS @\d+", key)
+                        or re.fullmatch(r"(Avg latency|P95|P99) @[\d/@]+", key)
+                        or key in {"Max QPS", "Payload bytes/query"}
+                    ):
+                        fields[key] = value
                 entries[(case_id, "concurrent_qps")] = ReportEntry(
                     case_id=case_id,
                     phase="concurrent_qps",
@@ -220,6 +215,47 @@ def compare_payload_bytes(errors: list[str], raw_value: int, shown: str) -> None
         errors.append(f"Payload bytes/query: report={shown}, raw={raw_value}")
 
 
+def concurrency_index(errors: list[str], label: str, conc_num_list: list[int], concurrency: int) -> int | None:
+    try:
+        return conc_num_list.index(concurrency)
+    except ValueError:
+        errors.append(f"{label}: concurrency {concurrency} not present in raw conc_num_list={conc_num_list}")
+        return None
+
+
+def compare_concurrency_metric(
+    errors: list[str],
+    label: str,
+    conc_num_list: list[int],
+    raw_values: list[float],
+    concurrency: int,
+    shown: str,
+) -> None:
+    idx = concurrency_index(errors, label, conc_num_list, concurrency)
+    if idx is None:
+        return
+    if idx >= len(raw_values):
+        errors.append(f"{label}: missing raw value for concurrency {concurrency}")
+        return
+    compare_float(errors, label, raw_values[idx], shown)
+
+
+def compare_concurrency_metric_list(
+    errors: list[str],
+    label: str,
+    conc_num_list: list[int],
+    raw_values: list[float],
+    concurrencies: list[int],
+    shown: str,
+) -> None:
+    parts = split_pair(shown)
+    if len(parts) != len(concurrencies):
+        errors.append(f"{label}: report list is malformed: {shown}")
+        return
+    for concurrency, shown_value in zip(concurrencies, parts):
+        compare_concurrency_metric(errors, f"{label} @{concurrency}", conc_num_list, raw_values, concurrency, shown_value)
+
+
 def validate_raw_and_manifest(root: Path, manifest: dict[tuple[str, str], dict[str, Any]]) -> dict[tuple[str, str], dict[str, Any]]:
     raw_by_key: dict[tuple[str, str], dict[str, Any]] = {}
     for key, item in manifest.items():
@@ -261,20 +297,36 @@ def compare_report_to_raw(
             if "NDCG" in entry.fields:
                 compare_float(errors, f"{prefix} NDCG", m["ndcg"], entry.fields["NDCG"])
         elif key[1] == "concurrent_qps":
-            if "QPS @60" in entry.fields:
-                compare_float(errors, f"{prefix} QPS @60", m["conc_qps_list"][0], entry.fields["QPS @60"])
-            if "QPS @80" in entry.fields:
-                compare_float(errors, f"{prefix} QPS @80", m["conc_qps_list"][1], entry.fields["QPS @80"])
-            if "Max QPS" in entry.fields:
-                compare_float(errors, f"{prefix} Max QPS", m["qps"], entry.fields["Max QPS"])
-            if "Avg latency @60/@80" in entry.fields:
-                compare_pair(errors, f"{prefix} Avg latency @60/@80", m["conc_latency_avg_list"], entry.fields["Avg latency @60/@80"])
-            if "P95 @60/@80" in entry.fields:
-                compare_pair(errors, f"{prefix} P95 @60/@80", m["conc_latency_p95_list"], entry.fields["P95 @60/@80"])
-            if "P99 @60/@80" in entry.fields:
-                compare_pair(errors, f"{prefix} P99 @60/@80", m["conc_latency_p99_list"], entry.fields["P99 @60/@80"])
-            if "Payload bytes/query" in entry.fields:
-                compare_payload_bytes(errors, m["payload_estimated_bytes_per_query"], entry.fields["Payload bytes/query"])
+            conc_num_list = m["conc_num_list"]
+            for field, shown in entry.fields.items():
+                qps_match = re.fullmatch(r"QPS @(\d+)", field)
+                if qps_match:
+                    compare_concurrency_metric(
+                        errors,
+                        f"{prefix} {field}",
+                        conc_num_list,
+                        m["conc_qps_list"],
+                        int(qps_match.group(1)),
+                        shown,
+                    )
+                    continue
+
+                latency_match = re.fullmatch(r"(Avg latency|P95|P99) @([\d/@]+)", field)
+                if latency_match:
+                    metric_name = latency_match.group(1)
+                    raw_key = {
+                        "Avg latency": "conc_latency_avg_list",
+                        "P95": "conc_latency_p95_list",
+                        "P99": "conc_latency_p99_list",
+                    }[metric_name]
+                    concurrencies = [int(value) for value in re.findall(r"\d+", latency_match.group(2))]
+                    compare_concurrency_metric_list(errors, f"{prefix} {field}", conc_num_list, m[raw_key], concurrencies, shown)
+                    continue
+
+                if field == "Max QPS":
+                    compare_float(errors, f"{prefix} Max QPS", m["qps"], shown)
+                elif field == "Payload bytes/query":
+                    compare_payload_bytes(errors, m["payload_estimated_bytes_per_query"], shown)
 
     for key, entry in report.items():
         if key not in manifest:
