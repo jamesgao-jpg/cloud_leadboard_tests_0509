@@ -7,6 +7,8 @@ search testing across cloud vector database products. The matrix is designed to
 separate three effects:
 
 - Which multitenant isolation model is used by the product.
+- Whether the search is unfiltered or filtered.
+- Which filter type is used: integer range filter or string scalar label filter.
 - Which payload is returned: IDs only, scalar label field, or vector field.
 - What QPS and latency each exact product, tenant layout, and payload
   combination gets.
@@ -33,11 +35,24 @@ accuracy columns.
 
 Each product section should eventually contain this full matrix.
 
-| Tenant model | Payload profile | Required phases | Status |
-|---|---|---|---|
-| Product-native tenant routing | IDs only | load, readiness/optimize, concurrent QPS | pending |
-| Product-native tenant routing | scalar label | load, readiness/optimize, concurrent QPS | pending |
-| Product-native tenant routing | vector | load, readiness/optimize, concurrent QPS | pending |
+| Search mode | Filter flag | Filter expression | Payload profile | Required phases | Status |
+|---|---|---|---|---|---|
+| Unfiltered | none | tenant routing only | IDs only | concurrent QPS | pending |
+| Unfiltered | none | tenant routing only | scalar label | concurrent QPS | pending |
+| Unfiltered | none | tenant routing only | vector | concurrent QPS | pending |
+| Integer filtered | `--cloud-filter-rate <rate>` | tenant routing plus `id >= int(dataset_size * rate)` | IDs only | concurrent QPS | pending |
+| Integer filtered | `--cloud-filter-rate <rate>` | tenant routing plus `id >= int(dataset_size * rate)` | scalar label | concurrent QPS | pending |
+| Integer filtered | `--cloud-filter-rate <rate>` | tenant routing plus `id >= int(dataset_size * rate)` | vector | concurrent QPS | pending |
+| Scalar label filtered | `--cloud-label-percentage <rate>` | tenant routing plus `label == "label_<rate>"` | IDs only | concurrent QPS | pending |
+| Scalar label filtered | `--cloud-label-percentage <rate>` | tenant routing plus `label == "label_<rate>"` | scalar label | concurrent QPS | pending |
+| Scalar label filtered | `--cloud-label-percentage <rate>` | tenant routing plus `label == "label_<rate>"` | vector | concurrent QPS | pending |
+
+Planned selectivities:
+
+| Filter type | Candidate rates |
+|---|---|
+| Integer filter | `0.001`, `0.01`, `0.1`, `0.5` |
+| Scalar label filter | `0.001`, `0.002`, `0.005`, `0.01`, `0.02`, `0.05`, `0.1`, `0.2`, `0.5` |
 
 Product tenant mappings:
 
@@ -87,27 +102,9 @@ export PINECONE_API_KEY='<api-key>'
 export TURBOPUFFER_API_KEY='<api-key>'
 ```
 
-Every case needs a load/readiness run before the measured search run unless the
-target collection or index is already loaded and verified for the same tenant
-layout and payload schema.
-
-Base Zilliz load/readiness command:
-
-```bash
-.venv/bin/python -X faulthandler -m vectordb_bench.cli.vectordbbench zillizautoindex \
-  --uri '<zilliz-uri>' \
-  --user-name db_admin \
-  --case-type MultiTenantPerformanceCase \
-  --dataset-with-size-type 'Large Cohere (768dim, 10M)' \
-  --tenant-count 1000 \
-  --tenant-prefix tenant_ \
-  --tenant-id-width 4 \
-  --payload-profile '<ids_only|scalar_label|vector>' \
-  --collection-name '<collection-name>' \
-  --drop-old --load \
-  --skip-search-serial --skip-search-concurrent \
-  --db-label '<run-label>_load'
-```
+This report tracks measured search rows only. The target collection or index
+must already be loaded and verified for the same tenant layout and payload
+schema before running these commands.
 
 Base Zilliz concurrent QPS command:
 
@@ -127,6 +124,16 @@ Base Zilliz concurrent QPS command:
   --num-concurrency 60,80 \
   --concurrency-duration 60 \
   --db-label '<run-label>'
+```
+
+Add exactly one filter flag for filtered rows:
+
+```bash
+# Integer filter.
+--cloud-filter-rate 0.01
+
+# Scalar string label filter.
+--cloud-label-percentage 0.01
 ```
 
 For Zilliz Cloud and Milvus-compatible clients, run this case only with the
@@ -172,10 +179,6 @@ Base Turbopuffer concurrent QPS command:
   --db-label '<run-label>'
 ```
 
-Use matching load/readiness commands for Pinecone and Turbopuffer by changing
-the final phase flags to `--drop-old --load --skip-search-serial
---skip-search-concurrent`.
-
 ## Result JSON Interpretation
 
 Each run produces a JSON file under:
@@ -195,9 +198,8 @@ Read these fields:
 | `results[0].task_config.case_config.custom_case.tenant_prefix` | Tenant label prefix |
 | `results[0].task_config.case_config.custom_case.tenant_id_width` | Zero-padding width for tenant IDs |
 | `results[0].task_config.case_config.custom_case.payload_profile` | Payload profile requested |
-| `results[0].metrics.load_duration` | Load duration, when the run includes load |
-| `results[0].metrics.optimize_duration` | Optimize/readiness duration, when emitted |
-| `results[0].metrics.max_load_count` | Loaded row count, when the run includes load |
+| `results[0].task_config.case_config.custom_case.filter_rate` | Integer filter rate, if present |
+| `results[0].task_config.case_config.custom_case.label_percentage` | Scalar label selectivity, if present |
 | `results[0].metrics.qps` | Maximum QPS across the tested concurrency list |
 | `results[0].metrics.conc_num_list` | Concurrency levels tested |
 | `results[0].metrics.conc_qps_list` | QPS at each concurrency level |
@@ -207,11 +209,10 @@ Read these fields:
 | `results[0].metrics.payload_profile` | Payload profile recorded by the metrics object |
 | `results[0].metrics.payload_estimated_bytes_per_query` | Estimated returned bytes/query |
 
-A case is complete when these artifacts are recorded:
+A case is complete when this artifact is recorded:
 
 | Artifact | Required contents |
 |---|---|
-| Load/readiness JSON | loaded row count, load duration, readiness or optimize duration when emitted |
 | Concurrent QPS JSON | max QPS, per-concurrency QPS, average/p95/p99 latency, payload bytes/query |
 
 Raw JSON outputs copied into this repository should be stored under
@@ -232,21 +233,29 @@ present.
 | Tenant count | 1,000 |
 | Rows per tenant | approximately 10,000 |
 
-### Load and Readiness
-
-| Payload | Loaded rows | Load duration | Optimize/readiness duration | Status |
-|---|---:|---:|---:|---|
-| IDs only | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | pending |
-
-### Multitenant Search
+### Unfiltered Search
 
 | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
 |---|---:|---:|---:|---|---|---|---:|---|
 | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Integer Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Scalar Label Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Zilliz Cloud Capacity 12CU
 
@@ -259,21 +268,29 @@ present.
 | Tenant count | 1,000 |
 | Rows per tenant | approximately 10,000 |
 
-### Load and Readiness
-
-| Payload | Loaded rows | Load duration | Optimize/readiness duration | Status |
-|---|---:|---:|---:|---|
-| IDs only | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | pending |
-
-### Multitenant Search
+### Unfiltered Search
 
 | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
 |---|---:|---:|---:|---|---|---|---:|---|
 | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Integer Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Scalar Label Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Pinecone Serverless
 
@@ -286,15 +303,7 @@ present.
 | Tenant count | 1,000 |
 | Rows per tenant | approximately 10,000 |
 
-### Load and Readiness
-
-| Payload | Loaded rows | Load duration | Readiness duration | Status |
-|---|---:|---:|---:|---|
-| IDs only | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | pending |
-
-### Multitenant Search
+### Unfiltered Search
 
 Pinecone serverless may need a lower concurrency list if the service returns
 rate-limit responses at `60,80`. Record the actual concurrency list in the row
@@ -305,6 +314,22 @@ if it differs from the default.
 | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Integer Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Scalar Label Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Turbopuffer Unpinned
 
@@ -318,21 +343,29 @@ if it differs from the default.
 | Tenant count | 1,000 |
 | Rows per tenant | approximately 10,000 |
 
-### Load and Readiness
-
-| Payload | Loaded rows | Load duration | Readiness duration | Status |
-|---|---:|---:|---:|---|
-| IDs only | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | pending |
-
-### Multitenant Search
+### Unfiltered Search
 
 | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
 |---|---:|---:|---:|---|---|---|---:|---|
 | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Integer Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Scalar Label Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Turbopuffer Pinned
 
@@ -349,21 +382,29 @@ explicit instruction.
 | Tenant count | 1,000 |
 | Rows per tenant | approximately 10,000 |
 
-### Load and Readiness
-
-| Payload | Loaded rows | Load duration | Readiness duration | Status |
-|---|---:|---:|---:|---|
-| IDs only | TBD | TBD | TBD | pending |
-| scalar label | TBD | TBD | TBD | pending |
-| vector | TBD | TBD | TBD | pending |
-
-### Multitenant Search
+### Unfiltered Search
 
 | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
 |---|---:|---:|---:|---|---|---|---:|---|
 | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Integer Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+
+### Scalar Label Filtered Search
+
+| Selectivity | Payload | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Payload bytes/query | Status |
+|---:|---|---:|---:|---:|---|---|---|---:|---|
+| TBD | IDs only | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | scalar label | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
+| TBD | vector | TBD | TBD | TBD | TBD | TBD | TBD | TBD | pending |
 
 ## Run Queue
 
@@ -372,12 +413,14 @@ Before running more jobs, select the next subset explicitly. Suggested axes:
 | Axis | Options |
 |---|---|
 | Product | Tiered 4CU, Capacity 12CU, Pinecone serverless, Turbopuffer unpinned, Turbopuffer pinned |
+| Search mode | unfiltered, integer filtered, scalar label filtered |
+| Selectivity | one or more rates from the planned selectivity table |
 | Payload | IDs only, scalar label, vector |
 | Tenant count | default `1000` unless changed |
 | Concurrency | default `60,80` unless changed |
 | Duration | default 60s unless changed |
-| Required order | load/readiness first, concurrent QPS second |
+| Required artifact | concurrent QPS JSON |
 
 The current pause point is before the first official multitenant result is
-recorded. Start with one product and one payload profile to validate the raw
-JSON layout and manifest path before filling the whole matrix.
+recorded. Start with one product, one search mode, and one payload profile to
+validate the raw JSON layout and manifest path before filling the whole matrix.
