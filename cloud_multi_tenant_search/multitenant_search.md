@@ -216,8 +216,8 @@ A case is complete when this artifact is recorded:
 | Concurrent QPS JSON | max QPS, per-concurrency QPS, average/p95/p99 latency, payload bytes/query |
 
 Raw JSON outputs copied into this repository should be stored under
-`search/raw_results/` and indexed by
-`search/raw_results/manifest.jsonl`. Use the manifest as the machine-readable
+`cloud_multi_tenant_search/raw_results/` and indexed by
+`cloud_multi_tenant_search/raw_results/manifest.jsonl`. Use the manifest as the machine-readable
 source for official leaderboard ingestion. In the result tables, the `Max QPS`
 cell should link to the concurrent throughput JSON when that artifact is
 present.

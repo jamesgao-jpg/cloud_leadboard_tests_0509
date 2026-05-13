@@ -60,11 +60,14 @@ def cell_label(cell: str) -> str:
     return clean_cell(cell)
 
 
-def cell_link(cell: str) -> str:
+def cell_link(cell: str, report_dir: Path | None = None) -> str:
     link = markdown_link(cell)
-    if link:
-        return link[1]
-    return ""
+    if not link:
+        return ""
+    path = link[1]
+    if report_dir and path and not path.startswith(("/", "http://", "https://")):
+        return str((report_dir / path).as_posix())
+    return path
 
 
 def is_pending(value: str) -> bool:
@@ -93,7 +96,7 @@ def is_separator_row(line: str) -> bool:
 
 
 def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
-    path = root / "search/single_tenant_100m_search.md"
+    path = root / "cloud_payload_search/single_tenant_100m_search.md"
     lines = path.read_text().splitlines()
     product: str | None = None
     filter_type: str | None = None
@@ -132,7 +135,8 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
                 continue
             case_id = f"{product}__{filter_type}__{selectivity}__{payload}"
 
-            serial_path = data.get("Serial JSON", "") or cell_link(data.get("Recall", "")) or cell_link(row[0])
+            report_dir = Path("cloud_payload_search")
+            serial_path = data.get("Serial JSON", "") or cell_link(data.get("Recall", ""), report_dir) or cell_link(row[0], report_dir)
             if serial_path and not is_pending(serial_path):
                 entries[(case_id, "serial_recall")] = ReportEntry(
                     case_id=case_id,
@@ -141,7 +145,7 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
                     fields={k: data[k] for k in ("Recall", "NDCG") if k in data},
                 )
 
-            concurrent_path = data.get("Concurrent JSON", "") or cell_link(data.get("Max QPS", ""))
+            concurrent_path = data.get("Concurrent JSON", "") or cell_link(data.get("Max QPS", ""), report_dir)
             if concurrent_path and not is_pending(concurrent_path):
                 fields = {}
                 for key, value in data.items():
@@ -161,7 +165,7 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
 
 
 def load_manifest(root: Path) -> dict[tuple[str, str], dict[str, Any]]:
-    manifest = root / "search/raw_results/manifest.jsonl"
+    manifest = root / "cloud_payload_search/raw_results/manifest.jsonl"
     entries: dict[tuple[str, str], dict[str, Any]] = {}
     for lineno, line in enumerate(manifest.read_text().splitlines(), 1):
         if not line.strip():

@@ -46,12 +46,12 @@ class VerifySearchResultsTest(unittest.TestCase):
     def test_verifies_manifest_raw_json_and_report_metrics(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            serial_raw = root / "search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result.json"
-            concurrent_raw = root / "search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json"
+            serial_raw = root / "cloud_payload_search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result.json"
+            concurrent_raw = root / "cloud_payload_search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json"
             write_raw(serial_raw, "run-serial", "label-serial")
             write_raw(concurrent_raw, "run-concurrent", "label-concurrent")
-            (root / "search/raw_results/manifest.jsonl").parent.mkdir(parents=True, exist_ok=True)
-            (root / "search/raw_results/manifest.jsonl").write_text(
+            (root / "cloud_payload_search/raw_results/manifest.jsonl").parent.mkdir(parents=True, exist_ok=True)
+            (root / "cloud_payload_search/raw_results/manifest.jsonl").write_text(
                 json.dumps(
                     {
                         "case_id": "zilliz_cloud_tiered_4cu__unfiltered__na__ids_only",
@@ -81,12 +81,12 @@ class VerifySearchResultsTest(unittest.TestCase):
                 )
                 + "\n"
             )
-            (root / "search/single_tenant_100m_search.md").write_text(
+            (root / "cloud_payload_search/single_tenant_100m_search.md").write_text(
                 """## Zilliz Cloud Tiered 4CU
 ### Unfiltered Search
 | Payload | Recall | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
 |---|---:|---:|---:|---:|---|---|---|---|
-| IDs only | [0.951](search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result.json) | 10.1234 | 12.3456 | [12.3456](search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
+| IDs only | [0.951](raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/serial_recall/result.json) | 10.1234 | 12.3456 | [12.3456](raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
 """
             )
 
@@ -97,10 +97,10 @@ class VerifySearchResultsTest(unittest.TestCase):
     def test_reports_metric_mismatch(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            raw = root / "search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json"
+            raw = root / "cloud_payload_search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json"
             write_raw(raw, "run-1", "label-1")
-            (root / "search/raw_results/manifest.jsonl").parent.mkdir(parents=True, exist_ok=True)
-            (root / "search/raw_results/manifest.jsonl").write_text(
+            (root / "cloud_payload_search/raw_results/manifest.jsonl").parent.mkdir(parents=True, exist_ok=True)
+            (root / "cloud_payload_search/raw_results/manifest.jsonl").write_text(
                 json.dumps(
                     {
                         "case_id": "zilliz_cloud_tiered_4cu__unfiltered__na__ids_only",
@@ -116,12 +116,12 @@ class VerifySearchResultsTest(unittest.TestCase):
                 )
                 + "\n"
             )
-            (root / "search/single_tenant_100m_search.md").write_text(
+            (root / "cloud_payload_search/single_tenant_100m_search.md").write_text(
                 """## Zilliz Cloud Tiered 4CU
 ### Unfiltered Search
 | Payload | Recall | QPS @60 | QPS @80 | Max QPS | Avg latency @60/@80 | P95 @60/@80 | P99 @60/@80 | Status |
 |---|---:|---:|---:|---:|---|---|---|---|
-| IDs only | pending | 99.0000 | 12.3456 | [12.3456](search/raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
+| IDs only | pending | 99.0000 | 12.3456 | [12.3456](raw_results/zilliz_cloud_tiered_4cu/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.5000s / 0.6000s | 0.7000s / 0.8000s | 0.9000s / 1.1000s | measured |
 """
             )
 
@@ -132,7 +132,7 @@ class VerifySearchResultsTest(unittest.TestCase):
     def test_verifies_non_default_concurrency_headers(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            raw = root / "search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result.json"
+            raw = root / "cloud_payload_search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result.json"
             write_raw(raw, "run-1", "label-1")
             payload = json.loads(raw.read_text())
             metrics = payload["results"][0]["metrics"]
@@ -143,8 +143,8 @@ class VerifySearchResultsTest(unittest.TestCase):
             metrics["conc_latency_p99_list"] = [0.2210, 0.1801]
             metrics["qps"] = 5.3979
             raw.write_text(json.dumps(payload))
-            (root / "search/raw_results/manifest.jsonl").parent.mkdir(parents=True, exist_ok=True)
-            (root / "search/raw_results/manifest.jsonl").write_text(
+            (root / "cloud_payload_search/raw_results/manifest.jsonl").parent.mkdir(parents=True, exist_ok=True)
+            (root / "cloud_payload_search/raw_results/manifest.jsonl").write_text(
                 json.dumps(
                     {
                         "case_id": "pinecone_serverless__unfiltered__na__ids_only",
@@ -160,12 +160,12 @@ class VerifySearchResultsTest(unittest.TestCase):
                 )
                 + "\n"
             )
-            (root / "search/single_tenant_100m_search.md").write_text(
+            (root / "cloud_payload_search/single_tenant_100m_search.md").write_text(
                 """## Pinecone Serverless
 ### Unfiltered Search
 | Payload | Recall | QPS @3 | QPS @4 | Max QPS | Avg latency @3/@4 | P95 @3/@4 | P99 @3/@4 | Status |
 |---|---:|---:|---:|---:|---|---|---|---|
-| IDs only | pending | 9.9999 | 4.1521 | [5.3979](search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.0863s / 0.0691s | 0.1523s / 0.1443s | 0.2210s / 0.1801s | measured; 429 observed |
+| IDs only | pending | 9.9999 | 4.1521 | [5.3979](raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result.json) | 0.0863s / 0.0691s | 0.1523s / 0.1443s | 0.2210s / 0.1801s | measured; 429 observed |
 """
             )
 

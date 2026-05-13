@@ -59,14 +59,14 @@ must remain redacted in the JSON before committing.
 Run this before committing any report or raw-result update:
 
 ```bash
-python3 search/verify_search_results.py
+python3 cloud_payload_search/verify_search_results.py
 ```
 
 The verifier checks that:
 
 - Every manifest raw JSON exists.
 - Manifest `run_id`, `db_label`, and payload profile match the raw JSON.
-- Every manifest entry is referenced by `search/single_tenant_100m_search.md`.
+- Every manifest entry is referenced by `cloud_payload_search/single_tenant_100m_search.md`.
 - Every raw JSON path in the report exists in the manifest.
 - Reported recall, NDCG, QPS, latency, and payload bytes match the raw JSON at
   the precision shown in the Markdown table.
