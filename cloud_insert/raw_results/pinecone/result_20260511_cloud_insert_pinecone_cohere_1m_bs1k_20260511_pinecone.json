@@ -1,1 +1,43 @@
-{"run_id":"7230547d0ac34470898264ed45aef24c","task_label":"cloud_insert_pinecone_cohere_1m_bs1k_20260511","results":[{"metrics":{"inserted_count":1000000,"insert_rows_per_second":222.1111,"insert_completion_seconds":4502.252,"searchable_after_insert_seconds":0.0,"indexed_after_searchable_seconds":0.0001,"additional_parameters":{}},"task_config":{"db":"Pinecone","db_config":{"db_label":"pinecone_cloud_insert_cohere_1m_bs1k","version":"","note":""},"db_case_config":{"null":null},"case_config":{"case_id":600,"custom_case":{"batch_size":1000,"duration":null,"dataset_with_size_type":"Medium Cohere (768dim, 1M)"}},"stages":["drop_old","load"],"load_concurrency":0},"label":":)"}],"file_fmt":"result_{}_{}_{}.json","timestamp":1778457600.0}
+{
+  "run_id": "7230547d0ac34470898264ed45aef24c",
+  "task_label": "cloud_insert_pinecone_cohere_1m_bs1k_20260511",
+  "results": [
+    {
+      "metrics": {
+        "inserted_count": 1000000,
+        "insert_rows_per_second": 222.1111,
+        "insert_completion_seconds": 4502.252,
+        "searchable_after_insert_seconds": 0.0,
+        "indexed_after_searchable_seconds": 0.0001,
+        "additional_parameters": {}
+      },
+      "task_config": {
+        "db": "Pinecone",
+        "db_config": {
+          "db_label": "pinecone_cloud_insert_cohere_1m_bs1k",
+          "version": "",
+          "note": ""
+        },
+        "db_case_config": {
+          "null": null
+        },
+        "case_config": {
+          "case_id": 600,
+          "custom_case": {
+            "batch_size": 1000,
+            "duration": null,
+            "dataset_with_size_type": "Medium Cohere (768dim, 1M)"
+          }
+        },
+        "stages": [
+          "drop_old",
+          "load"
+        ],
+        "load_concurrency": 0
+      },
+      "label": ":)"
+    }
+  ],
+  "file_fmt": "result_{}_{}_{}.json",
+  "timestamp": 1778457600.0
+}

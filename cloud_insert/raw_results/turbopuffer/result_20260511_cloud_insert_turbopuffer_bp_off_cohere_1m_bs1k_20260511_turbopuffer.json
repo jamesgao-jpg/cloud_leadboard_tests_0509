@@ -1,1 +1,48 @@
-{"run_id":"2e3b46e6b5004b01bdf056cc3daca34f","task_label":"cloud_insert_turbopuffer_bp_off_cohere_1m_bs1k_20260511","results":[{"metrics":{"inserted_count":1000000,"insert_rows_per_second":519.367,"insert_completion_seconds":1925.4209,"searchable_after_insert_seconds":0.0,"indexed_after_searchable_seconds":187.3016,"additional_parameters":{"disable_backpressure":true}},"task_config":{"db":"TurboPuffer","db_config":{"db_label":"turbopuffer_bp_off_cloud_insert_cohere_1m_bs1k","version":"","note":""},"db_case_config":{"metric_type":"COSINE","use_multi_ns_for_filter":false,"time_wait_warmup":60,"disable_backpressure":true},"case_config":{"case_id":600,"custom_case":{"batch_size":1000,"duration":null,"dataset_with_size_type":"Medium Cohere (768dim, 1M)"}},"stages":["drop_old","load"],"load_concurrency":0},"label":":)"}],"file_fmt":"result_{}_{}_{}.json","timestamp":1778457600.0}
+{
+  "run_id": "2e3b46e6b5004b01bdf056cc3daca34f",
+  "task_label": "cloud_insert_turbopuffer_bp_off_cohere_1m_bs1k_20260511",
+  "results": [
+    {
+      "metrics": {
+        "inserted_count": 1000000,
+        "insert_rows_per_second": 519.367,
+        "insert_completion_seconds": 1925.4209,
+        "searchable_after_insert_seconds": 0.0,
+        "indexed_after_searchable_seconds": 187.3016,
+        "additional_parameters": {
+          "disable_backpressure": true
+        }
+      },
+      "task_config": {
+        "db": "TurboPuffer",
+        "db_config": {
+          "db_label": "turbopuffer_bp_off_cloud_insert_cohere_1m_bs1k",
+          "version": "",
+          "note": ""
+        },
+        "db_case_config": {
+          "metric_type": "COSINE",
+          "use_multi_ns_for_filter": false,
+          "time_wait_warmup": 60,
+          "disable_backpressure": true
+        },
+        "case_config": {
+          "case_id": 600,
+          "custom_case": {
+            "batch_size": 1000,
+            "duration": null,
+            "dataset_with_size_type": "Medium Cohere (768dim, 1M)"
+          }
+        },
+        "stages": [
+          "drop_old",
+          "load"
+        ],
+        "load_concurrency": 0
+      },
+      "label": ":)"
+    }
+  ],
+  "file_fmt": "result_{}_{}_{}.json",
+  "timestamp": 1778457600.0
+}

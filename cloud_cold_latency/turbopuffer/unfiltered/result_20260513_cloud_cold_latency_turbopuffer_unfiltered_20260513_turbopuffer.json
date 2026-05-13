@@ -1,0 +1,68 @@
+{
+  "run_id": "",
+  "task_label": "cloud_cold_latency_turbopuffer_unfiltered_20260513",
+  "results": [
+    {
+      "metrics": {
+        "insert_duration": 0.0,
+        "optimize_duration": 0.0,
+        "load_duration": 0.0,
+        "payload_profile": "ids_only",
+        "payload_estimated_bytes_per_query": 0,
+        "cold_latency": {
+          "cold_stats": {
+            "first_query_latency": 0.0,
+            "p99_latency": 0.0,
+            "p95_latency": 0.0,
+            "avg_latency": 0.0
+          },
+          "warm_stats": {
+            "first_query_latency": 0.0,
+            "p99_latency": 0.0,
+            "p95_latency": 0.0,
+            "avg_latency": 0.0
+          },
+          "ratios": {
+            "first_query_latency": 0.0,
+            "p99_latency": 0.0,
+            "p95_latency": 0.0,
+            "avg_latency": 0.0
+          }
+        }
+      },
+      "task_config": {
+        "db": "TurboPuffer",
+        "db_config": {
+          "db_label": "turbopuffer_cloud_cold_latency_unfiltered",
+          "version": "",
+          "note": "",
+          "api_key": "**********",
+          "region": "",
+          "api_base_url": null,
+          "namespace": "vdbbench_test",
+          "multitenant_namespace_prefix": "vdbbench_mt_"
+        },
+        "db_case_config": {
+          "metric_type": "COSINE",
+          "use_multi_ns_for_filter": false,
+          "time_wait_warmup": 60,
+          "disable_backpressure": false
+        },
+        "case_config": {
+          "case_id": 700,
+          "custom_case": {
+            "payload_profile": "ids_only",
+            "query_count": 1000
+          }
+        },
+        "stages": [
+          "search_serial"
+        ],
+        "load_concurrency": 0
+      },
+      "label": ":)"
+    }
+  ],
+  "file_fmt": "result_{}_{}_{}.json",
+  "timestamp": 0.0
+}
