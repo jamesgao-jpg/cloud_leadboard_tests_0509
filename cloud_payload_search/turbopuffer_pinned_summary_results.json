@@ -1,0 +1,1682 @@
+[
+  {
+    "case_id": "turbopuffer_pinned__unfiltered__na__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "unfiltered",
+    "filter_rate": "na",
+    "source_rate_label": "na",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/unfiltered/na/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_unfiltered_na_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/unfiltered/na/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_unfiltered_na_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9321,
+    "ndcg": 0.9391,
+    "serial_latency_p95": 0.07,
+    "serial_latency_p99": 0.0924,
+    "max_qps": 68.1714,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      68.1714,
+      67.3759
+    ],
+    "conc_latency_avg_list": [
+      0.8621949400775297,
+      1.1541160989339674
+    ],
+    "conc_latency_p95_list": [
+      2.1900709938607177,
+      2.836823470046511
+    ],
+    "conc_latency_p99_list": [
+      2.4945100600528525,
+      3.297876723398221
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__unfiltered__na__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "unfiltered",
+    "filter_rate": "na",
+    "source_rate_label": "na",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/unfiltered/na/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_unfiltered_na_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/unfiltered/na/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_unfiltered_na_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9321,
+    "ndcg": 0.9391,
+    "serial_latency_p95": 0.0578,
+    "serial_latency_p99": 0.0602,
+    "max_qps": 66.3255,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      66.3255,
+      63.0274
+    ],
+    "conc_latency_avg_list": [
+      0.8904997964791307,
+      1.2454184212113455
+    ],
+    "conc_latency_p95_list": [
+      1.730733750923536,
+      2.9216509150108316
+    ],
+    "conc_latency_p99_list": [
+      2.0111056488507892,
+      3.485765019594693
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__unfiltered__na__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "unfiltered",
+    "filter_rate": "na",
+    "source_rate_label": "na",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/unfiltered/na/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_unfiltered_na_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/unfiltered/na/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_unfiltered_na_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9321,
+    "ndcg": 0.9391,
+    "serial_latency_p95": 0.068,
+    "serial_latency_p99": 0.0709,
+    "max_qps": 71.6683,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      71.6683,
+      68.1989
+    ],
+    "conc_latency_avg_list": [
+      0.8221989985061604,
+      1.145902661746804
+    ],
+    "conc_latency_p95_list": [
+      2.247047181334346,
+      2.6537924684118477
+    ],
+    "conc_latency_p99_list": [
+      2.586573529965245,
+      3.0741751200100387
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__99_9p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "99_9p",
+    "source_rate_label": "0_1p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/0_1p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_0_1p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/0_1p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_0_1p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9436,
+    "ndcg": 0.954,
+    "serial_latency_p95": 0.2732,
+    "serial_latency_p99": 0.3348,
+    "max_qps": 27.2995,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      27.2995,
+      27.2696
+    ],
+    "conc_latency_avg_list": [
+      2.123651798532639,
+      2.8024443838938113
+    ],
+    "conc_latency_p95_list": [
+      4.638843700592406,
+      5.541605862393043
+    ],
+    "conc_latency_p99_list": [
+      5.185495619033462,
+      6.337595300558023
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__99_9p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "99_9p",
+    "source_rate_label": "0_1p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/0_1p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_0_1p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/0_1p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_0_1p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9436,
+    "ndcg": 0.954,
+    "serial_latency_p95": 0.2153,
+    "serial_latency_p99": 0.2402,
+    "max_qps": 24.6137,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      24.4802,
+      24.6137
+    ],
+    "conc_latency_avg_list": [
+      2.3693016652690875,
+      3.0890098077327566
+    ],
+    "conc_latency_p95_list": [
+      4.773584549460793,
+      5.76009500301443
+    ],
+    "conc_latency_p99_list": [
+      5.311680151632753,
+      6.480682696884032
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__99_9p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "99_9p",
+    "source_rate_label": "0_1p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/0_1p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_0_1p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/0_1p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_0_1p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9436,
+    "ndcg": 0.954,
+    "serial_latency_p95": 0.225,
+    "serial_latency_p99": 0.2456,
+    "max_qps": 26.7097,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      26.7097,
+      25.9503
+    ],
+    "conc_latency_avg_list": [
+      2.1616476802228632,
+      2.9759845307832005
+    ],
+    "conc_latency_p95_list": [
+      3.655398454726673,
+      4.873919701942941
+    ],
+    "conc_latency_p99_list": [
+      4.220909337043994,
+      5.179015353157883
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__99p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "99p",
+    "source_rate_label": "1p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/1p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_1p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/1p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_1p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7119,
+    "ndcg": 0.751,
+    "serial_latency_p95": 0.06,
+    "serial_latency_p99": 0.0622,
+    "max_qps": 57.9279,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      57.9279,
+      53.9051
+    ],
+    "conc_latency_avg_list": [
+      1.0181178142797154,
+      1.4454057825922817
+    ],
+    "conc_latency_p95_list": [
+      2.331760316982399,
+      2.3129029681673274
+    ],
+    "conc_latency_p99_list": [
+      2.5640647385199546,
+      2.5375613267952564
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__99p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "99p",
+    "source_rate_label": "1p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/1p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_1p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/1p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_1p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7119,
+    "ndcg": 0.751,
+    "serial_latency_p95": 0.0638,
+    "serial_latency_p99": 0.0658,
+    "max_qps": 55.5083,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      55.0892,
+      55.5083
+    ],
+    "conc_latency_avg_list": [
+      1.0709218266876852,
+      1.4043975987398023
+    ],
+    "conc_latency_p95_list": [
+      2.514034543163143,
+      3.3093535534106193
+    ],
+    "conc_latency_p99_list": [
+      2.8693525207880892,
+      3.5410916318418457
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__99p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "99p",
+    "source_rate_label": "1p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/1p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_1p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/1p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_1p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7119,
+    "ndcg": 0.751,
+    "serial_latency_p95": 0.0724,
+    "serial_latency_p99": 0.0746,
+    "max_qps": 62.8649,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      54.9657,
+      62.8649
+    ],
+    "conc_latency_avg_list": [
+      1.070841720988125,
+      1.2418099013766284
+    ],
+    "conc_latency_p95_list": [
+      2.622807258449029,
+      2.8078040908614637
+    ],
+    "conc_latency_p99_list": [
+      2.81106915534474,
+      3.1029084110062106
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__90p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "90p",
+    "source_rate_label": "10p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/10p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_10p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/10p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_10p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9076,
+    "ndcg": 0.9196,
+    "serial_latency_p95": 0.071,
+    "serial_latency_p99": 0.0733,
+    "max_qps": 44.4073,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      41.9045,
+      44.4073
+    ],
+    "conc_latency_avg_list": [
+      1.3953293352802354,
+      1.7418352884082926
+    ],
+    "conc_latency_p95_list": [
+      3.2486338034097573,
+      3.543418881454272
+    ],
+    "conc_latency_p99_list": [
+      3.621622588771861,
+      3.8602213663922122
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__90p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "90p",
+    "source_rate_label": "10p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/10p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_10p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/10p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_10p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9076,
+    "ndcg": 0.9196,
+    "serial_latency_p95": 0.0748,
+    "serial_latency_p99": 0.0771,
+    "max_qps": 38.8922,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      38.6995,
+      38.8922
+    ],
+    "conc_latency_avg_list": [
+      1.5157445066499415,
+      2.0065083658519383
+    ],
+    "conc_latency_p95_list": [
+      3.1624154910678044,
+      3.636747480143094
+    ],
+    "conc_latency_p99_list": [
+      3.624620844540184,
+      3.992148498870665
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__90p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "90p",
+    "source_rate_label": "10p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/10p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_10p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/10p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_10p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9076,
+    "ndcg": 0.9196,
+    "serial_latency_p95": 0.0832,
+    "serial_latency_p99": 0.086,
+    "max_qps": 43.5288,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      41.3297,
+      43.5288
+    ],
+    "conc_latency_avg_list": [
+      1.4181732272117311,
+      1.7875835763949497
+    ],
+    "conc_latency_p95_list": [
+      3.22784412035253,
+      4.148679329868173
+    ],
+    "conc_latency_p99_list": [
+      3.6073818545462557,
+      4.542860193476079
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__50p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "50p",
+    "source_rate_label": "50p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/50p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_50p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/50p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_50p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9507,
+    "ndcg": 0.9567,
+    "serial_latency_p95": 0.0783,
+    "serial_latency_p99": 0.0819,
+    "max_qps": 37.9533,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      37.9533,
+      36.9144
+    ],
+    "conc_latency_avg_list": [
+      1.5441604059465606,
+      2.112576728373528
+    ],
+    "conc_latency_p95_list": [
+      3.5208118307346012,
+      4.35453847158933
+    ],
+    "conc_latency_p99_list": [
+      3.9062764686590516,
+      4.860299072884955
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__50p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "50p",
+    "source_rate_label": "50p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/50p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_50p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/50p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_50p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9507,
+    "ndcg": 0.9567,
+    "serial_latency_p95": 0.082,
+    "serial_latency_p99": 0.0867,
+    "max_qps": 34.4056,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      34.4056,
+      31.9928
+    ],
+    "conc_latency_avg_list": [
+      1.7016219289730892,
+      2.436197667254018
+    ],
+    "conc_latency_p95_list": [
+      3.9810123378410935,
+      4.865275627875234
+    ],
+    "conc_latency_p99_list": [
+      4.32812584501226,
+      5.25898038573097
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__int_filter__50p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "int_filter",
+    "filter_rate": "50p",
+    "source_rate_label": "50p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/50p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_int_filter_50p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/int_filter/50p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_int_filter_50p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9507,
+    "ndcg": 0.9567,
+    "serial_latency_p95": 0.0906,
+    "serial_latency_p99": 0.0955,
+    "max_qps": 39.3695,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      39.3695,
+      35.5211
+    ],
+    "conc_latency_avg_list": [
+      1.4906646687597536,
+      2.194101576499567
+    ],
+    "conc_latency_p95_list": [
+      3.653621314250631,
+      4.05884297179291
+    ],
+    "conc_latency_p99_list": [
+      4.087882650322281,
+      4.541022029714658
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_1p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_1p",
+    "source_rate_label": "0_1p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_1p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_1p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_1p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9438,
+    "ndcg": 0.9537,
+    "serial_latency_p95": 0.2032,
+    "serial_latency_p99": 0.2619,
+    "max_qps": 26.4219,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      24.491,
+      26.4219
+    ],
+    "conc_latency_avg_list": [
+      2.362780806732153,
+      2.8960650474136007
+    ],
+    "conc_latency_p95_list": [
+      4.970790876407408,
+      6.195495238970032
+    ],
+    "conc_latency_p99_list": [
+      5.335422406898579,
+      6.6851651326427275
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_1p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_1p",
+    "source_rate_label": "0_1p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_1p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_1p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_1p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_1p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9438,
+    "ndcg": 0.9537,
+    "serial_latency_p95": 0.1463,
+    "serial_latency_p99": 0.1731,
+    "max_qps": 24.0199,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      24.0199,
+      23.7316
+    ],
+    "conc_latency_avg_list": [
+      2.4117372025600106,
+      3.2151929807200026
+    ],
+    "conc_latency_p95_list": [
+      5.726431371900253,
+      7.059649257420096
+    ],
+    "conc_latency_p99_list": [
+      6.256037932370091,
+      7.635217877244578
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_1p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_1p",
+    "source_rate_label": "0_1p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_1p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_1p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_1p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9438,
+    "ndcg": 0.9537,
+    "serial_latency_p95": 0.1576,
+    "serial_latency_p99": 0.1874,
+    "max_qps": 27.0399,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      27.0399,
+      24.2034
+    ],
+    "conc_latency_avg_list": [
+      2.133377734775422,
+      3.1734445219682357
+    ],
+    "conc_latency_p95_list": [
+      4.6916520078550095,
+      7.067938477837014
+    ],
+    "conc_latency_p99_list": [
+      5.191299860923317,
+      7.610369250515942
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_2p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_2p",
+    "source_rate_label": "0_2p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_2p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_2p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_2p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9375,
+    "ndcg": 0.9485,
+    "serial_latency_p95": 0.2404,
+    "serial_latency_p99": 0.2639,
+    "max_qps": 10.868,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      10.868,
+      10.4027
+    ],
+    "conc_latency_avg_list": [
+      5.1983196813087735,
+      7.1515215546585775
+    ],
+    "conc_latency_p95_list": [
+      8.289057892659912,
+      12.79240406001918
+    ],
+    "conc_latency_p99_list": [
+      8.741950984160649,
+      13.441204015666152
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_2p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_2p",
+    "source_rate_label": "0_2p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_2p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_2p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_2p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_2p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9375,
+    "ndcg": 0.9485,
+    "serial_latency_p95": 0.223,
+    "serial_latency_p99": 0.2526,
+    "max_qps": 10.7342,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      10.6353,
+      10.7342
+    ],
+    "conc_latency_avg_list": [
+      5.331260571985492,
+      7.106245650700165
+    ],
+    "conc_latency_p95_list": [
+      8.650377196085174,
+      9.875314368761611
+    ],
+    "conc_latency_p99_list": [
+      8.986661237432855,
+      10.249389774709707
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_2p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_2p",
+    "source_rate_label": "0_2p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_2p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_2p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_2p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9375,
+    "ndcg": 0.9485,
+    "serial_latency_p95": 0.2401,
+    "serial_latency_p99": 0.2669,
+    "max_qps": 11.215,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      11.215,
+      10.7409
+    ],
+    "conc_latency_avg_list": [
+      5.076158166183109,
+      6.95641254654797
+    ],
+    "conc_latency_p95_list": [
+      9.295395301276585,
+      9.504695589508628
+    ],
+    "conc_latency_p99_list": [
+      9.921804857789539,
+      9.967974815783087
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_5p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_5p",
+    "source_rate_label": "0_5p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_5p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_5p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_5p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.5884,
+    "ndcg": 0.6438,
+    "serial_latency_p95": 0.0497,
+    "serial_latency_p99": 0.0521,
+    "max_qps": 87.6429,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      87.6429,
+      86.1364
+    ],
+    "conc_latency_avg_list": [
+      0.6725806657353584,
+      0.9068153676200557
+    ],
+    "conc_latency_p95_list": [
+      1.6048947955598125,
+      2.1064056559698656
+    ],
+    "conc_latency_p99_list": [
+      1.8144984537595885,
+      2.3333742580143735
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_5p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_5p",
+    "source_rate_label": "0_5p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_5p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_5p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_5p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_5p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.5884,
+    "ndcg": 0.6438,
+    "serial_latency_p95": 0.0528,
+    "serial_latency_p99": 0.0555,
+    "max_qps": 89.4607,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      76.2756,
+      89.4607
+    ],
+    "conc_latency_avg_list": [
+      0.7733832869210597,
+      0.8753793712104462
+    ],
+    "conc_latency_p95_list": [
+      1.6057158855197484,
+      2.1873894780292176
+    ],
+    "conc_latency_p99_list": [
+      1.8213116715755298,
+      2.4023048050003126
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__0_5p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "0_5p",
+    "source_rate_label": "0_5p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_5p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_5p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_0_5p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.5884,
+    "ndcg": 0.6438,
+    "serial_latency_p95": 0.0634,
+    "serial_latency_p99": 0.0655,
+    "max_qps": 90.7709,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      90.7709,
+      87.6651
+    ],
+    "conc_latency_avg_list": [
+      0.6501985590352841,
+      0.8896385737957544
+    ],
+    "conc_latency_p95_list": [
+      1.6708662760211155,
+      1.630682247044751
+    ],
+    "conc_latency_p99_list": [
+      1.8853376199258491,
+      1.9051529966969976
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__1p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "1p",
+    "source_rate_label": "1p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/1p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_1p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_1p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7081,
+    "ndcg": 0.7468,
+    "serial_latency_p95": 0.0618,
+    "serial_latency_p99": 0.0646,
+    "max_qps": 52.4628,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      52.4628,
+      49.5
+    ],
+    "conc_latency_avg_list": [
+      1.1236849519997316,
+      1.57340529612162
+    ],
+    "conc_latency_p95_list": [
+      2.670977654814486,
+      3.540449183341115
+    ],
+    "conc_latency_p99_list": [
+      2.9355952223914206,
+      3.919455573229352
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__1p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "1p",
+    "source_rate_label": "1p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/1p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_1p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/1p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_1p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7081,
+    "ndcg": 0.7468,
+    "serial_latency_p95": 0.0662,
+    "serial_latency_p99": 0.0707,
+    "max_qps": 44.5008,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      44.146,
+      44.5008
+    ],
+    "conc_latency_avg_list": [
+      1.3338522901842123,
+      1.7596289853767237
+    ],
+    "conc_latency_p95_list": [
+      2.4121270666597407,
+      3.44304386654403
+    ],
+    "conc_latency_p99_list": [
+      2.6915952629595994,
+      3.797133263250577
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__1p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "1p",
+    "source_rate_label": "1p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/1p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_1p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/1p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_1p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7081,
+    "ndcg": 0.7468,
+    "serial_latency_p95": 0.0767,
+    "serial_latency_p99": 0.079,
+    "max_qps": 50.3759,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      49.3199,
+      50.3759
+    ],
+    "conc_latency_avg_list": [
+      1.191114798270336,
+      1.5493462933476725
+    ],
+    "conc_latency_p95_list": [
+      2.1766888986632678,
+      3.5514820335898545
+    ],
+    "conc_latency_p99_list": [
+      2.593904874385334,
+      3.866226445720531
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__2p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "2p",
+    "source_rate_label": "2p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/2p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_2p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_2p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7976,
+    "ndcg": 0.824,
+    "serial_latency_p95": 0.0771,
+    "serial_latency_p99": 0.0794,
+    "max_qps": 33.7544,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      33.7544,
+      31.0356
+    ],
+    "conc_latency_avg_list": [
+      1.7304932269369395,
+      2.488351195676015
+    ],
+    "conc_latency_p95_list": [
+      3.8346585587831212,
+      5.3013501256005835
+    ],
+    "conc_latency_p99_list": [
+      4.21401095372159,
+      5.732106686984189
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__2p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "2p",
+    "source_rate_label": "2p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/2p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_2p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/2p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_2p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7976,
+    "ndcg": 0.824,
+    "serial_latency_p95": 0.0815,
+    "serial_latency_p99": 0.0838,
+    "max_qps": 29.2327,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      29.1182,
+      29.2327
+    ],
+    "conc_latency_avg_list": [
+      2.0148531015702753,
+      2.6609427788072044
+    ],
+    "conc_latency_p95_list": [
+      3.916694013029337,
+      4.990005247760562
+    ],
+    "conc_latency_p99_list": [
+      4.3933455111226065,
+      5.667870829645546
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__2p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "2p",
+    "source_rate_label": "2p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/2p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_2p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/2p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_2p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.7976,
+    "ndcg": 0.824,
+    "serial_latency_p95": 0.0924,
+    "serial_latency_p99": 0.0955,
+    "max_qps": 31.9835,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      30.3101,
+      31.9835
+    ],
+    "conc_latency_avg_list": [
+      1.9338864807137406,
+      2.433672811727503
+    ],
+    "conc_latency_p95_list": [
+      3.642436931258999,
+      3.8990286726737393
+    ],
+    "conc_latency_p99_list": [
+      4.02515394507791,
+      4.426186827274505
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__5p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "5p",
+    "source_rate_label": "5p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/5p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_5p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_5p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.8746,
+    "ndcg": 0.8905,
+    "serial_latency_p95": 0.0846,
+    "serial_latency_p99": 0.088,
+    "max_qps": 27.0331,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      27.0331,
+      26.4031
+    ],
+    "conc_latency_avg_list": [
+      2.152907277133183,
+      2.908166118783915
+    ],
+    "conc_latency_p95_list": [
+      4.715355485177133,
+      4.80786000319058
+    ],
+    "conc_latency_p99_list": [
+      5.059907566821202,
+      5.211168864395003
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__5p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "5p",
+    "source_rate_label": "5p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/5p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_5p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/5p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_5p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.8746,
+    "ndcg": 0.8905,
+    "serial_latency_p95": 0.0887,
+    "serial_latency_p99": 0.0916,
+    "max_qps": 27.4702,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      27.4702,
+      24.0167
+    ],
+    "conc_latency_avg_list": [
+      2.141256827206335,
+      3.230122582856371
+    ],
+    "conc_latency_p95_list": [
+      4.766959989030147,
+      6.862438512197695
+    ],
+    "conc_latency_p99_list": [
+      5.178312212991294,
+      7.427884572488256
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__5p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "5p",
+    "source_rate_label": "5p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/5p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_5p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/5p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_5p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.8746,
+    "ndcg": 0.8905,
+    "serial_latency_p95": 0.0986,
+    "serial_latency_p99": 0.1015,
+    "max_qps": 27.964,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      26.5261,
+      27.964
+    ],
+    "conc_latency_avg_list": [
+      2.20850970861835,
+      2.798563028937475
+    ],
+    "conc_latency_p95_list": [
+      4.748581186519004,
+      4.73330863006413
+    ],
+    "conc_latency_p99_list": [
+      5.284304749401053,
+      5.131269588880242
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__10p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "10p",
+    "source_rate_label": "10p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/10p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_10p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_10p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.906,
+    "ndcg": 0.9176,
+    "serial_latency_p95": 0.0842,
+    "serial_latency_p99": 0.0884,
+    "max_qps": 30.278,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      30.278,
+      28.3541
+    ],
+    "conc_latency_avg_list": [
+      1.9348431870759084,
+      2.736799244496077
+    ],
+    "conc_latency_p95_list": [
+      3.976874203735497,
+      4.311081780144013
+    ],
+    "conc_latency_p99_list": [
+      4.374971655986736,
+      4.713896116161486
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__10p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "10p",
+    "source_rate_label": "10p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/10p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_10p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/10p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_10p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.906,
+    "ndcg": 0.9176,
+    "serial_latency_p95": 0.0872,
+    "serial_latency_p99": 0.0911,
+    "max_qps": 28.2824,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      27.0414,
+      28.2824
+    ],
+    "conc_latency_avg_list": [
+      2.178186273702597,
+      2.7487140290790304
+    ],
+    "conc_latency_p95_list": [
+      4.142399663780815,
+      5.295250334637239
+    ],
+    "conc_latency_p99_list": [
+      4.6147883754852215,
+      5.930334091437982
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__10p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "10p",
+    "source_rate_label": "10p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/10p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_10p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/10p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_10p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.906,
+    "ndcg": 0.9176,
+    "serial_latency_p95": 0.0974,
+    "serial_latency_p99": 0.1008,
+    "max_qps": 27.4952,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      27.4952,
+      26.1624
+    ],
+    "conc_latency_avg_list": [
+      2.1285016740867024,
+      2.9509754782904922
+    ],
+    "conc_latency_p95_list": [
+      4.786470830958568,
+      5.122296057851053
+    ],
+    "conc_latency_p99_list": [
+      5.319920763351254,
+      5.475336536089887
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__20p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "20p",
+    "source_rate_label": "20p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/20p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_20p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_20p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9315,
+    "ndcg": 0.9401,
+    "serial_latency_p95": 0.0826,
+    "serial_latency_p99": 0.0875,
+    "max_qps": 30.7461,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      30.4973,
+      30.7461
+    ],
+    "conc_latency_avg_list": [
+      1.9174992543721694,
+      2.517851110663722
+    ],
+    "conc_latency_p95_list": [
+      4.4305176379857585,
+      4.700596458371727
+    ],
+    "conc_latency_p99_list": [
+      4.830590208608191,
+      5.135088489233747
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__20p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "20p",
+    "source_rate_label": "20p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/20p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_20p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/20p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_20p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9315,
+    "ndcg": 0.9401,
+    "serial_latency_p95": 0.0871,
+    "serial_latency_p99": 0.092,
+    "max_qps": 30.1028,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      28.9875,
+      30.1028
+    ],
+    "conc_latency_avg_list": [
+      2.0396718852133366,
+      2.582462405110083
+    ],
+    "conc_latency_p95_list": [
+      3.948321862367447,
+      5.110232363484101
+    ],
+    "conc_latency_p99_list": [
+      4.333380149971928,
+      5.608592950599268
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__20p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "20p",
+    "source_rate_label": "20p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/20p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_20p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/20p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_20p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.9315,
+    "ndcg": 0.9401,
+    "serial_latency_p95": 0.0948,
+    "serial_latency_p99": 0.1006,
+    "max_qps": 30.0731,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      29.2896,
+      30.0731
+    ],
+    "conc_latency_avg_list": [
+      1.9961428705471607,
+      2.5900886732340105
+    ],
+    "conc_latency_p95_list": [
+      3.4770197382837065,
+      4.454031492641661
+    ],
+    "conc_latency_p99_list": [
+      3.9893786936230025,
+      4.894355417254848
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__50p__ids_only",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "50p",
+    "source_rate_label": "50p",
+    "payload_profile": "ids_only",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/50p/ids_only/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_50p_ids_only_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_50p_ids_only_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.951,
+    "ndcg": 0.9569,
+    "serial_latency_p95": 0.0825,
+    "serial_latency_p99": 0.0877,
+    "max_qps": 31.8482,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      31.8482,
+      31.2622
+    ],
+    "conc_latency_avg_list": [
+      1.8387091056990132,
+      2.4725007905673646
+    ],
+    "conc_latency_p95_list": [
+      4.08369126743055,
+      4.4324143690522755
+    ],
+    "conc_latency_p99_list": [
+      4.467885251261758,
+      5.035711429202929
+    ],
+    "payload_estimated_bytes_per_query": 2000,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__50p__scalar_label",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "50p",
+    "source_rate_label": "50p",
+    "payload_profile": "scalar_label",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/50p/scalar_label/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_50p_scalar_label_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/50p/scalar_label/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_50p_scalar_label_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.951,
+    "ndcg": 0.9569,
+    "serial_latency_p95": 0.086,
+    "serial_latency_p99": 0.0908,
+    "max_qps": 30.7861,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      29.9535,
+      30.7861
+    ],
+    "conc_latency_avg_list": [
+      1.958411455772929,
+      2.533217898113295
+    ],
+    "conc_latency_p95_list": [
+      4.016352218831889,
+      5.239539513387717
+    ],
+    "conc_latency_p99_list": [
+      4.402252464196644,
+      5.801438119334635
+    ],
+    "payload_estimated_bytes_per_query": 3600,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  },
+  {
+    "case_id": "turbopuffer_pinned__scalar_label_filter__50p__vector",
+    "product": "turbopuffer_pinned",
+    "filter_type": "scalar_label_filter",
+    "filter_rate": "50p",
+    "source_rate_label": "50p",
+    "payload_profile": "vector",
+    "serial_recall_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/50p/vector/serial_recall/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_50p_vector_serial_recall_20260514_turbopuffer.json",
+    "concurrent_qps_json": "cloud_payload_search/raw_results/turbopuffer_pinned/scalar_label_filter/50p/vector/concurrent_qps/result_20260514_turbopuffer_pinned_2rep_scalar_label_filter_50p_vector_topk100_c60_c80_30s_20260514_turbopuffer.json",
+    "recall": 0.951,
+    "ndcg": 0.9569,
+    "serial_latency_p95": 0.0955,
+    "serial_latency_p99": 0.1004,
+    "max_qps": 32.4054,
+    "conc_num_list": [
+      60,
+      80
+    ],
+    "conc_qps_list": [
+      32.4054,
+      29.909
+    ],
+    "conc_latency_avg_list": [
+      1.8101528918591003,
+      2.5986279457122716
+    ],
+    "conc_latency_p95_list": [
+      4.165570228977594,
+      5.5146949519985355
+    ],
+    "conc_latency_p99_list": [
+      4.586979576681043,
+      5.9656119823572205
+    ],
+    "payload_estimated_bytes_per_query": 309200,
+    "pinning": {
+      "namespace": "laion100m_bulk",
+      "replicas": 2
+    }
+  }
+]
