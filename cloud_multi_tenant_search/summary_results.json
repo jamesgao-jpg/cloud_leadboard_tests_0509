@@ -1,0 +1,5097 @@
+{
+  "generated_from": "VectorDBBench CloudMultiTenantSearchCase results from 2026-05-13",
+  "framework_repo": "VectorDBBench",
+  "framework_branch": "cloud-payload-search-case",
+  "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+  "framework_state": "untracked benchmark artifacts present",
+  "common_parameters": {
+    "dataset": "Large Cohere (768dim, 10M)",
+    "dimensions": 768,
+    "metric": "COSINE",
+    "top_k": 50,
+    "tenant_count": 1000,
+    "concurrency": [
+      60,
+      80
+    ],
+    "duration_seconds": 30
+  },
+  "rows": [
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__99_9p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99_9p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_0_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "f12e2cd9f5e54d8b8b42e382684967ac",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 944.0877,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        944.0877,
+        852.4406
+      ],
+      "conc_latency_avg_list": [
+        0.062438128813555566,
+        0.09120103612349219
+      ],
+      "conc_latency_p95_list": [
+        0.08347032759338617,
+        0.1299735210137441
+      ],
+      "conc_latency_p99_list": [
+        0.1298789526801557,
+        0.17340319469105447
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__99_9p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99_9p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_0_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "cab7a2dc437949b690ac241c8296cae4",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 937.8986,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        918.9192,
+        937.8986
+      ],
+      "conc_latency_avg_list": [
+        0.06410844426338273,
+        0.08291352377189544
+      ],
+      "conc_latency_p95_list": [
+        0.07892302519176154,
+        0.1146713886409998
+      ],
+      "conc_latency_p99_list": [
+        0.13674014109186822,
+        0.17181184838525956
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__99_9p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99_9p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_0_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "b24528d54333436687e003f83cfd03ef",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 574.637,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        401.6805,
+        574.637
+      ],
+      "conc_latency_avg_list": [
+        0.14672257971546285,
+        0.13543734360984672
+      ],
+      "conc_latency_p95_list": [
+        0.16160488699097186,
+        0.1838106129551306
+      ],
+      "conc_latency_p99_list": [
+        1.8269743762211874,
+        0.22989941843319694
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__90p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/90p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_10p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "17af75a7d7d94e0aa835abf64c5b9642",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 711.7052,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        629.3629,
+        711.7052
+      ],
+      "conc_latency_avg_list": [
+        0.09370084176032323,
+        0.10929999154965746
+      ],
+      "conc_latency_p95_list": [
+        0.1308219607686624,
+        0.144626001449069
+      ],
+      "conc_latency_p99_list": [
+        0.18124407528433942,
+        0.18544708346598782
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__90p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/90p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_10p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "09d44b580070480bbd53a30f700ae3f8",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 691.9848,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        689.2834,
+        691.9848
+      ],
+      "conc_latency_avg_list": [
+        0.08549778292099326,
+        0.11262524685959613
+      ],
+      "conc_latency_p95_list": [
+        0.10988701350288466,
+        0.14983210408827283
+      ],
+      "conc_latency_p99_list": [
+        0.13437415887601672,
+        0.1707582981849555
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__90p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/90p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_10p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "fda3cffd81984162ac2d7a7d2a2c5e9b",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 175.0015,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        2.428,
+        175.0015
+      ],
+      "conc_latency_avg_list": [
+        21.699085415461496,
+        0.44547280367300124
+      ],
+      "conc_latency_p95_list": [
+        31.85984198336955,
+        0.5485397484269922
+      ],
+      "conc_latency_p99_list": [
+        32.36453903125599,
+        5.408408346541691
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__99p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "dd5db2ff6aba41c7ac2e7ce5d8bf54f9",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 857.2543,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        845.75,
+        857.2543
+      ],
+      "conc_latency_avg_list": [
+        0.0695317381667994,
+        0.09067528793287397
+      ],
+      "conc_latency_p95_list": [
+        0.09184726139064846,
+        0.12584055442130193
+      ],
+      "conc_latency_p99_list": [
+        0.1361457350105047,
+        0.18099707264918805
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__99p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "e95b0b8b211e4caab8ce8ad1b73d2209",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 808.5485,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        808.5485,
+        780.1259
+      ],
+      "conc_latency_avg_list": [
+        0.07278570490149837,
+        0.09973922462549467
+      ],
+      "conc_latency_p95_list": [
+        0.09208031861926427,
+        0.13307358196470886
+      ],
+      "conc_latency_p99_list": [
+        0.13614865279523652,
+        0.18005993869155645
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__99p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "b4a8f5f0ee3e45e483d0c88cffcb9a11",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 372.4641,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        269.092,
+        372.4641
+      ],
+      "conc_latency_avg_list": [
+        0.21930463532012395,
+        0.21285048560484687
+      ],
+      "conc_latency_p95_list": [
+        0.23829048613552004,
+        0.2657513781101443
+      ],
+      "conc_latency_p99_list": [
+        2.486372103244066,
+        0.3325529312645084
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__50p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/50p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_50p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "4c238d8d60df4e068154dd912b590704",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 470.6729,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        282.2915,
+        470.6729
+      ],
+      "conc_latency_avg_list": [
+        0.20857788626482532,
+        0.1657223774698429
+      ],
+      "conc_latency_p95_list": [
+        0.4477323535422328,
+        0.2035457694204524
+      ],
+      "conc_latency_p99_list": [
+        1.436007920439589,
+        0.25262442100327465
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__50p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/50p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_50p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "1fb6cb152e14491691c78b08b4cfdb4b",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 462.5285,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        450.5191,
+        462.5285
+      ],
+      "conc_latency_avg_list": [
+        0.13103475602092227,
+        0.16822743698834428
+      ],
+      "conc_latency_p95_list": [
+        0.16258609479991695,
+        0.2063690048176795
+      ],
+      "conc_latency_p99_list": [
+        0.18668798983795568,
+        0.2350027518812567
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__int_filter__50p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/50p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_50p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "9f22d7f83a3e4c84b798c2e97fc96b4d",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 3.5772,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1.8442,
+        3.5772
+      ],
+      "conc_latency_avg_list": [
+        25.5107422841861,
+        18.922910572690544
+      ],
+      "conc_latency_p95_list": [
+        34.34082646041061,
+        28.759103836957365
+      ],
+      "conc_latency_p99_list": [
+        35.49146840567235,
+        28.990342032629997
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_1p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "3b110cf9153d4ac089e0ec969b0b3442",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 387.8166,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        379.0223,
+        387.8166
+      ],
+      "conc_latency_avg_list": [
+        0.1556523014776998,
+        0.2006926480662056
+      ],
+      "conc_latency_p95_list": [
+        0.188834998360835,
+        0.24408445454901084
+      ],
+      "conc_latency_p99_list": [
+        0.22728439540602297,
+        0.26047914719674736
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_1p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_1p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "924a8ef8aaf640cc81ff5f3cc76a956b",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 384.4926,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        384.4926,
+        383.2965
+      ],
+      "conc_latency_avg_list": [
+        0.15335767500826258,
+        0.20304970256302096
+      ],
+      "conc_latency_p95_list": [
+        0.18110526445088915,
+        0.2471028061350808
+      ],
+      "conc_latency_p99_list": [
+        0.19670737826498225,
+        0.30349814454209983
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_1p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "3ce580db183b4c698807951184224fb9",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4.4121,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        2.1094,
+        4.4121
+      ],
+      "conc_latency_avg_list": [
+        22.373933378655625,
+        14.85108837568435
+      ],
+      "conc_latency_p95_list": [
+        32.46945864040172,
+        18.96259958631126
+      ],
+      "conc_latency_p99_list": [
+        32.7970991340396,
+        20.683352026054635
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_2p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_2p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "61e4e2331a504d0297ca8276a694421a",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 400.6982,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        364.1257,
+        400.6982
+      ],
+      "conc_latency_avg_list": [
+        0.16199656194003803,
+        0.1943846453273359
+      ],
+      "conc_latency_p95_list": [
+        0.20167435377370563,
+        0.22778279494959852
+      ],
+      "conc_latency_p99_list": [
+        0.22588835952105,
+        0.2535690303985029
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_2p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_2p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_2p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "d60a559ccde6414f84e87db97c2c102b",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 387.0038,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        381.3891,
+        387.0038
+      ],
+      "conc_latency_avg_list": [
+        0.15464540500448232,
+        0.201278731004075
+      ],
+      "conc_latency_p95_list": [
+        0.1814761815126985,
+        0.24696324643446133
+      ],
+      "conc_latency_p99_list": [
+        0.20407188556389882,
+        0.2696439275168814
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_2p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_2p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "8ee2d84286a247a8b89b4ec54c368d23",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 3.0183,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3.0183,
+        2.9998
+      ],
+      "conc_latency_avg_list": [
+        16.755290043949845,
+        20.794023496765366
+      ],
+      "conc_latency_p95_list": [
+        22.67891335452441,
+        28.31139198343153
+      ],
+      "conc_latency_p99_list": [
+        23.780789185706524,
+        29.365609272565926
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_5p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_5p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "8eb0b14bf1e744f39418b3a23bc78c36",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 365.6331,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        321.5244,
+        365.6331
+      ],
+      "conc_latency_avg_list": [
+        0.18396578931653348,
+        0.21291354666685283
+      ],
+      "conc_latency_p95_list": [
+        0.2788013192242942,
+        0.258122169674607
+      ],
+      "conc_latency_p99_list": [
+        0.38320953376824035,
+        0.27537176732788793
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_5p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_5p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_5p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "6530acf191274158bfbe97f31983017a",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 368.4364,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        364.7357,
+        368.4364
+      ],
+      "conc_latency_avg_list": [
+        0.16154211251290918,
+        0.21145230726959122
+      ],
+      "conc_latency_p95_list": [
+        0.18902356977923776,
+        0.2501836880575865
+      ],
+      "conc_latency_p99_list": [
+        0.22148820978705774,
+        0.274593227445148
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__0_5p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_5p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "f496cdf7503c4b709c18e5898cbeb98a",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 5.0933,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        2.8943,
+        5.0933
+      ],
+      "conc_latency_avg_list": [
+        17.073513129225734,
+        13.888177354460504
+      ],
+      "conc_latency_p95_list": [
+        25.447133471025154,
+        21.599561758094932
+      ],
+      "conc_latency_p99_list": [
+        26.265010457660537,
+        23.277321683187036
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__10p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_10p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "9e89905400e94b4a86b8966e889fa5aa",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 172.9183,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        66.2901,
+        172.9183
+      ],
+      "conc_latency_avg_list": [
+        0.8909947339682533,
+        0.45178794296373886
+      ],
+      "conc_latency_p95_list": [
+        1.7226405592111405,
+        0.6338266397651751
+      ],
+      "conc_latency_p99_list": [
+        1.8201037772558635,
+        0.7458368389925425
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__10p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/10p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_10p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "01032b561f2b4ab1a6c781e2d291e885",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 271.1625,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        246.6871,
+        271.1625
+      ],
+      "conc_latency_avg_list": [
+        0.23928187387670946,
+        0.2875412566621075
+      ],
+      "conc_latency_p95_list": [
+        0.28248530224664137,
+        0.333967912272783
+      ],
+      "conc_latency_p99_list": [
+        0.3401944061857648,
+        0.3845939609454945
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__10p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/10p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_10p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "23b39124dd5642e48ba40189de90d130",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 36.5594,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        36.5594,
+        33.24
+      ],
+      "conc_latency_avg_list": [
+        1.605181654020996,
+        2.3493880923244963
+      ],
+      "conc_latency_p95_list": [
+        2.313563281833194,
+        3.125596848875284
+      ],
+      "conc_latency_p99_list": [
+        2.3758227745920886,
+        3.1790990408882496
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__1p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "dfa6f5b82d6446e59c51f16ba4dac0cc",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 374.6763,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        289.4898,
+        374.6763
+      ],
+      "conc_latency_avg_list": [
+        0.20380952773982752,
+        0.2076926382230142
+      ],
+      "conc_latency_p95_list": [
+        0.3928059354191645,
+        0.24690573129337284
+      ],
+      "conc_latency_p99_list": [
+        0.5804845074191702,
+        0.28469092390965667
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__1p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/1p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "97372106f70d4fdea1a4482a85d24984",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 364.8097,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        364.8097,
+        350.1425
+      ],
+      "conc_latency_avg_list": [
+        0.16171780168301608,
+        0.22251958885364956
+      ],
+      "conc_latency_p95_list": [
+        0.19195502163493072,
+        0.266972908511525
+      ],
+      "conc_latency_p99_list": [
+        0.29393471035291435,
+        0.3361690323834773
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__1p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/1p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "68953c4df08342f4a4c93efe422e491e",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 63.5453,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        8.4731,
+        63.5453
+      ],
+      "conc_latency_avg_list": [
+        6.8812042324454525,
+        1.229478818923898
+      ],
+      "conc_latency_p95_list": [
+        11.067095332918688,
+        2.1152050857490394
+      ],
+      "conc_latency_p99_list": [
+        11.547803111773684,
+        2.3446607402933295
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__20p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_20p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "855d7aa5b76c4bd0bc3c7f004ef09e0c",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 146.1041,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        65.1676,
+        146.1041
+      ],
+      "conc_latency_avg_list": [
+        0.9052534889248576,
+        0.53542769826997
+      ],
+      "conc_latency_p95_list": [
+        1.78451785397483,
+        0.7445755235094111
+      ],
+      "conc_latency_p99_list": [
+        1.9288893062481656,
+        0.9023036970756918
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__20p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/20p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_20p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "def5a240764c4ff49e4064d064a976aa",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 233.9098,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        203.2728,
+        233.9098
+      ],
+      "conc_latency_avg_list": [
+        0.29081683687456283,
+        0.33164723847789485
+      ],
+      "conc_latency_p95_list": [
+        0.3516538231866434,
+        0.3893192959949374
+      ],
+      "conc_latency_p99_list": [
+        0.3852360600605607,
+        0.5323084327625065
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__20p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/20p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_20p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "890b6945948d49a798fcd19d921c0b56",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 32.4336,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        32.4336,
+        29.4696
+      ],
+      "conc_latency_avg_list": [
+        1.809072813105178,
+        2.6522899453634015
+      ],
+      "conc_latency_p95_list": [
+        2.5774733904167078,
+        3.2360682866710704
+      ],
+      "conc_latency_p99_list": [
+        2.6119903423951474,
+        3.260238110240316
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__2p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_2p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "2a108a45967644899240c298457b589c",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 353.2406,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        130.0559,
+        353.2406
+      ],
+      "conc_latency_avg_list": [
+        0.453186928946443,
+        0.22053995218285619
+      ],
+      "conc_latency_p95_list": [
+        1.1586923409136942,
+        0.2647082924901042
+      ],
+      "conc_latency_p99_list": [
+        1.2665845902636648,
+        0.3237583672918847
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__2p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/2p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_2p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "60e8c62f52404e398265f232d6c9a536",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 349.6334,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        348.2551,
+        349.6334
+      ],
+      "conc_latency_avg_list": [
+        0.16978633132159854,
+        0.22287274323835327
+      ],
+      "conc_latency_p95_list": [
+        0.20128763548564166,
+        0.2699913260061294
+      ],
+      "conc_latency_p99_list": [
+        0.2183000814402476,
+        0.3328215337404981
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__2p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/2p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_2p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "c49a6ef37f414827bb390f73d0dafcee",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 66.1314,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        55.493,
+        66.1314
+      ],
+      "conc_latency_avg_list": [
+        1.0675689604208303,
+        1.1865486731929336
+      ],
+      "conc_latency_p95_list": [
+        1.5436713709612377,
+        1.6078488758299498
+      ],
+      "conc_latency_p99_list": [
+        1.5775480403297113,
+        1.8855987234599887
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__50p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_50p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "413310910fe14d77b47e253d25c6dec8",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 121.7992,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        63.1829,
+        121.7992
+      ],
+      "conc_latency_avg_list": [
+        0.9326178800199265,
+        0.642199755431984
+      ],
+      "conc_latency_p95_list": [
+        1.9162295112619177,
+        0.8537507681874558
+      ],
+      "conc_latency_p99_list": [
+        2.2439996384317054,
+        1.0060451107798138
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__50p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/50p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_50p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "3f74432bcfb94c72b0c00860f953c681",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 196.3058,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        164.6652,
+        196.3058
+      ],
+      "conc_latency_avg_list": [
+        0.35964434950091717,
+        0.39747847177024787
+      ],
+      "conc_latency_p95_list": [
+        0.44485646255780004,
+        0.47139775737887246
+      ],
+      "conc_latency_p99_list": [
+        0.5335466901084865,
+        0.5780754410917914
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__50p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/50p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_50p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "4ee8454678ba4542ac74a8a104772ae4",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 30.0567,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        30.0567,
+        26.9721
+      ],
+      "conc_latency_avg_list": [
+        1.953204076084549,
+        2.8984575929907743
+      ],
+      "conc_latency_p95_list": [
+        2.894596304273,
+        3.6071239922370295
+      ],
+      "conc_latency_p99_list": [
+        3.0306582053832245,
+        3.639402227526298
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__5p__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_5p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "4d5c0197f2864150bf9db2b143b90a40",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 223.5542,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        67.5627,
+        223.5542
+      ],
+      "conc_latency_avg_list": [
+        0.8736915974850845,
+        0.3490027668433076
+      ],
+      "conc_latency_p95_list": [
+        1.7081203429610468,
+        0.5421654094825499
+      ],
+      "conc_latency_p99_list": [
+        1.9779111681343051,
+        0.6266128174029288
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__5p__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/5p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_5p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "706bff3b1f75472f8f74ae743ad383d2",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 315.3831,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        292.7097,
+        315.3831
+      ],
+      "conc_latency_avg_list": [
+        0.20137815620703772,
+        0.24694211235294805
+      ],
+      "conc_latency_p95_list": [
+        0.23928032115800307,
+        0.29056697139749305
+      ],
+      "conc_latency_p99_list": [
+        0.2960452285548672,
+        0.3270696696662344
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__scalar_label_filter__5p__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/5p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_5p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "cf5a36b684424caba0af19f4a389da29",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 42.2659,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        42.2659,
+        39.1663
+      ],
+      "conc_latency_avg_list": [
+        1.39099623522933,
+        1.998179131822156
+      ],
+      "conc_latency_p95_list": [
+        2.08329065622529,
+        2.293402719020378
+      ],
+      "conc_latency_p99_list": [
+        2.185820222412003,
+        2.6431571219465697
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__unfiltered__na__ids_only",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/unfiltered/na/ids_only/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_unfiltered_na_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "c49bf73f5cab4a76bff9c9c3f56e73c1",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 481.1791,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        473.6019,
+        481.1791
+      ],
+      "conc_latency_avg_list": [
+        0.12463969162455163,
+        0.16203155293985053
+      ],
+      "conc_latency_p95_list": [
+        0.14300352695863694,
+        0.19522817941615356
+      ],
+      "conc_latency_p99_list": [
+        0.19420903262216582,
+        0.21706584576750187
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__unfiltered__na__scalar_label",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/unfiltered/na/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_unfiltered_na_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "52554a4f8c7a447290621a11bcc3dbdf",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 444.9385,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        444.9385,
+        431.0545
+      ],
+      "conc_latency_avg_list": [
+        0.13254011096338666,
+        0.18083009467413455
+      ],
+      "conc_latency_p95_list": [
+        0.14961775119882076,
+        0.22173982684034854
+      ],
+      "conc_latency_p99_list": [
+        0.18053893378470093,
+        0.25907743280054985
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_tiered_1cu__unfiltered__na__vector",
+      "product": "zilliz_cloud_tiered_1cu",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/unfiltered/na/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_unfiltered_na_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "973b8c130c9f4e82a43becbf3de4a16d",
+      "db_label": "zilliz_cloud_tiered_1cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1.3061,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        0.9853,
+        1.3061
+      ],
+      "conc_latency_avg_list": [
+        43.4606104250066,
+        42.14133673085331
+      ],
+      "conc_latency_p95_list": [
+        66.05697266564239,
+        61.02699500955641
+      ],
+      "conc_latency_p99_list": [
+        67.17272220480255,
+        62.60282133883331
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__99_9p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/99_9p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_0_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "591e1a4b8d354ae580e51e94b3787756",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 2109.511,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        2097.8559,
+        2109.511
+      ],
+      "conc_latency_avg_list": [
+        0.028070467175832024,
+        0.036830795684421914
+      ],
+      "conc_latency_p95_list": [
+        0.06355198235251008,
+        0.07216749404324219
+      ],
+      "conc_latency_p99_list": [
+        0.07290248907520436,
+        0.07964583467110062
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__99_9p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/99_9p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_0_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "69e1e027ec084abbb03080bb9c7422f1",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 2068.2014,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        2052.2448,
+        2068.2014
+      ],
+      "conc_latency_avg_list": [
+        0.02867416163283121,
+        0.03751305826778129
+      ],
+      "conc_latency_p95_list": [
+        0.06482004940626211,
+        0.07333451379672623
+      ],
+      "conc_latency_p99_list": [
+        0.0735184558504261,
+        0.08078136860975065
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__99_9p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/99_9p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_0_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "b7353deba57b40deb96ca687b02dd861",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 1306.5933,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1306.5933,
+        1302.4189
+      ],
+      "conc_latency_avg_list": [
+        0.045011187798612545,
+        0.05957136373425471
+      ],
+      "conc_latency_p95_list": [
+        0.07596598396776244,
+        0.08732530861161646
+      ],
+      "conc_latency_p99_list": [
+        0.08866465971805153,
+        0.09980126960552296
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__90p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/90p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_10p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "7e0c3d7ce06e40bbb3d9e6ecb7c7e15e",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 1409.8924,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1402.5685,
+        1409.8924
+      ],
+      "conc_latency_avg_list": [
+        0.041982565026792464,
+        0.05508018477518266
+      ],
+      "conc_latency_p95_list": [
+        0.0775089841976296,
+        0.08906831697095186
+      ],
+      "conc_latency_p99_list": [
+        0.0833330723864492,
+        0.09386957599781454
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__90p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/90p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_10p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "2b50f3c02bbe4bed9b314c50d2272c86",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 1374.2625,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1358.084,
+        1374.2625
+      ],
+      "conc_latency_avg_list": [
+        0.04346752741812704,
+        0.05665531088368637
+      ],
+      "conc_latency_p95_list": [
+        0.07997547823470087,
+        0.09027896954212337
+      ],
+      "conc_latency_p99_list": [
+        0.08399254212738017,
+        0.09423436757526353
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__90p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/90p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_10p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "1dde4652ea954668b661a8eafa7cf85a",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 828.9358,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        812.8939,
+        828.9358
+      ],
+      "conc_latency_avg_list": [
+        0.07244152334577163,
+        0.09371757797480121
+      ],
+      "conc_latency_p95_list": [
+        0.10179942866670898,
+        0.11706594500574281
+      ],
+      "conc_latency_p99_list": [
+        0.10855244987178594,
+        0.12725160114932793
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__99p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/99p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "9feb27504caa4abe956e2818faac9c87",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 1811.6332,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1797.1984,
+        1811.6332
+      ],
+      "conc_latency_avg_list": [
+        0.032760618686779326,
+        0.042873525967941695
+      ],
+      "conc_latency_p95_list": [
+        0.06673172698356211,
+        0.07772477080579847
+      ],
+      "conc_latency_p99_list": [
+        0.07662100419402122,
+        0.08438716349657627
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__99p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/99p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "e4f212dbc13b4f02922a800c2cf8e3a4",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 1762.284,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1754.8887,
+        1762.284
+      ],
+      "conc_latency_avg_list": [
+        0.033513813537338503,
+        0.04414382573062932
+      ],
+      "conc_latency_p95_list": [
+        0.06672650941764004,
+        0.07515757382498123
+      ],
+      "conc_latency_p99_list": [
+        0.0771986017806921,
+        0.0842685872490983
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__99p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/99p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "09147f3937de43f5b951c10c5e4750b8",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 967.7286,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        963.3106,
+        967.7286
+      ],
+      "conc_latency_avg_list": [
+        0.06117981373612065,
+        0.08021771997851354
+      ],
+      "conc_latency_p95_list": [
+        0.08938182910787873,
+        0.10729098460869864
+      ],
+      "conc_latency_p99_list": [
+        0.09883162241894751,
+        0.11440739438403398
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__50p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/50p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_50p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "a1e8f07cc36c4acd8e40bfa5fe6cc5e7",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 908.8571,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        902.9304,
+        908.8571
+      ],
+      "conc_latency_avg_list": [
+        0.06527520717285555,
+        0.08549830960882727
+      ],
+      "conc_latency_p95_list": [
+        0.09110025380505249,
+        0.10915079385158606
+      ],
+      "conc_latency_p99_list": [
+        0.09681798488716595,
+        0.11597999096964486
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__50p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/50p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_50p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "4ca1a98b12294c78add09324c584cc67",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 892.0028,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        886.0709,
+        892.0028
+      ],
+      "conc_latency_avg_list": [
+        0.06660157305309196,
+        0.08711257647963558
+      ],
+      "conc_latency_p95_list": [
+        0.09283376243547536,
+        0.10958984575700015
+      ],
+      "conc_latency_p99_list": [
+        0.09608970525790936,
+        0.11344103506417014
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__int_filter__50p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/int_filter/50p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_int_filter_50p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "bb0d340f74164f0094fcc42be7ffc06c",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 501.5928,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        490.8798,
+        501.5928
+      ],
+      "conc_latency_avg_list": [
+        0.12012155351665496,
+        0.1549430247112322
+      ],
+      "conc_latency_p95_list": [
+        0.14148448104970154,
+        0.1760433101269882
+      ],
+      "conc_latency_p99_list": [
+        0.15011015458614566,
+        0.18722098544705654
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_1p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "7355ff4b395142c493b792d2ee2bb609",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 956.184,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        944.0011,
+        956.184
+      ],
+      "conc_latency_avg_list": [
+        0.06247458992677253,
+        0.0813566703816921
+      ],
+      "conc_latency_p95_list": [
+        0.08446589234517887,
+        0.10127026059199125
+      ],
+      "conc_latency_p99_list": [
+        0.0911503084958531,
+        0.11136944205500185
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_1p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_1p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "521a9af1acc548cab151f81e80de380c",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 938.2192,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        933.4305,
+        938.2192
+      ],
+      "conc_latency_avg_list": [
+        0.06326519928528292,
+        0.08281245436867594
+      ],
+      "conc_latency_p95_list": [
+        0.08487068142276256,
+        0.1023486697813496
+      ],
+      "conc_latency_p99_list": [
+        0.09129607723560183,
+        0.11016268333769404
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_1p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "e374d3f68810458695ec93fdaec20d99",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 726.7952,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        724.3978,
+        726.7952
+      ],
+      "conc_latency_avg_list": [
+        0.08132716287629821,
+        0.10683334578161151
+      ],
+      "conc_latency_p95_list": [
+        0.10373733182204886,
+        0.132462462678086
+      ],
+      "conc_latency_p99_list": [
+        0.11133321317262017,
+        0.1505108797783032
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_2p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_2p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "9518cd7be87a454bb11521d756002c84",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 932.9284,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        926.3096,
+        932.9284
+      ],
+      "conc_latency_avg_list": [
+        0.06366045585600372,
+        0.08335956708588264
+      ],
+      "conc_latency_p95_list": [
+        0.08537864403333514,
+        0.10359606653219089
+      ],
+      "conc_latency_p99_list": [
+        0.0907544269924983,
+        0.11111381318769414
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_2p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_2p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_2p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "9973d678555e4677ab5534bf0faeaf1c",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 918.4657,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        911.0764,
+        918.4657
+      ],
+      "conc_latency_avg_list": [
+        0.06460566067431645,
+        0.08481777031791725
+      ],
+      "conc_latency_p95_list": [
+        0.08644988860469312,
+        0.10394401999656111
+      ],
+      "conc_latency_p99_list": [
+        0.09333682117052369,
+        0.11486859621945766
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_2p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_2p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "de12784d350e4dee90fa3fa3b5ce72eb",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 680.4028,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        672.9848,
+        680.4028
+      ],
+      "conc_latency_avg_list": [
+        0.08744150662394008,
+        0.11428625964666622
+      ],
+      "conc_latency_p95_list": [
+        0.1090244997991249,
+        0.1447293477831408
+      ],
+      "conc_latency_p99_list": [
+        0.11823987670708452,
+        0.15788673096802083
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_5p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_5p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "24deb34ffca945e9b067807a78b84722",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 897.4345,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        886.6728,
+        897.4345
+      ],
+      "conc_latency_avg_list": [
+        0.0665590780019,
+        0.0866288476046556
+      ],
+      "conc_latency_p95_list": [
+        0.08832381528336554,
+        0.10728208703221753
+      ],
+      "conc_latency_p99_list": [
+        0.09267795880790804,
+        0.11720665155909954
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_5p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_5p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_5p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "b51c0d319ebe4a77995c5aeef6703a7e",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 871.5848,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        866.4546,
+        871.5848
+      ],
+      "conc_latency_avg_list": [
+        0.06808996880712155,
+        0.08918629946455668
+      ],
+      "conc_latency_p95_list": [
+        0.08969120436813682,
+        0.10853558933013119
+      ],
+      "conc_latency_p99_list": [
+        0.09511314919218421,
+        0.11978826615959408
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__0_5p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_0_5p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "104742502c10400c82ca19dae2a779e1",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 602.1184,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        583.7694,
+        602.1184
+      ],
+      "conc_latency_avg_list": [
+        0.10103826344892358,
+        0.12899278804639347
+      ],
+      "conc_latency_p95_list": [
+        0.12821061996510252,
+        0.16168431242695078
+      ],
+      "conc_latency_p99_list": [
+        0.15014278489397848,
+        0.17157085781451314
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__10p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_10p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "81aa17330d2543599f1513540f1323fa",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 763.7163,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        751.3605,
+        763.7163
+      ],
+      "conc_latency_avg_list": [
+        0.07843657483970475,
+        0.10168823432091273
+      ],
+      "conc_latency_p95_list": [
+        0.09669194974703714,
+        0.12353260273812339
+      ],
+      "conc_latency_p99_list": [
+        0.10042000190122054,
+        0.13823284598765895
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__10p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/10p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_10p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "6f681c7957f2474cbe8dc89d8e21e491",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 742.0147,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        739.1259,
+        742.0147
+      ],
+      "conc_latency_avg_list": [
+        0.07971269103309653,
+        0.10471342231318671
+      ],
+      "conc_latency_p95_list": [
+        0.09899246086133644,
+        0.12671760095399803
+      ],
+      "conc_latency_p99_list": [
+        0.10424831397715024,
+        0.14452954720938577
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__10p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/10p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_10p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "48510cbfe03a4b9eb5a716a5edb8230d",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 434.6915,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        405.6364,
+        434.6915
+      ],
+      "conc_latency_avg_list": [
+        0.14554304038100951,
+        0.17906189849767556
+      ],
+      "conc_latency_p95_list": [
+        0.1777636285405606,
+        0.19533098239917307
+      ],
+      "conc_latency_p99_list": [
+        0.18637532357824965,
+        0.20363137806765735
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__1p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_1p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "833c3d29f841449f9be1663a4ac4c635",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 873.497,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        856.8208,
+        873.497
+      ],
+      "conc_latency_avg_list": [
+        0.06876527361191279,
+        0.0890575459214182
+      ],
+      "conc_latency_p95_list": [
+        0.09004342218395323,
+        0.10951369397807866
+      ],
+      "conc_latency_p99_list": [
+        0.0938908894034103,
+        0.12140397941228
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__1p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/1p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_1p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "9e9bb844a8e0482d846dd4f951c7c304",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 854.6074,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        840.4544,
+        854.6074
+      ],
+      "conc_latency_avg_list": [
+        0.07011593245297928,
+        0.09089549595717872
+      ],
+      "conc_latency_p95_list": [
+        0.09088816873263567,
+        0.1107530262961518
+      ],
+      "conc_latency_p99_list": [
+        0.10180530328419994,
+        0.12402075005229563
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__1p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/1p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "0f7c1de75f4f4713870191ae9d71b5d8",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 588.2456,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        553.7885,
+        588.2456
+      ],
+      "conc_latency_avg_list": [
+        0.10625804758388345,
+        0.1322399714915738
+      ],
+      "conc_latency_p95_list": [
+        0.14173470607493072,
+        0.16430343501269817
+      ],
+      "conc_latency_p99_list": [
+        0.1672604010393843,
+        0.1744640873745084
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__20p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_20p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "ac72ed5b63e6499fb4fa739d0a5e5307",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 719.5802,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        707.8775,
+        719.5802
+      ],
+      "conc_latency_avg_list": [
+        0.08338433712482436,
+        0.10805845504510034
+      ],
+      "conc_latency_p95_list": [
+        0.10053653377690352,
+        0.13258014861494297
+      ],
+      "conc_latency_p99_list": [
+        0.10984305347083138,
+        0.1464396757958457
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__20p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/20p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_20p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "22124601ed524b12a9fc61e7ad01f06e",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 697.4468,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        697.4468,
+        695.7421
+      ],
+      "conc_latency_avg_list": [
+        0.0845704698830744,
+        0.1111961641624726
+      ],
+      "conc_latency_p95_list": [
+        0.10250183988828211,
+        0.13577897095819935
+      ],
+      "conc_latency_p99_list": [
+        0.10714747342746705,
+        0.14833279976737687
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__20p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/20p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_20p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "5d66f22e5aa54cd391407ec0393095c9",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 376.003,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        362.7374,
+        376.003
+      ],
+      "conc_latency_avg_list": [
+        0.1627350211086983,
+        0.2068870460420159
+      ],
+      "conc_latency_p95_list": [
+        0.1834716352634132,
+        0.21988019498530775
+      ],
+      "conc_latency_p99_list": [
+        0.19400822335854173,
+        0.22676508806180198
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__2p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_2p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "2531f19b44884c7fa6eee57ae6b9bde4",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 858.7817,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        845.8386,
+        858.7817
+      ],
+      "conc_latency_avg_list": [
+        0.06956494820965475,
+        0.09052410826521075
+      ],
+      "conc_latency_p95_list": [
+        0.0913275336381048,
+        0.11109093321720138
+      ],
+      "conc_latency_p99_list": [
+        0.09858975968905728,
+        0.12235206714714882
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__2p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/2p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_2p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "0c0b48283a594efbbcbfc542a151fb2a",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 840.5465,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        830.2696,
+        840.5465
+      ],
+      "conc_latency_avg_list": [
+        0.07105771332786655,
+        0.09258609322136671
+      ],
+      "conc_latency_p95_list": [
+        0.09156876460183412,
+        0.11160471003968267
+      ],
+      "conc_latency_p99_list": [
+        0.09595769941341133,
+        0.11954763977322727
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__2p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/2p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_2p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "e0d6962d84684191916be0dfb75b15a8",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 570.0569,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        521.5204,
+        570.0569
+      ],
+      "conc_latency_avg_list": [
+        0.11285242270009428,
+        0.13649792162648378
+      ],
+      "conc_latency_p95_list": [
+        0.1496303384192288,
+        0.1690738622273784
+      ],
+      "conc_latency_p99_list": [
+        0.16756680685793982,
+        0.18031229720218106
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__50p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_50p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "1a1c4e814c2d4e4d816230b028cee540",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 582.0859,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        579.8026,
+        582.0859
+      ],
+      "conc_latency_avg_list": [
+        0.10170306032303415,
+        0.13390706362564467
+      ],
+      "conc_latency_p95_list": [
+        0.12034557290608061,
+        0.16154289401601998
+      ],
+      "conc_latency_p99_list": [
+        0.13379502847790717,
+        0.17415123283630235
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__50p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/50p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_50p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "ce7872c3177f44c4be1ae3b1d29909da",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 576.5301,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        569.5811,
+        576.5301
+      ],
+      "conc_latency_avg_list": [
+        0.10347213372790037,
+        0.13499900765104597
+      ],
+      "conc_latency_p95_list": [
+        0.1218301608460024,
+        0.16241052570403555
+      ],
+      "conc_latency_p99_list": [
+        0.13517813269048937,
+        0.1703846943320241
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__50p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/50p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_50p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "53943813c92a4d32bb35a5bf826abf6f",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 317.4757,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        312.3402,
+        317.4757
+      ],
+      "conc_latency_avg_list": [
+        0.18886876384565415,
+        0.24544182283007315
+      ],
+      "conc_latency_p95_list": [
+        0.20231329323723912,
+        0.2586805139435455
+      ],
+      "conc_latency_p99_list": [
+        0.20807943808846177,
+        0.2740327081468423
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__5p__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_5p_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "8a3322e8f2824d4c8c5dd8448ec6560d",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 831.0361,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        820.105,
+        831.0361
+      ],
+      "conc_latency_avg_list": [
+        0.07176127318495218,
+        0.0936279569327652
+      ],
+      "conc_latency_p95_list": [
+        0.09249192931456492,
+        0.1122636565414723
+      ],
+      "conc_latency_p99_list": [
+        0.10177054955391211,
+        0.123756132061826
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__5p__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/5p/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_5p_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "e9306c4f127744168094a891e1093553",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 811.2514,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        807.0955,
+        811.2514
+      ],
+      "conc_latency_avg_list": [
+        0.07289411876856365,
+        0.09584611416025905
+      ],
+      "conc_latency_p95_list": [
+        0.09256854903651401,
+        0.11364854747080244
+      ],
+      "conc_latency_p99_list": [
+        0.09779165348736572,
+        0.12714005087618713
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__scalar_label_filter__5p__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/scalar_label_filter/5p/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_scalar_label_filter_5p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "5315a10bc72a41288b70a9081901c965",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 516.8106,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        466.6632,
+        516.8106
+      ],
+      "conc_latency_avg_list": [
+        0.1262572013970957,
+        0.1504558932020142
+      ],
+      "conc_latency_p95_list": [
+        0.16395594854839146,
+        0.17319716366473586
+      ],
+      "conc_latency_p99_list": [
+        0.1756365766748786,
+        0.1820166726456956
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__unfiltered__na__ids_only",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/unfiltered/na/ids_only/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_unfiltered_na_ids_only_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "52a2bb152ba741ee945e41d16f071700",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 889.2759,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        883.9646,
+        889.2759
+      ],
+      "conc_latency_avg_list": [
+        0.06672644988165978,
+        0.08742110549854136
+      ],
+      "conc_latency_p95_list": [
+        0.0909392918809317,
+        0.11071149987401441
+      ],
+      "conc_latency_p99_list": [
+        0.09564935192815027,
+        0.11440187384607271
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__unfiltered__na__scalar_label",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/unfiltered/na/scalar_label/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_unfiltered_na_scalar_label_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "91e15731263049a8b6b4cd9a72c3f907",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 869.3213,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        864.6916,
+        869.3213
+      ],
+      "conc_latency_avg_list": [
+        0.06823116418256925,
+        0.08944653584737945
+      ],
+      "conc_latency_p95_list": [
+        0.09269205023883839,
+        0.11162297800183296
+      ],
+      "conc_latency_p99_list": [
+        0.09695591514464467,
+        0.11589383862912654
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "zilliz_cloud_capacity_2cu__unfiltered__na__vector",
+      "product": "zilliz_cloud_capacity_2cu",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/zilliz_cloud_capacity_2cu/unfiltered/na/vector/concurrent_qps/result_20260513_zilliz_cloud_capacity_2cu_unfiltered_na_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "run_id": "006c27996e96474782e8560d160e0ec4",
+      "db_label": "zilliz_cloud_capacity_2cu",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 371.0902,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        368.4559,
+        371.0902
+      ],
+      "conc_latency_avg_list": [
+        0.15983352986805888,
+        0.20958372809626613
+      ],
+      "conc_latency_p95_list": [
+        0.1716442659846507,
+        0.22139866978977807
+      ],
+      "conc_latency_p99_list": [
+        0.18920850354479624,
+        0.22990127095137716
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__int_filter__99_9p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/99_9p/ids_only/concurrent_qps/result_20260513_turbopuffer_int_filter_0_1p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "a0b4075c88b24289b8411d23520e12d7",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 4374.4112,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3541.9115,
+        4374.4112
+      ],
+      "conc_latency_avg_list": [
+        0.016601833798695835,
+        0.017776725390282657
+      ],
+      "conc_latency_p95_list": [
+        0.026506698020966724,
+        0.02932905755005777
+      ],
+      "conc_latency_p99_list": [
+        0.04548237278359021,
+        0.05014033452025611
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__int_filter__99_9p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/99_9p/scalar_label/concurrent_qps/result_20260513_turbopuffer_int_filter_0_1p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "7e508bf8035344ec9bbbc4668a6b48c2",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 4461.7273,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3462.6385,
+        4461.7273
+      ],
+      "conc_latency_avg_list": [
+        0.017003000845010812,
+        0.017427913573175607
+      ],
+      "conc_latency_p95_list": [
+        0.027921717171557246,
+        0.02907765872078016
+      ],
+      "conc_latency_p99_list": [
+        0.04773206861689689,
+        0.04840289003448555
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__int_filter__99_9p__vector",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "99_9p",
+      "filter_rate_display": "99.9%",
+      "filter_rate_value": 0.999,
+      "source_rate_label": "0_1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/99_9p/vector/concurrent_qps/result_20260513_turbopuffer_int_filter_0_1p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "c4ea11a487af43e6a091863c2ff3476e",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "0.1%",
+      "qps": 3835.0336,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3063.3113,
+        3835.0336
+      ],
+      "conc_latency_avg_list": [
+        0.019191127176314635,
+        0.020235646147759696
+      ],
+      "conc_latency_p95_list": [
+        0.03073996437015011,
+        0.030550801713252425
+      ],
+      "conc_latency_p99_list": [
+        0.053491133549250655,
+        0.05222890965873379
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__int_filter__90p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/90p/ids_only/concurrent_qps/result_20260513_turbopuffer_int_filter_10p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "c85c9dabded4448e9284af04b45fe01d",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 4150.4113,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3332.2455,
+        4150.4113
+      ],
+      "conc_latency_avg_list": [
+        0.017674684360713847,
+        0.018768553741562097
+      ],
+      "conc_latency_p95_list": [
+        0.02889151896815745,
+        0.03185545689193531
+      ],
+      "conc_latency_p99_list": [
+        0.047156835342757365,
+        0.05782761769019995
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__int_filter__90p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/90p/scalar_label/concurrent_qps/result_20260513_turbopuffer_int_filter_10p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "659f37c2d4b24f408be4dbd94252c5e8",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 4302.2748,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3319.6874,
+        4302.2748
+      ],
+      "conc_latency_avg_list": [
+        0.017736311750266277,
+        0.01808425937357884
+      ],
+      "conc_latency_p95_list": [
+        0.028995676292106462,
+        0.02951861382462084
+      ],
+      "conc_latency_p99_list": [
+        0.051635008208686176,
+        0.05048022894654421
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__int_filter__90p__vector",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "90p",
+      "filter_rate_display": "90%",
+      "filter_rate_value": 0.9,
+      "source_rate_label": "10p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/90p/vector/concurrent_qps/result_20260513_turbopuffer_int_filter_10p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "aa4efde52a3b49f48f39327827af4ec0",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "10%",
+      "qps": 1767.4318,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1759.9299,
+        1767.4318
+      ],
+      "conc_latency_avg_list": [
+        0.033330260745424875,
+        0.043750271800864965
+      ],
+      "conc_latency_p95_list": [
+        0.0499513529939577,
+        0.06816563864704221
+      ],
+      "conc_latency_p99_list": [
+        0.06916554505005479,
+        0.08996342284604907
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__int_filter__99p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/99p/ids_only/concurrent_qps/result_20260513_turbopuffer_int_filter_1p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "c82561aa6cd44b988f4ec4e8da1bd703",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 4512.9687,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3498.0448,
+        4512.9687
+      ],
+      "conc_latency_avg_list": [
+        0.016835311946924513,
+        0.017253927610540266
+      ],
+      "conc_latency_p95_list": [
+        0.026366011594654987,
+        0.026653620734578
+      ],
+      "conc_latency_p99_list": [
+        0.046600987869314846,
+        0.04611369648482652
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__int_filter__99p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/99p/scalar_label/concurrent_qps/result_20260513_turbopuffer_int_filter_1p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "476c101cad0c46b78aa736374dc0290c",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 4285.4931,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3416.8382,
+        4285.4931
+      ],
+      "conc_latency_avg_list": [
+        0.017245132000720642,
+        0.018165257823336025
+      ],
+      "conc_latency_p95_list": [
+        0.028051444998709485,
+        0.029486669797915963
+      ],
+      "conc_latency_p99_list": [
+        0.04774983081733813,
+        0.04987627802183851
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__int_filter__99p__vector",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "99p",
+      "filter_rate_display": "99%",
+      "filter_rate_value": 0.99,
+      "source_rate_label": "1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/99p/vector/concurrent_qps/result_20260513_turbopuffer_int_filter_1p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "3e431db044b643a4be94d7e2614de3e7",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "1%",
+      "qps": 1759.4409,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1759.4409,
+        1754.4688
+      ],
+      "conc_latency_avg_list": [
+        0.03332355994407298,
+        0.043891367579794345
+      ],
+      "conc_latency_p95_list": [
+        0.05008583921007808,
+        0.06737194527522661
+      ],
+      "conc_latency_p99_list": [
+        0.07024500429164622,
+        0.08728406273876332
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__int_filter__50p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/50p/ids_only/concurrent_qps/result_20260513_turbopuffer_int_filter_50p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "4683a5c99b29421c89bd2a8ee14859be",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 4065.1862,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3165.8892,
+        4065.1862
+      ],
+      "conc_latency_avg_list": [
+        0.01859755449884772,
+        0.01918186751411928
+      ],
+      "conc_latency_p95_list": [
+        0.031035654770676047,
+        0.03342263525701128
+      ],
+      "conc_latency_p99_list": [
+        0.054779455933021366,
+        0.053540672785602525
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__int_filter__50p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/50p/scalar_label/concurrent_qps/result_20260513_turbopuffer_int_filter_50p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "585644cc0e234675915ca9b33209a588",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 4143.3079,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3173.9046,
+        4143.3079
+      ],
+      "conc_latency_avg_list": [
+        0.018547857890504005,
+        0.01880083923673939
+      ],
+      "conc_latency_p95_list": [
+        0.030256920563988387,
+        0.03168445816263556
+      ],
+      "conc_latency_p99_list": [
+        0.05238075152039529,
+        0.050429483603220464
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__int_filter__50p__vector",
+      "product": "turbopuffer",
+      "filter_type": "int_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/int_filter/50p/vector/concurrent_qps/result_20260513_turbopuffer_int_filter_50p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "4797a5178f2849f2a660eff1530824e3",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "candidate_rate_display": "50%",
+      "qps": 1760.4148,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1760.4148,
+        1759.7066
+      ],
+      "conc_latency_avg_list": [
+        0.0333090771465314,
+        0.043755990880396806
+      ],
+      "conc_latency_p95_list": [
+        0.04925702440086751,
+        0.06782855187775565
+      ],
+      "conc_latency_p99_list": [
+        0.06546355350408703,
+        0.08516924032010137
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_1p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_1p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "44c429eb0fa1430381961faf44dd9a37",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4474.6276,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3462.3573,
+        4474.6276
+      ],
+      "conc_latency_avg_list": [
+        0.017020708128970257,
+        0.017394389349448532
+      ],
+      "conc_latency_p95_list": [
+        0.028269204800017166,
+        0.028260682040126994
+      ],
+      "conc_latency_p99_list": [
+        0.0465543443430215,
+        0.0479734722233843
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_1p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_1p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_1p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "c5d5ff22af7549dbb68658d7dcee5526",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4461.1256,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3401.2418,
+        4461.1256
+      ],
+      "conc_latency_avg_list": [
+        0.01732720277851994,
+        0.017442512794871422
+      ],
+      "conc_latency_p95_list": [
+        0.029816075798589737,
+        0.02821025658631697
+      ],
+      "conc_latency_p99_list": [
+        0.04874320580973291,
+        0.04771652224473623
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_1p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_1p",
+      "filter_rate_display": "0.1%",
+      "filter_rate_value": 0.001,
+      "source_rate_label": "0_1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_1p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "bf04327de5d44766a569524ed930a8b2",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 3863.0166,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3229.7497,
+        3863.0166
+      ],
+      "conc_latency_avg_list": [
+        0.018205584853173848,
+        0.020073746861436485
+      ],
+      "conc_latency_p95_list": [
+        0.02638082235353067,
+        0.029819196870084816
+      ],
+      "conc_latency_p99_list": [
+        0.045840303110890074,
+        0.049611108429962615
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_2p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_2p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "47f7d3aea9664b10a5a5b038f241e221",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4421.5355,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3645.1467,
+        4421.5355
+      ],
+      "conc_latency_avg_list": [
+        0.01615912830414059,
+        0.017624539927718775
+      ],
+      "conc_latency_p95_list": [
+        0.02423998603480867,
+        0.02814483380061574
+      ],
+      "conc_latency_p99_list": [
+        0.04446975826867857,
+        0.051713177795754746
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_2p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_2p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_2p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "db10b29587f64beea42a37a934d22d2e",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4349.2793,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3431.194,
+        4349.2793
+      ],
+      "conc_latency_avg_list": [
+        0.01717066581102507,
+        0.017907000784760017
+      ],
+      "conc_latency_p95_list": [
+        0.02687885888153686,
+        0.02991816294379531
+      ],
+      "conc_latency_p99_list": [
+        0.05005980048328634,
+        0.05239633013028636
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_2p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_2p",
+      "filter_rate_display": "0.2%",
+      "filter_rate_value": 0.002,
+      "source_rate_label": "0_2p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_2p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "8d6e0f908d5e4c228ee1f2a888a71b6e",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 3063.5334,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        2875.5294,
+        3063.5334
+      ],
+      "conc_latency_avg_list": [
+        0.02043458627198619,
+        0.025267950802747345
+      ],
+      "conc_latency_p95_list": [
+        0.030747510271612523,
+        0.03702638490358367
+      ],
+      "conc_latency_p99_list": [
+        0.05123129535932094,
+        0.05744397382019073
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_5p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_5p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "22c655c5814945e68af164a42bb0bc0e",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4534.6206,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3454.8483,
+        4534.6206
+      ],
+      "conc_latency_avg_list": [
+        0.017047021175381677,
+        0.017156606008355064
+      ],
+      "conc_latency_p95_list": [
+        0.02770256574731319,
+        0.02556302746525034
+      ],
+      "conc_latency_p99_list": [
+        0.04757871086709201,
+        0.04790579123306074
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_5p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_5p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_5p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "097c176f005147879bbe3e911d4579ad",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4559.5927,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3550.5698,
+        4559.5927
+      ],
+      "conc_latency_avg_list": [
+        0.016580528919568495,
+        0.017059570893218527
+      ],
+      "conc_latency_p95_list": [
+        0.02504032130236737,
+        0.02585396453505381
+      ],
+      "conc_latency_p99_list": [
+        0.043455279504414676,
+        0.043926139166578664
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__0_5p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "0_5p",
+      "filter_rate_display": "0.5%",
+      "filter_rate_value": 0.005,
+      "source_rate_label": "0_5p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_0_5p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "a31625aef4fb41dc8b326492e01e906e",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1840.0142,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1834.7427,
+        1840.0142
+      ],
+      "conc_latency_avg_list": [
+        0.031951700786238366,
+        0.041912917698656606
+      ],
+      "conc_latency_p95_list": [
+        0.048394013382494445,
+        0.06428258542437104
+      ],
+      "conc_latency_p99_list": [
+        0.06648044667439532,
+        0.08129078491241666
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__10p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_10p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "87d7f3ccd4e64cde92c706606f969997",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4436.1178,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3422.0162,
+        4436.1178
+      ],
+      "conc_latency_avg_list": [
+        0.017208361475840407,
+        0.017540058872729327
+      ],
+      "conc_latency_p95_list": [
+        0.028698113514110446,
+        0.027357104944530863
+      ],
+      "conc_latency_p99_list": [
+        0.04663798503461303,
+        0.045237421152414754
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__10p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/10p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_10p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "82ca4bcd9a85405ca3406e68d739e469",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4352.685,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3390.0875,
+        4352.685
+      ],
+      "conc_latency_avg_list": [
+        0.01735465614873672,
+        0.017869887349179124
+      ],
+      "conc_latency_p95_list": [
+        0.028443814651109272,
+        0.02853999298531562
+      ],
+      "conc_latency_p99_list": [
+        0.047458617030642886,
+        0.04896153775043771
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__10p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "10p",
+      "filter_rate_display": "10%",
+      "filter_rate_value": 0.1,
+      "source_rate_label": "10p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/10p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_10p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "a81b061c01c44a7a8e879b4e3c01e302",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1759.4816,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1757.246,
+        1759.4816
+      ],
+      "conc_latency_avg_list": [
+        0.03337140831358177,
+        0.043878789550680045
+      ],
+      "conc_latency_p95_list": [
+        0.05045264158397912,
+        0.06844932654057628
+      ],
+      "conc_latency_p99_list": [
+        0.0689500718889758,
+        0.09034578022896314
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__1p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_1p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "e7d7dc628ca94dad9bb8d705d2625537",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4566.9943,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3453.7997,
+        4566.9943
+      ],
+      "conc_latency_avg_list": [
+        0.01705342485511466,
+        0.017026026129499598
+      ],
+      "conc_latency_p95_list": [
+        0.028144649206660686,
+        0.025520497572142628
+      ],
+      "conc_latency_p99_list": [
+        0.04848678813781578,
+        0.04465741622494534
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__1p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/1p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_1p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "bdda36fd75ae40f29a2d35f1977065d8",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4440.5302,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3509.2407,
+        4440.5302
+      ],
+      "conc_latency_avg_list": [
+        0.01678017602405074,
+        0.017512932566667326
+      ],
+      "conc_latency_p95_list": [
+        0.02538659899146295,
+        0.02761318616103381
+      ],
+      "conc_latency_p99_list": [
+        0.04557602571905592,
+        0.048049339972203634
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__1p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "1p",
+      "filter_rate_display": "1%",
+      "filter_rate_value": 0.01,
+      "source_rate_label": "1p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/1p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_1p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "a20b53de041f4028b0ec762395489094",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1767.2513,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1767.2513,
+        1762.5671
+      ],
+      "conc_latency_avg_list": [
+        0.03316205835699102,
+        0.04373854672820219
+      ],
+      "conc_latency_p95_list": [
+        0.049089585460023955,
+        0.06738992048194631
+      ],
+      "conc_latency_p99_list": [
+        0.06884572326089256,
+        0.08586156667210149
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__20p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_20p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "e5b116af04dd45789c7b8a925b164bb9",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4045.5609,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3056.6678,
+        4045.5609
+      ],
+      "conc_latency_avg_list": [
+        0.019193788794814787,
+        0.019266603303853557
+      ],
+      "conc_latency_p95_list": [
+        0.0361864663893357,
+        0.034652129479218245
+      ],
+      "conc_latency_p99_list": [
+        0.058093209913931826,
+        0.05495598935172894
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__20p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/20p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_20p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "1e98fa9c415747da9cfc981553bcb371",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4063.1335,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3176.0501,
+        4063.1335
+      ],
+      "conc_latency_avg_list": [
+        0.01855192464063702,
+        0.01917843272167549
+      ],
+      "conc_latency_p95_list": [
+        0.032327545946463955,
+        0.0341398571501486
+      ],
+      "conc_latency_p99_list": [
+        0.053570252805948244,
+        0.054288403956452375
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__20p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "20p",
+      "filter_rate_display": "20%",
+      "filter_rate_value": 0.2,
+      "source_rate_label": "20p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/20p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_20p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "c36167050a8142db8e49d6d4fc2acd7d",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1762.242,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1750.8508,
+        1762.242
+      ],
+      "conc_latency_avg_list": [
+        0.03351121966076104,
+        0.04375232359039868
+      ],
+      "conc_latency_p95_list": [
+        0.05419505544705316,
+        0.06822443075943738
+      ],
+      "conc_latency_p99_list": [
+        0.0785290271800477,
+        0.08767154064495115
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__2p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_2p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "def048fb5fec46b39c1f3d83d1ddb34f",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4514.8948,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3463.7862,
+        4514.8948
+      ],
+      "conc_latency_avg_list": [
+        0.017006149015611947,
+        0.017233159452031587
+      ],
+      "conc_latency_p95_list": [
+        0.027241124480497092,
+        0.02696026453049849
+      ],
+      "conc_latency_p99_list": [
+        0.04722172309411687,
+        0.04569821692770345
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__2p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/2p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_2p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "05dc77879588443d9ac65e6e54b77f28",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4433.2559,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3501.1969,
+        4433.2559
+      ],
+      "conc_latency_avg_list": [
+        0.01682456330574195,
+        0.017555221392966062
+      ],
+      "conc_latency_p95_list": [
+        0.02635837171110324,
+        0.027660729596391313
+      ],
+      "conc_latency_p99_list": [
+        0.04546228946885092,
+        0.047410634863189756
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__2p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "2p",
+      "filter_rate_display": "2%",
+      "filter_rate_value": 0.02,
+      "source_rate_label": "2p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/2p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_2p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "6cced45ce0a542b5bd3e25dce8c12bc3",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1762.3361,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1762.3361,
+        1759.586
+      ],
+      "conc_latency_avg_list": [
+        0.03328809187846031,
+        0.04388799179323568
+      ],
+      "conc_latency_p95_list": [
+        0.0496872147952672,
+        0.06737751493928952
+      ],
+      "conc_latency_p99_list": [
+        0.06768079928355292,
+        0.08428749436046919
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__50p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_50p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "1fd14ed3192f4975b1b829335bd896cc",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4147.7988,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1491.2085,
+        4147.7988
+      ],
+      "conc_latency_avg_list": [
+        0.02016477982253818,
+        0.01885663296076958
+      ],
+      "conc_latency_p95_list": [
+        0.0370623803930357,
+        0.030569696292513975
+      ],
+      "conc_latency_p99_list": [
+        0.06001080144662414,
+        0.05513207905460157
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__50p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/50p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_50p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "6c89301f764c45c5bdfaaa98ec9d7b6a",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4219.6587,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3182.9416,
+        4219.6587
+      ],
+      "conc_latency_avg_list": [
+        0.01850234367291133,
+        0.01844639837450737
+      ],
+      "conc_latency_p95_list": [
+        0.030267739907139924,
+        0.028324084612540882
+      ],
+      "conc_latency_p99_list": [
+        0.05197584538836961,
+        0.046214047693647446
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__50p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "50p",
+      "filter_rate_display": "50%",
+      "filter_rate_value": 0.5,
+      "source_rate_label": "50p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/50p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_50p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "7de3841b516d454eb0f05d77d13bd528",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1759.71,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1755.352,
+        1759.71
+      ],
+      "conc_latency_avg_list": [
+        0.033435342333716075,
+        0.04382045259403356
+      ],
+      "conc_latency_p95_list": [
+        0.0501955901097972,
+        0.06765335622476405
+      ],
+      "conc_latency_p99_list": [
+        0.06885430025053207,
+        0.08657651871908456
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__5p__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_5p_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "845190ae6bbc45e396ce0a4563c493e5",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4569.5414,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3505.5387,
+        4569.5414
+      ],
+      "conc_latency_avg_list": [
+        0.01679512155930684,
+        0.017034972155456657
+      ],
+      "conc_latency_p95_list": [
+        0.026115381438285085,
+        0.02620864564087242
+      ],
+      "conc_latency_p99_list": [
+        0.043959896652959254,
+        0.042719826889224405
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__5p__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/5p/scalar_label/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_5p_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "1e8548d4b5cd43659722bb458ebd9caa",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 4444.1858,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3441.1856,
+        4444.1858
+      ],
+      "conc_latency_avg_list": [
+        0.017114607755630524,
+        0.017488435023784183
+      ],
+      "conc_latency_p95_list": [
+        0.028558600251562875,
+        0.026500971289351583
+      ],
+      "conc_latency_p99_list": [
+        0.04854123744647949,
+        0.04683320197509626
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__scalar_label_filter__5p__vector",
+      "product": "turbopuffer",
+      "filter_type": "scalar_label_filter",
+      "filter_rate": "5p",
+      "filter_rate_display": "5%",
+      "filter_rate_value": 0.05,
+      "source_rate_label": "5p",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/scalar_label_filter/5p/vector/concurrent_qps/result_20260513_turbopuffer_scalar_label_filter_5p_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "9d012b6f6c804c279623367a116fba89",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1765.9335,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1765.0279,
+        1765.9335
+      ],
+      "conc_latency_avg_list": [
+        0.033193479394199664,
+        0.04377736281384535
+      ],
+      "conc_latency_p95_list": [
+        0.04904584263567812,
+        0.0687147431541234
+      ],
+      "conc_latency_p99_list": [
+        0.06627431729575607,
+        0.08990962825249851
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    },
+    {
+      "case_id": "turbopuffer__unfiltered__na__ids_only",
+      "product": "turbopuffer",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "ids_only",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/unfiltered/na/ids_only/concurrent_qps/result_20260513_turbopuffer_unfiltered_na_ids_only_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "e129892ac3c34c979eb76842b5cad5df",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 3854.5229,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        2967.4479,
+        3854.5229
+      ],
+      "conc_latency_avg_list": [
+        0.019898523095961674,
+        0.02019417759014926
+      ],
+      "conc_latency_p95_list": [
+        0.03331605883431615,
+        0.03425928975921122
+      ],
+      "conc_latency_p99_list": [
+        0.07355806405306792,
+        0.05801166262943297
+      ],
+      "payload_estimated_bytes_per_query": 1000
+    },
+    {
+      "case_id": "turbopuffer__unfiltered__na__scalar_label",
+      "product": "turbopuffer",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "scalar_label",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/unfiltered/na/scalar_label/concurrent_qps/result_20260513_turbopuffer_unfiltered_na_scalar_label_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "58defe0bb4a64eb9b850c414c84a8909",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 3910.8024,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        3041.1076,
+        3910.8024
+      ],
+      "conc_latency_avg_list": [
+        0.01936671611806617,
+        0.01989963599750461
+      ],
+      "conc_latency_p95_list": [
+        0.03227830382529646,
+        0.034170387324411425
+      ],
+      "conc_latency_p99_list": [
+        0.05216926882509144,
+        0.05580809320788829
+      ],
+      "payload_estimated_bytes_per_query": 1800
+    },
+    {
+      "case_id": "turbopuffer__unfiltered__na__vector",
+      "product": "turbopuffer",
+      "filter_type": "unfiltered",
+      "filter_rate": "na",
+      "filter_rate_display": "none",
+      "filter_rate_value": null,
+      "source_rate_label": "na",
+      "payload_profile": "vector",
+      "phase": "concurrent_qps",
+      "raw_json": "cloud_multi_tenant_search/raw_results/turbopuffer/unfiltered/na/vector/concurrent_qps/result_20260513_turbopuffer_unfiltered_na_vector_topk50_c60_c80_30s_20260513_turbopuffer.json",
+      "run_id": "74f423f2304b4e26bb55d5e98ec408c5",
+      "db_label": "turbopuffer",
+      "framework_repo": "VectorDBBench",
+      "framework_branch": "cloud-payload-search-case",
+      "framework_commit": "df1521796acd63d62042e182e7addad02c21e792",
+      "framework_state": "untracked benchmark artifacts present",
+      "qps": 1775.3678,
+      "conc_num_list": [
+        60,
+        80
+      ],
+      "conc_qps_list": [
+        1756.25,
+        1775.3678
+      ],
+      "conc_latency_avg_list": [
+        0.033417201381328254,
+        0.04355266121600469
+      ],
+      "conc_latency_p95_list": [
+        0.05146598324645309,
+        0.06718598093139007
+      ],
+      "conc_latency_p99_list": [
+        0.0793891141936183,
+        0.08640709250466888
+      ],
+      "payload_estimated_bytes_per_query": 154600
+    }
+  ]
+}

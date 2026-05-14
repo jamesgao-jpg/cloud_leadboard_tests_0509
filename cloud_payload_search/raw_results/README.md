@@ -12,7 +12,7 @@ raw_results/
   manifest.jsonl
   <product>/
     <filter_type>/
-      <selectivity>/
+      <filter_rate>/
         <payload_profile>/
           <phase>/
             result_<date>_<run_id>_<product>.json
@@ -24,7 +24,7 @@ Path components:
 |---|---|
 | `product` | `zilliz_cloud_tiered_4cu`, `zilliz_cloud_capacity_12cu`, `pinecone_serverless`, `turbopuffer_unpinned`, `turbopuffer_pinned` |
 | `filter_type` | `unfiltered`, `int_filter`, `scalar_label_filter` |
-| `selectivity` | `na` for unfiltered, otherwise labels such as `1p`, `0_5p`, `20p` |
+| `filter_rate` | `na` for unfiltered, otherwise labels such as `1p`, `0_5p`, `20p` |
 | `payload_profile` | `ids_only`, `scalar_label`, `vector` |
 | `phase` | `serial_recall`, `concurrent_qps` |
 
@@ -37,10 +37,10 @@ Required fields:
 
 | Field | Meaning |
 |---|---|
-| `case_id` | Stable matrix key: `<product>__<filter_type>__<selectivity>__<payload_profile>` |
+| `case_id` | Stable matrix key: `<product>__<filter_type>__<filter_rate>__<payload_profile>` |
 | `product` | Product directory name |
 | `filter_type` | Filter mode directory name |
-| `selectivity` | Selectivity directory name |
+| `filter_rate` | Filter-rate directory name |
 | `payload_profile` | Payload profile directory name |
 | `phase` | `serial_recall` or `concurrent_qps` |
 | `raw_json` | Path to the raw JSON, relative to repo root |

@@ -9,7 +9,9 @@
         "insert_completion_seconds": null,
         "searchable_after_insert_seconds": null,
         "indexed_after_searchable_seconds": null,
-        "additional_parameters": {}
+        "additional_parameters": {
+            "disable_backpressure": true
+        }
       },
       "task_config": {
         "db": "TurboPuffer",

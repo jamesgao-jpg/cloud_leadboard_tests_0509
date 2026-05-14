@@ -74,7 +74,7 @@ def is_pending(value: str) -> bool:
     return cell_label(value) in PENDING
 
 
-def selectivity_id(value: str) -> str:
+def filter_rate_id(value: str) -> str:
     value = cell_label(value)
     if value in {"", "TBD", "other"}:
         return value
@@ -130,10 +130,10 @@ def parse_report(root: Path) -> dict[tuple[str, str], ReportEntry]:
             payload = PAYLOADS.get(cell_label(data.get("Payload", "")))
             if not payload:
                 continue
-            selectivity = "na" if filter_type == "unfiltered" else selectivity_id(data.get("Selectivity", ""))
-            if selectivity in {"", "TBD", "other"}:
+            filter_rate = "na" if filter_type == "unfiltered" else filter_rate_id(data.get("Filter rate", ""))
+            if filter_rate in {"", "TBD", "other"}:
                 continue
-            case_id = f"{product}__{filter_type}__{selectivity}__{payload}"
+            case_id = f"{product}__{filter_type}__{filter_rate}__{payload}"
 
             report_dir = Path("cloud_payload_search")
             serial_path = data.get("Serial JSON", "") or cell_link(data.get("Recall", ""), report_dir) or cell_link(row[0], report_dir)
