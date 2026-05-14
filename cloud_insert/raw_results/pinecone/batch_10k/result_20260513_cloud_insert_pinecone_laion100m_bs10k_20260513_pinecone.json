@@ -5,10 +5,10 @@
     {
       "metrics": {
         "inserted_count": 100000000,
-        "insert_rows_per_second": 383.80,
-        "insert_completion_seconds": 260552.38,
-        "searchable_after_insert_seconds": 0,
-        "indexed_after_searchable_seconds": 0.1,
+        "insert_rows_per_second": 383.8043,
+        "insert_completion_seconds": 260552.3832,
+        "searchable_after_insert_seconds": 0.0,
+        "indexed_after_searchable_seconds": 0.1274,
         "additional_parameters": {}
       },
       "task_config": {

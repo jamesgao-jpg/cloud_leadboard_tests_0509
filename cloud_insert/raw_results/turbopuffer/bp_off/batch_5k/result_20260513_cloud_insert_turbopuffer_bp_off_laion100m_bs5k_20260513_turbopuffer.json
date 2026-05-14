@@ -5,10 +5,10 @@
     {
       "metrics": {
         "inserted_count": 100000000,
-        "insert_rows_per_second": null,
-        "insert_completion_seconds": null,
-        "searchable_after_insert_seconds": null,
-        "indexed_after_searchable_seconds": null,
+        "insert_rows_per_second": 14313.4931,
+        "insert_completion_seconds": 6986.4148,
+        "searchable_after_insert_seconds": 23874.232,
+        "indexed_after_searchable_seconds": 145.83,
         "additional_parameters": {
           "disable_backpressure": true
         }
