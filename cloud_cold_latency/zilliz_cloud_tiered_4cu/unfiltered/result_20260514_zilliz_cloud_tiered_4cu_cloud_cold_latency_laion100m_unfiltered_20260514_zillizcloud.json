@@ -1,6 +1,6 @@
 {
-  "run_id": "",
-  "task_label": "cloud_cold_latency_zilliz_cloud_cap_12cu_unfiltered_20260513",
+  "run_id": "ecf49ccea5bc4c668d98fc47ee32853c",
+  "task_label": "zilliz_cloud_tiered_4cu_cloud_cold_latency_laion100m_unfiltered_20260514",
   "results": [
     {
       "metrics": {
@@ -8,32 +8,32 @@
         "optimize_duration": 0.0,
         "load_duration": 0.0,
         "payload_profile": "ids_only",
-        "payload_estimated_bytes_per_query": 0,
+        "payload_estimated_bytes_per_query": 2000,
         "cold_latency": {
           "cold_stats": {
-            "first_query_latency": 0.0,
-            "p99_latency": 0.0,
-            "p95_latency": 0.0,
-            "avg_latency": 0.0
+            "first_query_latency": 0.1222,
+            "p99_latency": 0.4867,
+            "p95_latency": 0.2108,
+            "avg_latency": 0.0764
           },
           "warm_stats": {
-            "first_query_latency": 0.0,
-            "p99_latency": 0.0,
-            "p95_latency": 0.0,
-            "avg_latency": 0.0
+            "first_query_latency": 0.0565,
+            "p99_latency": 0.0655,
+            "p95_latency": 0.0495,
+            "avg_latency": 0.0279
           },
-          "ratios": {
-            "first_query_latency": 0.0,
-            "p99_latency": 0.0,
-            "p95_latency": 0.0,
-            "avg_latency": 0.0
+          "cold_warm_ratio": {
+            "first_query_latency_ratio": 2.1628,
+            "p99_latency_ratio": 7.4305,
+            "p95_latency_ratio": 4.2586,
+            "avg_latency_ratio": 2.7384
           }
         }
       },
       "task_config": {
         "db": "ZillizCloud",
         "db_config": {
-          "db_label": "zilliz_cloud_cap_12cu_cloud_cold_latency_unfiltered",
+          "db_label": "zilliz_cloud_tiered_4cu_cloud_cold_latency_laion100m_unfiltered_20260514",
           "version": "",
           "note": "",
           "uri": "**********",
@@ -41,7 +41,7 @@
           "password": "**********",
           "token": "**********",
           "num_shards": 1,
-          "collection_name": "LAION100M_capacity"
+          "collection_name": "LAION100M"
         },
         "db_case_config": {
           "index": "AUTOINDEX",
@@ -58,7 +58,8 @@
           }
         },
         "stages": [
-          "search_serial"
+          "search_serial",
+          "search_concurrent"
         ],
         "load_concurrency": 0
       },
@@ -66,5 +67,5 @@
     }
   ],
   "file_fmt": "result_{}_{}_{}.json",
-  "timestamp": 0.0
+  "timestamp": 1778716800.0
 }
