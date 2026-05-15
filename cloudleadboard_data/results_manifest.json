@@ -1,8 +1,14 @@
 {
-  "generated_at": "2026-05-15T03:18:47.233Z",
+  "generated_at": "2026-05-15T03:45:15.576Z",
   "entries": [
     {
       "path": "cloud_cold_latency/pinecone/int_filter_0.9/result_20260513_cloud_cold_latency_pinecone_int_filter_0.9_20260513_pinecone.json",
+      "family": "cloud_cold_latency",
+      "case_id": 700,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_cold_latency/pinecone/int_filter_0.9/result_20260515_pinecone_cloud_cold_latency_laion100m_int_filter_0_9_20260515_pinecone.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "measured"
@@ -20,6 +26,24 @@
       "source": "measured"
     },
     {
+      "path": "cloud_cold_latency/turbopuffer/int_filter_0.9/result_20260513_cloud_cold_latency_turbopuffer_int_filter_0.9_20260513_turbopuffer.json",
+      "family": "cloud_cold_latency",
+      "case_id": 700,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_cold_latency/turbopuffer/int_filter_0.9/result_20260515_turbopuffer_cloud_cold_latency_laion100m_int_filter_0_9_20260515_turbopuffer.json",
+      "family": "cloud_cold_latency",
+      "case_id": 700,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_cold_latency/turbopuffer/unfiltered/result_20260514_turbopuffer_cloud_cold_latency_laion100m_unfiltered_20260514_turbopuffer.json",
+      "family": "cloud_cold_latency",
+      "case_id": 700,
+      "source": "measured"
+    },
+    {
       "path": "cloud_cold_latency/turbopuffer_pinned/int_filter_0.9/result_20260514_turbopuffer_pinned_2rep_cloud_cold_latency_laion100m_int_filter_0_9_20260514_turbopuffer.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
@@ -32,19 +56,13 @@
       "source": "measured"
     },
     {
-      "path": "cloud_cold_latency/turbopuffer/int_filter_0.9/result_20260513_cloud_cold_latency_turbopuffer_int_filter_0.9_20260513_turbopuffer.json",
-      "family": "cloud_cold_latency",
-      "case_id": 700,
-      "source": "measured"
-    },
-    {
-      "path": "cloud_cold_latency/turbopuffer/unfiltered/result_20260514_turbopuffer_cloud_cold_latency_laion100m_unfiltered_20260514_turbopuffer.json",
-      "family": "cloud_cold_latency",
-      "case_id": 700,
-      "source": "measured"
-    },
-    {
       "path": "cloud_cold_latency/zilliz_cloud_cap_12cu/int_filter_0.9/result_20260513_cloud_cold_latency_zilliz_cloud_cap_12cu_int_filter_0.9_20260513_zillizcloud.json",
+      "family": "cloud_cold_latency",
+      "case_id": 700,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_cold_latency/zilliz_cloud_cap_12cu/int_filter_0.9/result_20260515_zilliz_cloud_cap_12cu_cloud_cold_latency_laion100m_int_filter_0_9_20260515_zillizcloud.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "measured"
@@ -57,6 +75,12 @@
     },
     {
       "path": "cloud_cold_latency/zilliz_cloud_tiered_4cu/int_filter_0.9/result_20260513_cloud_cold_latency_zilliz_cloud_tiered_4cu_int_filter_0.9_20260513_zillizcloud.json",
+      "family": "cloud_cold_latency",
+      "case_id": 700,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_cold_latency/zilliz_cloud_tiered_4cu/int_filter_0.9/result_20260515_zilliz_cloud_tiered_4cu_cloud_cold_latency_laion100m_int_filter_0_9_20260515_zillizcloud.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "measured"
@@ -3759,7 +3783,7 @@
     }
   ],
   "counts": {
-    "cloud_cold_latency:measured": 11,
+    "cloud_cold_latency:measured": 15,
     "cloud_cold_latency:mocked": 4,
     "cloud_insert:measured": 21,
     "cloud_multi_tenant_search:measured": 154,
