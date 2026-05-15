@@ -11,6 +11,7 @@ const phasesByFamily = {
   cloud_payload_search: phases,
   cloud_multi_tenant_search: ["concurrent_qps"],
 };
+const supportedPayloads = new Set(["ids_only", "vector"]);
 const targetProducts = {
   cloud_payload_search: [
     "zilliz_cloud_capacity_12cu",
@@ -29,19 +30,16 @@ const targetProducts = {
 
 const payloadBytes = {
   ids_only: 2000,
-  scalar_label: 2100,
   vector: 309200,
 };
 
 const payloadQpsFactor = {
   ids_only: 1,
-  scalar_label: 0.96,
   vector: 0.48,
 };
 
 const payloadLatencyFactor = {
   ids_only: 1,
-  scalar_label: 1.08,
   vector: 1.35,
 };
 
@@ -125,12 +123,11 @@ function profileFor(family, product, filterType, filterRate, payload) {
   if (product === "pinecone_serverless") {
     const singleBase = {
       ids_only: { qps: 4.5642, p99: 4.8496, serialP99: 1.0901 },
-      scalar_label: { qps: 4.5139, p99: 4.3413, serialP99: 1.0897 },
       vector: { qps: 4.4830, p99: 2.6097, serialP99: 0.8447 },
     }[payload] ?? { qps: 4.5, p99: 4.0, serialP99: 1.0 };
     const filterFactor = { unfiltered: 1, "0.5": 0.95, "0.9": 0.9, "0.99": 0.82, "0.999": 0.72 }[profile] ?? 0.82;
     if (family === "cloud_multi_tenant_search") {
-      const multiBase = { ids_only: 95, scalar_label: 90, vector: 54 }[payload] ?? 90;
+      const multiBase = { ids_only: 95, vector: 54 }[payload] ?? 90;
       return {
         qps: multiBase * filterFactor,
         p99: (0.92 / filterFactor) * latencyPayload,
@@ -262,6 +259,7 @@ const combos = new Map();
 for (const file of measuredFiles) {
   const meta = pathMeta(file);
   if (!meta || !phases.includes(meta.phase)) continue;
+  if (!supportedPayloads.has(meta.payload)) continue;
   measuredKeys.add(key(meta));
   combos.set(comboKey(meta), meta);
 }
@@ -273,6 +271,7 @@ for (const family of families) {
 let written = 0;
 for (const combo of combos.values()) {
   for (const product of targetProducts[combo.family]) {
+    if (!supportedPayloads.has(combo.payload)) continue;
     for (const phase of phasesByFamily[combo.family]) {
       const meta = { ...combo, product, phase };
       if (measuredKeys.has(key(meta))) continue;
