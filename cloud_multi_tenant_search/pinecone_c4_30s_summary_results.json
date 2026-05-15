@@ -1,0 +1,646 @@
+[
+  {
+    "conc_latency_avg_list": [
+      0.006980945371570925
+    ],
+    "conc_latency_p95_list": [
+      0.011701147817075246
+    ],
+    "conc_latency_p99_list": [
+      0.03638138042297213
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      568.9403
+    ],
+    "label": "pinecone_multitenant_unfiltered_na_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 568.9403,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_unfiltered_na_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_unfiltered_na_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007565477672735232
+    ],
+    "conc_latency_p95_list": [
+      0.0132696611166466
+    ],
+    "conc_latency_p99_list": [
+      0.038961673816665925
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      524.5527
+    ],
+    "label": "pinecone_multitenant_int_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 524.5527,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99_9p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007224260583895781
+    ],
+    "conc_latency_p95_list": [
+      0.012359051144449032
+    ],
+    "conc_latency_p99_list": [
+      0.03717789261136204
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      549.3702
+    ],
+    "label": "pinecone_multitenant_int_filter_1p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 549.3702,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_1p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007499167435054831
+    ],
+    "conc_latency_p95_list": [
+      0.013292878051288426
+    ],
+    "conc_latency_p99_list": [
+      0.039129121927544475
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      529.5485
+    ],
+    "label": "pinecone_multitenant_int_filter_10p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 529.5485,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/90p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_10p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007201456690118866
+    ],
+    "conc_latency_p95_list": [
+      0.01100509117823094
+    ],
+    "conc_latency_p99_list": [
+      0.032549612519796885
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      551.2294
+    ],
+    "label": "pinecone_multitenant_int_filter_50p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 551.2294,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_50p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007018360074694882
+    ],
+    "conc_latency_p95_list": [
+      0.009483517816988751
+    ],
+    "conc_latency_p99_list": [
+      0.027215707744471726
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      565.6945
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 565.6945,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007089560441569914
+    ],
+    "conc_latency_p95_list": [
+      0.0102023929473944
+    ],
+    "conc_latency_p99_list": [
+      0.030574699535500273
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      559.9415
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_0_2p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 559.9415,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_0_2p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007137825536325015
+    ],
+    "conc_latency_p95_list": [
+      0.01038902933942154
+    ],
+    "conc_latency_p99_list": [
+      0.03358215006301178
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      556.1593
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_0_5p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 556.1593,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_0_5p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007010221798248244
+    ],
+    "conc_latency_p95_list": [
+      0.00947843526955694
+    ],
+    "conc_latency_p99_list": [
+      0.02244357879390002
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      566.52
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_1p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 566.52,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_1p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007248438757320379
+    ],
+    "conc_latency_p95_list": [
+      0.010702012531692147
+    ],
+    "conc_latency_p99_list": [
+      0.03144426087499598
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      547.7551
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_2p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 547.7551,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_2p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007018903519967247
+    ],
+    "conc_latency_p95_list": [
+      0.010170196020044384
+    ],
+    "conc_latency_p99_list": [
+      0.03430991497589295
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      565.9264
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_5p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 565.9264,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_5p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.006910806317070922
+    ],
+    "conc_latency_p95_list": [
+      0.01051398896379397
+    ],
+    "conc_latency_p99_list": [
+      0.03359692230005746
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      573.9603
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_10p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 573.9603,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_10p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.008203914645166158
+    ],
+    "conc_latency_p95_list": [
+      0.017101202945923433
+    ],
+    "conc_latency_p99_list": [
+      0.05052270693704486
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      483.9911
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_20p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 483.9911,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_20p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_20p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.008032205519059452
+    ],
+    "conc_latency_p95_list": [
+      0.013396414264570913
+    ],
+    "conc_latency_p99_list": [
+      0.04849675457226088
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      494.2505
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_50p_ids_only_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 1000,
+    "qps": 494.2505,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_50p_ids_only_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007322580576368471
+    ],
+    "conc_latency_p95_list": [
+      0.011068696476286277
+    ],
+    "conc_latency_p99_list": [
+      0.04031671449774876
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      541.9661
+    ],
+    "label": "pinecone_multitenant_unfiltered_na_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 541.9661,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/unfiltered/na/vector/concurrent_qps/result_20260514_pinecone_multitenant_unfiltered_na_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_unfiltered_na_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.0075425290126636384
+    ],
+    "conc_latency_p95_list": [
+      0.010887645708862685
+    ],
+    "conc_latency_p99_list": [
+      0.037380252217408275
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      526.1875
+    ],
+    "label": "pinecone_multitenant_int_filter_0_1p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 526.1875,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99_9p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_0_1p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.006943095637225744
+    ],
+    "conc_latency_p95_list": [
+      0.010136057983618238
+    ],
+    "conc_latency_p99_list": [
+      0.03620320047717529
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      571.7549
+    ],
+    "label": "pinecone_multitenant_int_filter_1p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 571.7549,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_1p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.00790374683284525
+    ],
+    "conc_latency_p95_list": [
+      0.01473284198436886
+    ],
+    "conc_latency_p99_list": [
+      0.04495884738862521
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      502.3192
+    ],
+    "label": "pinecone_multitenant_int_filter_10p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 502.3192,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/90p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_10p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007834984347051837
+    ],
+    "conc_latency_p95_list": [
+      0.014851483004167613
+    ],
+    "conc_latency_p99_list": [
+      0.0409380351798609
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      506.8155
+    ],
+    "label": "pinecone_multitenant_int_filter_50p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 506.8155,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/50p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_int_filter_50p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.008094152876931738
+    ],
+    "conc_latency_p95_list": [
+      0.016945329809095667
+    ],
+    "conc_latency_p99_list": [
+      0.042521635130978855
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      490.4772
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_0_1p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 490.4772,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_0_1p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007426431818062343
+    ],
+    "conc_latency_p95_list": [
+      0.011793582164682445
+    ],
+    "conc_latency_p99_list": [
+      0.04359474883414809
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      534.4986
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_0_2p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 534.4986,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_0_2p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007648914296688489
+    ],
+    "conc_latency_p95_list": [
+      0.012155245197936888
+    ],
+    "conc_latency_p99_list": [
+      0.043222993533127016
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      518.5324
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_0_5p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 518.5324,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_0_5p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.006615530881235992
+    ],
+    "conc_latency_p95_list": [
+      0.009305712976492943
+    ],
+    "conc_latency_p99_list": [
+      0.034815686894580686
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      600.1535
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_1p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 600.1535,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/1p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_1p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007375206785599452
+    ],
+    "conc_latency_p95_list": [
+      0.011181814223527908
+    ],
+    "conc_latency_p99_list": [
+      0.04389671731274574
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      538.2404
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_2p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 538.2404,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/2p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_2p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.006747275157803852
+    ],
+    "conc_latency_p95_list": [
+      0.009030842303764072
+    ],
+    "conc_latency_p99_list": [
+      0.03094418781576682
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      588.4483
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_5p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 588.4483,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/5p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_5p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007368511403775025
+    ],
+    "conc_latency_p95_list": [
+      0.012199001968838248
+    ],
+    "conc_latency_p99_list": [
+      0.04332649053540064
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      538.9582
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_10p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 538.9582,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/10p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_10p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007674378078987242
+    ],
+    "conc_latency_p95_list": [
+      0.013349091180134555
+    ],
+    "conc_latency_p99_list": [
+      0.04437376945512365
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      517.064
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_20p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 517.064,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/20p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_20p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_20p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  },
+  {
+    "conc_latency_avg_list": [
+      0.007052494429038301
+    ],
+    "conc_latency_p95_list": [
+      0.010393288184422986
+    ],
+    "conc_latency_p99_list": [
+      0.034215525095351
+    ],
+    "conc_num_list": [
+      4
+    ],
+    "conc_qps_list": [
+      562.3003
+    ],
+    "label": "pinecone_multitenant_scalar_label_filter_50p_vector_concurrent_qps_c4_30s_20260514",
+    "payload_estimated_bytes_per_query": 154600,
+    "qps": 562.3003,
+    "raw_json": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/50p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+    "raw_output": "cloud_multi_tenant_search/raw_outputs/pinecone_serverless/pinecone_multitenant_scalar_label_filter_50p_vector_concurrent_qps_c4_30s_20260514.log",
+    "result_label": ":)"
+  }
+]
