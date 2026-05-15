@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T03:04:25.833Z",
+  "generated_at": "2026-05-15T03:18:47.233Z",
   "entries": [
     {
       "path": "cloud_cold_latency/pinecone/int_filter_0.9/result_20260513_cloud_cold_latency_pinecone_int_filter_0.9_20260513_pinecone.json",
@@ -69,12 +69,6 @@
     },
     {
       "path": "cloudleadboard_data/mock_raw_results/cloud_cold_latency/pinecone/int_filter_0.9/result_mocked_output_cloud_cold_latency_pinecone_int_filter_0.9.json",
-      "family": "cloud_cold_latency",
-      "case_id": 700,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_cold_latency/pinecone/unfiltered/result_mocked_output_cloud_cold_latency_pinecone_unfiltered.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "mocked"
@@ -221,6 +215,174 @@
       "path": "cloud_insert/raw_results/zillz_cloud_cap_12cu/batch_5k/result_20260513_cloud_insert_zillz_cloud_cap_12cu_laion100m_bs5k_20260513_zillizcloud.json",
       "family": "cloud_insert",
       "case_id": 600,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/50p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/90p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/90p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99_9p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99_9p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/10p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/1p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_20p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/20p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_20p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/2p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/50p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/5p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_unfiltered_na_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_multi_tenant_search/raw_results/pinecone_serverless/unfiltered/na/vector/concurrent_qps/result_20260514_pinecone_multitenant_unfiltered_na_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_multi_tenant_search",
+      "case_id": 800,
       "source": "measured"
     },
     {
@@ -980,25 +1142,7 @@
       "source": "measured"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/50p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_50p_ids_only_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/50p/scalar_label/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_50p_scalar_label_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/50p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_50p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/90p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_90p_ids_only_concurrent_qps.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "mocked"
@@ -1010,31 +1154,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/90p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_90p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99_9p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_99_9p_ids_only_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99_9p/scalar_label/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_99_9p_scalar_label_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99_9p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_99_9p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_99p_ids_only_concurrent_qps.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "mocked"
@@ -1046,31 +1166,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/int_filter/99p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_99p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_1p_ids_only_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/scalar_label/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_1p_scalar_label_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_1p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_2p_ids_only_concurrent_qps.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "mocked"
@@ -1082,31 +1178,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_2p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_5p_ids_only_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/scalar_label/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_5p_scalar_label_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_5p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/10p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_10p_ids_only_concurrent_qps.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "mocked"
@@ -1118,31 +1190,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/10p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_10p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/1p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_1p_ids_only_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/1p/scalar_label/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_1p_scalar_label_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/1p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_1p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/20p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_20p_ids_only_concurrent_qps.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "mocked"
@@ -1154,31 +1202,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/20p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_20p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/2p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_2p_ids_only_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/2p/scalar_label/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_2p_scalar_label_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/2p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_2p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/50p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_50p_ids_only_concurrent_qps.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "mocked"
@@ -1190,31 +1214,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/50p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_50p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/5p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_5p_ids_only_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/5p/scalar_label/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_5p_scalar_label_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/scalar_label_filter/5p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_5p_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_unfiltered_na_ids_only_concurrent_qps.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "mocked"
@@ -1226,13 +1226,169 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_multi_tenant_search/raw_results/pinecone_serverless/unfiltered/na/vector/concurrent_qps/result_mocked_output_pinecone_serverless_unfiltered_na_vector_concurrent_qps.json",
-      "family": "cloud_multi_tenant_search",
-      "case_id": 800,
-      "source": "mocked"
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/0_1p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_int_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/0_1p/vector/concurrent_qps/result_20260514_pinecone_serverless_int_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/10p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_int_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/10p/vector/concurrent_qps/result_20260514_pinecone_serverless_int_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/1p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_int_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/1p/vector/concurrent_qps/result_20260514_pinecone_serverless_int_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_int_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/int_filter/50p/vector/concurrent_qps/result_20260514_pinecone_serverless_int_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_0_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_0_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_0_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_0_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/10p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/1p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_20p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/20p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_20p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/2p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/50p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/5p/vector/concurrent_qps/result_20260514_pinecone_serverless_scalar_label_filter_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
     },
     {
       "path": "cloud_payload_search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result_20260513_pinecone_serverless_unfiltered_na_ids_only_concurrent_qps_c3c4_20260513_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result_20260514_pinecone_serverless_unfiltered_na_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "measured"
@@ -1257,6 +1413,12 @@
     },
     {
       "path": "cloud_payload_search/raw_results/pinecone_serverless/unfiltered/na/vector/concurrent_qps/result_20260513_pinecone_serverless_unfiltered_na_vector_concurrent_qps_c3c4_20260513_pinecone.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/pinecone_serverless/unfiltered/na/vector/concurrent_qps/result_20260514_pinecone_serverless_unfiltered_na_vector_concurrent_qps_c4_30s_20260514_pinecone.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "measured"
@@ -3284,12 +3446,6 @@
       "source": "measured"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/0_1p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_0_1p_ids_only_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/0_1p/ids_only/serial_recall/result_mocked_output_pinecone_serverless_int_filter_0_1p_ids_only_serial_recall.json",
       "family": "cloud_payload_search",
       "case_id": 500,
@@ -3308,19 +3464,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/0_1p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_0_1p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/0_1p/vector/serial_recall/result_mocked_output_pinecone_serverless_int_filter_0_1p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/10p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_10p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3344,19 +3488,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/10p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_10p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/10p/vector/serial_recall/result_mocked_output_pinecone_serverless_int_filter_10p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/1p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_1p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3380,19 +3512,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/1p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_1p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/1p/vector/serial_recall/result_mocked_output_pinecone_serverless_int_filter_1p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/50p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_50p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3416,19 +3536,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/50p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_int_filter_50p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/int_filter/50p/vector/serial_recall/result_mocked_output_pinecone_serverless_int_filter_50p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_1p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3452,19 +3560,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_1p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_1p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_0_1p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_2p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3488,19 +3584,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_2p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_2p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_0_2p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_5p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3524,19 +3608,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_0_5p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/0_5p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_0_5p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/10p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_10p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3560,19 +3632,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/10p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_10p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/10p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_10p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/1p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_1p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3596,19 +3656,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/1p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_1p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/1p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_1p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/20p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_20p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3632,19 +3680,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/20p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_20p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/20p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_20p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/2p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_2p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3668,19 +3704,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/2p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_2p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/2p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_2p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/50p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_50p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3704,19 +3728,7 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/50p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_50p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/50p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_50p_vector_serial_recall.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/5p/ids_only/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_5p_ids_only_concurrent_qps.json",
       "family": "cloud_payload_search",
       "case_id": 500,
       "source": "mocked"
@@ -3740,12 +3752,6 @@
       "source": "mocked"
     },
     {
-      "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/5p/vector/concurrent_qps/result_mocked_output_pinecone_serverless_scalar_label_filter_5p_vector_concurrent_qps.json",
-      "family": "cloud_payload_search",
-      "case_id": 500,
-      "source": "mocked"
-    },
-    {
       "path": "cloudleadboard_data/mock_raw_results/cloud_payload_search/raw_results/pinecone_serverless/scalar_label_filter/5p/vector/serial_recall/result_mocked_output_pinecone_serverless_scalar_label_filter_5p_vector_serial_recall.json",
       "family": "cloud_payload_search",
       "case_id": 500,
@@ -3754,11 +3760,11 @@
   ],
   "counts": {
     "cloud_cold_latency:measured": 11,
-    "cloud_cold_latency:mocked": 5,
+    "cloud_cold_latency:mocked": 4,
     "cloud_insert:measured": 21,
-    "cloud_multi_tenant_search:measured": 126,
-    "cloud_multi_tenant_search:mocked": 42,
-    "cloud_payload_search:measured": 342,
-    "cloud_payload_search:mocked": 78
+    "cloud_multi_tenant_search:measured": 154,
+    "cloud_multi_tenant_search:mocked": 14,
+    "cloud_payload_search:measured": 370,
+    "cloud_payload_search:mocked": 52
   }
 }

@@ -41,11 +41,40 @@ async function readCaseId(file) {
   }
 }
 
+async function isUsableMeasured(file, family) {
+  if (family !== "cloud_cold_latency") return true;
+  try {
+    const json = JSON.parse(await readFile(file, "utf8"));
+    const metrics = json?.results?.[0]?.metrics?.cold_latency || {};
+    return Number(metrics.cold_stats?.first_query_latency) > 0
+      && Number(metrics.warm_stats?.p99_latency) > 0;
+  } catch {
+    return false;
+  }
+}
+
+function canonicalKey(file, family, sourceRoot) {
+  const rel = path.relative(sourceRoot, file).split(path.sep);
+  if (family === "cloud_cold_latency") {
+    return [family, rel[0], rel[1]].join("|");
+  }
+  const rawIndex = rel.indexOf("raw_results");
+  if (rawIndex >= 0) {
+    return [family, ...rel.slice(rawIndex + 1, -1)].join("|");
+  }
+  return [family, rel.slice(0, -1).join("/")].join("|");
+}
+
 const entries = [];
+const measuredKeys = new Set();
 for (const folder of caseFolders) {
-  const files = await walk(path.join(resultRoot, folder));
+  const sourceRoot = path.join(resultRoot, folder);
+  const files = await walk(sourceRoot);
   for (const file of files) {
     const rel = path.relative(root, file).split(path.sep).join("/");
+    if (await isUsableMeasured(file, folder)) {
+      measuredKeys.add(canonicalKey(file, folder, sourceRoot));
+    }
     entries.push({
       path: rel,
       family: folder,
@@ -56,8 +85,10 @@ for (const folder of caseFolders) {
 }
 
 for (const folder of caseFolders) {
-  const files = await walk(path.join(mockRoot, folder));
+  const sourceRoot = path.join(mockRoot, folder);
+  const files = await walk(sourceRoot);
   for (const file of files) {
+    if (measuredKeys.has(canonicalKey(file, folder, sourceRoot))) continue;
     const rel = path.relative(root, file).split(path.sep).join("/");
     entries.push({
       path: rel,
