@@ -15,12 +15,11 @@ This document summarizes the completed CloudMultiTenantSearchCase run for cloud 
 | Tenant label format | `tenant_0000` through `tenant_0999` |
 | Tenant assignment | `tenant_id = row_id % tenant_count` |
 | Search phase | concurrent QPS and latency only |
-| Concurrency list | `60,80` |
+| Concurrency list | `60,80` for Zilliz/Turbopuffer; `4` for Pinecone c4-only detached run |
 | Duration | 30s per concurrency |
 | Framework commit | `df1521796acd63d62042e182e7addad02c21e792` |
 | Framework branch | `cloud-payload-search-case` |
 | Raw result manifest | [raw_results/manifest.jsonl](raw_results/manifest.jsonl) |
-| Machine-readable summary | [summary_results.json](summary_results.json) |
 
 ## Filter Rate Semantics
 
@@ -38,12 +37,13 @@ Integer filtered rows use the actual `--cloud-filter-rate` value. The expression
 | Zilliz Cloud Tiered 1CU | 42 | measured |
 | Zilliz Cloud Capacity 2CU | 42 | measured |
 | Turbopuffer | 42 | measured |
-| Pinecone Serverless | 0 | skipped, missing Pinecone API key or multitenant index name |
+| Pinecone Serverless | 28 | measured c4-only; IDs-only and vector payloads only |
 
 ## Notes
 
 - Zilliz Cloud Tiered 1CU scalar-label payload QPS was higher than IDs-only for several scalar-label filter rates. The harness paths were checked and the payload branches are not reversed, but these rows should be rebenched before drawing a product conclusion from that inversion.
 - Vector payload returns the 768D vector field and is expected to be substantially heavier than IDs-only or scalar-label payloads.
+- Pinecone Serverless results were collected separately with concurrency `4`; keep them separate from the `60,80` comparison rows when interpreting leaderboard results.
 
 ## Zilliz Cloud Tiered 1CU
 
@@ -239,4 +239,50 @@ Integer filtered rows use the actual `--cloud-filter-rate` value. The expression
 
 ## Pinecone Serverless
 
-Pinecone was skipped in this run because the detached launcher did not have a Pinecone API key or multitenant index name configured.
+| Item | Value |
+|---|---|
+| Product key | `pinecone_serverless` |
+| Notes | Pinecone Serverless multitenant namespace results were collected in a detached c4-only run. They are included for traceability but are not directly comparable with the c60/c80 rows above. |
+
+### Unfiltered Search
+
+| Payload | QPS @4 | Max QPS | Avg latency @4 | P95 @4 | P99 @4 | Payload bytes/query | Status |
+|---|---:|---:|---|---|---|---:|---|
+| IDs only | 568.9403 | [568.9403](raw_results/pinecone_serverless/unfiltered/na/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_unfiltered_na_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0070s | 0.0117s | 0.0364s | 1,000 | measured c4 |
+| vector | 541.9661 | [541.9661](raw_results/pinecone_serverless/unfiltered/na/vector/concurrent_qps/result_20260514_pinecone_multitenant_unfiltered_na_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0073s | 0.0111s | 0.0403s | 154,600 | measured c4 |
+
+### Integer Filtered Search
+
+| Filter rate | Payload | QPS @4 | Max QPS | Avg latency @4 | P95 @4 | P99 @4 | Payload bytes/query | Status |
+|---:|---|---:|---:|---|---|---|---:|---|
+| 99.9% | IDs only | 524.5527 | [524.5527](raw_results/pinecone_serverless/int_filter/99_9p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0076s | 0.0133s | 0.0390s | 1,000 | measured c4 |
+| 99.9% | vector | 526.1875 | [526.1875](raw_results/pinecone_serverless/int_filter/99_9p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0075s | 0.0109s | 0.0374s | 154,600 | measured c4 |
+| 99% | IDs only | 549.3702 | [549.3702](raw_results/pinecone_serverless/int_filter/99p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0072s | 0.0124s | 0.0372s | 1,000 | measured c4 |
+| 99% | vector | 571.7549 | [571.7549](raw_results/pinecone_serverless/int_filter/99p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0069s | 0.0101s | 0.0362s | 154,600 | measured c4 |
+| 90% | IDs only | 529.5485 | [529.5485](raw_results/pinecone_serverless/int_filter/90p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0075s | 0.0133s | 0.0391s | 1,000 | measured c4 |
+| 90% | vector | 502.3192 | [502.3192](raw_results/pinecone_serverless/int_filter/90p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0079s | 0.0147s | 0.0450s | 154,600 | measured c4 |
+| 50% | IDs only | 551.2294 | [551.2294](raw_results/pinecone_serverless/int_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0072s | 0.0110s | 0.0325s | 1,000 | measured c4 |
+| 50% | vector | 506.8155 | [506.8155](raw_results/pinecone_serverless/int_filter/50p/vector/concurrent_qps/result_20260514_pinecone_multitenant_int_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0078s | 0.0149s | 0.0409s | 154,600 | measured c4 |
+
+### Scalar Label Filtered Search
+
+| Filter rate | Payload | QPS @4 | Max QPS | Avg latency @4 | P95 @4 | P99 @4 | Payload bytes/query | Status |
+|---:|---|---:|---:|---|---|---|---:|---|
+| 0.1% | IDs only | 565.6945 | [565.6945](raw_results/pinecone_serverless/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0070s | 0.0095s | 0.0272s | 1,000 | measured c4 |
+| 0.1% | vector | 490.4772 | [490.4772](raw_results/pinecone_serverless/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0081s | 0.0169s | 0.0425s | 154,600 | measured c4 |
+| 0.2% | IDs only | 559.9415 | [559.9415](raw_results/pinecone_serverless/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0071s | 0.0102s | 0.0306s | 1,000 | measured c4 |
+| 0.2% | vector | 534.4986 | [534.4986](raw_results/pinecone_serverless/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0074s | 0.0118s | 0.0436s | 154,600 | measured c4 |
+| 0.5% | IDs only | 556.1593 | [556.1593](raw_results/pinecone_serverless/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0071s | 0.0104s | 0.0336s | 1,000 | measured c4 |
+| 0.5% | vector | 518.5324 | [518.5324](raw_results/pinecone_serverless/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_0_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0076s | 0.0122s | 0.0432s | 154,600 | measured c4 |
+| 1% | IDs only | 566.5200 | [566.5200](raw_results/pinecone_serverless/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_1p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0070s | 0.0095s | 0.0224s | 1,000 | measured c4 |
+| 1% | vector | 600.1535 | [600.1535](raw_results/pinecone_serverless/scalar_label_filter/1p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_1p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0066s | 0.0093s | 0.0348s | 154,600 | measured c4 |
+| 2% | IDs only | 547.7551 | [547.7551](raw_results/pinecone_serverless/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_2p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0072s | 0.0107s | 0.0314s | 1,000 | measured c4 |
+| 2% | vector | 538.2404 | [538.2404](raw_results/pinecone_serverless/scalar_label_filter/2p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_2p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0074s | 0.0112s | 0.0439s | 154,600 | measured c4 |
+| 5% | IDs only | 565.9264 | [565.9264](raw_results/pinecone_serverless/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_5p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0070s | 0.0102s | 0.0343s | 1,000 | measured c4 |
+| 5% | vector | 588.4483 | [588.4483](raw_results/pinecone_serverless/scalar_label_filter/5p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_5p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0067s | 0.0090s | 0.0309s | 154,600 | measured c4 |
+| 10% | IDs only | 573.9603 | [573.9603](raw_results/pinecone_serverless/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_10p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0069s | 0.0105s | 0.0336s | 1,000 | measured c4 |
+| 10% | vector | 538.9582 | [538.9582](raw_results/pinecone_serverless/scalar_label_filter/10p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_10p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0074s | 0.0122s | 0.0433s | 154,600 | measured c4 |
+| 20% | IDs only | 483.9911 | [483.9911](raw_results/pinecone_serverless/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_20p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0082s | 0.0171s | 0.0505s | 1,000 | measured c4 |
+| 20% | vector | 517.0640 | [517.0640](raw_results/pinecone_serverless/scalar_label_filter/20p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_20p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0077s | 0.0133s | 0.0444s | 154,600 | measured c4 |
+| 50% | IDs only | 494.2505 | [494.2505](raw_results/pinecone_serverless/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_50p_ids_only_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0080s | 0.0134s | 0.0485s | 1,000 | measured c4 |
+| 50% | vector | 562.3003 | [562.3003](raw_results/pinecone_serverless/scalar_label_filter/50p/vector/concurrent_qps/result_20260514_pinecone_multitenant_scalar_label_filter_50p_vector_concurrent_qps_c4_30s_20260514_pinecone.json) | 0.0071s | 0.0104s | 0.0342s | 154,600 | measured c4 |

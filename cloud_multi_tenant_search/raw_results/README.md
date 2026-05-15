@@ -19,13 +19,15 @@ Path components:
 
 | Component | Values |
 |---|---|
-| `product` | `zilliz_cloud_tiered_1cu`, `zilliz_cloud_capacity_2cu`, `turbopuffer` |
+| `product` | `zilliz_cloud_tiered_1cu`, `zilliz_cloud_capacity_2cu`, `turbopuffer`, `pinecone_serverless` |
 | `filter_type` | `unfiltered`, `int_filter`, `scalar_label_filter` |
 | `filter_rate` | `na` for unfiltered; actual `--cloud-filter-rate` labels such as `99_9p`, `99p`, `90p`, `50p`; scalar-label percentage labels such as `0_1p`, `5p`, `50p` |
 | `payload_profile` | `ids_only`, `scalar_label`, `vector` |
 | `phase` | `concurrent_qps` |
 
 For integer filters, `filter_rate` is the actual VDBBench CLI threshold used by `--cloud-filter-rate`, so `99_9p` means `id >= int(dataset_size * 0.999)` and leaves roughly 0.1% of rows as candidates. The manifest retains `source_rate_label` for the original run-label token.
+
+Pinecone Serverless entries are preserved from a detached c4-only run. Their raw JSON metrics use `conc_num_list=[4]`, while the Zilliz and Turbopuffer rows use the main `60,80` concurrency sweep.
 
 ## Manifest
 
