@@ -1,0 +1,60 @@
+{
+  "sources": [
+    {
+      "name": "Zilliz Cloud pricing",
+      "url": "https://zilliz.com/pricing"
+    },
+    {
+      "name": "Turbopuffer pricing",
+      "url": "https://turbopuffer.com/pricing"
+    },
+    {
+      "name": "Pinecone pricing",
+      "url": "https://www.pinecone.io/pricing/"
+    }
+  ],
+  "modes": [
+    { "id": "search", "label": "Search only" },
+    { "id": "search_storage", "label": "Search + storage" }
+  ],
+  "scenarios": {
+    "single": {
+      "label": "Single tenant LAION 100M",
+      "x_label": "Sustained QPS",
+      "points": [
+        { "product": "Turbopuffer", "qps": 1, "search_cost_hr": 0.188, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 10, "search_cost_hr": 1.884, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 16, "search_cost_hr": 3.008, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 100, "search_cost_hr": 18.837, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 400, "search_cost_hr": 75.347, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Zilliz Cloud Tiered 4CU", "qps": 1, "search_cost_hr": 1.488, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.951, "measured": true },
+        { "product": "Zilliz Cloud Tiered 4CU", "qps": 57.97, "search_cost_hr": 1.488, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.951, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 1, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 16, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 100, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 310.47, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Pinecone Serverless", "qps": 1, "search_cost_hr": 19.958, "storage_cost_hr": 0.141, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; search cost uses 308 RU/query at $18/M RU, $0.33/GB-month storage, and a 40 WPS write scenario." },
+        { "product": "Pinecone Serverless", "qps": 5, "search_cost_hr": 99.79, "storage_cost_hr": 0.141, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; performance endpoint remains capped at the requested <=5 QPS LAION 100M comparison point until measured." }
+      ]
+    },
+    "multi": {
+      "label": "Multitenant Cohere 10M",
+      "x_label": "Aggregate QPS",
+      "points": [
+        { "product": "Turbopuffer", "qps": 10, "search_cost_hr": 0.050, "storage_cost_hr": 0.014, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Turbopuffer", "qps": 50, "search_cost_hr": 0.248, "storage_cost_hr": 0.014, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Turbopuffer", "qps": 75, "search_cost_hr": 0.373, "storage_cost_hr": 0.014, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Turbopuffer", "qps": 524, "search_cost_hr": 2.60, "storage_cost_hr": 0.014, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Turbopuffer", "qps": 979, "search_cost_hr": 4.86, "storage_cost_hr": 0.014, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Tiered 1CU", "qps": 1, "search_cost_hr": 0.372, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Tiered 1CU", "qps": 75, "search_cost_hr": 0.372, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Tiered 1CU", "qps": 524, "search_cost_hr": 0.372, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Capacity 2CU", "qps": 1, "search_cost_hr": 0.496, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Capacity 2CU", "qps": 525, "search_cost_hr": 0.496, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Capacity 2CU", "qps": 979, "search_cost_hr": 0.496, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Pinecone Serverless", "qps": 10, "search_cost_hr": 0.162, "storage_cost_hr": 0.014, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; search cost uses the 0.25 RU/query minimum at $18/M RU and a 40 WPS write scenario." },
+        { "product": "Pinecone Serverless", "qps": 100, "search_cost_hr": 1.62, "storage_cost_hr": 0.014, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; performance endpoint remains capped at the requested <=100 aggregate QPS multitenant comparison point until measured." }
+      ]
+    }
+  }
+}

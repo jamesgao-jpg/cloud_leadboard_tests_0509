@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloud Vector Leaderboard</title>
+  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">C</div>
+        <div>
+          <strong>Cloud Vector Leaderboard</strong>
+          <small>VDBBench raw artifact view</small>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Leaderboard sections">
+        <a href="#cost-section">Cost</a>
+        <a href="#insert-section">Insertion</a>
+        <a href="#search-section">Search</a>
+        <a href="#cold-section">Cold Latency</a>
+        <a href="cloudleadboard_release_report.html">Release Report</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Cloud Leadboard v2</h1>
+        <p>Parsed from VDBBench raw JSON artifacts across insertion readiness, search behavior, cold latency, and cost profiles.</p>
+      </div>
+      <div class="chips hero-status">
+        <span class="chip accent" id="load-status">Loading raw results...</span>
+        <span class="chip" id="result-counts"></span>
+        <span class="chip">Dataset-aware charts</span>
+        <span class="chip">No hard-coded benchmark values</span>
+      </div>
+    </section>
+
+    <main>
+    <section class="section" id="cost-section">
+      <div class="section-head">
+        <div>
+          <h2>Cost Pareto Lines</h2>
+          <p class="case-explain">Pareto cost lines show how much sustained QPS each cloud vector database can deliver for a given operating spend. We build these lines from actual search results shown in CloudPayloadSearchCase &amp; MultitenantSearchCase, then apply public pricing models so the chart compares operating efficiency, not just raw benchmark speed.</p>
+        </div>
+      </div>
+      <div class="filters">
+        <label class="f-select">
+          <span>Workload</span>
+          <select id="cost-scenario">
+            <option value="single">Single tenant LAION 100M</option>
+            <option value="multi">Multitenant Cohere 10M</option>
+          </select>
+        </label>
+        <label class="f-select">
+          <span>Cost basis</span>
+          <select id="cost-mode">
+            <option value="search">Search only</option>
+            <option value="search_storage">Search + storage</option>
+          </select>
+        </label>
+        <div class="f-select">
+          <span>Cost period</span>
+          <div class="seg-control" id="cost-period-toggle" role="group" aria-label="Cost period">
+            <button type="button" class="active" data-period="hourly">Hourly</button>
+            <button type="button" data-period="monthly">Monthly</button>
+          </div>
+        </div>
+        <label class="f-select">
+          <span>QPS range</span>
+          <input id="cost-qps-max" class="f-input" type="number" min="1" step="1" value="50">
+        </label>
+      </div>
+      <div id="cost-chart" class="cost-chart"></div>
+      <div id="cost-sources" class="source-list"></div>
+    </section>
+
+    <section class="section" id="insert-section">
+      <div class="section-head">
+        <div>
+          <h2>CloudInsert Case</h2>
+          <p class="case-explain">This case measures the write-to-serve lifecycle for cloud vector databases: how long bulk data takes to finish inserting, when the inserted data can be searched reliably, and when background indexing has fully caught up. The purpose is to expose operational freshness, not just raw write throughput.</p>
+        </div>
+      </div>
+      <div class="filters">
+        <span class="f-pill"><span class="k">Dataset</span><span class="v">LAION 100M</span></span>
+        <div class="dot-legend">
+          <span><i style="background:var(--insert);"></i>inserted</span>
+          <span><i style="background:var(--searchable);"></i>searchable</span>
+          <span><i style="background:var(--indexed);"></i>indexed</span>
+        </div>
+      </div>
+      <div id="insert-chart" class="chart-host"></div>
+    </section>
+
+    <section class="section" id="search-section">
+      <div class="section-head">
+        <div>
+          <h2>CloudPayloadSearchCase & MultitenantSearchCase</h2>
+          <p id="search-note"></p>
+          <p class="case-explain">This case measures query behavior after cloud data is already loaded and searchable. It compares peak concurrent QPS, P99 latency, and recall under different response payloads, scalar-filter selectivity, and tenancy modes so the chart shows both throughput and result quality instead of rewarding speed alone.</p>
+        </div>
+      </div>
+      <div class="filters">
+        <label class="f-select">
+          <span>Mode</span>
+          <select id="search-mode">
+            <option value="single">Single tenant payload search</option>
+            <option value="multi">Multitenant search</option>
+          </select>
+        </label>
+        <label class="f-select">
+          <span>Filter</span>
+          <select id="filter-select"></select>
+        </label>
+        <label class="f-select">
+          <span>Payload</span>
+          <select id="payload-select"></select>
+        </label>
+      </div>
+      <div id="search-grid" class="metric-grid"></div>
+      <div id="search-chart" class="chart-host"></div>
+    </section>
+
+    <section class="section" id="cold-section">
+      <div class="section-head">
+        <div>
+          <h2>CloudColdLatency Case</h2>
+          <p>Idle-state first query vs. steady-state query, without mixing in other variables.</p>
+        </div>
+      </div>
+      <div class="filters">
+        <label class="f-select">
+          <span>Mode</span>
+          <select id="cold-filter-select">
+            <option value="unfiltered/na">Unfiltered</option>
+            <option value="int_filter/0.9">Int filter 90%</option>
+          </select>
+        </label>
+      </div>
+      <div id="cold-chart" class="cold-grid"></div>
+    </section>
+    </main>
+  </div>
+
+  <script src="cloudleadboard_assets/cloudleadboard.js"></script>
+</body>
+</html>
