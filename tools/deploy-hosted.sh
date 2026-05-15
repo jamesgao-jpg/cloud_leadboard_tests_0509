@@ -23,6 +23,7 @@ page="all"
 host="172.16.70.6"
 dest="/var/www/html/cloud-leaderboard"
 dry_run=()
+dry_run_enabled=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -39,7 +40,7 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     --dry-run)
-      dry_run=(--dry-run)
+      dry_run_enabled=1
       shift
       ;;
     -h|--help)
@@ -67,7 +68,10 @@ cd "$repo_root"
 
 ssh "$host" "sudo mkdir -p '$dest' && sudo chown \$(id -un):\$(id -gn) '$dest'"
 
-rsync_common=(-az --delete "${dry_run[@]}")
+rsync_common=(-az --delete)
+if [[ "$dry_run_enabled" -eq 1 ]]; then
+  rsync_common+=(--dry-run)
+fi
 
 deploy_assets() {
   rsync "${rsync_common[@]}" cloudleadboard_assets/ "$host:$dest/cloudleadboard_assets/"
