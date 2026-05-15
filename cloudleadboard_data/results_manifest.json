@@ -2,25 +2,25 @@
   "generated_at": "2026-05-15T03:58:39.366Z",
   "entries": [
     {
-      "path": "cloud_cold_latency/pinecone/int_filter_0.9/result_20260513_cloud_cold_latency_pinecone_int_filter_0.9_20260513_pinecone.json",
+      "path": "cloud_cold_latency/pinecone_serverless/int_filter_0.9/result_20260513_cloud_cold_latency_pinecone_int_filter_0.9_20260513_pinecone.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "measured"
     },
     {
-      "path": "cloud_cold_latency/pinecone/int_filter_0.9/result_20260515_pinecone_cloud_cold_latency_laion100m_int_filter_0_9_20260515_pinecone.json",
+      "path": "cloud_cold_latency/pinecone_serverless/int_filter_0.9/result_20260515_pinecone_cloud_cold_latency_laion100m_int_filter_0_9_20260515_pinecone.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "measured"
     },
     {
-      "path": "cloud_cold_latency/pinecone/unfiltered/result_20260513_cloud_cold_latency_pinecone_unfiltered_20260513_pinecone.json",
+      "path": "cloud_cold_latency/pinecone_serverless/unfiltered/result_20260513_cloud_cold_latency_pinecone_unfiltered_20260513_pinecone.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "measured"
     },
     {
-      "path": "cloud_cold_latency/pinecone/unfiltered/result_20260514_pinecone_cloud_cold_latency_laion100m_unfiltered_20260514_pinecone.json",
+      "path": "cloud_cold_latency/pinecone_serverless/unfiltered/result_20260514_pinecone_cloud_cold_latency_laion100m_unfiltered_20260514_pinecone.json",
       "family": "cloud_cold_latency",
       "case_id": 700,
       "source": "measured"
@@ -92,31 +92,31 @@
       "source": "measured"
     },
     {
-      "path": "cloud_insert/raw_results/pinecone/batch_10k/result_20260513_cloud_insert_pinecone_laion100m_bs10k_20260513_pinecone.json",
+      "path": "cloud_insert/raw_results/pinecone_serverless/batch_10k/result_20260513_cloud_insert_pinecone_laion100m_bs10k_20260513_pinecone.json",
       "family": "cloud_insert",
       "case_id": 600,
       "source": "measured"
     },
     {
-      "path": "cloud_insert/raw_results/pinecone/batch_1k/result_20260513_cloud_insert_pinecone_laion100m_bs1k_20260513_pinecone.json",
+      "path": "cloud_insert/raw_results/pinecone_serverless/batch_1k/result_20260513_cloud_insert_pinecone_laion100m_bs1k_20260513_pinecone.json",
       "family": "cloud_insert",
       "case_id": 600,
       "source": "measured"
     },
     {
-      "path": "cloud_insert/raw_results/pinecone/batch_5k/result_20260513_cloud_insert_pinecone_laion100m_bs5k_20260513_pinecone.json",
+      "path": "cloud_insert/raw_results/pinecone_serverless/batch_5k/result_20260513_cloud_insert_pinecone_laion100m_bs5k_20260513_pinecone.json",
       "family": "cloud_insert",
       "case_id": 600,
       "source": "measured"
     },
     {
-      "path": "cloud_insert/raw_results/pinecone/result_20260511_cloud_insert_pinecone_cohere_1m_bs1k_20260511_pinecone.json",
+      "path": "cloud_insert/raw_results/pinecone_serverless/result_20260511_cloud_insert_pinecone_cohere_1m_bs1k_20260511_pinecone.json",
       "family": "cloud_insert",
       "case_id": 600,
       "source": "measured"
     },
     {
-      "path": "cloud_insert/raw_results/pinecone/result_20260512_cloud_insert_pinecone_cohere_1m_bs1k_conc8_20260512_pinecone.json",
+      "path": "cloud_insert/raw_results/pinecone_serverless/result_20260512_cloud_insert_pinecone_cohere_1m_bs1k_conc8_20260512_pinecone.json",
       "family": "cloud_insert",
       "case_id": 600,
       "source": "measured"

@@ -32,8 +32,8 @@ VectorDBBench result output under `cloud_insert/raw_results/`.
 | Zilliz Cloud tiered 4CU | AUTOINDEX | 2026-05-11 | 0 | 3919.9296 | 255.1066 | 28.5956 | `cloud_insert/raw_results/zilliz_cloud_tiered_4cu/result_20260511_cloud_insert_zilliz_tiered_cohere_1m_bs1k_20260511_zillizcloud.json` |
 | TurboPuffer | backpressure disabled | 2026-05-11 | 0 | 519.3670 | 1925.4209 | 187.3016 | `cloud_insert/raw_results/turbopuffer/result_20260511_cloud_insert_turbopuffer_bp_off_cohere_1m_bs1k_20260511_turbopuffer.json` |
 | TurboPuffer | backpressure enabled | 2026-05-11 | 0 | 485.4639 | 2059.8853 | 182.2381 | `cloud_insert/raw_results/turbopuffer/result_20260511_cloud_insert_turbopuffer_bp_on_cohere_1m_bs1k_20260511_turbopuffer.json` |
-| Pinecone | serverless | 2026-05-12 | 8 | 426.9220 | 2342.3481 | 0.0001 | `cloud_insert/raw_results/pinecone/result_20260512_cloud_insert_pinecone_cohere_1m_bs1k_conc8_20260512_pinecone.json` |
-| Pinecone | serverless | 2026-05-11 | 0 | 222.1111 | 4502.2520 | 0.0001 | `cloud_insert/raw_results/pinecone/result_20260511_cloud_insert_pinecone_cohere_1m_bs1k_20260511_pinecone.json` |
+| Pinecone Serverless | serverless | 2026-05-12 | 8 | 426.9220 | 2342.3481 | 0.0001 | `cloud_insert/raw_results/pinecone_serverless/result_20260512_cloud_insert_pinecone_cohere_1m_bs1k_conc8_20260512_pinecone.json` |
+| Pinecone Serverless | serverless | 2026-05-11 | 0 | 222.1111 | 4502.2520 | 0.0001 | `cloud_insert/raw_results/pinecone_serverless/result_20260511_cloud_insert_pinecone_cohere_1m_bs1k_20260511_pinecone.json` |
 
 All six runs finished with VDBBench result label `:)`.
 
