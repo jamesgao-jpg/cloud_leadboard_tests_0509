@@ -1057,17 +1057,10 @@ function renderCost() {
   const modeLabel = state.cost.modes.find((item) => item.id === mode)?.label || mode;
   const writeLabel = writeMode === "batch" ? "10k batches" : "constant writes";
   const modeSuffix = mode === "full" ? ` · ${writeLabel}` : "";
-  const writeImpactRows = productGroups.map((group) => {
-    const writeAdd = group.rows.find((row) => Number.isFinite(row.writeAdd))?.writeAdd || 0;
-    const label = writeAdd > 0 ? `${fmtCurrency(writeAdd)} / ${unit}` : "fixed CU price";
-    return `<span><i style="background:${productColor(group.product)}"></i>${escapeHtml(group.product)} <b>${label}</b></span>`;
-  }).join("");
-  const showWriteImpact = mode === "full";
   $("cost-chart").innerHTML = `
     <div class="card cost-line-card">
       <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel}${modeSuffix} · lower is better</span></div>
       <div class="cost-legend">${legend}</div>
-      <div class="cost-write-impact${showWriteImpact ? "" : " is-empty"}" ${showWriteImpact ? "" : "aria-hidden=\"true\""}><strong>Write add-on</strong>${writeImpactRows}</div>
       <div class="cost-html-chart" role="img" aria-label="Cost versus QPS line chart">
         <div class="cost-y-title">Cost (USD / ${unit})</div>
         <div class="cost-plot" style="--cost-plot-width:${plotWidth}px;--cost-plot-height:${plotHeight}px;">

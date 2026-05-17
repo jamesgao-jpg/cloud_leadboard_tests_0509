@@ -1314,44 +1314,6 @@ tbody tr:hover {
   color: var(--muted);
 }
 
-.cost-write-impact {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 14px;
-  min-height: 18px;
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.cost-write-impact.is-empty {
-  visibility: hidden;
-}
-
-.cost-write-impact strong {
-  color: var(--ink);
-  font-weight: 800;
-}
-
-.cost-write-impact span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.cost-write-impact i {
-  width: 18px;
-  height: 3px;
-  border-radius: 999px;
-}
-
-.cost-write-impact b {
-  color: var(--ink);
-  font-weight: 800;
-}
-
 .cost-html-chart {
   display: grid;
   grid-template-columns: 96px max-content;
