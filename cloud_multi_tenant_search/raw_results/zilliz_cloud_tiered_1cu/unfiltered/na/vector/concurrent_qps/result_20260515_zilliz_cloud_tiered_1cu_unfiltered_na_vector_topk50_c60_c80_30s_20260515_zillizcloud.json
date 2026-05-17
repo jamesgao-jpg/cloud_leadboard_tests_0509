@@ -1,6 +1,6 @@
 {
-  "run_id": "973b8c130c9f4e82a43becbf3de4a16d",
-  "task_label": "zilliz_cloud_tiered_1cu_unfiltered_na_vector_topk50_c60_c80_30s_20260513",
+  "run_id": "eeb5bbca85284dbca2834cf9ed3c058c",
+  "task_label": "zilliz_cloud_tiered_1cu_unfiltered_na_vector_topk50_c60_c80_30s_20260515",
   "results": [
     {
       "metrics": {
@@ -8,7 +8,7 @@
         "insert_duration": 0.0,
         "optimize_duration": 0.0,
         "load_duration": 0.0,
-        "qps": 1.3061,
+        "qps": 34.4462,
         "serial_latency_p99": 0.0,
         "serial_latency_p95": 0.0,
         "recall": 0.0,
@@ -18,20 +18,20 @@
           80
         ],
         "conc_qps_list": [
-          0.9853,
-          1.3061
+          31.4324,
+          34.4462
         ],
         "conc_latency_p99_list": [
-          67.17272220480255,
-          62.60282133883331
+          4.401259646454127,
+          2.7683519703627097
         ],
         "conc_latency_p95_list": [
-          66.05697266564239,
-          61.02699500955641
+          4.045172495243605,
+          2.7292711095069535
         ],
         "conc_latency_avg_list": [
-          43.4606104250066,
-          42.14133673085331
+          1.8546718838870238,
+          2.2449354951190172
         ],
         "payload_profile": "vector",
         "payload_estimated_bytes_per_query": 154600,
@@ -104,5 +104,5 @@
     }
   ],
   "file_fmt": "result_{}_{}_{}.json",
-  "timestamp": 1778630400.0
+  "timestamp": 1778803200.0
 }

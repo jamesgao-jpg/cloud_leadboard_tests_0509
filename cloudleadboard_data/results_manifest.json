@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T12:22:55.854Z",
+  "generated_at": "2026-05-17T13:26:49.207Z",
   "entries": [
     {
       "path": "cloud_cold_latency/raw_results/pinecone_serverless/int_filter_0.9/result_20260515_pinecone_cloud_cold_latency_laion100m_int_filter_0_9_20260515_pinecone.json",
@@ -836,7 +836,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/50p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_50p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/50p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_int_filter_50p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -854,7 +854,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/90p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_10p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/90p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_int_filter_10p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -872,7 +872,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99_9p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_0_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99_9p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_int_filter_0_1p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -890,7 +890,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_int_filter_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/int_filter/99p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_int_filter_1p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -908,7 +908,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_0_1p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -926,7 +926,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_2p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_0_2p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -944,7 +944,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_0_5p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_0_5p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -962,7 +962,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/10p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_10p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/10p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_10p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -980,7 +980,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/1p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_1p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/1p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_1p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -998,7 +998,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/20p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_20p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/20p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_20p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -1016,7 +1016,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/2p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_2p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/2p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_2p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -1034,7 +1034,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/50p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_50p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/50p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_50p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -1052,7 +1052,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/5p/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_scalar_label_filter_5p_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/scalar_label_filter/5p/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_scalar_label_filter_5p_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"
@@ -1070,7 +1070,7 @@
       "source": "measured"
     },
     {
-      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/unfiltered/na/vector/concurrent_qps/result_20260513_zilliz_cloud_tiered_1cu_unfiltered_na_vector_topk50_c60_c80_30s_20260513_zillizcloud.json",
+      "path": "cloud_multi_tenant_search/raw_results/zilliz_cloud_tiered_1cu/unfiltered/na/vector/concurrent_qps/result_20260515_zilliz_cloud_tiered_1cu_unfiltered_na_vector_topk50_c60_c80_30s_20260515_zillizcloud.json",
       "family": "cloud_multi_tenant_search",
       "case_id": 800,
       "source": "measured"

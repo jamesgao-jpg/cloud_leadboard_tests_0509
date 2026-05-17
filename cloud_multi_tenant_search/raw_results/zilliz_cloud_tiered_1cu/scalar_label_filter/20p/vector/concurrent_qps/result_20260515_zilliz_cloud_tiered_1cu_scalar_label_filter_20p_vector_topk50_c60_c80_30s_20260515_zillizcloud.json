@@ -1,6 +1,6 @@
 {
-  "run_id": "b4a8f5f0ee3e45e483d0c88cffcb9a11",
-  "task_label": "zilliz_cloud_tiered_1cu_int_filter_1p_vector_topk50_c60_c80_30s_20260513",
+  "run_id": "91db3ebf0f544bc988e67c59ff1d44b2",
+  "task_label": "zilliz_cloud_tiered_1cu_scalar_label_filter_20p_vector_topk50_c60_c80_30s_20260515",
   "results": [
     {
       "metrics": {
@@ -8,7 +8,7 @@
         "insert_duration": 0.0,
         "optimize_duration": 0.0,
         "load_duration": 0.0,
-        "qps": 372.4641,
+        "qps": 31.7358,
         "serial_latency_p99": 0.0,
         "serial_latency_p95": 0.0,
         "recall": 0.0,
@@ -18,20 +18,20 @@
           80
         ],
         "conc_qps_list": [
-          269.092,
-          372.4641
+          29.2532,
+          31.7358
         ],
         "conc_latency_p99_list": [
-          2.486372103244066,
-          0.3325529312645084
+          2.6524497436499224,
+          2.7942485128762202
         ],
         "conc_latency_p95_list": [
-          0.23829048613552004,
-          0.2657513781101443
+          2.3934334729798135,
+          2.7124757024808788
         ],
         "conc_latency_avg_list": [
-          0.21930463532012395,
-          0.21285048560484687
+          2.0189326318441707,
+          2.4499936919426313
         ],
         "payload_profile": "vector",
         "payload_estimated_bytes_per_query": 154600,
@@ -84,7 +84,7 @@
             "tenant_prefix": "tenant_",
             "tenant_id_width": 4,
             "payload_profile": "vector",
-            "filter_rate": 0.99
+            "label_percentage": 0.2
           },
           "k": 50,
           "concurrency_search_config": {
@@ -105,5 +105,5 @@
     }
   ],
   "file_fmt": "result_{}_{}_{}.json",
-  "timestamp": 1778630400.0
+  "timestamp": 1778803200.0
 }
