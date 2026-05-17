@@ -48,6 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
+const BUILD_ID = "20260517-pinned-cache-bust";
 
 const state = {
   raw: [],
@@ -134,7 +135,8 @@ function payloadLabel(payload) {
 }
 
 async function fetchJson(path) {
-  const res = await fetch(path);
+  const url = `${path}${path.includes("?") ? "&" : "?"}v=${BUILD_ID}`;
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`${res.status} ${path}`);
   return res.json();
 }
