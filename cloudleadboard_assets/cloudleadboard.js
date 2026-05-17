@@ -889,7 +889,51 @@ function applyMeasuredCutoff(rows, cutoffQps, mode, multiplier, scenarioId, writ
   return result.sort((a, b) => a.qps - b.qps);
 }
 
+function captureCostMotion() {
+  const elements = document.querySelectorAll("#cost-chart [data-motion-key]");
+  const snapshot = new Map();
+  elements.forEach((element) => {
+    snapshot.set(element.dataset.motionKey, {
+      left: element.style.left,
+      top: element.style.top,
+      width: element.style.width,
+      transform: element.style.transform,
+    });
+  });
+  return snapshot;
+}
+
+function animateCostMotion(previous) {
+  if (!previous?.size || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const elements = document.querySelectorAll("#cost-chart [data-motion-key]");
+  elements.forEach((element) => {
+    const from = previous.get(element.dataset.motionKey);
+    if (!from) return;
+    const to = {
+      left: element.style.left,
+      top: element.style.top,
+      width: element.style.width,
+      transform: element.style.transform,
+    };
+    element.classList.add("cost-motion");
+    element.style.transition = "none";
+    if (from.left) element.style.left = from.left;
+    if (from.top) element.style.top = from.top;
+    if (from.width) element.style.width = from.width;
+    if (from.transform) element.style.transform = from.transform;
+    element.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      element.style.transition = "";
+      element.style.left = to.left;
+      element.style.top = to.top;
+      element.style.width = to.width;
+      element.style.transform = to.transform;
+    });
+  });
+}
+
 function renderCost() {
+  const previousMotion = captureCostMotion();
   const scenarioId = $("cost-scenario").value;
   const mode = $("cost-mode").value;
   const writeMode = selectedCostWriteMode();
@@ -965,9 +1009,10 @@ function renderCost() {
       const length = Math.sqrt(dx * dx + dy * dy);
       const angle = Math.atan2(dy, dx) * 180 / Math.PI;
       if (length < 1) return "";
+      const motionKey = `${group.product}|${point.qps}|${end.qps}`;
       const data = `data-product="${escapeHtml(group.product)}" data-qps-start="${point.qps}" data-qps-end="${end.qps}" data-cost-start="${point.cost}" data-cost-end="${end.cost}" data-write-add="${point.writeAdd || 0}" data-unit="${unit}"`;
-      return `<span class="cost-line-segment" style="left:${x1}px;top:${y1 - 1.5}px;width:${length}px;transform:rotate(${angle}deg);background:${color};"></span>
-        <span class="cost-line-hit" ${data} style="left:${x1}px;top:${y1 - 9}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
+      return `<span class="cost-line-segment" data-motion-key="segment|${escapeHtml(motionKey)}" style="left:${x1}px;top:${y1 - 1.5}px;width:${length}px;transform:rotate(${angle}deg);background:${color};"></span>
+        <span class="cost-line-hit" data-motion-key="hit|${escapeHtml(motionKey)}" ${data} style="left:${x1}px;top:${y1 - 9}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
     }).join("");
     return `<div class="cost-line-series">${segments}</div>`;
   }).join("");
@@ -975,7 +1020,7 @@ function renderCost() {
     const x = xPx(point.qps);
     const y = yPx(point.cost);
     const label = `${point.productA} / ${point.productB}`;
-    return `<span class="cost-crossover-point" style="left:${x}px;top:${y}px;">
+    return `<span class="cost-crossover-point" data-motion-key="crossover|${escapeHtml(point.key)}" style="left:${x}px;top:${y}px;">
       <span class="cost-crossover-tip">
         <strong>${escapeHtml(label)}</strong>
         <span>${fmtNumber(point.qps, 2)} QPS</span>
@@ -985,7 +1030,7 @@ function renderCost() {
   }).join("");
   const cutoffMarkers = visibleCutoffs.map((point) => {
     const x = xPx(point.qps);
-    return `<span class="cost-cutoff-line" style="left:${x}px;color:${point.color};">
+    return `<span class="cost-cutoff-line" data-motion-key="cutoff|${escapeHtml(point.product)}" style="left:${x}px;color:${point.color};">
       <span class="cost-cutoff-tip">
         <strong>${escapeHtml(point.product)}</strong>
         <span>Measured unfiltered cutoff</span>
@@ -1010,16 +1055,17 @@ function renderCost() {
   const modeLabel = state.cost.modes.find((item) => item.id === mode)?.label || mode;
   const writeLabel = writeMode === "batch" ? "10k batches" : "constant writes";
   const modeSuffix = mode === "full" ? ` · ${writeLabel}` : "";
-  const writeImpact = mode === "full" ? productGroups.map((group) => {
+  const writeImpactRows = productGroups.map((group) => {
     const writeAdd = group.rows.find((row) => Number.isFinite(row.writeAdd))?.writeAdd || 0;
     const label = writeAdd > 0 ? `${fmtCurrency(writeAdd)} / ${unit}` : "fixed CU price";
     return `<span><i style="background:${productColor(group.product)}"></i>${escapeHtml(group.product)} <b>${label}</b></span>`;
-  }).join("") : "";
+  }).join("");
+  const showWriteImpact = mode === "full";
   $("cost-chart").innerHTML = `
     <div class="card cost-line-card">
       <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel}${modeSuffix} · lower is better</span></div>
       <div class="cost-legend">${legend}</div>
-      ${writeImpact ? `<div class="cost-write-impact"><strong>Write add-on</strong>${writeImpact}</div>` : ""}
+      <div class="cost-write-impact${showWriteImpact ? "" : " is-empty"}" ${showWriteImpact ? "" : "aria-hidden=\"true\""}><strong>Write add-on</strong>${writeImpactRows}</div>
       <div class="cost-html-chart" role="img" aria-label="Cost versus QPS line chart">
         <div class="cost-y-title">Cost (USD / ${unit})</div>
         <div class="cost-plot" style="--cost-plot-width:${plotWidth}px;--cost-plot-height:${plotHeight}px;">
@@ -1037,6 +1083,7 @@ function renderCost() {
     if (source.url) return `<span>${source.name}: <a href="${source.url}">${source.url}</a></span>`;
     return `<span>${source.name}: <code>${source.path}</code></span>`;
   }).join("<br>");
+  animateCostMotion(previousMotion);
   attachCostLineHover();
 }
 

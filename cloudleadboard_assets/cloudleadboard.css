@@ -1319,10 +1319,15 @@ tbody tr:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 14px;
+  min-height: 18px;
   margin-top: 12px;
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
+}
+
+.cost-write-impact.is-empty {
+  visibility: hidden;
 }
 
 .cost-write-impact strong {
@@ -1448,6 +1453,19 @@ tbody tr:hover {
   background: transparent;
   transform-origin: left center;
   cursor: help;
+}
+
+.cost-motion {
+  transition: left 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    top 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cost-motion {
+    transition: none;
+  }
 }
 
 .cost-line-tooltip {
