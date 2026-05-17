@@ -103,6 +103,7 @@ function productColor(label) {
   if (lower.includes("zilliz") && lower.includes("tier")) return "var(--c-zilliz-tier)";
   if (lower.includes("zilliz") && lower.includes("capacity")) return "var(--c-zilliz-capacity)";
   if (lower.includes("zilliz")) return "var(--c-zilliz-srv)";
+  if (lower.includes("turbo") && lower.includes("pinned")) return "var(--c-turbo-pinned)";
   if (lower.includes("turbo")) return "var(--c-turbo)";
   if (lower.includes("pine")) return "var(--c-pinecone)";
   return "var(--c-neutral)";
@@ -583,7 +584,11 @@ function renderCostControls() {
     $("cost-qps-max").value = defaultCostQpsMax($("cost-scenario").value);
     renderCost();
   });
-  $("cost-mode").addEventListener("change", renderCost);
+  $("cost-mode").addEventListener("change", () => {
+    updateCostWriteControl();
+    renderCost();
+  });
+  $("cost-write-mode")?.addEventListener("change", renderCost);
   $("cost-period-toggle").addEventListener("click", (event) => {
     const button = event.target.closest("button[data-period]");
     if (!button) return;
@@ -594,6 +599,7 @@ function renderCostControls() {
   });
   $("cost-qps-max").addEventListener("input", renderCost);
   window.addEventListener("resize", renderCost);
+  updateCostWriteControl();
 }
 
 function selectedCostPeriod() {
@@ -601,11 +607,21 @@ function selectedCostPeriod() {
 }
 
 function costPeriodMultiplier(period) {
-  return period === "monthly" ? MONTHLY_HOURS : 1;
+  return period === "monthly" ? pricingMonthHours() : 1;
 }
 
 function costPeriodUnit(period) {
   return period === "monthly" ? "month" : "hour";
+}
+
+function selectedCostWriteMode() {
+  return $("cost-write-mode")?.value || "constant";
+}
+
+function updateCostWriteControl() {
+  const control = $("cost-write-control");
+  if (!control) return;
+  control.hidden = $("cost-mode").value !== "full";
 }
 
 function fmtCurrency(value) {
@@ -634,10 +650,88 @@ function niceTicks(maxValue, targetIntervals = 5) {
   return ticks;
 }
 
-function pointCost(point, mode, multiplier = 1) {
+function pricingMonthHours() {
+  return state.cost?.pricing?.monthly_hours || MONTHLY_HOURS;
+}
+
+function productCostFamily(product) {
+  const lower = (product || "").toLowerCase();
+  if (lower.includes("zilliz")) return "zilliz";
+  if (lower.includes("pinecone")) return "pinecone";
+  if (lower.includes("turbo")) return "turbopuffer";
+  return "other";
+}
+
+function isFixedCostProduct(pointOrGroup) {
+  const lower = (pointOrGroup.product || "").toLowerCase();
+  return lower.includes("zilliz") || (lower.includes("turbo") && lower.includes("pinned"));
+}
+
+function scenarioWriteShape(scenarioId, writeMode) {
+  const scenario = state.cost?.pricing?.scenarios?.[scenarioId] || {};
+  const recordCount = Number(scenario.record_count || 0);
+  const vectorDataGb = Number(scenario.vector_data_gb || 0);
+  const monthlyHours = pricingMonthHours();
+  if (!recordCount || !vectorDataGb || !monthlyHours) return null;
+  const secondsPerMonth = monthlyHours * 3600;
+  const constantRps = Number(scenario.constant_write_requests_per_second || 0);
+  const batchSize = Number(scenario.batch_size_records || 0);
+  const recordsPerRequest = writeMode === "batch" && batchSize > 0
+    ? batchSize
+    : recordCount / Math.max(1, constantRps * secondsPerMonth);
+  const requestsPerMonth = recordCount / Math.max(1, recordsPerRequest);
+  const bytesPerRecord = (vectorDataGb * 1e9) / recordCount;
+  return {
+    recordCount,
+    vectorDataGb,
+    recordsPerRequest,
+    requestsPerMonth,
+    requestBytes: recordsPerRequest * bytesPerRecord,
+    monthlyHours,
+  };
+}
+
+function turbopufferBatchDiscount(requestKb) {
+  if (!Number.isFinite(requestKb) || requestKb <= 0) return 0;
+  const cap = state.cost?.pricing?.turbopuffer?.batch_discount_cap ?? 0.5;
+  return Math.max(0, Math.min(cap, (Math.log10(requestKb) - 1) * 0.2));
+}
+
+function computedWriteCostHr(point, scenarioId, writeMode) {
+  const family = productCostFamily(point.product);
+  if (family === "zilliz") return 0;
+  const shape = scenarioWriteShape(scenarioId, writeMode);
+  if (!shape) return point.write_cost_hr || 0;
+  if (family === "turbopuffer") {
+    const pricing = state.cost?.pricing?.turbopuffer || {};
+    const minKb = pricing.min_write_kb_per_request || 10;
+    const pricePerGb = pricing.write_usd_per_logical_gb || 0;
+    const requestKb = shape.requestBytes / 1000;
+    const billableKb = Math.max(requestKb, minKb);
+    const discount = turbopufferBatchDiscount(billableKb);
+    const billableGbMonth = (shape.requestsPerMonth * billableKb * (1 - discount)) / 1e6;
+    return (billableGbMonth * pricePerGb) / shape.monthlyHours;
+  }
+  if (family === "pinecone") {
+    const pricing = state.cost?.pricing?.pinecone || {};
+    const unitBytes = pricing.write_unit_bytes || 1024;
+    const minWu = pricing.min_write_units_per_request || 5;
+    const pricePerMillion = pricing.write_usd_per_million_wu || 0;
+    const wuPerRequest = Math.max(Math.ceil(shape.requestBytes / unitBytes), minWu);
+    const wuMonth = shape.requestsPerMonth * wuPerRequest;
+    return (wuMonth / 1e6 * pricePerMillion) / shape.monthlyHours;
+  }
+  return point.write_cost_hr || 0;
+}
+
+function writeAddCost(point, mode, multiplier = 1, scenarioId = "single", writeMode = "constant") {
+  return mode === "full" ? computedWriteCostHr(point, scenarioId, writeMode) * multiplier : 0;
+}
+
+function pointCost(point, mode, multiplier = 1, scenarioId = "single", writeMode = "constant") {
   let cost = point.search_cost_hr;
   if (mode === "search_storage" || mode === "full") cost += point.storage_cost_hr || 0;
-  if (mode === "full") cost += point.write_cost_hr || 0;
+  cost += writeAddCost(point, mode, multiplier, scenarioId, writeMode) / multiplier;
   return cost * multiplier;
 }
 
@@ -701,43 +795,142 @@ function costAtQps(rows, qps) {
   return sorted[sorted.length - 1].cost;
 }
 
+function extrapolatedCostAtQps(rows, qps, mode, multiplier, scenarioId, writeMode) {
+  const sorted = rows.slice().sort((a, b) => a.qps - b.qps);
+  if (!sorted.length) return null;
+  if (qps <= sorted[0].qps) {
+    const zero = { ...sorted[0], qps: 0, cost: zeroQpsCost(sorted[0], mode, multiplier, scenarioId, writeMode) };
+    return costAtSegment(zero, sorted[0], qps);
+  }
+  for (let i = 0; i < sorted.length - 1; i += 1) {
+    const left = sorted[i];
+    const right = sorted[i + 1];
+    if (qps >= left.qps && qps <= right.qps) return costAtSegment(left, right, qps);
+  }
+  if (sorted.length === 1) return sorted[0].cost;
+  const left = sorted[sorted.length - 2];
+  const right = sorted[sorted.length - 1];
+  return costAtSegment(left, right, qps);
+}
+
 function isPineconeCostLine(pointOrGroup) {
   return (pointOrGroup.product || "").toLowerCase().includes("pinecone");
 }
 
-function zeroQpsCost(point, mode, multiplier = 1) {
-  const product = (point.product || "").toLowerCase();
-  if (product.includes("zilliz")) return point.cost;
+function zeroQpsCost(point, mode, multiplier = 1, scenarioId = "single", writeMode = "constant") {
+  if (isFixedCostProduct(point)) return pointCost(point, mode, multiplier, scenarioId, writeMode);
   let cost = 0;
   if (mode === "search_storage" || mode === "full") cost += point.storage_cost_hr || 0;
-  if (mode === "full") cost += point.write_cost_hr || 0;
+  if (mode === "full") cost += computedWriteCostHr(point, scenarioId, writeMode);
   return cost * multiplier;
+}
+
+function costProductSearchAliases(product, scenarioId) {
+  const lower = product.toLowerCase();
+  if (scenarioId === "single") {
+    if (lower.includes("tiered")) return ["zilliz_cloud_tiered_4cu"];
+    if (lower.includes("capacity")) return ["zilliz_cloud_capacity_12cu", "zilliz_cloud_cap_12cu", "zillz_cloud_cap_12cu"];
+    if (lower.includes("pinecone")) return ["pinecone_serverless", "pinecone"];
+    if (lower.includes("turbo") && lower.includes("pinned")) return ["turbopuffer_pinned"];
+    if (lower.includes("turbo")) return ["turbopuffer_unpinned"];
+  }
+  if (lower.includes("tiered")) return ["zilliz_cloud_tiered_1cu"];
+  if (lower.includes("capacity")) return ["zilliz_cloud_capacity_2cu"];
+  if (lower.includes("pinecone")) return ["pinecone_serverless", "pinecone"];
+  if (lower.includes("turbo")) return ["turbopuffer"];
+  return [];
+}
+
+function measuredCostCutoffs(scenarioId) {
+  const rows = scenarioId === "single" ? state.payload : state.multi;
+  const candidates = rows.filter((row) => {
+    return row.phase === "concurrent_qps"
+      && row.filterKey === "unfiltered/na"
+      && row.payload !== "scalar_label"
+      && !row.mocked
+      && row.maxQps > 0;
+  });
+  const cutoffs = new Map();
+  for (const point of state.cost.scenarios[scenarioId].points) {
+    if (cutoffs.has(point.product)) continue;
+    const aliases = costProductSearchAliases(point.product, scenarioId);
+    const match = candidates
+      .filter((row) => aliases.includes(row.product))
+      .sort((a, b) => b.maxQps - a.maxQps)[0];
+    if (match) {
+      cutoffs.set(point.product, {
+        qps: match.maxQps,
+        payload: match.payload,
+        path: match.path,
+      });
+    }
+  }
+  return cutoffs;
+}
+
+function applyMeasuredCutoff(rows, cutoffQps, mode, multiplier, scenarioId, writeMode) {
+  const sorted = rows.slice().sort((a, b) => a.qps - b.qps);
+  if (!sorted.length || !cutoffQps || cutoffQps <= 0) return sorted;
+  const result = sorted.filter((row) => row.qps < cutoffQps);
+  const exact = sorted.find((row) => Math.abs(row.qps - cutoffQps) < 1e-6);
+  if (exact) {
+    result.push(exact);
+    return result.sort((a, b) => a.qps - b.qps);
+  }
+  const endpointCost = extrapolatedCostAtQps(sorted, cutoffQps, mode, multiplier, scenarioId, writeMode);
+  if (endpointCost === null) return sorted;
+  const source = result.at(-1) || sorted[0];
+  result.push({
+    ...source,
+    qps: cutoffQps,
+    cost: endpointCost,
+    measuredCutoff: true,
+  });
+  return result.sort((a, b) => a.qps - b.qps);
 }
 
 function renderCost() {
   const scenarioId = $("cost-scenario").value;
   const mode = $("cost-mode").value;
+  const writeMode = selectedCostWriteMode();
   const period = selectedCostPeriod();
   const multiplier = costPeriodMultiplier(period);
   const unit = costPeriodUnit(period);
   const scenario = state.cost.scenarios[scenarioId];
   const points = scenario.points
-    .map((point) => ({ ...point, cost: pointCost(point, mode, multiplier) }))
+    .map((point) => ({
+      ...point,
+      cost: pointCost(point, mode, multiplier, scenarioId, writeMode),
+      writeAdd: writeAddCost(point, mode, multiplier, scenarioId, writeMode),
+    }))
     .filter((point) => point.qps > 0 && point.cost >= 0);
+  const cutoffs = measuredCostCutoffs(scenarioId);
   const availableWidth = $("cost-chart").clientWidth || 1120;
   const plotWidth = Math.max(680, Math.min(1160, availableWidth - 220));
   const plotHeight = 360;
-  const absoluteMaxQps = Math.max(1, ...points.map((point) => point.qps));
+  const absoluteMaxQps = Math.max(1, ...points.map((point) => point.qps), ...[...cutoffs.values()].map((point) => point.qps));
   const requestedMaxQps = Number($("cost-qps-max").value) || defaultCostQpsMax(scenarioId);
   const maxQps = Math.min(Math.max(1, requestedMaxQps), absoluteMaxQps);
   const productGroups = [...groupBy(points, (point) => point.product).entries()]
-    .map(([product, rows]) => ({
-      product,
-      rows: rows.slice().sort((a, b) => a.qps - b.qps),
-    }))
+    .map(([product, rows]) => {
+      const cutoff = cutoffs.get(product);
+      return {
+        product,
+        rows: applyMeasuredCutoff(rows, cutoff?.qps, mode, multiplier, scenarioId, writeMode),
+        cutoff,
+      };
+    })
     .sort((a, b) => a.product.localeCompare(b.product));
   const crossovers = lineCrossovers(productGroups);
   const visibleCrossovers = crossovers.filter((point) => point.qps <= maxQps);
+  const visibleCutoffs = productGroups
+    .filter((group) => group.cutoff?.qps > 0 && group.cutoff.qps < maxQps)
+    .map((group) => ({
+      product: group.product,
+      color: productColor(group.product),
+      ...group.cutoff,
+      cost: extrapolatedCostAtQps(group.rows, group.cutoff.qps, mode, multiplier, scenarioId, writeMode),
+    }));
   const visibleCosts = points
     .filter((point) => point.qps <= maxQps && !isPineconeCostLine(point))
     .map((point) => point.cost)
@@ -755,7 +948,7 @@ function renderCost() {
   const lines = productGroups.map((group) => {
     const color = productColor(group.product);
     const drawRows = group.rows.length
-      ? [{ ...group.rows[0], qps: 0, cost: zeroQpsCost(group.rows[0], mode, multiplier) }, ...group.rows]
+      ? [{ ...group.rows[0], qps: 0, cost: zeroQpsCost(group.rows[0], mode, multiplier, scenarioId, writeMode) }, ...group.rows]
       : [];
     const segments = drawRows.slice(0, -1).map((point, index) => {
       const next = drawRows[index + 1];
@@ -772,7 +965,7 @@ function renderCost() {
       const length = Math.sqrt(dx * dx + dy * dy);
       const angle = Math.atan2(dy, dx) * 180 / Math.PI;
       if (length < 1) return "";
-      const data = `data-product="${escapeHtml(group.product)}" data-qps-start="${point.qps}" data-qps-end="${end.qps}" data-cost-start="${point.cost}" data-cost-end="${end.cost}" data-unit="${unit}"`;
+      const data = `data-product="${escapeHtml(group.product)}" data-qps-start="${point.qps}" data-qps-end="${end.qps}" data-cost-start="${point.cost}" data-cost-end="${end.cost}" data-write-add="${point.writeAdd || 0}" data-unit="${unit}"`;
       return `<span class="cost-line-segment" style="left:${x1}px;top:${y1 - 1.5}px;width:${length}px;transform:rotate(${angle}deg);background:${color};"></span>
         <span class="cost-line-hit" ${data} style="left:${x1}px;top:${y1 - 9}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
     }).join("");
@@ -790,6 +983,17 @@ function renderCost() {
       </span>
     </span>`;
   }).join("");
+  const cutoffMarkers = visibleCutoffs.map((point) => {
+    const x = xPx(point.qps);
+    return `<span class="cost-cutoff-line" style="left:${x}px;color:${point.color};">
+      <span class="cost-cutoff-tip">
+        <strong>${escapeHtml(point.product)}</strong>
+        <span>Measured unfiltered cutoff</span>
+        <span>${fmtNumber(point.qps, 2)} QPS · ${payloadLabel(point.payload)}</span>
+        <span>${fmtCurrency(point.cost)} / ${unit}</span>
+      </span>
+    </span>`;
+  }).join("");
   const xGrid = xTicks.map((tick) => {
     const x = xPx(tick);
     return `<span class="cost-x-grid" style="left:${x}px"></span><span class="cost-x-label" style="left:${x}px">${fmtNumber(tick, tick >= 100 ? 0 : 1)}</span>`;
@@ -800,18 +1004,29 @@ function renderCost() {
   }).join("");
   const legend = productGroups.map((group) => {
     return `<span><i style="background:${productColor(group.product)}"></i>${escapeHtml(group.product)}</span>`;
-  }).join("") + (visibleCrossovers.length ? `<span class="cost-crossover-legend"><i></i> crossover points</span>` : "");
+  }).join("")
+    + (visibleCutoffs.length ? `<span class="cost-cutoff-legend"><i></i> measured QPS cutoff</span>` : "")
+    + (visibleCrossovers.length ? `<span class="cost-crossover-legend"><i></i> crossover points</span>` : "");
   const modeLabel = state.cost.modes.find((item) => item.id === mode)?.label || mode;
+  const writeLabel = writeMode === "batch" ? "10k batches" : "constant writes";
+  const modeSuffix = mode === "full" ? ` · ${writeLabel}` : "";
+  const writeImpact = mode === "full" ? productGroups.map((group) => {
+    const writeAdd = group.rows.find((row) => Number.isFinite(row.writeAdd))?.writeAdd || 0;
+    const label = writeAdd > 0 ? `${fmtCurrency(writeAdd)} / ${unit}` : "fixed CU price";
+    return `<span><i style="background:${productColor(group.product)}"></i>${escapeHtml(group.product)} <b>${label}</b></span>`;
+  }).join("") : "";
   $("cost-chart").innerHTML = `
     <div class="card cost-line-card">
-      <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel} · lower is better</span></div>
+      <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel}${modeSuffix} · lower is better</span></div>
       <div class="cost-legend">${legend}</div>
+      ${writeImpact ? `<div class="cost-write-impact"><strong>Write add-on</strong>${writeImpact}</div>` : ""}
       <div class="cost-html-chart" role="img" aria-label="Cost versus QPS line chart">
         <div class="cost-y-title">Cost (USD / ${unit})</div>
         <div class="cost-plot" style="--cost-plot-width:${plotWidth}px;--cost-plot-height:${plotHeight}px;">
           ${xGrid}
           ${yGrid}
           ${lines}
+          ${cutoffMarkers}
           ${crossoverMarkers}
           <div class="cost-line-tooltip" id="cost-line-tooltip"></div>
         </div>
@@ -837,9 +1052,13 @@ function attachCostLineHover() {
       const qpsEnd = Number(segment.dataset.qpsEnd);
       const costStart = Number(segment.dataset.costStart);
       const costEnd = Number(segment.dataset.costEnd);
+      const writeAdd = Number(segment.dataset.writeAdd || 0);
       const qps = qpsStart + (qpsEnd - qpsStart) * t;
       const cost = costStart + (costEnd - costStart) * t;
-      tooltip.innerHTML = `<strong>${escapeHtml(segment.dataset.product)}</strong><span>${fmtNumber(qps, 2)} QPS</span><span>${fmtCurrency(cost)} / ${escapeHtml(segment.dataset.unit)}</span>`;
+      const writeLine = writeAdd > 0
+        ? `<span>write add-on ${fmtCurrency(writeAdd)} / ${escapeHtml(segment.dataset.unit)}</span>`
+        : "";
+      tooltip.innerHTML = `<strong>${escapeHtml(segment.dataset.product)}</strong><span>${fmtNumber(qps, 2)} QPS</span><span>${fmtCurrency(cost)} / ${escapeHtml(segment.dataset.unit)}</span>${writeLine}`;
       const plotRect = plot.getBoundingClientRect();
       tooltip.style.left = `${event.clientX - plotRect.left + 14}px`;
       tooltip.style.top = `${event.clientY - plotRect.top - 14}px`;

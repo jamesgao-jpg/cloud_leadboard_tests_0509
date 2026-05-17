@@ -5,36 +5,86 @@
       "url": "https://zilliz.com/pricing"
     },
     {
+      "name": "Zilliz Cloud list price",
+      "url": "https://zilliz.com/pricing/pricing-guide"
+    },
+    {
       "name": "Turbopuffer pricing",
       "url": "https://turbopuffer.com/pricing"
     },
     {
+      "name": "Turbopuffer pinning",
+      "url": "https://turbopuffer.com/docs/pinning"
+    },
+    {
       "name": "Pinecone pricing",
       "url": "https://www.pinecone.io/pricing/"
+    },
+    {
+      "name": "Pinecone cost documentation",
+      "url": "https://docs.pinecone.io/guides/manage-cost/understanding-cost"
     }
   ],
   "modes": [
-    { "id": "search", "label": "Search only" },
-    { "id": "search_storage", "label": "Search + storage" }
+    { "id": "search", "label": "Query only" },
+    { "id": "search_storage", "label": "Query + storage" },
+    { "id": "full", "label": "Query + storage + write" }
   ],
+  "pricing": {
+    "monthly_hours": 730,
+    "scenarios": {
+      "single": {
+        "record_count": 100000000,
+        "vector_data_gb": 302,
+        "constant_write_requests_per_second": 4,
+        "batch_size_records": 10000
+      },
+      "multi": {
+        "record_count": 10000000,
+        "vector_data_gb": 30.2,
+        "constant_write_requests_per_second": 0.4,
+        "batch_size_records": 10000
+      }
+    },
+    "turbopuffer": {
+      "storage_usd_per_gb_month": 0.33,
+      "write_usd_per_logical_gb": 2,
+      "min_write_kb_per_request": 10,
+      "batch_discount_cap": 0.5,
+      "batch_discount_cap_kb": 3100
+    },
+    "pinecone": {
+      "storage_usd_per_gb_month": 0.33,
+      "read_usd_per_million_ru": 16,
+      "write_usd_per_million_wu": 4,
+      "write_unit_bytes": 1024,
+      "min_write_units_per_request": 5
+    },
+    "zilliz": {
+      "tiered_storage_usd_per_gb_month": 0.025,
+      "capacity_storage_usd_per_gb_month": 0.04
+    }
+  },
   "scenarios": {
     "single": {
       "label": "Single tenant LAION 100M",
       "x_label": "Sustained QPS",
       "points": [
-        { "product": "Turbopuffer", "qps": 1, "search_cost_hr": 0.188, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
-        { "product": "Turbopuffer", "qps": 10, "search_cost_hr": 1.884, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
-        { "product": "Turbopuffer", "qps": 16, "search_cost_hr": 3.008, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
-        { "product": "Turbopuffer", "qps": 100, "search_cost_hr": 18.837, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
-        { "product": "Turbopuffer", "qps": 400, "search_cost_hr": 75.347, "storage_cost_hr": 0.141, "write_cost_hr": 0, "recall": 0.900, "measured": true },
-        { "product": "Zilliz Cloud Tiered 4CU", "qps": 1, "search_cost_hr": 1.488, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.951, "measured": true },
-        { "product": "Zilliz Cloud Tiered 4CU", "qps": 57.97, "search_cost_hr": 1.488, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.951, "measured": true },
-        { "product": "Zilliz Capacity 12CU", "qps": 1, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
-        { "product": "Zilliz Capacity 12CU", "qps": 16, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
-        { "product": "Zilliz Capacity 12CU", "qps": 100, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
-        { "product": "Zilliz Capacity 12CU", "qps": 310.47, "search_cost_hr": 2.976, "storage_cost_hr": 0.011, "write_cost_hr": 0, "recall": 0.971, "measured": true },
-        { "product": "Pinecone Serverless", "qps": 1, "search_cost_hr": 19.958, "storage_cost_hr": 0.141, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; search cost uses 308 RU/query at $18/M RU, $0.33/GB-month storage, and a 40 WPS write scenario." },
-        { "product": "Pinecone Serverless", "qps": 5, "search_cost_hr": 99.79, "storage_cost_hr": 0.141, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; performance endpoint remains capped at the requested <=5 QPS LAION 100M comparison point until measured." }
+        { "product": "Turbopuffer", "qps": 1, "search_cost_hr": 0.188, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 10, "search_cost_hr": 1.884, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 16, "search_cost_hr": 3.008, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 100, "search_cost_hr": 18.837, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer", "qps": 400, "search_cost_hr": 75.347, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": 0.900, "measured": true },
+        { "product": "Turbopuffer Pinned 2 Replicas", "qps": 1, "search_cost_hr": 8.002, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": 0.900, "measured": true, "note": "Published Turbopuffer pinned namespace pricing model; search cost uses a 302 GB vector-only namespace, 2 replicas, and $0.013249/GB-hour pinning cost." },
+        { "product": "Turbopuffer Pinned 2 Replicas", "qps": 400, "search_cost_hr": 8.002, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": 0.900, "measured": true, "note": "Published Turbopuffer pinned namespace pricing model; line is clipped by the measured unfiltered pinned max-QPS result." },
+        { "product": "Zilliz Cloud Tiered 4CU", "qps": 1, "search_cost_hr": 1.488, "storage_cost_hr": 0.010, "write_cost_hr": 0, "recall": 0.951, "measured": true },
+        { "product": "Zilliz Cloud Tiered 4CU", "qps": 57.97, "search_cost_hr": 1.488, "storage_cost_hr": 0.010, "write_cost_hr": 0, "recall": 0.951, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 1, "search_cost_hr": 2.976, "storage_cost_hr": 0.017, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 16, "search_cost_hr": 2.976, "storage_cost_hr": 0.017, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 100, "search_cost_hr": 2.976, "storage_cost_hr": 0.017, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Zilliz Capacity 12CU", "qps": 310.47, "search_cost_hr": 2.976, "storage_cost_hr": 0.017, "write_cost_hr": 0, "recall": 0.971, "measured": true },
+        { "product": "Pinecone Serverless", "qps": 1, "search_cost_hr": 17.741, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; search cost uses 308 RU/query at $16/M RU and $0.33/GB-month storage." },
+        { "product": "Pinecone Serverless", "qps": 5, "search_cost_hr": 88.704, "storage_cost_hr": 0.137, "write_cost_hr": 0, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; performance endpoint remains capped at the requested <=5 QPS LAION 100M comparison point until measured." }
       ]
     },
     "multi": {
@@ -49,11 +99,11 @@
         { "product": "Zilliz Tiered 1CU", "qps": 1, "search_cost_hr": 0.372, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
         { "product": "Zilliz Tiered 1CU", "qps": 75, "search_cost_hr": 0.372, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
         { "product": "Zilliz Tiered 1CU", "qps": 524, "search_cost_hr": 0.372, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
-        { "product": "Zilliz Capacity 2CU", "qps": 1, "search_cost_hr": 0.496, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
-        { "product": "Zilliz Capacity 2CU", "qps": 525, "search_cost_hr": 0.496, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
-        { "product": "Zilliz Capacity 2CU", "qps": 979, "search_cost_hr": 0.496, "storage_cost_hr": 0.001, "write_cost_hr": 0, "recall": null, "measured": true },
-        { "product": "Pinecone Serverless", "qps": 10, "search_cost_hr": 0.162, "storage_cost_hr": 0.014, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; search cost uses the 0.25 RU/query minimum at $18/M RU and a 40 WPS write scenario." },
-        { "product": "Pinecone Serverless", "qps": 100, "search_cost_hr": 1.62, "storage_cost_hr": 0.014, "write_cost_hr": 3.99, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; performance endpoint remains capped at the requested <=100 aggregate QPS multitenant comparison point until measured." }
+        { "product": "Zilliz Capacity 2CU", "qps": 1, "search_cost_hr": 0.496, "storage_cost_hr": 0.002, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Capacity 2CU", "qps": 525, "search_cost_hr": 0.496, "storage_cost_hr": 0.002, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Zilliz Capacity 2CU", "qps": 979, "search_cost_hr": 0.496, "storage_cost_hr": 0.002, "write_cost_hr": 0, "recall": null, "measured": true },
+        { "product": "Pinecone Serverless", "qps": 10, "search_cost_hr": 0.144, "storage_cost_hr": 0.014, "write_cost_hr": 0, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; search cost uses the 0.25 RU/query minimum at $16/M RU." },
+        { "product": "Pinecone Serverless", "qps": 100, "search_cost_hr": 1.44, "storage_cost_hr": 0.014, "write_cost_hr": 0, "recall": null, "measured": false, "note": "Published Pinecone serverless pricing model; performance endpoint remains capped at the requested <=100 aggregate QPS multitenant comparison point until measured." }
       ]
     }
   }
