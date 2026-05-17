@@ -17,8 +17,8 @@ const PRODUCT_LABELS = {
   turbopuffer: "Turbopuffer",
   turbopuffer_bp_on: "Turbopuffer Backpressure On",
   turbopuffer_bp_off: "Turbopuffer Backpressure Off",
-  turbopuffer_pinned: "Turbopuffer Pinned",
-  turbopuffer_unpinned: "Turbopuffer Unpinned",
+  turbopuffer_pinned: "Turbopuffer Pinned Mode",
+  turbopuffer_unpinned: "Turbopuffer Unpinned Mode",
 };
 
 const FILTER_LABELS = {
