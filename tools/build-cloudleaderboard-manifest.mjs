@@ -56,7 +56,8 @@ async function isUsableMeasured(file, family) {
 function canonicalKey(file, family, sourceRoot) {
   const rel = path.relative(sourceRoot, file).split(path.sep);
   if (family === "cloud_cold_latency") {
-    return [family, rel[0], rel[1]].join("|");
+    const offset = rel[0] === "raw_results" ? 1 : 0;
+    return [family, rel[offset], rel[offset + 1]].join("|");
   }
   const rawIndex = rel.indexOf("raw_results");
   if (rawIndex >= 0) {

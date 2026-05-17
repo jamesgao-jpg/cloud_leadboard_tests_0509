@@ -155,10 +155,11 @@ function pathMeta(path) {
   }
   if (family === "cloud_cold_latency") {
     const i = parts.indexOf(family);
-    const filterFolder = parts[i + 2];
+    const offset = parts[i + 1] === "raw_results" ? 2 : 1;
+    const filterFolder = parts[i + offset + 1];
     return {
       family,
-      product: parts[i + 1],
+      product: parts[i + offset],
       filterType: filterFolder?.startsWith("int_filter") ? "int_filter" : "unfiltered",
       filterRate: filterFolder?.startsWith("int_filter") ? filterFolder.replace("int_filter_", "") : "na",
     };
