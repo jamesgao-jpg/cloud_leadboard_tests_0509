@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>CloudLeadboard v2 Release Report</title>
   <style>
     :root {
@@ -218,6 +221,21 @@
       border-radius: 8px;
       background: #fff;
       padding: 18px;
+    }
+    .cost-board-frame {
+      width: 100%;
+      height: 660px;
+      border: 0;
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .cost-board-frame iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
     }
     svg { display: block; width: 100%; height: auto; }
 
@@ -498,29 +516,32 @@
       <section id="candidates">
         <h2>Who we tested this round</h2>
         <p>
-          For this draft, we are intentionally keeping the release-note narrative focused on Zilliz Cloud and
-          turbopuffer. Other candidates can be folded into the board later, but they are out of scope for
-          this version of the note.
+          We are measuring three of the most popular cloud vector databases in the market:
+          Zilliz Cloud, turbopuffer, and Pinecone.
         </p>
         <table>
           <thead>
             <tr>
-              <th>Candidate</th>
-              <th>Role in this release note</th>
+              <th>Name</th>
+              <th>Reason for choosing</th>
+              <th>Date benched</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Zilliz Cloud Tiered</td>
-              <td>Cost-conscious managed cloud profile, especially important after the low-QPS cost crossover.</td>
-            </tr>
-            <tr>
-              <td>Zilliz Cloud Capacity</td>
-              <td>Production stability profile for recall-sensitive, latency-sensitive, and cold-start-sensitive workloads.</td>
+              <td>Zilliz Cloud</td>
+              <td>Managed cloud vector database with tiered and capacity profiles, strong ready-to-serve behavior, and a production-stability focus.</td>
+              <td>May 10th, 2026</td>
             </tr>
             <tr>
               <td>turbopuffer</td>
-              <td>Serverless candidate with pay-per-query economics, namespace-oriented operation, and pinned-replica variants.</td>
+              <td>Serverless pay-per-query vector database with strong namespace-oriented throughput and pinned or unpinned operating modes.</td>
+              <td>May 10th, 2026</td>
+            </tr>
+            <tr>
+              <td>Pinecone</td>
+              <td>Widely adopted serverless vector database with a mature managed service and usage-based pricing model.</td>
+              <td>May 10th, 2026</td>
             </tr>
           </tbody>
         </table>
@@ -782,50 +803,16 @@
         </p>
 
         <figure>
-          <div class="cost-figure">
-            <svg viewBox="0 0 720 360" aria-label="Cost crossover illustration">
-              <rect x="0" y="0" width="720" height="360" rx="8" fill="#fff"></rect>
-              <g stroke="#e5eaf0" stroke-width="1">
-                <line x1="70" y1="294" x2="670" y2="294"></line>
-                <line x1="70" y1="236" x2="670" y2="236"></line>
-                <line x1="70" y1="178" x2="670" y2="178"></line>
-                <line x1="70" y1="120" x2="670" y2="120"></line>
-                <line x1="70" y1="62" x2="670" y2="62"></line>
-              </g>
-              <g fill="#6b7280" font-size="12" font-family="Arial, sans-serif">
-                <text x="34" y="298">$0</text>
-                <text x="26" y="240">$5k</text>
-                <text x="20" y="182">$10k</text>
-                <text x="20" y="124">$15k</text>
-                <text x="20" y="66">$20k</text>
-                <text x="70" y="326">1</text>
-                <text x="160" y="326">8</text>
-                <text x="252" y="326">57</text>
-                <text x="350" y="326">114</text>
-                <text x="470" y="326">310</text>
-                <text x="620" y="326">400 QPS</text>
-              </g>
-              <line x1="70" y1="294" x2="675" y2="294" stroke="#6b7280" stroke-width="1.3"></line>
-              <line x1="70" y1="300" x2="70" y2="52" stroke="#6b7280" stroke-width="1.3"></line>
-              <text x="276" y="350" fill="#303b4b" font-size="13" font-weight="700" font-family="Arial, sans-serif">Sustained QPS target</text>
-              <text x="2" y="28" fill="#303b4b" font-size="13" font-weight="700" font-family="Arial, sans-serif">Monthly compute cost</text>
-
-              <polyline points="70,291 162,284 254,235 352,173 472,68 628,28" fill="none" stroke="#9a5b00" stroke-width="4"></polyline>
-              <polyline points="70,278 162,278 254,278" fill="none" stroke="#007e8a" stroke-width="4"></polyline>
-              <polyline points="254,251 352,251" fill="none" stroke="#007e8a" stroke-width="4"></polyline>
-              <polyline points="352,251 472,251" fill="none" stroke="#2563eb" stroke-width="4"></polyline>
-              <polyline points="472,231 628,231" fill="none" stroke="#2563eb" stroke-width="4"></polyline>
-
-              <circle cx="162" cy="278" r="5" fill="#007e8a"></circle>
-              <text x="180" y="270" fill="#17202c" font-size="13" font-weight="800" font-family="Arial, sans-serif">8 QPS crossover</text>
-              <text x="470" y="48" fill="#9a5b00" font-size="12" font-weight="800" font-family="Arial, sans-serif">turbopuffer pay-per-query</text>
-              <text x="382" y="242" fill="#2563eb" font-size="12" font-weight="800" font-family="Arial, sans-serif">Zilliz Capacity bands</text>
-              <text x="82" y="270" fill="#007e8a" font-size="12" font-weight="800" font-family="Arial, sans-serif">Zilliz Tiered bands</text>
-            </svg>
+          <div class="cost-board-frame">
+            <iframe
+              src="cloudleadboard.html?embed=cost"
+              title="CloudLeaderboard cost Pareto board"
+              loading="lazy"
+              scrolling="no"></iframe>
           </div>
           <figcaption>
-            Release-note view of the cost story. The full benchmark report should carry the detailed
-            monthly tables, QPS ceilings, pricing date, and region assumptions.
+            Live CloudLeaderboard cost Pareto board, rendered from the same cost model and measured search
+            result inputs used by the main leaderboard.
           </figcaption>
         </figure>
 

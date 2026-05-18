@@ -1358,6 +1358,7 @@ tbody tr:hover {
 html.embed-cost,
 html.embed-cost body {
   background: #fff;
+  overflow: hidden;
 }
 
 html.embed-cost .page {
@@ -1368,6 +1369,9 @@ html.embed-cost .page {
 
 html.embed-cost .topbar,
 html.embed-cost .hero,
+html.embed-cost #cost-section .section-head,
+html.embed-cost #cost-section .filters,
+html.embed-cost #cost-sources,
 html.embed-cost main > .section:not(#cost-section) {
   display: none;
 }
@@ -1377,11 +1381,23 @@ html.embed-cost #cost-section {
   padding: 0;
 }
 
-html.embed-cost #cost-section .section-head,
-html.embed-cost #cost-section .filters,
-html.embed-cost #cost-chart,
-html.embed-cost #cost-sources {
+html.embed-cost #cost-chart {
   max-width: none;
+}
+
+html.embed-cost .cost-chart {
+  display: block;
+}
+
+html.embed-cost .cost-line-card {
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+html.embed-cost .cost-html-chart {
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 0 14px;
+  overflow-x: hidden;
 }
 
 .cost-line-card {

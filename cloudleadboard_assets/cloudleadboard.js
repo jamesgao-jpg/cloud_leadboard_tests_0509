@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-cold-capacity-note";
+const BUILD_ID = "20260518-cost-y-defaults";
 
 const state = {
   raw: [],
@@ -722,6 +722,8 @@ function fmtMs(seconds) {
 }
 
 function renderCostControls() {
+  const costYMax = $("cost-y-max");
+  if (costYMax && !costYMax.value) costYMax.value = defaultCostYMax(selectedCostPeriod());
   $("cost-scenario").addEventListener("change", () => {
     $("cost-qps-max").value = defaultCostQpsMax($("cost-scenario").value);
     renderCost();
@@ -737,6 +739,7 @@ function renderCostControls() {
     $("cost-period-toggle").querySelectorAll("button").forEach((item) => {
       item.classList.toggle("active", item === button);
     });
+    if (costYMax) costYMax.value = defaultCostYMax(button.dataset.period);
     renderCost();
   });
   $("cost-qps-max").addEventListener("input", renderCost);
@@ -747,6 +750,10 @@ function renderCostControls() {
 
 function selectedCostPeriod() {
   return $("cost-period-toggle").querySelector("button.active")?.dataset.period || "hourly";
+}
+
+function defaultCostYMax(period) {
+  return period === "monthly" ? 10000 : 20;
 }
 
 function costPeriodMultiplier(period) {
@@ -1084,6 +1091,7 @@ function renderCost() {
   const mode = $("cost-mode").value;
   const writeMode = selectedCostWriteMode();
   const period = selectedCostPeriod();
+  const isCostEmbed = document.documentElement.classList.contains("embed-cost");
   const multiplier = costPeriodMultiplier(period);
   const unit = costPeriodUnit(period);
   const scenario = state.cost.scenarios[scenarioId];
@@ -1096,8 +1104,10 @@ function renderCost() {
     .filter((point) => point.qps > 0 && point.cost >= 0);
   const cutoffs = measuredCostCutoffs(scenarioId);
   const availableWidth = $("cost-chart").clientWidth || 1120;
-  const plotWidth = Math.max(680, Math.min(1160, availableWidth - 220));
-  const plotHeight = 360;
+  const plotWidth = isCostEmbed
+    ? Math.max(560, Math.min(1000, availableWidth - 126))
+    : Math.max(680, Math.min(1160, availableWidth - 220));
+  const plotHeight = isCostEmbed ? 320 : 360;
   const absoluteMaxQps = Math.max(1, ...points.map((point) => point.qps), ...[...cutoffs.values()].map((point) => point.qps));
   const requestedMaxQps = Number($("cost-qps-max").value) || defaultCostQpsMax(scenarioId);
   const maxQps = Math.min(Math.max(1, requestedMaxQps), absoluteMaxQps);
