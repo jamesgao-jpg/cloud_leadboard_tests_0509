@@ -815,10 +815,6 @@ function extrapolatedCostAtQps(rows, qps, mode, multiplier, scenarioId, writeMod
   return costAtSegment(left, right, qps);
 }
 
-function isPineconeCostLine(pointOrGroup) {
-  return (pointOrGroup.product || "").toLowerCase().includes("pinecone");
-}
-
 function zeroQpsCost(point, mode, multiplier = 1, scenarioId = "single", writeMode = "constant") {
   if (isFixedCostProduct(point)) return pointCost(point, mode, multiplier, scenarioId, writeMode);
   let cost = 0;
@@ -978,15 +974,14 @@ function renderCost() {
       cost: extrapolatedCostAtQps(group.rows, group.cutoff.qps, mode, multiplier, scenarioId, writeMode),
     }));
   const visibleCosts = points
-    .filter((point) => point.qps <= maxQps && !isPineconeCostLine(point))
+    .filter((point) => point.qps <= maxQps)
     .map((point) => point.cost)
     .concat(visibleCrossovers.map((point) => point.cost));
   productGroups.forEach((group) => {
-    if (isPineconeCostLine(group)) return;
     const boundaryCost = costAtQps(group.rows, maxQps);
     if (boundaryCost !== null) visibleCosts.push(boundaryCost);
   });
-  const maxCost = niceTicks(Math.max(1, ...visibleCosts) * 1.08).at(-1);
+  const maxCost = niceTicks(Math.max(1, ...visibleCosts) * 1.16).at(-1);
   const xTicks = niceTicks(maxQps);
   const yTicks = niceTicks(maxCost);
   const xPx = (qps) => (qps / maxQps) * plotWidth;
