@@ -1532,14 +1532,6 @@ html.embed-cost .cost-html-chart {
   box-shadow: none;
 }
 
-.cost-cutoff-legend i {
-  width: 1px;
-  height: 16px;
-  border-radius: 0;
-  background: repeating-linear-gradient(to bottom, currentColor 0 4px, transparent 4px 7px);
-  color: var(--muted);
-}
-
 .cost-best-legend i {
   width: 30px;
   height: 4px;
@@ -1673,6 +1665,10 @@ html.embed-cost .cost-html-chart {
   filter: none;
 }
 
+.cost-plot.best-active .cost-line-series .cost-line-segment.reference-only {
+  background: repeating-linear-gradient(to right, #cbd5e1 0 8px, transparent 8px 13px) !important;
+}
+
 .cost-plot.best-active .cost-line-series .cost-line-hit {
   z-index: 2;
 }
@@ -1752,54 +1748,6 @@ html.embed-cost .cost-html-chart {
 
 .cost-crossover-line {
   display: none;
-}
-
-.cost-cutoff-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 3;
-  width: 0;
-  border-left: 1px dashed currentColor;
-  color: var(--muted);
-  opacity: 0.85;
-  cursor: help;
-}
-
-.cost-cutoff-tip {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  z-index: 8;
-  display: grid;
-  gap: 2px;
-  min-width: 190px;
-  padding: 8px 10px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.35;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, 6px);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
-  transition: opacity 120ms ease, transform 120ms ease;
-}
-
-.cost-cutoff-tip span {
-  color: var(--muted);
-}
-
-.cost-cutoff-line:hover {
-  opacity: 1;
-}
-
-.cost-cutoff-line:hover .cost-cutoff-tip {
-  opacity: 1;
-  transform: translate(-50%, 0);
 }
 
 .cost-crossover-point {

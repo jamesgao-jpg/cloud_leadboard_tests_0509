@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-legend-toggles";
+const BUILD_ID = "20260518-cutoff-extension";
 
 const state = {
   raw: [],
@@ -1073,6 +1073,21 @@ function costDrawRows(rows, mode, multiplier, scenarioId, writeMode) {
   ];
 }
 
+function extendCostRows(rows, targetQps, mode, multiplier, scenarioId, writeMode) {
+  const sorted = rows.slice().sort((a, b) => a.qps - b.qps);
+  if (!sorted.length || !targetQps || targetQps <= sorted.at(-1).qps + 1e-6) return sorted;
+  const endpointCost = extrapolatedCostAtQps(sorted, targetQps, mode, multiplier, scenarioId, writeMode);
+  if (endpointCost === null) return sorted;
+  return [
+    ...sorted,
+    {
+      ...sorted.at(-1),
+      qps: targetQps,
+      cost: endpointCost,
+    },
+  ];
+}
+
 function defaultCostQpsMax(scenarioId) {
   return scenarioId === "multi" ? 150 : 50;
 }
@@ -1215,24 +1230,23 @@ function measuredCostCutoffs(scenarioId) {
   return cutoffs;
 }
 
-function applyMeasuredCutoff(rows, cutoffQps, mode, multiplier, scenarioId, writeMode) {
+function achievableCostRows(rows, cutoffQps, mode, multiplier, scenarioId, writeMode) {
   const sorted = rows.slice().sort((a, b) => a.qps - b.qps);
   if (!sorted.length || !cutoffQps || cutoffQps <= 0) return sorted;
   const result = sorted.filter((row) => row.qps < cutoffQps);
   const exact = sorted.find((row) => Math.abs(row.qps - cutoffQps) < 1e-6);
-  if (exact) {
-    result.push(exact);
-    return result.sort((a, b) => a.qps - b.qps);
+  if (exact) result.push(exact);
+  else {
+    const endpointCost = extrapolatedCostAtQps(sorted, cutoffQps, mode, multiplier, scenarioId, writeMode);
+    const source = result.at(-1) || sorted[0];
+    if (endpointCost !== null) {
+      result.push({
+        ...source,
+        qps: cutoffQps,
+        cost: endpointCost,
+      });
+    }
   }
-  const endpointCost = extrapolatedCostAtQps(sorted, cutoffQps, mode, multiplier, scenarioId, writeMode);
-  if (endpointCost === null) return sorted;
-  const source = result.at(-1) || sorted[0];
-  result.push({
-    ...source,
-    qps: cutoffQps,
-    cost: endpointCost,
-    measuredCutoff: true,
-  });
   return result.sort((a, b) => a.qps - b.qps);
 }
 
@@ -1312,7 +1326,7 @@ function renderCost() {
       const cutoff = cutoffs.get(product);
       return {
         product,
-        rows: applyMeasuredCutoff(rows, cutoff?.qps, mode, multiplier, scenarioId, writeMode),
+        rows: extendCostRows(rows, maxQps, mode, multiplier, scenarioId, writeMode),
         cutoff,
       };
     })
@@ -1322,16 +1336,14 @@ function renderCost() {
     ...group,
     rows: costDrawRows(group.rows, mode, multiplier, scenarioId, writeMode),
   }));
+  const achievableDrawGroups = activeProductGroups
+    .map((group) => ({
+      ...group,
+      rows: costDrawRows(achievableCostRows(group.rows, group.cutoff?.qps, mode, multiplier, scenarioId, writeMode), mode, multiplier, scenarioId, writeMode),
+    }))
+    .filter((group) => group.rows.length > 1);
   const crossovers = lineCrossovers(drawGroups);
   const visibleCrossovers = crossovers.filter((point) => point.qps >= minQps && point.qps <= maxQps);
-  const visibleCutoffs = activeProductGroups
-    .filter((group) => group.cutoff?.qps >= minQps && group.cutoff.qps <= maxQps)
-    .map((group) => ({
-      product: group.product,
-      color: productColor(group.product),
-      ...group.cutoff,
-      cost: extrapolatedCostAtQps(group.rows, group.cutoff.qps, mode, multiplier, scenarioId, writeMode),
-    }));
   const visibleCosts = points
     .filter((point) => !state.costHiddenProducts.has(point.product))
     .filter((point) => point.qps >= minQps && point.qps <= maxQps)
@@ -1349,7 +1361,52 @@ function renderCost() {
   const xPx = (qps) => ((qps - minQps) / qpsSpan) * plotWidth;
   const yPx = (cost) => plotHeight - ((cost - costMin) / costSpan) * plotHeight;
   syncCostLimitControls();
-  const bestEnvelope = state.costShowBest ? lowerCostEnvelope(drawGroups, minQps, maxQps) : [];
+  const bestEnvelope = state.costShowBest ? lowerCostEnvelope(achievableDrawGroups, minQps, maxQps) : [];
+  const segmentMarkup = ({ product, start, end, key, color, className = "", hitClassName = "", yOffset = 1.5, reference = false, labelPrefix = "" }) => {
+    const x1 = xPx(start.qps);
+    const y1 = yPx(start.cost);
+    const x2 = xPx(end.qps);
+    const y2 = yPx(end.cost);
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const length = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    if (length < 1) return "";
+    const data = [
+      `data-product="${labelPrefix}${escapeHtml(product)}"`,
+      `data-qps-start="${start.qps}"`,
+      `data-qps-end="${end.qps}"`,
+      `data-cost-start="${start.cost}"`,
+      `data-cost-end="${end.cost}"`,
+      `data-write-add="${start.writeAdd || 0}"`,
+      `data-unit="${unit}"`,
+      reference ? `data-reference-only="true"` : "",
+    ].filter(Boolean).join(" ");
+    const background = reference
+      ? `background:repeating-linear-gradient(to right, ${color || "#111827"} 0 8px, transparent 8px 13px);`
+      : color ? `background:${color};` : "";
+    const style = `left:${x1}px;top:${y1 - yOffset}px;width:${length}px;transform:rotate(${angle}deg);${background}`;
+    return `<span class="cost-line-segment ${className} ${reference ? "reference-only" : ""}" data-motion-key="segment|${escapeHtml(key)}" style="${style}"></span>
+      <span class="cost-line-hit ${hitClassName}" data-motion-key="hit|${escapeHtml(key)}" ${data} style="left:${x1}px;top:${y1 - 9}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
+  };
+  const splitByMeasuredCutoff = ({ group, start, end, key, color, className = "", hitClassName = "", yOffset = 1.5, labelPrefix = "" }) => {
+    const cutoffQps = group.cutoff?.qps;
+    if (!cutoffQps || cutoffQps <= 0 || end.qps <= cutoffQps + 1e-9) {
+      return segmentMarkup({ product: group.product, start, end, key, color, className, hitClassName, yOffset, labelPrefix });
+    }
+    if (start.qps >= cutoffQps - 1e-9) {
+      return segmentMarkup({ product: group.product, start, end, key: `${key}|reference`, color, className, hitClassName, yOffset, reference: true, labelPrefix });
+    }
+    const cutoffPoint = {
+      ...start,
+      qps: cutoffQps,
+      cost: costAtSegment(start, end, cutoffQps),
+    };
+    return [
+      segmentMarkup({ product: group.product, start, end: cutoffPoint, key: `${key}|measured`, color, className, hitClassName, yOffset, labelPrefix }),
+      segmentMarkup({ product: group.product, start: cutoffPoint, end, key: `${key}|reference`, color, className, hitClassName, yOffset, reference: true, labelPrefix }),
+    ].join("");
+  };
   const lines = activeProductGroups.map((group) => {
     const color = productColor(group.product);
     const drawRows = costDrawRows(group.rows, mode, multiplier, scenarioId, writeMode);
@@ -1362,36 +1419,25 @@ function renderCost() {
       const end = next.qps > maxQps
         ? { ...next, qps: maxQps, cost: costAtSegment(point, next, maxQps) }
         : next;
-      const x1 = xPx(start.qps);
-      const y1 = yPx(start.cost);
-      const x2 = xPx(end.qps);
-      const y2 = yPx(end.cost);
-      const dx = x2 - x1;
-      const dy = y2 - y1;
-      const length = Math.sqrt(dx * dx + dy * dy);
-      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-      if (length < 1) return "";
       const motionKey = `${group.product}|${point.qps}|${next.qps}`;
-      const data = `data-product="${escapeHtml(group.product)}" data-qps-start="${start.qps}" data-qps-end="${end.qps}" data-cost-start="${start.cost}" data-cost-end="${end.cost}" data-write-add="${point.writeAdd || 0}" data-unit="${unit}"`;
-      return `<span class="cost-line-segment" data-motion-key="segment|${escapeHtml(motionKey)}" style="left:${x1}px;top:${y1 - 1.5}px;width:${length}px;transform:rotate(${angle}deg);background:${color};"></span>
-        <span class="cost-line-hit" data-motion-key="hit|${escapeHtml(motionKey)}" ${data} style="left:${x1}px;top:${y1 - 9}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
+      return splitByMeasuredCutoff({ group, start, end, key: motionKey, color });
     }).join("");
     return `<div class="cost-line-series">${segments}</div>`;
   }).join("");
   const bestLine = bestEnvelope.map((segment) => {
-    const x1 = xPx(segment.startQps);
-    const y1 = yPx(segment.startCost);
-    const x2 = xPx(segment.endQps);
-    const y2 = yPx(segment.endCost);
-    const dx = x2 - x1;
-    const dy = y2 - y1;
-    const length = Math.sqrt(dx * dx + dy * dy);
-    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-    if (length < 1) return "";
+    const group = activeProductGroups.find((item) => item.product === segment.product);
+    if (!group) return "";
     const key = `best|${segment.product}|${segment.startQps}|${segment.endQps}`;
-    const data = `data-product="Best choice: ${escapeHtml(segment.product)}" data-qps-start="${segment.startQps}" data-qps-end="${segment.endQps}" data-cost-start="${segment.startCost}" data-cost-end="${segment.endCost}" data-write-add="0" data-unit="${unit}"`;
-    return `<span class="cost-line-segment cost-best-segment" data-motion-key="segment|${escapeHtml(key)}" style="left:${x1}px;top:${y1 - 2}px;width:${length}px;transform:rotate(${angle}deg);"></span>
-      <span class="cost-line-hit cost-best-hit" data-motion-key="hit|${escapeHtml(key)}" ${data} style="left:${x1}px;top:${y1 - 11}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
+    return splitByMeasuredCutoff({
+      group,
+      start: { qps: segment.startQps, cost: segment.startCost },
+      end: { qps: segment.endQps, cost: segment.endCost },
+      key,
+      className: "cost-best-segment",
+      hitClassName: "cost-best-hit",
+      yOffset: 2,
+      labelPrefix: "Best choice: ",
+    });
   }).join("");
   const crossoverMarkers = visibleCrossovers.map((point) => {
     const x = xPx(point.qps);
@@ -1401,17 +1447,6 @@ function renderCost() {
       <span class="cost-crossover-tip">
         <strong>${escapeHtml(label)}</strong>
         <span>${fmtNumber(point.qps, 2)} QPS</span>
-        <span>${fmtCurrency(point.cost)} / ${unit}</span>
-      </span>
-    </span>`;
-  }).join("");
-  const cutoffMarkers = visibleCutoffs.map((point) => {
-    const x = xPx(point.qps);
-    return `<span class="cost-cutoff-line" data-motion-key="cutoff|${escapeHtml(point.product)}" style="left:${x}px;color:${point.color};">
-      <span class="cost-cutoff-tip">
-        <strong>${escapeHtml(point.product)}</strong>
-        <span>Measured unfiltered cutoff</span>
-        <span>${fmtNumber(point.qps, 2)} QPS · ${payloadLabel(point.payload)}</span>
         <span>${fmtCurrency(point.cost)} / ${unit}</span>
       </span>
     </span>`;
@@ -1429,7 +1464,6 @@ function renderCost() {
     return `<button type="button" class="cost-legend-item ${hidden ? "off" : ""}" data-cost-toggle="product" data-product="${escapeHtml(group.product)}" aria-pressed="${hidden ? "false" : "true"}"><i style="background:${productColor(group.product)}"></i>${escapeHtml(group.product)}</button>`;
   }).join("")
     + `<button type="button" class="cost-legend-item cost-best-legend ${state.costShowBest ? "" : "off"}" data-cost-toggle="best" aria-pressed="${state.costShowBest ? "true" : "false"}"><i></i>best choice line</button>`
-    + (visibleCutoffs.length ? `<span class="cost-cutoff-legend"><i></i> measured QPS cutoff</span>` : "")
     + (visibleCrossovers.length ? `<span class="cost-crossover-legend"><i></i> crossover points</span>` : "");
   const modeLabel = state.cost.modes.find((item) => item.id === mode)?.label || mode;
   const writeLabel = writeMode === "batch" ? "10k batches" : "constant writes";
@@ -1445,7 +1479,6 @@ function renderCost() {
           ${yGrid}
           ${lines}
           ${bestLine ? `<div class="cost-best-line-series">${bestLine}</div>` : ""}
-          ${cutoffMarkers}
           ${crossoverMarkers}
           <div class="cost-line-tooltip" id="cost-line-tooltip"></div>
         </div>
@@ -1474,7 +1507,10 @@ function attachCostLineHover() {
       const writeLine = writeAdd > 0
         ? `<span>write add-on ${fmtCurrency(writeAdd)} / ${escapeHtml(segment.dataset.unit)}</span>`
         : "";
-      tooltip.innerHTML = `<strong>${escapeHtml(segment.dataset.product)}</strong><span>${fmtNumber(qps, 2)} QPS</span><span>${fmtCurrency(cost)} / ${escapeHtml(segment.dataset.unit)}</span>${writeLine}`;
+      const referenceLine = segment.dataset.referenceOnly === "true"
+        ? `<span>Non-achievable QPS, reference only</span>`
+        : `<span>${fmtNumber(qps, 2)} QPS</span>`;
+      tooltip.innerHTML = `<strong>${escapeHtml(segment.dataset.product)}</strong>${referenceLine}<span>${fmtCurrency(cost)} / ${escapeHtml(segment.dataset.unit)}</span>${writeLine}`;
       const plotRect = plot.getBoundingClientRect();
       tooltip.style.left = `${event.clientX - plotRect.left + 14}px`;
       tooltip.style.top = `${event.clientY - plotRect.top - 14}px`;
