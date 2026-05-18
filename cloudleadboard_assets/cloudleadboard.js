@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-cost-drag";
+const BUILD_ID = "20260518-legend-toggles";
 
 const state = {
   raw: [],
@@ -57,9 +57,10 @@ const state = {
   multi: [],
   cold: [],
   cost: null,
-  costZoom: {},
+  costShowBest: true,
+  costHiddenProducts: new Set(),
   insertBackpressure: "off",
-  insertShowCost: false,
+  insertShowCost: true,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -227,6 +228,8 @@ function normalizeInsert(row) {
 }
 
 function normalizeSearch(row) {
+  const concurrentP99 = Math.max(0, ...(row.metrics.conc_latency_p99_list || [0]));
+  const concurrentP95 = Math.max(0, ...(row.metrics.conc_latency_p95_list || [0]));
   return {
     ...row.meta,
     productLabel: productLabel(row.meta.product),
@@ -234,9 +237,14 @@ function normalizeSearch(row) {
     maxQps: Math.max(row.metrics.qps || 0, ...(row.metrics.conc_qps_list || [0])),
     recall: row.metrics.recall,
     ndcg: row.metrics.ndcg,
-    p99: Math.max(row.metrics.serial_latency_p99 || 0, ...(row.metrics.conc_latency_p99_list || [0])),
-    p95: Math.max(row.metrics.serial_latency_p95 || 0, ...(row.metrics.conc_latency_p95_list || [0])),
+    concurrentP99,
+    concurrentP95,
+    serialP99: row.metrics.serial_latency_p99 || 0,
+    serialP95: row.metrics.serial_latency_p95 || 0,
+    p99: Math.max(row.metrics.serial_latency_p99 || 0, concurrentP99),
+    p95: Math.max(row.metrics.serial_latency_p95 || 0, concurrentP95),
     payloadBytes: row.metrics.payload_estimated_bytes_per_query,
+    topK: Number(row.task.case_config?.k || 0),
     mocked: row.mocked,
     path: row.path,
   };
@@ -457,11 +465,11 @@ function renderInsert() {
         ["indexed", "seg-indexed", row.indexedSeconds, phaseMax.indexed],
       ].map(([label, className, value, max]) => {
         const width = Math.max(value > 0 ? 2 : 0, (value / max) * 100);
-        return `<div class="insert-phase ${className}">
+        return `<div class="insert-phase ${className}" style="--phase-width:${width}%">
           <div class="insert-phase-track">
             <span data-insert-motion-key="${escapeHtml(insertMotionKey(row, label))}" style="width:${width}%"></span>
+            <strong>${fmtSeconds(value)}</strong>
           </div>
-          <strong>${fmtSeconds(value)}</strong>
         </div>`;
       }).join("");
       return `<div class="insert-row">
@@ -541,9 +549,12 @@ function combinedSearchRows(rows) {
     ...group,
     maxQps: group.qpsRow?.maxQps ?? 0,
     p99: group.qpsRow?.p99 ?? 0,
+    concurrentP99: group.qpsRow?.concurrentP99 ?? group.qpsRow?.p99 ?? 0,
+    serialP99: group.recallRow?.serialP99 ?? group.recallRow?.p99 ?? group.qpsRow?.serialP99 ?? 0,
     recall: group.recallRow?.recall ?? null,
     ndcg: group.recallRow?.ndcg ?? null,
     payloadBytes: group.qpsRow?.payloadBytes ?? group.recallRow?.payloadBytes,
+    topK: group.qpsRow?.topK || group.recallRow?.topK || 0,
     mocked: Boolean(group.qpsRow?.mocked || group.recallRow?.mocked),
   }));
 }
@@ -561,6 +572,7 @@ function renderSearchControls() {
   });
   $("filter-select").addEventListener("change", renderSearch);
   $("payload-select").addEventListener("change", renderSearch);
+  $("search-latency-mode").addEventListener("change", renderSearch);
   populateSearchOptions();
 }
 
@@ -569,6 +581,11 @@ function searchScaleRows() {
     ...combinedSearchRows(state.payload),
     ...combinedSearchRows(state.multi),
   ].filter((row) => row.payload !== "scalar_label");
+}
+
+function selectedSearchLatency(row, mode = $("search-latency-mode")?.value || "concurrent") {
+  if (mode === "serial" && row.serialP99 > 0) return row.serialP99;
+  return row.concurrentP99 || row.p99 || 0;
 }
 
 function captureSearchMotion() {
@@ -630,20 +647,19 @@ function renderSearch() {
   const previousMotion = captureSearchMotion();
   const mode = $("search-mode").value;
   const showRecall = mode === "single";
+  const latencyMode = $("search-latency-mode").value;
   const filterKey = $("filter-select").value;
   const payload = $("payload-select").value;
   const rows = availableSearchRows()
     .filter((row) => row.filterKey === filterKey && row.payload === payload)
     .sort((a, b) => b.maxQps - a.maxQps);
+  const topK = rows.find((row) => row.topK > 0)?.topK || (mode === "single" ? 100 : 50);
+  $("search-topk-badge").textContent = `topK = ${topK}`;
   const scaleRows = searchScaleRows();
   const maxQps = Math.max(1, ...scaleRows.map((r) => r.maxQps));
-  const maxP99 = Math.max(1, ...scaleRows.map((r) => r.p99 || 0));
+  const maxP99 = Math.max(1, ...scaleRows.map((r) => selectedSearchLatency(r, latencyMode)));
   const bestZilliz = rows.find((r) => r.productLabel.includes("Zilliz"));
   const bestOverall = rows[0];
-
-  $("search-note").textContent = mode === "single"
-    ? "Single-tenant recall and QPS are merged from serial_recall and concurrent_qps JSON files."
-    : "Multi-tenant mode is evaluated on concurrent QPS and P99 latency only.";
 
   const hasPinecone = rows.some((row) => row.productLabel.includes("Pinecone"));
   const coverageNotes = [];
@@ -655,8 +671,9 @@ function renderSearch() {
   const combinedRows = rows.map((row) => {
     const quality = row.recall === null || row.recall === undefined
       ? `<span class="muted">recall n/a</span>`
-      : `<span class="${row.recall >= 0.96 ? "quality-good" : "quality-bad"}">recall ${row.recall.toFixed(4)}</span>`;
-    const latencyWidth = Math.min(100, ((row.p99 || 0) / maxP99) * 100);
+      : `<span class="${row.recall >= 0.96 ? "quality-good" : "quality-bad"}">recall@10 ${row.recall.toFixed(4)}</span>`;
+    const latency = selectedSearchLatency(row, latencyMode);
+    const latencyWidth = Math.min(100, (latency / maxP99) * 100);
     const qpsWidth = Math.min(100, (row.maxQps / maxQps) * 100);
     const rowKey = row.product;
     return `<div class="search-combined-row ${showRecall ? "" : "no-recall"} ${productClass(row.productLabel)}">
@@ -666,7 +683,7 @@ function renderSearch() {
       </div>
       <div class="search-diverging-bars">
         <div class="diverge-side diverge-latency">
-          <span class="diverge-value" data-search-motion-key="latency-value|${escapeHtml(rowKey)}" data-search-value="${row.p99 || 0}" data-search-value-type="latency">${fmtSeconds(row.p99)}</span>
+          <span class="diverge-value" data-search-motion-key="latency-value|${escapeHtml(rowKey)}" data-search-value="${latency}" data-search-value-type="latency">${fmtSeconds(latency)}</span>
           <div class="diverge-fill-wrap"><div class="fill" data-search-motion-key="latency|${escapeHtml(rowKey)}" style="width:${latencyWidth}%"></div></div>
         </div>
         <div class="diverge-axis"></div>
@@ -683,12 +700,11 @@ function renderSearch() {
     <div class="search-combined-card">
       <div class="search-chart-head">
         <strong>Vector Search Latency and QPS</strong>
-        <span>${FILTER_LABELS[filterKey] || filterKey} · ${payloadLabel(payload)}${showRecall ? " · recall shown at row end" : ""}</span>
       </div>
       <div class="search-combined-head ${showRecall ? "" : "no-recall"}">
         <span>Product</span>
-        <span class="search-axis-head"><span>Concurrent P99 Latency</span><span>QPS</span></span>
-        ${showRecall ? "<span>Recall</span>" : ""}
+        <span class="search-axis-head"><span>${latencyMode === "serial" ? "Serial P99 Latency" : "Max Concurrency P99 Latency"}</span><span>Max Concurrency QPS</span></span>
+        ${showRecall ? "<span>recall@10</span>" : ""}
       </div>
       <div class="search-combined-body">${combinedRows}</div>
     </div>` : `<p class="muted">No rows for this selection.</p>`;
@@ -718,7 +734,6 @@ function renderCold() {
   const selectedFilter = $("cold-filter-select").value;
   const valid = canonicalColdRows(state.cold
     .filter((row) => row.filterKey === selectedFilter)
-    .filter((row) => !row.productLabel.includes("Zilliz Cloud Capacity"))
     .filter((row) => row.first > 0 && row.warmP99 > 0));
   if (!valid.length) {
     $("cold-chart").innerHTML = `<p class="muted">No non-zero cold latency rows for this mode yet.</p>`;
@@ -778,9 +793,9 @@ function fmtMs(seconds) {
 }
 
 function renderCostControls() {
-  resetCostZoom();
+  syncCostLimitControls();
   $("cost-scenario").addEventListener("change", () => {
-    resetCostZoom();
+    syncCostLimitControls({ force: true });
     renderCost();
   });
   $("cost-mode").addEventListener("change", () => {
@@ -788,13 +803,28 @@ function renderCostControls() {
     renderCost();
   });
   $("cost-write-mode")?.addEventListener("change", renderCost);
+  $("cost-chart")?.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-cost-toggle]");
+    if (!button) return;
+    if (button.dataset.costToggle === "best") {
+      state.costShowBest = !state.costShowBest;
+    } else if (button.dataset.costToggle === "product") {
+      const product = button.dataset.product;
+      if (state.costHiddenProducts.has(product)) state.costHiddenProducts.delete(product);
+      else state.costHiddenProducts.add(product);
+    }
+    renderCost();
+  });
+  ["cost-qps-max-limit", "cost-max-limit"].forEach((id) => {
+    $(id)?.addEventListener("change", renderCost);
+  });
   $("cost-period-toggle").addEventListener("click", (event) => {
     const button = event.target.closest("button[data-period]");
     if (!button) return;
     $("cost-period-toggle").querySelectorAll("button").forEach((item) => {
       item.classList.toggle("active", item === button);
     });
-    resetCostZoom();
+    syncCostLimitControls({ force: true });
     renderCost();
   });
   window.addEventListener("resize", renderCost);
@@ -809,22 +839,28 @@ function defaultCostYMax(period) {
   return period === "monthly" ? 10000 : 20;
 }
 
-function costZoomKey(scenarioId = $("cost-scenario").value, period = selectedCostPeriod()) {
-  return `${scenarioId}|${period}`;
+function readPositiveInput(id) {
+  const value = Number($(id)?.value);
+  return Number.isFinite(value) && value > 0 ? value : null;
 }
 
-function resetCostZoom(scenarioId = $("cost-scenario").value, period = selectedCostPeriod()) {
-  state.costZoom[costZoomKey(scenarioId, period)] = {
-    qpsMin: 0,
-    qps: defaultCostQpsMax(scenarioId),
-    cost: defaultCostYMax(period),
+function fmtRangeValue(value) {
+  if (!Number.isFinite(value)) return "";
+  const digits = value >= 100 ? 0 : 2;
+  return Number(value.toFixed(digits)).toString();
+}
+
+function syncCostLimitControls({ force = false } = {}) {
+  const active = document.activeElement;
+  const values = {
+    "cost-qps-max-limit": defaultCostQpsMax($("cost-scenario").value),
+    "cost-max-limit": defaultCostYMax(selectedCostPeriod()),
   };
-}
-
-function currentCostZoom(scenarioId, period) {
-  const key = costZoomKey(scenarioId, period);
-  if (!state.costZoom[key]) resetCostZoom(scenarioId, period);
-  return state.costZoom[key];
+  Object.entries(values).forEach(([id, value]) => {
+    const input = $(id);
+    if (!input || (!force && input.value && input !== active)) return;
+    input.value = fmtRangeValue(value);
+  });
 }
 
 function costPeriodMultiplier(period) {
@@ -1005,6 +1041,7 @@ function lineCrossovers(groups) {
           const denominator = aSlope - bSlope;
           if (Math.abs(denominator) < 1e-9) continue;
           const qps = (b1.cost - a1.cost + aSlope * a1.qps - bSlope * b1.qps) / denominator;
+          if (qps <= 1e-6) continue;
           if (qps < minQps - 1e-6 || qps > maxQps + 1e-6) continue;
           const cost = costAtSegment(a1, a2, qps);
           const key = `${left.product}|${right.product}|${qps.toFixed(2)}`;
@@ -1023,6 +1060,19 @@ function lineCrossovers(groups) {
   return crossovers.sort((a, b) => a.qps - b.qps);
 }
 
+function costDrawRows(rows, mode, multiplier, scenarioId, writeMode) {
+  const sorted = rows.slice().sort((a, b) => a.qps - b.qps);
+  if (!sorted.length) return [];
+  return [
+    {
+      ...sorted[0],
+      qps: 0,
+      cost: zeroQpsCost(sorted[0], mode, multiplier, scenarioId, writeMode),
+    },
+    ...sorted,
+  ];
+}
+
 function defaultCostQpsMax(scenarioId) {
   return scenarioId === "multi" ? 150 : 50;
 }
@@ -1037,6 +1087,63 @@ function costAtQps(rows, qps) {
     if (qps >= left.qps && qps <= right.qps) return costAtSegment(left, right, qps);
   }
   return sorted[sorted.length - 1].cost;
+}
+
+function costAtQpsBounded(rows, qps) {
+  const sorted = rows.slice().sort((a, b) => a.qps - b.qps);
+  if (!sorted.length) return null;
+  if (qps < sorted[0].qps - 1e-9 || qps > sorted.at(-1).qps + 1e-9) return null;
+  if (qps <= sorted[0].qps) return sorted[0].cost;
+  for (let i = 0; i < sorted.length - 1; i += 1) {
+    const left = sorted[i];
+    const right = sorted[i + 1];
+    if (qps >= left.qps - 1e-9 && qps <= right.qps + 1e-9) return costAtSegment(left, right, qps);
+  }
+  return sorted.at(-1).cost;
+}
+
+function lowerCostEnvelope(groups, minQps, maxQps) {
+  const breakpoints = [minQps, maxQps];
+  groups.forEach((group) => {
+    group.rows.forEach((row) => {
+      if (row.qps > minQps + 1e-9 && row.qps < maxQps - 1e-9) breakpoints.push(row.qps);
+    });
+  });
+  lineCrossovers(groups).forEach((point) => {
+    if (point.qps > minQps + 1e-9 && point.qps < maxQps - 1e-9) breakpoints.push(point.qps);
+  });
+  const qpsPoints = [...new Set(breakpoints.map((value) => Number(value.toFixed(6))))]
+    .sort((a, b) => a - b);
+  const segments = [];
+  for (let i = 0; i < qpsPoints.length - 1; i += 1) {
+    const startQps = qpsPoints[i];
+    const endQps = qpsPoints[i + 1];
+    if (endQps - startQps < 1e-6) continue;
+    const midQps = (startQps + endQps) / 2;
+    const candidates = groups
+      .map((group) => ({ group, cost: costAtQpsBounded(group.rows, midQps) }))
+      .filter((item) => item.cost !== null);
+    if (!candidates.length) continue;
+    candidates.sort((a, b) => a.cost - b.cost || a.group.product.localeCompare(b.group.product));
+    const best = candidates[0].group;
+    const startCost = costAtQpsBounded(best.rows, startQps);
+    const endCost = costAtQpsBounded(best.rows, endQps);
+    if (startCost === null || endCost === null) continue;
+    const previous = segments.at(-1);
+    if (previous?.product === best.product && Math.abs(previous.endCost - startCost) < 1e-6) {
+      previous.endQps = endQps;
+      previous.endCost = endCost;
+    } else {
+      segments.push({
+        product: best.product,
+        startQps,
+        endQps,
+        startCost,
+        endCost,
+      });
+    }
+  }
+  return segments;
 }
 
 function extrapolatedCostAtQps(rows, qps, mode, multiplier, scenarioId, writeMode) {
@@ -1195,19 +1302,11 @@ function renderCost() {
     ? Math.max(560, Math.min(1000, availableWidth - 126))
     : Math.max(680, Math.min(1160, availableWidth - 220));
   const plotHeight = isCostEmbed ? 320 : 360;
-  const absoluteMaxQps = Math.max(1, ...points.map((point) => point.qps), ...[...cutoffs.values()].map((point) => point.qps));
-  const zoomKey = costZoomKey(scenarioId, period);
-  const rawZoom = currentCostZoom(scenarioId, period);
-  const qpsSpan = Math.max(1, Math.min(absoluteMaxQps, rawZoom.qps || defaultCostQpsMax(scenarioId)));
-  const maxQpsMin = Math.max(0, absoluteMaxQps - qpsSpan);
-  const minQps = Math.max(0, Math.min(rawZoom.qpsMin || 0, maxQpsMin));
-  const maxQps = minQps + qpsSpan;
-  const zoom = {
-    qpsMin: minQps,
-    qps: qpsSpan,
-    cost: Math.max(1, rawZoom.cost || defaultCostYMax(period)),
-  };
-  state.costZoom[zoomKey] = zoom;
+  const minQps = 0;
+  const maxQps = Math.max(1, readPositiveInput("cost-qps-max-limit") || defaultCostQpsMax(scenarioId));
+  const qpsSpan = maxQps - minQps;
+  const costMin = 0;
+  const maxCost = Math.max(1, readPositiveInput("cost-max-limit") || defaultCostYMax(period));
   const productGroups = [...groupBy(points, (point) => point.product).entries()]
     .map(([product, rows]) => {
       const cutoff = cutoffs.get(product);
@@ -1218,9 +1317,14 @@ function renderCost() {
       };
     })
     .sort((a, b) => a.product.localeCompare(b.product));
-  const crossovers = lineCrossovers(productGroups);
+  const activeProductGroups = productGroups.filter((group) => !state.costHiddenProducts.has(group.product));
+  const drawGroups = activeProductGroups.map((group) => ({
+    ...group,
+    rows: costDrawRows(group.rows, mode, multiplier, scenarioId, writeMode),
+  }));
+  const crossovers = lineCrossovers(drawGroups);
   const visibleCrossovers = crossovers.filter((point) => point.qps >= minQps && point.qps <= maxQps);
-  const visibleCutoffs = productGroups
+  const visibleCutoffs = activeProductGroups
     .filter((group) => group.cutoff?.qps >= minQps && group.cutoff.qps <= maxQps)
     .map((group) => ({
       product: group.product,
@@ -1229,25 +1333,26 @@ function renderCost() {
       cost: extrapolatedCostAtQps(group.rows, group.cutoff.qps, mode, multiplier, scenarioId, writeMode),
     }));
   const visibleCosts = points
+    .filter((point) => !state.costHiddenProducts.has(point.product))
     .filter((point) => point.qps >= minQps && point.qps <= maxQps)
     .map((point) => point.cost)
     .concat(visibleCrossovers.map((point) => point.cost));
-  productGroups.forEach((group) => {
+  activeProductGroups.forEach((group) => {
     const startCost = costAtQps(group.rows, minQps);
     if (startCost !== null) visibleCosts.push(startCost);
     const boundaryCost = costAtQps(group.rows, maxQps);
     if (boundaryCost !== null) visibleCosts.push(boundaryCost);
   });
-  const maxCost = zoom.cost;
+  const costSpan = Math.max(1e-9, maxCost - costMin);
   const xTicks = rangeTicks(minQps, maxQps);
-  const yTicks = boundedTicks(maxCost);
+  const yTicks = rangeTicks(costMin, maxCost);
   const xPx = (qps) => ((qps - minQps) / qpsSpan) * plotWidth;
-  const yPx = (cost) => plotHeight - (cost / maxCost) * plotHeight;
-  const lines = productGroups.map((group) => {
+  const yPx = (cost) => plotHeight - ((cost - costMin) / costSpan) * plotHeight;
+  syncCostLimitControls();
+  const bestEnvelope = state.costShowBest ? lowerCostEnvelope(drawGroups, minQps, maxQps) : [];
+  const lines = activeProductGroups.map((group) => {
     const color = productColor(group.product);
-    const drawRows = group.rows.length
-      ? [{ ...group.rows[0], qps: 0, cost: zeroQpsCost(group.rows[0], mode, multiplier, scenarioId, writeMode) }, ...group.rows]
-      : [];
+    const drawRows = costDrawRows(group.rows, mode, multiplier, scenarioId, writeMode);
     const segments = drawRows.slice(0, -1).map((point, index) => {
       const next = drawRows[index + 1];
       if (next.qps < minQps || point.qps > maxQps) return "";
@@ -1272,6 +1377,21 @@ function renderCost() {
         <span class="cost-line-hit" data-motion-key="hit|${escapeHtml(motionKey)}" ${data} style="left:${x1}px;top:${y1 - 9}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
     }).join("");
     return `<div class="cost-line-series">${segments}</div>`;
+  }).join("");
+  const bestLine = bestEnvelope.map((segment) => {
+    const x1 = xPx(segment.startQps);
+    const y1 = yPx(segment.startCost);
+    const x2 = xPx(segment.endQps);
+    const y2 = yPx(segment.endCost);
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const length = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    if (length < 1) return "";
+    const key = `best|${segment.product}|${segment.startQps}|${segment.endQps}`;
+    const data = `data-product="Best choice: ${escapeHtml(segment.product)}" data-qps-start="${segment.startQps}" data-qps-end="${segment.endQps}" data-cost-start="${segment.startCost}" data-cost-end="${segment.endCost}" data-write-add="0" data-unit="${unit}"`;
+    return `<span class="cost-line-segment cost-best-segment" data-motion-key="segment|${escapeHtml(key)}" style="left:${x1}px;top:${y1 - 2}px;width:${length}px;transform:rotate(${angle}deg);"></span>
+      <span class="cost-line-hit cost-best-hit" data-motion-key="hit|${escapeHtml(key)}" ${data} style="left:${x1}px;top:${y1 - 11}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
   }).join("");
   const crossoverMarkers = visibleCrossovers.map((point) => {
     const x = xPx(point.qps);
@@ -1305,8 +1425,10 @@ function renderCost() {
     return `<span class="cost-y-grid" style="top:${y}px"></span><span class="cost-y-label" style="top:${y}px">${fmtCurrency(tick)}</span>`;
   }).join("");
   const legend = productGroups.map((group) => {
-    return `<span><i style="background:${productColor(group.product)}"></i>${escapeHtml(group.product)}</span>`;
+    const hidden = state.costHiddenProducts.has(group.product);
+    return `<button type="button" class="cost-legend-item ${hidden ? "off" : ""}" data-cost-toggle="product" data-product="${escapeHtml(group.product)}" aria-pressed="${hidden ? "false" : "true"}"><i style="background:${productColor(group.product)}"></i>${escapeHtml(group.product)}</button>`;
   }).join("")
+    + `<button type="button" class="cost-legend-item cost-best-legend ${state.costShowBest ? "" : "off"}" data-cost-toggle="best" aria-pressed="${state.costShowBest ? "true" : "false"}"><i></i>best choice line</button>`
     + (visibleCutoffs.length ? `<span class="cost-cutoff-legend"><i></i> measured QPS cutoff</span>` : "")
     + (visibleCrossovers.length ? `<span class="cost-crossover-legend"><i></i> crossover points</span>` : "");
   const modeLabel = state.cost.modes.find((item) => item.id === mode)?.label || mode;
@@ -1314,14 +1436,15 @@ function renderCost() {
   const modeSuffix = mode === "full" ? ` · ${writeLabel}` : "";
   $("cost-chart").innerHTML = `
     <div class="card cost-line-card">
-      <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel}${modeSuffix} · lower is better · drag horizontally · scroll to zoom · double-click reset</span></div>
+      <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel}${modeSuffix} · lower is better</span></div>
       <div class="cost-legend">${legend}</div>
       <div class="cost-html-chart" role="img" aria-label="Cost versus QPS line chart">
         <div class="cost-y-title">Cost (USD / ${unit})</div>
-        <div class="cost-plot" style="--cost-plot-width:${plotWidth}px;--cost-plot-height:${plotHeight}px;">
+        <div class="cost-plot ${state.costShowBest ? "best-active" : ""}" style="--cost-plot-width:${plotWidth}px;--cost-plot-height:${plotHeight}px;">
           ${xGrid}
           ${yGrid}
           ${lines}
+          ${bestLine ? `<div class="cost-best-line-series">${bestLine}</div>` : ""}
           ${cutoffMarkers}
           ${crossoverMarkers}
           <div class="cost-line-tooltip" id="cost-line-tooltip"></div>
@@ -1329,13 +1452,8 @@ function renderCost() {
         <div class="cost-x-title">${escapeHtml(scenario.x_label)}</div>
       </div>
     </div>`;
-  $("cost-sources").innerHTML = state.cost.sources.map((source) => {
-    if (source.url) return `<span>${source.name}: <a href="${source.url}">${source.url}</a></span>`;
-    return `<span>${source.name}: <code>${source.path}</code></span>`;
-  }).join("<br>");
   animateCostMotion(previousMotion);
   attachCostLineHover();
-  attachCostZoom({ scenarioId, period, absoluteMaxQps, minQps, qpsSpan, plotWidth });
 }
 
 function attachCostLineHover() {
@@ -1363,59 +1481,6 @@ function attachCostLineHover() {
       tooltip.classList.add("show");
     });
     segment.addEventListener("mouseleave", () => tooltip.classList.remove("show"));
-  });
-}
-
-function attachCostZoom({ scenarioId, period, absoluteMaxQps, minQps, qpsSpan, plotWidth }) {
-  const plot = document.querySelector(".cost-plot");
-  if (!plot) return;
-  plot.addEventListener("wheel", (event) => {
-    event.preventDefault();
-    const key = costZoomKey(scenarioId, period);
-    const zoom = currentCostZoom(scenarioId, period);
-    const factor = event.deltaY < 0 ? 0.84 : 1.19;
-    const next = { ...zoom };
-    if (!event.shiftKey) {
-      const oldSpan = Math.max(1, zoom.qps || qpsSpan);
-      const pointerRatio = Math.max(0, Math.min(1, event.offsetX / Math.max(1, plotWidth)));
-      const focusQps = (zoom.qpsMin || 0) + oldSpan * pointerRatio;
-      next.qps = Math.max(1, Math.min(absoluteMaxQps, oldSpan * factor));
-      next.qpsMin = Math.max(0, Math.min(absoluteMaxQps - next.qps, focusQps - next.qps * pointerRatio));
-    }
-    if (!event.altKey) next.cost = Math.max(1, zoom.cost * factor);
-    state.costZoom[key] = next;
-    renderCost();
-  }, { passive: false });
-  plot.addEventListener("dblclick", () => {
-    resetCostZoom(scenarioId, period);
-    renderCost();
-  });
-  plot.addEventListener("pointerdown", (event) => {
-    if (event.button !== 0) return;
-    event.preventDefault();
-    const dragStart = { x: event.clientX, minQps };
-    plot.classList.add("dragging");
-    const move = (moveEvent) => {
-      const key = costZoomKey(scenarioId, period);
-      const dx = moveEvent.clientX - dragStart.x;
-      const qpsDelta = (dx / Math.max(1, plotWidth)) * qpsSpan;
-      const maxMin = Math.max(0, absoluteMaxQps - qpsSpan);
-      state.costZoom[key] = {
-        ...currentCostZoom(scenarioId, period),
-        qpsMin: Math.max(0, Math.min(maxMin, dragStart.minQps - qpsDelta)),
-        qps: qpsSpan,
-      };
-      renderCost();
-    };
-    const stop = () => {
-      document.removeEventListener("pointermove", move);
-      document.removeEventListener("pointerup", stop);
-      document.removeEventListener("pointercancel", stop);
-      document.querySelector(".cost-plot")?.classList.remove("dragging");
-    };
-    document.addEventListener("pointermove", move);
-    document.addEventListener("pointerup", stop);
-    document.addEventListener("pointercancel", stop);
   });
 }
 

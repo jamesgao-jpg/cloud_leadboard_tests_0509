@@ -9,7 +9,7 @@
       document.documentElement.classList.add("embed-cost");
     }
   </script>
-  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-cost-drag">
+  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-legend-toggles">
 </head>
 <body>
   <div class="page">
@@ -93,9 +93,16 @@
             <button type="button" data-period="monthly">Monthly</button>
           </div>
         </div>
+        <label class="f-select">
+          <span>QPS max</span>
+          <input id="cost-qps-max-limit" class="f-input" type="number" min="1" step="0.1" inputmode="decimal" aria-label="Maximum QPS">
+        </label>
+        <label class="f-select">
+          <span>Cost max</span>
+          <input id="cost-max-limit" class="f-input" type="number" min="1" step="0.1" inputmode="decimal" aria-label="Maximum cost">
+        </label>
       </div>
       <div id="cost-chart" class="cost-chart"></div>
-      <div id="cost-sources" class="source-list"></div>
     </section>
 
     <section class="section" id="insert-section">
@@ -106,14 +113,14 @@
         </div>
       </div>
       <div class="filters">
-        <span class="f-pill"><span class="k">Dataset</span><span class="v">LAION 100M</span></span>
-        <button id="insert-cost-toggle" class="switch-button" type="button" role="switch" aria-checked="false" aria-label="Toggle insert write cost display">
+        <button id="insert-cost-toggle" class="switch-button" type="button" role="switch" aria-checked="true" aria-label="Toggle insert write cost display">
           <strong>Display cost</strong>
           <span class="switch-segments" aria-hidden="true">
             <span class="switch-off">Off</span>
             <span class="switch-on">On</span>
           </span>
         </button>
+        <span class="f-pill"><span class="k">Dataset</span><span class="v">LAION 100M</span></span>
         <div class="dot-legend">
           <span><i style="background:var(--insert);"></i>inserted</span>
           <span><i style="background:var(--searchable);"></i>searchable</span>
@@ -127,7 +134,6 @@
       <div class="section-head">
         <div>
           <h2>CloudPayloadSearchCase & MultitenantSearchCase</h2>
-          <p id="search-note"></p>
           <p class="case-explain">This case measures query behavior after cloud data is already loaded and searchable. It compares peak concurrent QPS, P99 latency, and recall under different response payloads, scalar-filter selectivity, and tenancy modes so the chart shows both throughput and result quality instead of rewarding speed alone.</p>
         </div>
       </div>
@@ -135,8 +141,8 @@
         <label class="f-select">
           <span>Mode</span>
           <select id="search-mode">
-            <option value="single">Single tenant payload search</option>
-            <option value="multi">Multitenant search</option>
+            <option value="single">Single tenant LAION 100M</option>
+            <option value="multi">Multitenant Cohere 10M</option>
           </select>
         </label>
         <label class="f-select">
@@ -147,6 +153,14 @@
           <span>Payload</span>
           <select id="payload-select"></select>
         </label>
+        <label class="f-select search-latency-select">
+          <span>Latency</span>
+          <select id="search-latency-mode">
+            <option value="concurrent">Max concurrency P99 latency</option>
+            <option value="serial">Serial P99 latency</option>
+          </select>
+        </label>
+        <span id="search-topk-badge" class="topk-badge">topK = 100</span>
       </div>
       <div id="search-grid" class="metric-grid"></div>
       <div id="search-chart" class="chart-host"></div>
@@ -159,7 +173,7 @@
           <p class="case-explain">This case measures the first query after an idle cold period against the warmed steady-state query path. It isolates cold-start behavior from normal search throughput so the chart shows whether a product has a material warm-up penalty after inactivity.</p>
           <div class="case-notes">
             <strong>Notes:</strong>
-            <p>Zilliz Cloud Capacity is not measured in this cold/warm comparison because the product does not distinguish cold and warm latency by design, so including it here would make the case misleading.</p>
+            <p>Zilliz Cloud Capacity 12CU is included with the updated measured cold/warm latency artifacts.</p>
           </div>
         </div>
       </div>
@@ -177,6 +191,6 @@
     </main>
   </div>
 
-  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-cost-drag"></script>
+  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-legend-toggles"></script>
 </body>
 </html>
