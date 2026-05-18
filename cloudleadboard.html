@@ -9,7 +9,7 @@
       document.documentElement.classList.add("embed-cost");
     }
   </script>
-  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-insert-cost-toggle">
+  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-cold-capacity-note">
 </head>
 <body>
   <div class="page">
@@ -164,7 +164,11 @@
       <div class="section-head">
         <div>
           <h2>CloudColdLatency Case</h2>
-          <p>Idle-state first query vs. steady-state query, without mixing in other variables.</p>
+          <p class="case-explain">This case measures the first query after an idle cold period against the warmed steady-state query path. It isolates cold-start behavior from normal search throughput so the chart shows whether a product has a material warm-up penalty after inactivity.</p>
+          <div class="case-notes">
+            <strong>Notes:</strong>
+            <p>Zilliz Cloud Capacity is not measured in this cold/warm comparison because the product does not distinguish cold and warm latency by design, so including it here would make the case misleading.</p>
+          </div>
         </div>
       </div>
       <div class="filters">
@@ -181,6 +185,6 @@
     </main>
   </div>
 
-  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-insert-cost-toggle"></script>
+  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-cold-capacity-note"></script>
 </body>
 </html>

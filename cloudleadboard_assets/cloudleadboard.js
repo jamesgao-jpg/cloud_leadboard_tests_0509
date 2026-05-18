@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-insert-cost-toggle";
+const BUILD_ID = "20260518-cold-capacity-note";
 
 const state = {
   raw: [],
@@ -662,6 +662,7 @@ function renderCold() {
   const selectedFilter = $("cold-filter-select").value;
   const valid = canonicalColdRows(state.cold
     .filter((row) => row.filterKey === selectedFilter)
+    .filter((row) => !row.productLabel.includes("Zilliz Cloud Capacity"))
     .filter((row) => row.first > 0 && row.warmP99 > 0));
   if (!valid.length) {
     $("cold-chart").innerHTML = `<p class="muted">No non-zero cold latency rows for this mode yet.</p>`;
