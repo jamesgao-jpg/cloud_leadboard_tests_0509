@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-search-motion-scale";
+const BUILD_ID = "20260518-cost-drag";
 
 const state = {
   raw: [],
@@ -57,6 +57,7 @@ const state = {
   multi: [],
   cold: [],
   cost: null,
+  costZoom: {},
   insertBackpressure: "off",
   insertShowCost: false,
 };
@@ -777,10 +778,9 @@ function fmtMs(seconds) {
 }
 
 function renderCostControls() {
-  const costYMax = $("cost-y-max");
-  if (costYMax && !costYMax.value) costYMax.value = defaultCostYMax(selectedCostPeriod());
+  resetCostZoom();
   $("cost-scenario").addEventListener("change", () => {
-    $("cost-qps-max").value = defaultCostQpsMax($("cost-scenario").value);
+    resetCostZoom();
     renderCost();
   });
   $("cost-mode").addEventListener("change", () => {
@@ -794,11 +794,9 @@ function renderCostControls() {
     $("cost-period-toggle").querySelectorAll("button").forEach((item) => {
       item.classList.toggle("active", item === button);
     });
-    if (costYMax) costYMax.value = defaultCostYMax(button.dataset.period);
+    resetCostZoom();
     renderCost();
   });
-  $("cost-qps-max").addEventListener("input", renderCost);
-  $("cost-y-max")?.addEventListener("input", renderCost);
   window.addEventListener("resize", renderCost);
   updateCostWriteControl();
 }
@@ -809,6 +807,24 @@ function selectedCostPeriod() {
 
 function defaultCostYMax(period) {
   return period === "monthly" ? 10000 : 20;
+}
+
+function costZoomKey(scenarioId = $("cost-scenario").value, period = selectedCostPeriod()) {
+  return `${scenarioId}|${period}`;
+}
+
+function resetCostZoom(scenarioId = $("cost-scenario").value, period = selectedCostPeriod()) {
+  state.costZoom[costZoomKey(scenarioId, period)] = {
+    qpsMin: 0,
+    qps: defaultCostQpsMax(scenarioId),
+    cost: defaultCostYMax(period),
+  };
+}
+
+function currentCostZoom(scenarioId, period) {
+  const key = costZoomKey(scenarioId, period);
+  if (!state.costZoom[key]) resetCostZoom(scenarioId, period);
+  return state.costZoom[key];
 }
 
 function costPeriodMultiplier(period) {
@@ -860,6 +876,22 @@ function boundedTicks(maxValue, targetIntervals = 5) {
   const last = ticks.at(-1);
   if (last === undefined || Math.abs(last - maxValue) > 1e-9) ticks.push(maxValue);
   return ticks;
+}
+
+function rangeTicks(minValue, maxValue, targetIntervals = 5) {
+  const min = Math.max(0, minValue || 0);
+  const max = Math.max(min + 1, maxValue || min + 1);
+  const step = niceStep((max - min) / targetIntervals);
+  const ticks = [];
+  const first = Math.ceil(min / step) * step;
+  if (min > 0) ticks.push(min);
+  for (let value = first; value <= max + step * 0.25; value += step) {
+    if (value >= min - 1e-9 && value <= max + 1e-9 && !ticks.some((tick) => Math.abs(tick - value) < 1e-9)) {
+      ticks.push(value);
+    }
+  }
+  if (!ticks.some((tick) => Math.abs(tick - max) < 1e-9)) ticks.push(max);
+  return ticks.sort((a, b) => a - b);
 }
 
 function pricingMonthHours() {
@@ -1164,8 +1196,18 @@ function renderCost() {
     : Math.max(680, Math.min(1160, availableWidth - 220));
   const plotHeight = isCostEmbed ? 320 : 360;
   const absoluteMaxQps = Math.max(1, ...points.map((point) => point.qps), ...[...cutoffs.values()].map((point) => point.qps));
-  const requestedMaxQps = Number($("cost-qps-max").value) || defaultCostQpsMax(scenarioId);
-  const maxQps = Math.min(Math.max(1, requestedMaxQps), absoluteMaxQps);
+  const zoomKey = costZoomKey(scenarioId, period);
+  const rawZoom = currentCostZoom(scenarioId, period);
+  const qpsSpan = Math.max(1, Math.min(absoluteMaxQps, rawZoom.qps || defaultCostQpsMax(scenarioId)));
+  const maxQpsMin = Math.max(0, absoluteMaxQps - qpsSpan);
+  const minQps = Math.max(0, Math.min(rawZoom.qpsMin || 0, maxQpsMin));
+  const maxQps = minQps + qpsSpan;
+  const zoom = {
+    qpsMin: minQps,
+    qps: qpsSpan,
+    cost: Math.max(1, rawZoom.cost || defaultCostYMax(period)),
+  };
+  state.costZoom[zoomKey] = zoom;
   const productGroups = [...groupBy(points, (point) => point.product).entries()]
     .map(([product, rows]) => {
       const cutoff = cutoffs.get(product);
@@ -1177,9 +1219,9 @@ function renderCost() {
     })
     .sort((a, b) => a.product.localeCompare(b.product));
   const crossovers = lineCrossovers(productGroups);
-  const visibleCrossovers = crossovers.filter((point) => point.qps <= maxQps);
+  const visibleCrossovers = crossovers.filter((point) => point.qps >= minQps && point.qps <= maxQps);
   const visibleCutoffs = productGroups
-    .filter((group) => group.cutoff?.qps > 0 && group.cutoff.qps < maxQps)
+    .filter((group) => group.cutoff?.qps >= minQps && group.cutoff.qps <= maxQps)
     .map((group) => ({
       product: group.product,
       color: productColor(group.product),
@@ -1187,19 +1229,19 @@ function renderCost() {
       cost: extrapolatedCostAtQps(group.rows, group.cutoff.qps, mode, multiplier, scenarioId, writeMode),
     }));
   const visibleCosts = points
-    .filter((point) => point.qps <= maxQps)
+    .filter((point) => point.qps >= minQps && point.qps <= maxQps)
     .map((point) => point.cost)
     .concat(visibleCrossovers.map((point) => point.cost));
   productGroups.forEach((group) => {
+    const startCost = costAtQps(group.rows, minQps);
+    if (startCost !== null) visibleCosts.push(startCost);
     const boundaryCost = costAtQps(group.rows, maxQps);
     if (boundaryCost !== null) visibleCosts.push(boundaryCost);
   });
-  const requestedMaxCost = Number($("cost-y-max")?.value || 0);
-  const autoMaxCost = niceTicks(Math.max(1, ...visibleCosts) * 1.16).at(-1);
-  const maxCost = requestedMaxCost > 0 ? requestedMaxCost : autoMaxCost;
-  const xTicks = niceTicks(maxQps);
+  const maxCost = zoom.cost;
+  const xTicks = rangeTicks(minQps, maxQps);
   const yTicks = boundedTicks(maxCost);
-  const xPx = (qps) => (qps / maxQps) * plotWidth;
+  const xPx = (qps) => ((qps - minQps) / qpsSpan) * plotWidth;
   const yPx = (cost) => plotHeight - (cost / maxCost) * plotHeight;
   const lines = productGroups.map((group) => {
     const color = productColor(group.product);
@@ -1208,12 +1250,15 @@ function renderCost() {
       : [];
     const segments = drawRows.slice(0, -1).map((point, index) => {
       const next = drawRows[index + 1];
-      if (point.qps > maxQps) return "";
+      if (next.qps < minQps || point.qps > maxQps) return "";
+      const start = point.qps < minQps
+        ? { ...point, qps: minQps, cost: costAtSegment(point, next, minQps) }
+        : point;
       const end = next.qps > maxQps
         ? { ...next, qps: maxQps, cost: costAtSegment(point, next, maxQps) }
         : next;
-      const x1 = xPx(point.qps);
-      const y1 = yPx(point.cost);
+      const x1 = xPx(start.qps);
+      const y1 = yPx(start.cost);
       const x2 = xPx(end.qps);
       const y2 = yPx(end.cost);
       const dx = x2 - x1;
@@ -1221,8 +1266,8 @@ function renderCost() {
       const length = Math.sqrt(dx * dx + dy * dy);
       const angle = Math.atan2(dy, dx) * 180 / Math.PI;
       if (length < 1) return "";
-      const motionKey = `${group.product}|${point.qps}|${end.qps}`;
-      const data = `data-product="${escapeHtml(group.product)}" data-qps-start="${point.qps}" data-qps-end="${end.qps}" data-cost-start="${point.cost}" data-cost-end="${end.cost}" data-write-add="${point.writeAdd || 0}" data-unit="${unit}"`;
+      const motionKey = `${group.product}|${point.qps}|${next.qps}`;
+      const data = `data-product="${escapeHtml(group.product)}" data-qps-start="${start.qps}" data-qps-end="${end.qps}" data-cost-start="${start.cost}" data-cost-end="${end.cost}" data-write-add="${point.writeAdd || 0}" data-unit="${unit}"`;
       return `<span class="cost-line-segment" data-motion-key="segment|${escapeHtml(motionKey)}" style="left:${x1}px;top:${y1 - 1.5}px;width:${length}px;transform:rotate(${angle}deg);background:${color};"></span>
         <span class="cost-line-hit" data-motion-key="hit|${escapeHtml(motionKey)}" ${data} style="left:${x1}px;top:${y1 - 9}px;width:${length}px;transform:rotate(${angle}deg);"></span>`;
     }).join("");
@@ -1269,7 +1314,7 @@ function renderCost() {
   const modeSuffix = mode === "full" ? ` · ${writeLabel}` : "";
   $("cost-chart").innerHTML = `
     <div class="card cost-line-card">
-      <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel}${modeSuffix} · lower is better</span></div>
+      <div class="card-head"><strong>Cost vs. QPS Pareto</strong><span>${modeLabel}${modeSuffix} · lower is better · drag horizontally · scroll to zoom · double-click reset</span></div>
       <div class="cost-legend">${legend}</div>
       <div class="cost-html-chart" role="img" aria-label="Cost versus QPS line chart">
         <div class="cost-y-title">Cost (USD / ${unit})</div>
@@ -1290,6 +1335,7 @@ function renderCost() {
   }).join("<br>");
   animateCostMotion(previousMotion);
   attachCostLineHover();
+  attachCostZoom({ scenarioId, period, absoluteMaxQps, minQps, qpsSpan, plotWidth });
 }
 
 function attachCostLineHover() {
@@ -1317,6 +1363,59 @@ function attachCostLineHover() {
       tooltip.classList.add("show");
     });
     segment.addEventListener("mouseleave", () => tooltip.classList.remove("show"));
+  });
+}
+
+function attachCostZoom({ scenarioId, period, absoluteMaxQps, minQps, qpsSpan, plotWidth }) {
+  const plot = document.querySelector(".cost-plot");
+  if (!plot) return;
+  plot.addEventListener("wheel", (event) => {
+    event.preventDefault();
+    const key = costZoomKey(scenarioId, period);
+    const zoom = currentCostZoom(scenarioId, period);
+    const factor = event.deltaY < 0 ? 0.84 : 1.19;
+    const next = { ...zoom };
+    if (!event.shiftKey) {
+      const oldSpan = Math.max(1, zoom.qps || qpsSpan);
+      const pointerRatio = Math.max(0, Math.min(1, event.offsetX / Math.max(1, plotWidth)));
+      const focusQps = (zoom.qpsMin || 0) + oldSpan * pointerRatio;
+      next.qps = Math.max(1, Math.min(absoluteMaxQps, oldSpan * factor));
+      next.qpsMin = Math.max(0, Math.min(absoluteMaxQps - next.qps, focusQps - next.qps * pointerRatio));
+    }
+    if (!event.altKey) next.cost = Math.max(1, zoom.cost * factor);
+    state.costZoom[key] = next;
+    renderCost();
+  }, { passive: false });
+  plot.addEventListener("dblclick", () => {
+    resetCostZoom(scenarioId, period);
+    renderCost();
+  });
+  plot.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    const dragStart = { x: event.clientX, minQps };
+    plot.classList.add("dragging");
+    const move = (moveEvent) => {
+      const key = costZoomKey(scenarioId, period);
+      const dx = moveEvent.clientX - dragStart.x;
+      const qpsDelta = (dx / Math.max(1, plotWidth)) * qpsSpan;
+      const maxMin = Math.max(0, absoluteMaxQps - qpsSpan);
+      state.costZoom[key] = {
+        ...currentCostZoom(scenarioId, period),
+        qpsMin: Math.max(0, Math.min(maxMin, dragStart.minQps - qpsDelta)),
+        qps: qpsSpan,
+      };
+      renderCost();
+    };
+    const stop = () => {
+      document.removeEventListener("pointermove", move);
+      document.removeEventListener("pointerup", stop);
+      document.removeEventListener("pointercancel", stop);
+      document.querySelector(".cost-plot")?.classList.remove("dragging");
+    };
+    document.addEventListener("pointermove", move);
+    document.addEventListener("pointerup", stop);
+    document.addEventListener("pointercancel", stop);
   });
 }
 

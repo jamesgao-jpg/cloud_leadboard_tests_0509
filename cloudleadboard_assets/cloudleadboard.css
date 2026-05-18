@@ -1515,6 +1515,12 @@ html.embed-cost .cost-html-chart {
   background: repeating-linear-gradient(to bottom, transparent 0, transparent 24.8%, #e5edf6 25%, transparent 25.2%),
     repeating-linear-gradient(to right, transparent 0, transparent 24.8%, #e5edf6 25%, transparent 25.2%),
     #fff;
+  cursor: grab;
+  touch-action: none;
+}
+
+.cost-plot.dragging {
+  cursor: grabbing;
 }
 
 .cost-line-series {

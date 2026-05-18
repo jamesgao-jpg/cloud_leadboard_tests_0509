@@ -9,7 +9,7 @@
       document.documentElement.classList.add("embed-cost");
     }
   </script>
-  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-search-motion-scale">
+  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-cost-drag">
 </head>
 <body>
   <div class="page">
@@ -93,14 +93,6 @@
             <button type="button" data-period="monthly">Monthly</button>
           </div>
         </div>
-        <label class="f-select">
-          <span>QPS range</span>
-          <input id="cost-qps-max" class="f-input" type="number" min="1" step="1" value="50">
-        </label>
-        <label class="f-select">
-          <span>Cost max</span>
-          <input id="cost-y-max" class="f-input" type="number" min="1" step="1" value="20">
-        </label>
       </div>
       <div id="cost-chart" class="cost-chart"></div>
       <div id="cost-sources" class="source-list"></div>
@@ -185,6 +177,6 @@
     </main>
   </div>
 
-  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-search-motion-scale"></script>
+  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-cost-drag"></script>
 </body>
 </html>
