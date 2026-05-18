@@ -1210,6 +1210,17 @@ tbody tr:hover {
   transform: translate(8px, -50%);
 }
 
+.search-motion {
+  transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    left 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-motion {
+    transition: none;
+  }
+}
+
 .search-recall {
   padding-right: 10px;
   text-align: right;
@@ -1221,7 +1232,7 @@ tbody tr:hover {
   min-width: 0;
   padding: 0 18px 0 12px;
   color: #000;
-  text-align: right;
+  text-align: left;
   font-size: 14px;
   font-weight: 600;
 }
@@ -1467,10 +1478,10 @@ html.embed-cost .cost-html-chart {
 
 .cost-html-chart {
   display: grid;
-  grid-template-columns: 96px max-content;
+  grid-template-columns: 96px minmax(0, 1fr);
   grid-template-rows: 360px 48px;
   gap: 0 22px;
-  overflow-x: auto;
+  overflow-x: hidden;
   margin-top: 12px;
   padding-top: 16px;
 }

@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-cost-y-defaults";
+const BUILD_ID = "20260518-search-motion-scale";
 
 const state = {
   raw: [],
@@ -563,6 +563,57 @@ function renderSearchControls() {
   populateSearchOptions();
 }
 
+function searchScaleRows() {
+  return [
+    ...combinedSearchRows(state.payload),
+    ...combinedSearchRows(state.multi),
+  ].filter((row) => row.payload !== "scalar_label");
+}
+
+function captureSearchMotion() {
+  const previous = new Map();
+  document.querySelectorAll("#search-chart [data-search-motion-key]").forEach((element) => {
+    previous.set(element.dataset.searchMotionKey, {
+      width: element.style.width,
+      left: element.style.left,
+      value: Number(element.dataset.searchValue),
+      valueType: element.dataset.searchValueType,
+    });
+  });
+  return previous;
+}
+
+function animateSearchMotion(previous) {
+  const duration = 420;
+  document.querySelectorAll("#search-chart [data-search-motion-key]").forEach((element) => {
+    const targetWidth = element.style.width;
+    const targetLeft = element.style.left;
+    const old = previous.get(element.dataset.searchMotionKey);
+    if (old?.width) element.style.width = old.width;
+    if (old?.left) element.style.left = old.left;
+    element.classList.add("search-motion");
+    requestAnimationFrame(() => {
+      element.style.width = targetWidth;
+      if (targetLeft) element.style.left = targetLeft;
+    });
+    const targetValue = Number(element.dataset.searchValue);
+    const valueType = element.dataset.searchValueType;
+    if (Number.isFinite(old?.value) && Number.isFinite(targetValue) && valueType) {
+      const start = performance.now();
+      const from = old.value;
+      const delta = targetValue - from;
+      const tick = (now) => {
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = from + delta * eased;
+        element.textContent = valueType === "latency" ? fmtSeconds(value) : fmtNumber(value, 1);
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+  });
+}
+
 function populateSearchOptions() {
   const mode = $("search-mode").value;
   const rows = availableSearchRows();
@@ -575,6 +626,7 @@ function populateSearchOptions() {
 }
 
 function renderSearch() {
+  const previousMotion = captureSearchMotion();
   const mode = $("search-mode").value;
   const showRecall = mode === "single";
   const filterKey = $("filter-select").value;
@@ -582,8 +634,9 @@ function renderSearch() {
   const rows = availableSearchRows()
     .filter((row) => row.filterKey === filterKey && row.payload === payload)
     .sort((a, b) => b.maxQps - a.maxQps);
-  const maxQps = Math.max(1, ...rows.map((r) => r.maxQps));
-  const maxP99 = Math.max(1, ...rows.map((r) => r.p99 || 0));
+  const scaleRows = searchScaleRows();
+  const maxQps = Math.max(1, ...scaleRows.map((r) => r.maxQps));
+  const maxP99 = Math.max(1, ...scaleRows.map((r) => r.p99 || 0));
   const bestZilliz = rows.find((r) => r.productLabel.includes("Zilliz"));
   const bestOverall = rows[0];
 
@@ -602,8 +655,9 @@ function renderSearch() {
     const quality = row.recall === null || row.recall === undefined
       ? `<span class="muted">recall n/a</span>`
       : `<span class="${row.recall >= 0.96 ? "quality-good" : "quality-bad"}">recall ${row.recall.toFixed(4)}</span>`;
-    const latencyWidth = ((row.p99 || 0) / maxP99) * 100;
-    const qpsWidth = (row.maxQps / maxQps) * 100;
+    const latencyWidth = Math.min(100, ((row.p99 || 0) / maxP99) * 100);
+    const qpsWidth = Math.min(100, (row.maxQps / maxQps) * 100);
+    const rowKey = row.product;
     return `<div class="search-combined-row ${showRecall ? "" : "no-recall"} ${productClass(row.productLabel)}">
       <div class="bar-label">
         <span>${escapeHtml(row.productLabel)}</span>
@@ -611,13 +665,13 @@ function renderSearch() {
       </div>
       <div class="search-diverging-bars">
         <div class="diverge-side diverge-latency">
-          <span class="diverge-value">${fmtSeconds(row.p99)}</span>
-          <div class="diverge-fill-wrap"><div class="fill" style="width:${latencyWidth}%"></div></div>
+          <span class="diverge-value" data-search-motion-key="latency-value|${escapeHtml(rowKey)}" data-search-value="${row.p99 || 0}" data-search-value-type="latency">${fmtSeconds(row.p99)}</span>
+          <div class="diverge-fill-wrap"><div class="fill" data-search-motion-key="latency|${escapeHtml(rowKey)}" style="width:${latencyWidth}%"></div></div>
         </div>
         <div class="diverge-axis"></div>
         <div class="diverge-side diverge-qps">
-          <div class="diverge-fill-wrap"><div class="fill" style="width:${qpsWidth}%"></div></div>
-          <span class="diverge-value qps-value" style="left:min(${qpsWidth}%, calc(100% - 2px))">${fmtNumber(row.maxQps, 1)}</span>
+          <div class="diverge-fill-wrap"><div class="fill" data-search-motion-key="qps|${escapeHtml(rowKey)}" style="width:${qpsWidth}%"></div></div>
+          <span class="diverge-value qps-value" data-search-motion-key="qps-value|${escapeHtml(rowKey)}" data-search-value="${row.maxQps}" data-search-value-type="qps" style="left:min(${qpsWidth}%, calc(100% - 2px))">${fmtNumber(row.maxQps, 1)}</span>
         </div>
       </div>
       ${showRecall ? `<div class="search-recall">${quality}</div>` : ""}
@@ -632,11 +686,12 @@ function renderSearch() {
       </div>
       <div class="search-combined-head ${showRecall ? "" : "no-recall"}">
         <span>Product</span>
-        <span class="search-axis-head"><span>P99 Latency (ms)</span><span>QPS</span></span>
+        <span class="search-axis-head"><span>Concurrent P99 Latency</span><span>QPS</span></span>
         ${showRecall ? "<span>Recall</span>" : ""}
       </div>
       <div class="search-combined-body">${combinedRows}</div>
     </div>` : `<p class="muted">No rows for this selection.</p>`;
+  animateSearchMotion(previousMotion);
 }
 
 function renderColdControls() {

@@ -572,6 +572,13 @@
             exactly the distinction v2 needs to make: fast upload is useful, but readiness is what determines
             when new data can safely take traffic.
           </p>
+          <p>
+            Version 2 also adds a write-cost view to this case because ingestion is not just a stopwatch
+            problem. A product can look attractive on raw rows per second while still changing the cost of a
+            backfill, migration, or daily refresh. The leaderboard therefore lets readers compare readiness
+            timing with the estimated write spend, making cost a first-class part of the insert decision
+            instead of something reviewed after the benchmark.
+          </p>
           <figure class="metric-figure">
             <div class="metric-grid">
               <div>
@@ -617,7 +624,8 @@
             </div>
             <figcaption>
               Excerpt: turbopuffer leads raw batch ingest, while Zilliz Cloud reaches searchable and indexed
-              readiness sooner in this batch-10k run.
+              readiness sooner in this batch-10k run. The main leaderboard adds a write-cost toggle for the
+              same insertion rows so teams can judge readiness and ingest spend together.
             </figcaption>
           </figure>
         </section>
