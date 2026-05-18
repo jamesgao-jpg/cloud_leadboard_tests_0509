@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260517-pinned-cache-bust";
+const BUILD_ID = "20260518-cost-y-max";
 
 const state = {
   raw: [],
@@ -57,6 +57,7 @@ const state = {
   multi: [],
   cold: [],
   cost: null,
+  insertBackpressure: "off",
 };
 
 const $ = (id) => document.getElementById(id);
@@ -293,27 +294,79 @@ function renderInsertControls() {
   renderInsert();
 }
 
+function attachInsertBackpressureToggle() {
+  const toggle = $("insert-backpressure-toggle");
+  if (!toggle) return;
+  toggle.setAttribute("aria-checked", state.insertBackpressure === "on" ? "true" : "false");
+  toggle.addEventListener("click", () => {
+    state.insertBackpressure = state.insertBackpressure === "on" ? "off" : "on";
+    renderInsert();
+  });
+}
+
+function insertDisplayProduct(row) {
+  if (row.product === "turbopuffer_bp_on" || row.product === "turbopuffer_bp_off") return "Turbopuffer";
+  return row.productLabel;
+}
+
+function insertMotionKey(row, phase) {
+  const product = row.product === "turbopuffer_bp_on" || row.product === "turbopuffer_bp_off"
+    ? "turbopuffer"
+    : row.product;
+  return `${product}|${row.batchSize}|${phase}`;
+}
+
+function captureInsertMotion() {
+  const snapshot = new Map();
+  document.querySelectorAll("#insert-chart [data-insert-motion-key]").forEach((element) => {
+    snapshot.set(element.dataset.insertMotionKey, { width: element.style.width });
+  });
+  return snapshot;
+}
+
+function animateInsertMotion(previous) {
+  if (!previous?.size || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.querySelectorAll("#insert-chart [data-insert-motion-key]").forEach((element) => {
+    const from = previous.get(element.dataset.insertMotionKey);
+    if (!from?.width) return;
+    const to = element.style.width;
+    element.classList.add("insert-bar-motion");
+    element.style.transition = "none";
+    element.style.width = from.width;
+    element.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      element.style.transition = "";
+      element.style.width = to;
+    });
+  });
+}
+
 function renderInsert() {
+  const previousMotion = captureInsertMotion();
   const dataset = "LAION 100M";
   const productRank = (product) => {
     if (product.includes("Zilliz Cloud Capacity")) return 0;
     if (product.includes("Zilliz Cloud Tiered")) return 1;
-    if (product.includes("Turbopuffer Backpressure Off")) return 2;
-    if (product.includes("Turbopuffer Backpressure On")) return 3;
+    if (product.includes("Turbopuffer")) return 2;
     if (product.includes("Pinecone")) return 4;
     return 5;
   };
-  const complete = state.insert
+  const scaleRows = state.insert
     .filter((r) => r.dataset === dataset)
     .filter((r) => [r.insertSeconds, r.searchableSeconds, r.indexedSeconds].every((v) => typeof v === "number"));
+  const complete = scaleRows.filter((r) => {
+    if (r.product === "turbopuffer_bp_on") return state.insertBackpressure === "on";
+    if (r.product === "turbopuffer_bp_off") return state.insertBackpressure === "off";
+    return true;
+  });
   const totals = complete.map((r) => r.insertSeconds + r.searchableSeconds + r.indexedSeconds).sort((a, b) => a - b);
   const maxTotal = Math.max(1, ...totals);
   const phaseMax = {
-    insert: Math.max(1, ...complete.map((r) => r.insertSeconds)),
-    searchable: Math.max(1, ...complete.map((r) => r.searchableSeconds)),
-    indexed: Math.max(1, ...complete.map((r) => r.indexedSeconds)),
+    insert: Math.max(1, ...scaleRows.map((r) => r.insertSeconds)),
+    searchable: Math.max(1, ...scaleRows.map((r) => r.searchableSeconds)),
+    indexed: Math.max(1, ...scaleRows.map((r) => r.indexedSeconds)),
   };
-  const byProduct = groupBy(complete, (r) => r.productLabel);
+  const byProduct = groupBy(complete, insertDisplayProduct);
   if (!complete.length) {
     $("insert-chart").innerHTML = `<p class="muted">No complete timing rows for this selection.</p>`;
     return;
@@ -334,7 +387,7 @@ function renderInsert() {
         const width = Math.max(value > 0 ? 2 : 0, (value / max) * 100);
         return `<div class="insert-phase ${className}">
           <div class="insert-phase-track">
-            <span style="width:${width}%"></span>
+            <span data-insert-motion-key="${escapeHtml(insertMotionKey(row, label))}" style="width:${width}%"></span>
           </div>
           <strong>${fmtSeconds(value)}</strong>
         </div>`;
@@ -364,6 +417,13 @@ function renderInsert() {
     return `<div class="insert-product">
       <div class="insert-product-head">
         <strong>${escapeHtml(group.product)}</strong>
+        ${group.product === "Turbopuffer" ? `<button id="insert-backpressure-toggle" class="switch-button insert-backpressure-switch" type="button" role="switch" aria-checked="${state.insertBackpressure === "on" ? "true" : "false"}" aria-label="Toggle Turbopuffer backpressure">
+          <strong>Backpressure</strong>
+          <span class="switch-segments" aria-hidden="true">
+            <span class="switch-off">Off</span>
+            <span class="switch-on">On</span>
+          </span>
+        </button>` : ""}
       </div>
       ${rows}
     </div>`;
@@ -381,6 +441,8 @@ function renderInsert() {
       </div>
       <div class="insert-groups">${productCards}</div>
     </div>`;
+  attachInsertBackpressureToggle();
+  animateInsertMotion(previousMotion);
 }
 
 function combinedSearchRows(rows) {
@@ -600,6 +662,7 @@ function renderCostControls() {
     renderCost();
   });
   $("cost-qps-max").addEventListener("input", renderCost);
+  $("cost-y-max")?.addEventListener("input", renderCost);
   window.addEventListener("resize", renderCost);
   updateCostWriteControl();
 }
@@ -649,6 +712,13 @@ function niceTicks(maxValue, targetIntervals = 5) {
   const top = Math.ceil(safeMax / step) * step;
   const ticks = [];
   for (let value = 0; value <= top + step * 0.25; value += step) ticks.push(value);
+  return ticks;
+}
+
+function boundedTicks(maxValue, targetIntervals = 5) {
+  const ticks = niceTicks(maxValue, targetIntervals).filter((tick) => tick <= maxValue + 1e-9);
+  const last = ticks.at(-1);
+  if (last === undefined || Math.abs(last - maxValue) > 1e-9) ticks.push(maxValue);
   return ticks;
 }
 
@@ -981,11 +1051,13 @@ function renderCost() {
     const boundaryCost = costAtQps(group.rows, maxQps);
     if (boundaryCost !== null) visibleCosts.push(boundaryCost);
   });
-  const maxCost = niceTicks(Math.max(1, ...visibleCosts) * 1.16).at(-1);
+  const requestedMaxCost = Number($("cost-y-max")?.value || 0);
+  const autoMaxCost = niceTicks(Math.max(1, ...visibleCosts) * 1.16).at(-1);
+  const maxCost = requestedMaxCost > 0 ? requestedMaxCost : autoMaxCost;
   const xTicks = niceTicks(maxQps);
-  const yTicks = niceTicks(maxCost);
+  const yTicks = boundedTicks(maxCost);
   const xPx = (qps) => (qps / maxQps) * plotWidth;
-  const yPx = (cost) => Math.max(0, plotHeight - (cost / maxCost) * plotHeight);
+  const yPx = (cost) => plotHeight - (cost / maxCost) * plotHeight;
   const lines = productGroups.map((group) => {
     const color = productColor(group.product);
     const drawRows = group.rows.length
