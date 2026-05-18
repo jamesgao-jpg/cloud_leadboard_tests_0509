@@ -19,6 +19,7 @@
   --c-turbo-pinned: #9333ea;
   --c-pinecone: #db2777;
   --c-neutral: #475569;
+  --c-best-choice: #2563eb;
 }
 
 * { box-sizing: border-box; }
@@ -1535,7 +1536,7 @@ html.embed-cost .cost-html-chart {
 .cost-best-legend i {
   width: 30px;
   height: 4px;
-  background: #111827;
+  background: var(--c-best-choice);
 }
 
 .cost-best-legend.off i {
@@ -1676,8 +1677,8 @@ html.embed-cost .cost-html-chart {
 .cost-best-segment {
   z-index: 7;
   height: 4px;
-  background: #111827;
-  filter: drop-shadow(0 1px 1px rgba(15, 23, 42, 0.18));
+  background: var(--c-best-choice);
+  filter: drop-shadow(0 1px 1px rgba(37, 99, 235, 0.24));
 }
 
 .cost-best-hit {

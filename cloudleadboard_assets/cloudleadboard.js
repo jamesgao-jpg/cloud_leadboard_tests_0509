@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-cutoff-extension";
+const BUILD_ID = "20260518-best-blue";
 
 const state = {
   raw: [],
@@ -1383,7 +1383,7 @@ function renderCost() {
       reference ? `data-reference-only="true"` : "",
     ].filter(Boolean).join(" ");
     const background = reference
-      ? `background:repeating-linear-gradient(to right, ${color || "#111827"} 0 8px, transparent 8px 13px);`
+      ? `background:repeating-linear-gradient(to right, ${color || "#2563eb"} 0 8px, transparent 8px 13px);`
       : color ? `background:${color};` : "";
     const style = `left:${x1}px;top:${y1 - yOffset}px;width:${length}px;transform:rotate(${angle}deg);${background}`;
     return `<span class="cost-line-segment ${className} ${reference ? "reference-only" : ""}" data-motion-key="segment|${escapeHtml(key)}" style="${style}"></span>
