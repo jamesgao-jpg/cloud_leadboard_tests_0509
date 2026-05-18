@@ -690,7 +690,8 @@
             Zilliz Cloud Capacity 2CU is still the stronger Zilliz profile and stays much more usable than
             Tiered for vector payloads. Capacity reaches <strong>371 QPS</strong> on unfiltered vector
             returns and <strong>1,306 QPS</strong> on the highly selective integer-filter/vector excerpt,
-            while Tiered 1CU struggles badly on some vector-return rows. This case therefore gives
+            while the refreshed Tiered 1CU vector rows are materially stronger on selective filters but still
+            trail on heavier vector-return cases. This case therefore gives
             turbopuffer a fair win on namespace-shaped throughput, while also showing why a fixed-capacity
             Zilliz deployment remains relevant once cost, recall, and operational guarantees are layered in.
           </p>
@@ -714,19 +715,19 @@
                 </tr>
                 <tr>
                   <td>Int filter 99.9%, vector</td>
-                  <td>575</td>
+                  <td>625</td>
                   <td>1,307</td>
                   <td>3,835</td>
                 </tr>
                 <tr>
                   <td>Scalar label 1%, vector</td>
-                  <td>64</td>
+                  <td>152</td>
                   <td>588</td>
                   <td>1,767</td>
                 </tr>
                 <tr>
                   <td>Scalar label 50%, vector</td>
-                  <td>30</td>
+                  <td>29</td>
                   <td>317</td>
                   <td>1,760</td>
                 </tr>
