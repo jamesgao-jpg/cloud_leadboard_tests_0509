@@ -553,6 +553,10 @@ main {
   letter-spacing: 0.04em;
 }
 
+.insert-readiness-card.show-cost .insert-phase-head {
+  grid-template-columns: 160px repeat(3, minmax(120px, 1fr)) 130px 180px;
+}
+
 .insert-phase-head span:last-child {
   text-align: right;
 }
@@ -606,6 +610,10 @@ main {
   gap: 14px;
   align-items: center;
   min-height: 46px;
+}
+
+.insert-readiness-card.show-cost .insert-row {
+  grid-template-columns: 160px minmax(0, 1fr) 130px 180px;
 }
 
 .insert-label strong {
@@ -672,6 +680,41 @@ main {
 
 .insert-phase-track span.insert-bar-motion {
   transition: width 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.insert-cost {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: 8px;
+}
+
+.insert-cost-track {
+  height: 22px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f4f7fb;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.insert-cost-track span {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #fce7f3, var(--c-pinecone));
+}
+
+.insert-cost-track span.insert-bar-motion {
+  transition: width 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.insert-cost strong {
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .insert-phase strong {
@@ -1312,6 +1355,35 @@ tbody tr:hover {
   gap: 14px;
 }
 
+html.embed-cost,
+html.embed-cost body {
+  background: #fff;
+}
+
+html.embed-cost .page {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+html.embed-cost .topbar,
+html.embed-cost .hero,
+html.embed-cost main > .section:not(#cost-section) {
+  display: none;
+}
+
+html.embed-cost #cost-section {
+  margin: 0;
+  padding: 0;
+}
+
+html.embed-cost #cost-section .section-head,
+html.embed-cost #cost-section .filters,
+html.embed-cost #cost-chart,
+html.embed-cost #cost-sources {
+  max-width: none;
+}
+
 .cost-line-card {
   overflow: hidden;
 }
@@ -1803,6 +1875,14 @@ code {
 
   .insert-phase-grid {
     grid-template-columns: 1fr;
+  }
+
+  .insert-readiness-card.show-cost .insert-row {
+    grid-template-columns: 1fr;
+  }
+
+  .insert-cost {
+    max-width: 320px;
   }
 
   .insert-total {

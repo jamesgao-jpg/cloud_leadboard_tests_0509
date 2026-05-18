@@ -4,7 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cloud Vector Leaderboard</title>
-  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-cost-y-max">
+  <script>
+    if (new URLSearchParams(window.location.search).get("embed") === "cost") {
+      document.documentElement.classList.add("embed-cost");
+    }
+  </script>
+  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-insert-cost-toggle">
 </head>
 <body>
   <div class="page">
@@ -110,6 +115,13 @@
       </div>
       <div class="filters">
         <span class="f-pill"><span class="k">Dataset</span><span class="v">LAION 100M</span></span>
+        <button id="insert-cost-toggle" class="switch-button" type="button" role="switch" aria-checked="false" aria-label="Toggle insert write cost display">
+          <strong>Display cost</strong>
+          <span class="switch-segments" aria-hidden="true">
+            <span class="switch-off">Off</span>
+            <span class="switch-on">On</span>
+          </span>
+        </button>
         <div class="dot-legend">
           <span><i style="background:var(--insert);"></i>inserted</span>
           <span><i style="background:var(--searchable);"></i>searchable</span>
@@ -169,6 +181,6 @@
     </main>
   </div>
 
-  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-cost-y-max"></script>
+  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-insert-cost-toggle"></script>
 </body>
 </html>

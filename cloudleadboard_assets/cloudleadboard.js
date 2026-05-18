@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-cost-y-max";
+const BUILD_ID = "20260518-insert-cost-toggle";
 
 const state = {
   raw: [],
@@ -58,6 +58,7 @@ const state = {
   cold: [],
   cost: null,
   insertBackpressure: "off",
+  insertShowCost: false,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -291,6 +292,15 @@ async function loadAll() {
 }
 
 function renderInsertControls() {
+  const costToggle = $("insert-cost-toggle");
+  if (costToggle) {
+    costToggle.setAttribute("aria-checked", state.insertShowCost ? "true" : "false");
+    costToggle.addEventListener("click", () => {
+      state.insertShowCost = !state.insertShowCost;
+      costToggle.setAttribute("aria-checked", state.insertShowCost ? "true" : "false");
+      renderInsert();
+    });
+  }
   renderInsert();
 }
 
@@ -341,6 +351,63 @@ function animateInsertMotion(previous) {
   });
 }
 
+function insertScenarioShape() {
+  const scenario = state.cost?.pricing?.scenarios?.single || {};
+  const recordCount = Number(scenario.record_count || 0);
+  const vectorDataGb = Number(scenario.vector_data_gb || 0);
+  if (!recordCount || !vectorDataGb) return null;
+  return {
+    recordCount,
+    vectorDataGb,
+    bytesPerRecord: (vectorDataGb * 1e9) / recordCount,
+  };
+}
+
+function zillizInsertHourlyRate(row) {
+  const points = state.cost?.scenarios?.single?.points || [];
+  const lowerProduct = row.product.toLowerCase();
+  const target = lowerProduct.includes("tiered") ? "tiered" : "capacity";
+  const point = points.find((item) => {
+    const lower = item.product.toLowerCase();
+    return lower.includes("zilliz") && lower.includes(target);
+  });
+  return Number(point?.search_cost_hr || 0);
+}
+
+function insertWriteCost(row) {
+  const totalSeconds = row.insertSeconds + row.searchableSeconds + row.indexedSeconds;
+  const family = productCostFamily(row.productLabel);
+  if (family === "zilliz") return (totalSeconds / 3600) * zillizInsertHourlyRate(row);
+
+  const shape = insertScenarioShape();
+  if (!shape) return 0;
+  const batchSize = Math.max(1, Number(row.batchSize || 1));
+  const recordCount = Number(row.insertedCount || shape.recordCount);
+  const requestBytes = batchSize * shape.bytesPerRecord;
+  const requests = recordCount / batchSize;
+
+  if (family === "pinecone") {
+    const pricing = state.cost?.pricing?.pinecone || {};
+    const unitBytes = pricing.write_unit_bytes || 1024;
+    const pricePerMillion = pricing.write_usd_per_million_wu || 0;
+    const totalWu = Math.ceil((recordCount * shape.bytesPerRecord) / unitBytes);
+    return (totalWu / 1e6) * pricePerMillion;
+  }
+
+  if (family === "turbopuffer") {
+    const pricing = state.cost?.pricing?.turbopuffer || {};
+    const minKb = pricing.min_write_kb_per_request || 10;
+    const pricePerGb = pricing.write_usd_per_logical_gb || 0;
+    const requestKb = requestBytes / 1000;
+    const billableKb = Math.max(requestKb, minKb);
+    const discount = turbopufferBatchDiscount(billableKb);
+    const billableGb = (requests * billableKb * (1 - discount)) / 1e6;
+    return billableGb * pricePerGb;
+  }
+
+  return 0;
+}
+
 function renderInsert() {
   const previousMotion = captureInsertMotion();
   const dataset = "LAION 100M";
@@ -361,6 +428,8 @@ function renderInsert() {
   });
   const totals = complete.map((r) => r.insertSeconds + r.searchableSeconds + r.indexedSeconds).sort((a, b) => a - b);
   const maxTotal = Math.max(1, ...totals);
+  const costByPath = new Map(scaleRows.map((row) => [row.path, insertWriteCost(row)]));
+  const maxInsertCost = Math.max(1, ...costByPath.values());
   const phaseMax = {
     insert: Math.max(1, ...scaleRows.map((r) => r.insertSeconds)),
     searchable: Math.max(1, ...scaleRows.map((r) => r.searchableSeconds)),
@@ -379,6 +448,8 @@ function renderInsert() {
   const productCards = products.map((group) => {
     const rows = group.rows.map((row) => {
       const total = row.insertSeconds + row.searchableSeconds + row.indexedSeconds;
+      const writeCost = costByPath.get(row.path) || 0;
+      const costWidth = Math.max(writeCost > 0 ? 2 : 0, (writeCost / maxInsertCost) * 100);
       const phaseBars = [
         ["inserted", "seg-insert", row.insertSeconds, phaseMax.insert],
         ["searchable", "seg-searchable", row.searchableSeconds, phaseMax.searchable],
@@ -405,6 +476,7 @@ function renderInsert() {
               <tr><td>Become searchable</td><td>${fmtSeconds(row.searchableSeconds)}</td></tr>
               <tr><td>Fully indexed</td><td>${fmtSeconds(row.indexedSeconds)}</td></tr>
               <tr class="tot"><td>Total readiness</td><td>${fmtSeconds(total)}</td></tr>
+              ${state.insertShowCost ? `<tr><td>Write cost</td><td>${fmtCurrency(writeCost)}</td></tr>` : ""}
               <tr><td>Rows/s</td><td>${fmtNumber(row.rowsPerSecond, 0)}</td></tr>
             </table>
           </div>
@@ -412,6 +484,10 @@ function renderInsert() {
         <div class="insert-total">
           <strong>${fmtSeconds(total)}</strong>
         </div>
+        ${state.insertShowCost ? `<div class="insert-cost">
+          <div class="insert-cost-track"><span data-insert-motion-key="${escapeHtml(insertMotionKey(row, "cost"))}" style="width:${costWidth}%;background:${productColor(row.productLabel)};"></span></div>
+          <strong>${fmtCurrency(writeCost)}</strong>
+        </div>` : ""}
       </div>`;
     }).join("");
     return `<div class="insert-product">
@@ -430,14 +506,15 @@ function renderInsert() {
   }).join("");
 
   $("insert-chart").innerHTML = `
-    <div class="card insert-readiness-card">
-      <div class="card-head"><strong>Readiness Window</strong><span>three independently scaled phases · max total ${fmtSeconds(maxTotal)}</span></div>
+    <div class="card insert-readiness-card ${state.insertShowCost ? "show-cost" : ""}">
+      <div class="card-head"><strong>Readiness Window</strong><span>three independently scaled phases · max total ${fmtSeconds(maxTotal)}${state.insertShowCost ? ` · max write cost ${fmtCurrency(maxInsertCost)}` : ""}</span></div>
       <div class="insert-phase-head">
         <span></span>
         <span>Inserted</span>
         <span>Searchable</span>
         <span>Indexed</span>
         <span>Total</span>
+        ${state.insertShowCost ? "<span>Write Cost</span>" : ""}
       </div>
       <div class="insert-groups">${productCards}</div>
     </div>`;
