@@ -9,7 +9,7 @@
       document.documentElement.classList.add("embed-cost");
     }
   </script>
-  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-best-blue">
+  <link rel="stylesheet" href="cloudleadboard_assets/cloudleadboard.css?v=20260518-search-cost">
 </head>
 <body>
   <div class="page">
@@ -160,6 +160,13 @@
             <option value="serial">Serial P99 latency</option>
           </select>
         </label>
+        <button id="search-cost-toggle" class="switch-button" type="button" role="switch" aria-checked="true" aria-label="Toggle search cost display">
+          <strong>Display cost</strong>
+          <span class="switch-segments" aria-hidden="true">
+            <span class="switch-off">Off</span>
+            <span class="switch-on">On</span>
+          </span>
+        </button>
         <span id="search-topk-badge" class="topk-badge">topK = 100</span>
       </div>
       <div id="search-grid" class="metric-grid"></div>
@@ -191,6 +198,6 @@
     </main>
   </div>
 
-  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-best-blue"></script>
+  <script src="cloudleadboard_assets/cloudleadboard.js?v=20260518-search-cost"></script>
 </body>
 </html>

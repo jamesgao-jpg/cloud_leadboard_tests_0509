@@ -1127,6 +1127,16 @@ tbody tr:hover {
   grid-template-columns: 300px minmax(520px, 1fr);
 }
 
+.search-combined-head.show-cost,
+.search-combined-row.show-cost {
+  grid-template-columns: 300px minmax(520px, 1fr) 132px 154px;
+}
+
+.search-combined-head.no-recall.show-cost,
+.search-combined-row.no-recall.show-cost {
+  grid-template-columns: 300px minmax(520px, 1fr) 154px;
+}
+
 .search-axis-head {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1258,6 +1268,42 @@ tbody tr:hover {
   display: inline-block;
   min-width: 96px;
   text-align: left;
+}
+
+.search-cost {
+  display: grid;
+  grid-template-columns: minmax(48px, 1fr) 58px;
+  align-items: center;
+  gap: 10px;
+  padding-right: 10px;
+}
+
+.search-cost-track {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e6ebf2;
+}
+
+.search-cost-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.search-cost strong {
+  color: #111827;
+  text-align: right;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.search-cost small {
+  margin-left: 1px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .bar-label {

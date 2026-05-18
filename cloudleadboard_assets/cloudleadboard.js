@@ -48,7 +48,7 @@ const DEFAULTS = {
 };
 
 const MONTHLY_HOURS = 730;
-const BUILD_ID = "20260518-best-blue";
+const BUILD_ID = "20260518-search-cost";
 
 const state = {
   raw: [],
@@ -61,6 +61,7 @@ const state = {
   costHiddenProducts: new Set(),
   insertBackpressure: "off",
   insertShowCost: true,
+  searchShowCost: true,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -573,6 +574,15 @@ function renderSearchControls() {
   $("filter-select").addEventListener("change", renderSearch);
   $("payload-select").addEventListener("change", renderSearch);
   $("search-latency-mode").addEventListener("change", renderSearch);
+  const costToggle = $("search-cost-toggle");
+  if (costToggle) {
+    costToggle.setAttribute("aria-checked", state.searchShowCost ? "true" : "false");
+    costToggle.addEventListener("click", () => {
+      state.searchShowCost = !state.searchShowCost;
+      costToggle.setAttribute("aria-checked", state.searchShowCost ? "true" : "false");
+      renderSearch();
+    });
+  }
   populateSearchOptions();
 }
 
@@ -586,6 +596,29 @@ function searchScaleRows() {
 function selectedSearchLatency(row, mode = $("search-latency-mode")?.value || "concurrent") {
   if (mode === "serial" && row.serialP99 > 0) return row.serialP99;
   return row.concurrentP99 || row.p99 || 0;
+}
+
+function searchCostProduct(row, mode) {
+  const scenario = state.cost?.scenarios?.[mode];
+  if (!scenario?.points?.length) return null;
+  const direct = scenario.points.find((point) => costProductSearchAliases(point.product, mode).includes(row.product));
+  if (direct) return direct.product;
+  const lower = row.product.toLowerCase();
+  if (mode === "single" && lower.includes("turbopuffer")) return "Turbopuffer";
+  return null;
+}
+
+function searchQueryCost(row, mode) {
+  const scenario = state.cost?.scenarios?.[mode];
+  const product = searchCostProduct(row, mode);
+  if (!scenario || !product || !(row.maxQps > 0)) return 0;
+  const rows = scenario.points
+    .filter((point) => point.product === product)
+    .map((point) => ({
+      ...point,
+      cost: pointCost(point, "search", 1, mode, "constant"),
+    }));
+  return extrapolatedCostAtQps(rows, row.maxQps, "search", 1, mode, "constant") || 0;
 }
 
 function captureSearchMotion() {
@@ -658,6 +691,8 @@ function renderSearch() {
   const scaleRows = searchScaleRows();
   const maxQps = Math.max(1, ...scaleRows.map((r) => r.maxQps));
   const maxP99 = Math.max(1, ...scaleRows.map((r) => selectedSearchLatency(r, latencyMode)));
+  const searchCosts = new Map(rows.map((row) => [row.product, searchQueryCost(row, mode)]));
+  const maxSearchCost = Math.max(1, ...[...searchCosts.values()]);
   const bestZilliz = rows.find((r) => r.productLabel.includes("Zilliz"));
   const bestOverall = rows[0];
 
@@ -675,8 +710,10 @@ function renderSearch() {
     const latency = selectedSearchLatency(row, latencyMode);
     const latencyWidth = Math.min(100, (latency / maxP99) * 100);
     const qpsWidth = Math.min(100, (row.maxQps / maxQps) * 100);
+    const queryCost = searchCosts.get(row.product) || 0;
+    const costWidth = Math.max(4, Math.min(100, (queryCost / maxSearchCost) * 100));
     const rowKey = row.product;
-    return `<div class="search-combined-row ${showRecall ? "" : "no-recall"} ${productClass(row.productLabel)}">
+    return `<div class="search-combined-row ${showRecall ? "" : "no-recall"} ${state.searchShowCost ? "show-cost" : ""} ${productClass(row.productLabel)}">
       <div class="bar-label">
         <span>${escapeHtml(row.productLabel)}</span>
         <small>${fmtNumber(row.payloadBytes, 0)} bytes/query</small>
@@ -693,6 +730,10 @@ function renderSearch() {
         </div>
       </div>
       ${showRecall ? `<div class="search-recall">${quality}</div>` : ""}
+      ${state.searchShowCost ? `<div class="search-cost" title="Query cost at measured max QPS ${fmtNumber(row.maxQps, 1)}">
+        <div class="search-cost-track"><span style="width:${costWidth}%;background:${productColor(row.productLabel)};"></span></div>
+        <strong>${fmtCurrency(queryCost)}<small>/hr</small></strong>
+      </div>` : ""}
     </div>`;
   }).join("");
 
@@ -700,11 +741,13 @@ function renderSearch() {
     <div class="search-combined-card">
       <div class="search-chart-head">
         <strong>Vector Search Latency and QPS</strong>
+        ${state.searchShowCost ? `<span>max query cost ${fmtCurrency(maxSearchCost)}/hr</span>` : ""}
       </div>
-      <div class="search-combined-head ${showRecall ? "" : "no-recall"}">
+      <div class="search-combined-head ${showRecall ? "" : "no-recall"} ${state.searchShowCost ? "show-cost" : ""}">
         <span>Product</span>
         <span class="search-axis-head"><span>${latencyMode === "serial" ? "Serial P99 Latency" : "Max Concurrency P99 Latency"}</span><span>Max Concurrency QPS</span></span>
         ${showRecall ? "<span>recall@10</span>" : ""}
+        ${state.searchShowCost ? "<span>Query cost @ max QPS</span>" : ""}
       </div>
       <div class="search-combined-body">${combinedRows}</div>
     </div>` : `<p class="muted">No rows for this selection.</p>`;
