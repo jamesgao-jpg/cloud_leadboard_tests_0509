@@ -88,6 +88,8 @@ deploy_leaderboard() {
 
 deploy_release() {
   rsync "${rsync_common[@]}" cloudleadboard_release_report.html "$host:$dest/cloudleadboard_release_report.html"
+  ssh "$host" "mkdir -p '$dest/cloud_leadboard_tests_0509'"
+  rsync "${rsync_common[@]}" cloudleadboard_release_report.html "$host:$dest/cloud_leadboard_tests_0509/cloudleadboard_release_report.html"
 }
 
 deploy_assets
