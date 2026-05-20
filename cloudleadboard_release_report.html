@@ -667,14 +667,19 @@
             Ingestion is also a cost event. A system that accepts rows quickly can still be expensive for a
             backfill, migration, or recurring refresh. Zilliz Cloud Tiered and Capacity use a dedicated
             cluster model, so insert cost is mainly the hourly cluster charge spread across the full load.
-            That makes the one-time write bill look thin once the cluster is kept busy.
+            In the LAION 100M cost model, that puts the one-time load around <strong>$20.31</strong> for
+            Zilliz Tiered 8CU and <strong>$20.87</strong> for Zilliz Capacity 16CU, with Capacity 12CU
+            projected at no more than <strong>$18.60</strong>.
           </p>
           <p>
             turbopuffer and Pinecone are closer to a pay-as-you-go serverless model. That is convenient and
             can be less expensive for customers with light or infrequent search demand, but writing and
-            maintaining a decently sized namespace still carries a material usage-metered cost. The point of
-            this view is to show both sides: serverless lowers operational friction, while dedicated capacity
-            can become much more cost efficient when the workload is large enough and predictable enough.
+            maintaining a decently sized namespace still carries a material usage-metered cost. In this
+            excerpt, turbopuffer's batch-10k backpressure-off bulk load is modeled at <strong>$308.00</strong>,
+            while Pinecone Serverless is estimated at about <strong>$1.18K</strong> from write-unit pricing.
+            The point of this view is to show both sides: serverless lowers operational friction, while
+            dedicated capacity can become much more cost efficient when the workload is large enough and
+            predictable enough.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">One-Time Full Load Cost <span>LAION 100M · write-side cost model</span></div>
@@ -684,7 +689,6 @@
                   <th>Product / mode</th>
                   <th>Ready time</th>
                   <th>Write cost</th>
-                  <th>Read as</th>
                 </tr>
               </thead>
               <tbody>
@@ -692,39 +696,29 @@
                   <td>Zilliz Capacity 12CU</td>
                   <td>≤6.25h projected</td>
                   <td>≤$18.60</td>
-                  <td>Projected from Capacity CU pricing</td>
                 </tr>
                 <tr>
                   <td>Zilliz Tiered 8CU</td>
                   <td>6h 49m measured</td>
                   <td>$20.31</td>
-                  <td>Measured bulk write</td>
                 </tr>
                 <tr>
                   <td>Zilliz Capacity 16CU</td>
                   <td>5h 15m measured</td>
                   <td>$20.87</td>
-                  <td>Measured bulk write</td>
                 </tr>
                 <tr>
-                  <td>turbopuffer batch 50k, bp-off</td>
+                  <td>turbopuffer batch 10k, bp-off</td>
                   <td>8h 7m measured</td>
                   <td>$308.00</td>
-                  <td>Measured run plus write-GB pricing</td>
                 </tr>
                 <tr>
                   <td>Pinecone Serverless</td>
                   <td>72.38h at batch 10k</td>
                   <td>≈$1.18K</td>
-                  <td>Estimated from write-unit pricing</td>
                 </tr>
               </tbody>
             </table>
-            <figcaption>
-              Excerpt: the insert case should not be read as a single winner-take-all stopwatch. turbopuffer
-              has a real bulk-ingest advantage at large batches, but Zilliz Cloud combines faster readiness
-              with a much lower one-time write bill in the LAION 100M cost view.
-            </figcaption>
           </figure>
         </section>
 
