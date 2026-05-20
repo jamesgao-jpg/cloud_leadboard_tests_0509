@@ -600,8 +600,17 @@
             the searchable-and-indexed path in about <strong>3.1-3.2 hours</strong> across the tested batch
             sizes, while Zilliz Tiered 4CU stays around <strong>4.2-4.3 hours</strong>. turbopuffer improves
             sharply as batch size grows, but its fastest ingest mode still lands at <strong>8.16 hours</strong>
-            in the batch-10k run. Pinecone Serverless is included now as a baseline from the ready data; in
-            these insert runs it trails both on throughput and total ready time.
+            in the batch-10k run.
+          </p>
+          <p>
+            Pinecone Serverless is included now as a baseline from the ready data. Its insert rate is much
+            lower in this excerpt: <strong>249 rows/s</strong> at batch 1k, <strong>389 rows/s</strong> at
+            batch 5k, and <strong>384 rows/s</strong> at batch 10k, which stretches total ready time to
+            roughly <strong>72-112 hours</strong>. One notable detail is that once Pinecone accepts the rows,
+            the additional searchable and indexed wait is effectively <strong>zero</strong> in these runs.
+            A reasonable interpretation is that Pinecone may be intentionally limiting write intake while a
+            more complex serverless indexing path builds and optimizes work under the hood. That makes it a
+            different tradeoff from Zilliz and turbopuffer rather than just a slower line in the table.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">Batch Size Excerpt <span>LAION 100M · rows/s and time until fully ready</span></div>
@@ -656,9 +665,16 @@
           <h4>Cost changes the insert decision</h4>
           <p>
             Ingestion is also a cost event. A system that accepts rows quickly can still be expensive for a
-            backfill, migration, or recurring refresh. The cost excerpt makes the Zilliz tradeoff easier to
-            see: the full-load write cost is modeled as CU time, while turbopuffer and Pinecone include
-            usage-metered write charges.
+            backfill, migration, or recurring refresh. Zilliz Cloud Tiered and Capacity use a dedicated
+            cluster model, so insert cost is mainly the hourly cluster charge spread across the full load.
+            That makes the one-time write bill look thin once the cluster is kept busy.
+          </p>
+          <p>
+            turbopuffer and Pinecone are closer to a pay-as-you-go serverless model. That is convenient and
+            can be less expensive for customers with light or infrequent search demand, but writing and
+            maintaining a decently sized namespace still carries a material usage-metered cost. The point of
+            this view is to show both sides: serverless lowers operational friction, while dedicated capacity
+            can become much more cost efficient when the workload is large enough and predictable enough.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">One-Time Full Load Cost <span>LAION 100M · write-side cost model</span></div>
