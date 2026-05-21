@@ -591,36 +591,22 @@
           </p>
           <h4>Batch size changes two different numbers</h4>
           <p>
-            On LAION 100M, larger batches show turbopuffer's best ingest strength clearly. With backpressure
-            disabled, it reaches <strong>14.3K rows/s</strong> at batch 5k and <strong>15.8K rows/s</strong>
-            at batch 10k, ahead of the Zilliz rows on raw acceptance rate. That is useful for teams optimizing
-            a one-way upload path.
+            Larger batches show turbopuffer's raw ingest strength: with backpressure disabled, it reaches
+            <strong>14.3K rows/s</strong> at batch 5k and <strong>15.8K rows/s</strong> at batch 10k.
           </p>
           <p>
-            The ready-time view is the more production-oriented signal. Zilliz Cloud Capacity 12CU finishes
-            the searchable-and-indexed path in about <strong>3.1-3.2 hours</strong> across the tested batch
-            sizes, while Zilliz Tiered 4CU stays around <strong>4.2-4.3 hours</strong>. turbopuffer improves
-            sharply as batch size grows, but its fastest ingest mode still lands at <strong>8.16 hours</strong>
-            in the batch-10k run.
+            Ready time changes the readout. Zilliz Capacity 12CU reaches searchable-and-indexed in about
+            <strong>3.1-3.2 hours</strong>, Tiered 4CU in <strong>4.2-4.3 hours</strong>, while
+            turbopuffer's fastest batch-10k path lands at <strong>8.16 hours</strong>.
           </p>
           <p>
-            Pinecone Serverless is included now as a baseline from the ready data. Its insert rate is much
-            lower in this excerpt: <strong>249 rows/s</strong> at batch 1k, <strong>389 rows/s</strong> at
-            batch 5k, and <strong>384 rows/s</strong> at batch 10k, which stretches total ready time to
-            roughly <strong>72-112 hours</strong>. One notable detail is that once Pinecone accepts the rows,
-            the additional searchable and indexed wait is effectively <strong>zero</strong> in these runs.
-            A reasonable interpretation is that Pinecone may be intentionally limiting write intake while a
-            more complex serverless indexing path builds and optimizes work under the hood. That makes it a
-            different tradeoff from Zilliz and turbopuffer rather than just a slower line in the table.
+            Pinecone is the slower bulk-intake baseline in this excerpt, with ready time around
+            <strong>72-112 hours</strong>. Once accepted, though, its extra searchable/indexed wait is
+            effectively <strong>zero</strong> in these runs.
           </p>
           <p>
-            The business read is straightforward. Zilliz is the cleaner fit when fresh embeddings must become
-            searchable quickly, such as a RAG knowledge-base rebuild, marketplace catalog refresh, security
-            corpus reindex, or daily multimodal content ingestion job. turbopuffer is attractive when the
-            priority is getting a very large batch accepted quickly and the application can tolerate a longer
-            ready window, for example offline backfills, archival namespaces, or preproduction data staging.
-            Pinecone's model fits teams that value serverless operations and slower, steady ingestion over
-            aggressive bulk refresh, especially when the AI application has modest update volume.
+            The product read is simple: Zilliz fits fresh-data workflows, turbopuffer fits large accepted
+            backfills with a longer ready window, and Pinecone fits lower-volume serverless ingestion.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">Batch Size Excerpt <span>LAION 100M · rows/s and time until fully ready</span></div>
@@ -674,29 +660,19 @@
           </figure>
           <h4>Cost changes the insert decision</h4>
           <p>
-            Ingestion is also a cost event. A system that accepts rows quickly can still be expensive for a
-            backfill, migration, or recurring refresh. Zilliz Cloud Tiered and Capacity use a dedicated
-            cluster model, so insert cost is mainly the hourly cluster charge spread across the full load.
-            In the LAION 100M cost model, that puts the one-time load around <strong>$20.31</strong> for
-            Zilliz Tiered 8CU and <strong>$20.87</strong> for Zilliz Capacity 16CU, with Capacity 12CU
-            projected at no more than <strong>$18.60</strong>.
+            Ingestion is also a cost event. In the LAION 100M model, dedicated Zilliz capacity keeps the
+            one-time full-load cost around <strong>$18-21</strong> because the write work is spread over
+            CU-hours.
           </p>
           <p>
-            turbopuffer and Pinecone are closer to a pay-as-you-go serverless model. That is convenient and
-            can be less expensive for customers with light or infrequent search demand, but writing and
-            maintaining a decently sized namespace still carries a material usage-metered cost. In this
-            excerpt, turbopuffer's batch-10k backpressure-off bulk load is modeled at <strong>$308.00</strong>,
-            while Pinecone Serverless is estimated at about <strong>$1.18K</strong> from write-unit pricing.
-            The point of this view is to show both sides: serverless lowers operational friction, while
-            dedicated capacity can become much more cost efficient when the workload is large enough and
-            predictable enough.
+            Serverless write models meter usage directly. Here, turbopuffer batch-10k bp-off is modeled at
+            <strong>$308</strong>, while Pinecone is about <strong>$1.18K</strong>. Serverless lowers
+            operational friction, but not every large write path is cheaper.
           </p>
           <p>
-            For buyers, this mostly separates always-on AI systems from occasional-use systems. A production
-            RAG service, recommendation index, or agent-memory platform that refreshes data frequently benefits
-            from spreading write work over dedicated Zilliz capacity. Serverless products remain appealing
-            when traffic is spiky, teams want less capacity planning, or the namespace is queried rarely, but
-            the write bill needs to be reviewed before assuming serverless is cheaper end to end.
+            For buyers, the split is recurring production refresh versus occasional or spiky use. Frequent
+            RAG, catalog, or agent-memory refreshes benefit from dedicated capacity; lighter workloads may
+            still prefer serverless operations.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">One-Time Full Load Cost <span>LAION 100M · write-side cost model</span></div>
@@ -743,53 +719,39 @@
           <h3>CloudPayloadSearchCase &amp; MultitenantSearchCase: search after data is ready</h3>
           <h4>What this case measures</h4>
           <p>
-            The leaderboard now treats search as one combined decision surface, just like the app does.
-            CloudPayloadSearchCase asks how a loaded single-tenant LAION 100M index behaves when the response
-            body changes from IDs to metadata or raw vectors. CloudMultitenantSearchCase asks the same search
-            question after switching to SaaS-shaped traffic: Cohere 10M split across <strong>1,000 tenants</strong>,
-            with each query routed to a tenant space.
+            The leaderboard now treats search as one combined decision surface. Payload search tests
+            single-tenant LAION 100M with IDs, metadata, or vector payloads; multitenant search tests Cohere
+            10M split across <strong>1,000 tenants</strong>.
           </p>
           <h4>Design logic</h4>
           <p>
-            Both cases use the same readout: max concurrent QPS, p99 latency, payload shape, and, where
-            available, recall. The dashboard exposes them through a single mode selector: single-tenant
-            LAION 100M or multitenant Cohere 10M. That matters because production search is not one number.
-            A product can look strong on broad unfiltered retrieval, then change position when the response
-            includes vectors, when filters become selective, or when traffic is fragmented across many small
-            tenant namespaces.
+            Both modes use the same readout: max concurrent QPS, p99 latency, payload shape, and recall
+            where available. This keeps the comparison consistent when response size, filters, or tenant
+            routing change the workload.
           </p>
           <h4>What we found</h4>
           <p>
-            In single-tenant LAION 100M payload search, turbopuffer has the clearest raw-throughput result
-            on broad unfiltered retrieval. It stays around <strong>395-400 QPS</strong> for IDs-only or
-            scalar-label responses and reaches <strong>382.2 QPS</strong> when returning vectors. Zilliz
-            Capacity 12CU is more balanced across quality and payload shape: <strong>376.0 QPS</strong> on
-            IDs-only, <strong>379.5 QPS</strong> on scalar-label payloads, <strong>229.4 QPS</strong> on
-            vectors, and stronger unfiltered recall at <strong>0.9723</strong>.
+            In single-tenant LAION 100M, turbopuffer leads broad unfiltered retrieval at about
+            <strong>395-400 QPS</strong> and still reaches <strong>382.2 QPS</strong> with vector payloads.
+            Zilliz Capacity 12CU is close on IDs/scalars and has stronger unfiltered recall at
+            <strong>0.9723</strong>.
           </p>
           <p>
-            Filters can flip the single-tenant story. At the <strong>99.9%</strong> integer-filter/vector
-            point, Zilliz Tiered 4CU reaches <strong>955.7 QPS</strong> and Zilliz Capacity 12CU reaches
-            <strong>933.0 QPS</strong>, while turbopuffer unpinned falls to <strong>45.1 QPS</strong> with
-            roughly <strong>7s p99</strong>. That is the production-RAG lesson: permission checks, user
-            memory filters, catalog constraints, and business metadata can matter as much as raw vector
-            search.
+            Selective filters flip the story. At the <strong>99.9%</strong> integer-filter/vector point,
+            Zilliz Tiered 4CU reaches <strong>955.7 QPS</strong> and Capacity 12CU reaches
+            <strong>933.0 QPS</strong>; turbopuffer unpinned drops to <strong>45.1 QPS</strong> with about
+            <strong>7s p99</strong>.
           </p>
           <p>
-            In the multitenant mode, turbopuffer gets its strongest search story. Tenant-aligned namespaces
-            reach <strong>3,855 QPS</strong> on unfiltered IDs-only search and <strong>3,835 QPS</strong>
-            on the 99.9% integer-filter/vector row. Zilliz Capacity 2CU remains the stronger Zilliz profile
-            for this mode, with <strong>889 QPS</strong> on unfiltered IDs-only, <strong>371 QPS</strong>
-            on unfiltered vector payloads, and <strong>1,307 QPS</strong> on the selective integer-filter
-            vector excerpt. Pinecone Serverless is included as a detached low-ops reference rather than a
+            In multitenant mode, turbopuffer is strongest: <strong>3,855 QPS</strong> on unfiltered IDs-only
+            and <strong>3,835 QPS</strong> on the selective integer-filter/vector row. Zilliz Capacity 2CU
+            remains the stronger Zilliz profile; Pinecone is a detached low-ops reference rather than a
             normalized high-concurrency comparison.
           </p>
           <p>
-            The combined product read is workload-shaped. turbopuffer fits broad unfiltered retrieval and
-            many lightweight tenants especially well. Zilliz fits filtered, permissioned, higher-governance,
-            or heavier-tenant deployments where recall, predictable capacity, and stable latency matter.
-            Pinecone remains a serverless baseline for teams prioritizing operational simplicity, but the
-            current high-throughput search findings are mainly a Zilliz-versus-turbopuffer tradeoff.
+            The product read is workload-shaped: turbopuffer fits broad retrieval and many lightweight
+            tenants; Zilliz fits filtered, permissioned, heavier-tenant, or recall-sensitive deployments.
+            Pinecone remains the low-ops serverless baseline.
           </p>
           <h4>Measured excerpts</h4>
           <figure class="metric-figure">
@@ -943,30 +905,21 @@
           <h3>CloudColdLatencyCase: the first query after idle</h3>
           <h4>What this case measures</h4>
           <p>
-            This case isolates the latency a user sees when a search path wakes up after idle time. It uses
-            LAION 100M, topK 100, and ids-only responses, then compares a cold serial pass against the same
-            query shape after the system is warm. The case matters because many AI features are not hit
-            continuously: a user opens an internal knowledge assistant, a long-tail workspace wakes up, or an
-            agent retrieves context after sitting idle.
+            This case isolates first-query latency after idle. It uses LAION 100M, topK 100, and ids-only
+            responses, then compares a cold serial pass with the same query shape after warmup.
           </p>
           <h4>What we found</h4>
           <p>
-            Zilliz Capacity 12CU has the cleanest accepted cold profile in this excerpt. The first request
-            after idle has a small visible penalty, but the cold tail remains close to the warm tail. That is
-            the easiest story to explain for interactive AI features where the user is waiting on the answer.
+            Zilliz Capacity 12CU has the cleanest accepted cold profile: first request and tail latency stay
+            close to the warm path, which is the cleanest story for interactive AI features.
           </p>
           <p>
-            turbopuffer needs to be split into two operating modes. The default unpinned path shows a cold
-            miss large enough to affect the user experience, so it fits background retrieval or less
-            interactive agent work better than first-token-sensitive flows. The pinned two-replica run
-            changes the result materially: it makes turbopuffer a credible latency-sensitive option, but that
-            should be presented as a distinct mode with a different cost and capacity posture.
+            turbopuffer needs two reads. Unpinned has a visible cold miss; pinned two-replica mode removes
+            most of that penalty, but with a different cost and capacity posture.
           </p>
           <p>
-            Pinecone Serverless is useful as a low-ops baseline, but its signal is different: the cold and
-            warm tails are similar, yet both sit around the one-second range in this setup. Zilliz Tiered 4CU
-            remains in the chart for transparency, but the row is marked for rebench because the cold tail is
-            much higher than the warm path.
+            Pinecone is useful as a low-ops baseline: cold and warm tails are similar, but both are around
+            one second. Zilliz Tiered 4CU stays in the chart for transparency and should be rebenched.
           </p>
           <h4>Measured excerpt</h4>
           <figure class="metric-figure">
@@ -1025,9 +978,8 @@
             </figcaption>
           </figure>
           <p>
-            The chart below mirrors the main CloudLeadboard cold-latency view: warm p99 next to first cold
-            query, then the first-cold-to-warm-first ratio. It uses the same unfiltered manifest rows as the
-            dashboard rather than a separate p99-only chart.
+            The chart below mirrors the main CloudLeadboard cold-latency view using the same unfiltered
+            manifest rows.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">Warm P99 / First Cold Query <span>ms, lower is better</span></div>
@@ -1104,53 +1056,35 @@
         <h3>Cost is modeled against achievable QPS, not shown as a detached price sheet</h3>
         <h4>What this view measures</h4>
         <p>
-          The Pareto cost board turns the benchmark into a buying surface. Instead of asking readers to
-          compare raw QPS tables against pricing pages by hand, it estimates the cost of serving different
-          target QPS levels and marks the products that are Pareto-optimal under the benchmark's latency,
-          recall, payload, readiness, and measured-throughput constraints.
+          The Pareto board turns benchmark results into a buying surface. It estimates cost at target QPS
+          levels and marks products that are Pareto-optimal under measured performance constraints.
         </p>
         <h4>Design logic</h4>
         <p>
-          The board combines two inputs. First, it uses the measured search limits from the leaderboard as
-          the reachable QPS boundary for each product and mode. For the current single-tenant LAION 100M
-          query-only board, that means the lines stop at measured or capped points such as turbopuffer's
-          tested search range, Zilliz Tiered 4CU's measured max-QPS boundary, Zilliz Capacity 12CU's measured
-          serving boundary, pinned turbopuffer's measured pinned-mode boundary, and Pinecone's current
-          low-QPS reference cap. Second, it applies the actual product price models: Zilliz CU-hour pricing,
-          turbopuffer query/storage or pinned namespace pricing, and Pinecone read-unit/storage pricing.
+          The board combines measured QPS boundaries with product price models. For LAION 100M query-only,
+          each line stops where the leaderboard measured or capped that product's serving range, then applies
+          Zilliz CU-hour pricing, turbopuffer query/storage or pinned pricing, and Pinecone read-unit/storage
+          pricing.
         </p>
         <p>
-          That is why the chart is a simulation over real benchmark boundaries rather than a synthetic price
-          calculator. For each target QPS, the board asks: which measured product line can actually reach
-          this QPS, and what would that line cost under the product's published pricing model? The blue
-          "best choice" line is the lower-cost envelope across the reachable options, while crossover points
-          show where one product's economic model overtakes another.
+          This makes the chart a simulation over real benchmark boundaries rather than a detached price
+          calculator. The best-choice line is the lower-cost envelope across reachable options.
         </p>
         <h4>What we found</h4>
         <p>
-          In the current LAION 100M query-only model, turbopuffer is compelling at very low sustained QPS.
-          That is the clean advantage of pay-per-query serverless pricing: if the namespace is queried only
-          occasionally, paying per query can beat reserving a cluster. The crossover in this board is at
-          <strong>8 QPS</strong>. Below that point, turbopuffer has the cheaper active-query line; from that
-          point onward, Zilliz Cloud Tiered 4CU's flat CU-hour cost becomes cheaper than turbopuffer's
-          usage-metered query cost.
+          In the LAION 100M query-only model, turbopuffer wins at very low sustained QPS. The crossover is
+          <strong>8 QPS</strong>; from that point onward, Zilliz Tiered 4CU's flat CU-hour cost is cheaper
+          than turbopuffer's usage-metered query line.
         </p>
         <p>
-          Zilliz Cloud products become more competitive as QPS rises because the serving cost is mostly flat
-          once the cluster is provisioned. Tiered is the economical active-production line after the low-QPS
-          crossover, while Capacity becomes relevant when the buyer needs the stronger serving envelope,
-          better cold behavior, or more predictable enterprise posture. This is the dedicated-cluster trade:
-          it can look over-provisioned for occasional traffic, but it gets more attractive as sustained load
-          grows.
+          Zilliz gets more competitive as QPS rises because serving cost is mostly flat once provisioned.
+          Tiered is the economical active-production line after crossover; Capacity matters when buyers need
+          a stronger serving envelope, better cold behavior, or a more predictable enterprise posture.
         </p>
         <p>
-          Pinecone Serverless and turbopuffer represent the serverless side of the board, but they should not
-          be read identically. turbopuffer is the clear low-QPS winner in the current LAION 100M query-only
-          curve. Pinecone remains useful as a low-ops serverless reference and can be more relevant in
-          smaller or lighter-traffic scenarios, but in this specific LAION 100M board its read-unit pricing
-          keeps it from becoming the cheapest line. The point is not "serverless is always cheaper"; it is
-          that serverless can win when QPS stays low, while provisioned Zilliz capacity wins once utilization
-          is high enough.
+          Pinecone remains useful as a low-ops serverless reference, but in this LAION 100M board its
+          read-unit pricing keeps it from becoming the cheapest line. The takeaway is conditional:
+          serverless can win when QPS stays low; provisioned Zilliz wins once utilization is high enough.
         </p>
         <h4>Current board state</h4>
         <figure class="metric-figure">
@@ -1212,10 +1146,9 @@
         </figure>
 
         <p>
-          This is exactly why v2 needs a cost board. A customer should not have to infer the buying decision
-          from a raw QPS table. The board should say where the serverless low-traffic advantage applies,
-          where Zilliz Tiered becomes the more economical active-production option, and where Zilliz Capacity
-          is the better fit for higher-QPS, latency-sensitive, or governance-heavy serving.
+          This is why v2 needs a cost board: it shows where serverless low-traffic economics apply, where
+          Zilliz Tiered becomes the economical active-production option, and where Capacity fits higher-QPS
+          or governance-heavy serving.
         </p>
       </section>
 
