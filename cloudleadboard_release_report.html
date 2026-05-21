@@ -1155,19 +1155,30 @@
       <section id="caveats">
         <h2>What to keep in mind</h2>
         <p>
-          This is a release note, not the full benchmark report. The job here is to introduce the new
-          leaderboard, explain why the cases matter, and make the direction of the current findings clear.
-          Detailed tables, reproduction commands, raw JSON paths, and edge-case analysis belong in the
-          benchmark report and source artifact repository.
+          CloudLeadboard v2 is meant to make cloud vector database evaluation feel closer to the way teams
+          actually buy and operate these systems. Peak QPS still matters, but it is no longer enough on its
+          own. The useful question is whether a product can meet the workload's latency, freshness, payload,
+          tenancy, recall, and cost requirements at the same time.
         </p>
-        <ul>
-          <li>Pricing changes over time, so every cost chart needs the pricing date and region.</li>
-          <li>Vendor configuration choices can change results, especially for managed products with scaling controls or serverless behavior.</li>
-          <li>Fully indexed status may be exposed differently by product; the report must document how it is detected or inferred.</li>
-          <li>The current multi-tenant workload uses Cohere 10M split across 1,000 tenants; it is useful, but it does not represent every tenant distribution.</li>
-          <li>Cold latency depends on cache state, idle windows, and storage architecture, so the test definition must remain strict.</li>
-          <li>Cost Pareto winners are workload-specific and should always be read together with latency, recall, and payload constraints.</li>
-        </ul>
+        <p>
+          The current results should be read with that context. Pricing can change by date and region, and
+          managed-product configuration choices can shift the outcome, especially for products with scaling
+          controls, serverless behavior, or pinned capacity modes. Readiness and fully indexed status also
+          need careful documentation because each product exposes or implies those states differently.
+        </p>
+        <p>
+          The workloads are intentionally specific, not universal. Cohere 10M across 1,000 tenants is a
+          useful SaaS-shaped test, but it does not represent every tenant distribution. Cold latency depends
+          on cache state, idle windows, and storage architecture, so the definition has to stay strict. And
+          every cost Pareto result is workload-specific: it should always be read together with latency,
+          recall, payload shape, and measured serving limits.
+        </p>
+        <p>
+          That is the main reason this release matters. CloudLeadboard v2 gives us a way to compare managed
+          vector databases as deployable products, not just benchmark entries. The next step is to keep
+          expanding the case matrix and make the full benchmark report carry the reproduction details behind
+          each chart.
+        </p>
       </section>
     </article>
   </div>
