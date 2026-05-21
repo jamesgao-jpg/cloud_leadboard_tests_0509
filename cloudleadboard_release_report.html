@@ -612,6 +612,15 @@
             more complex serverless indexing path builds and optimizes work under the hood. That makes it a
             different tradeoff from Zilliz and turbopuffer rather than just a slower line in the table.
           </p>
+          <p>
+            The business read is straightforward. Zilliz is the cleaner fit when fresh embeddings must become
+            searchable quickly, such as a RAG knowledge-base rebuild, marketplace catalog refresh, security
+            corpus reindex, or daily multimodal content ingestion job. turbopuffer is attractive when the
+            priority is getting a very large batch accepted quickly and the application can tolerate a longer
+            ready window, for example offline backfills, archival namespaces, or preproduction data staging.
+            Pinecone's model fits teams that value serverless operations and slower, steady ingestion over
+            aggressive bulk refresh, especially when the AI application has modest update volume.
+          </p>
           <figure class="metric-figure">
             <div class="metric-title">Batch Size Excerpt <span>LAION 100M · rows/s and time until fully ready</span></div>
             <table class="mini-table" aria-label="CloudInsertCase batch size throughput and ready time excerpt">
@@ -681,6 +690,13 @@
             dedicated capacity can become much more cost efficient when the workload is large enough and
             predictable enough.
           </p>
+          <p>
+            For buyers, this mostly separates always-on AI systems from occasional-use systems. A production
+            RAG service, recommendation index, or agent-memory platform that refreshes data frequently benefits
+            from spreading write work over dedicated Zilliz capacity. Serverless products remain appealing
+            when traffic is spiky, teams want less capacity planning, or the namespace is queried rarely, but
+            the write bill needs to be reviewed before assuming serverless is cheaper end to end.
+          </p>
           <figure class="metric-figure">
             <div class="metric-title">One-Time Full Load Cost <span>LAION 100M · write-side cost model</span></div>
             <table class="mini-table" aria-label="CloudInsertCase one-time write cost excerpt">
@@ -725,75 +741,201 @@
         <section class="case-section" id="case-payload">
           <h3>CloudPayloadSearchCase: search with real response bodies</h3>
           <p>
-            Production search often returns more than IDs. CloudPayloadSearchCase measures the cost of
-            returning scalar metadata and raw vectors under unfiltered and filtered search. turbopuffer
-            deserves credit here: in the unfiltered vector-payload excerpt, unpinned turbopuffer reaches
-            <strong>382 QPS</strong>, ahead of Zilliz Capacity 12CU at <strong>229 QPS</strong>.
+            Production search often returns more than IDs. CloudPayloadSearchCase measures what happens when
+            the result body includes only IDs, scalar metadata, or full raw vectors, then repeats the same
+            idea under integer and scalar-label filters. That is important because topK 100 vector payloads
+            are much heavier than ID-only results: roughly <strong>309 KB/query</strong> in this matrix,
+            compared with about <strong>2 KB/query</strong> for IDs-only.
+          </p>
+          <h4>Payload size changes the unfiltered ranking</h4>
+          <p>
+            turbopuffer deserves credit on the unfiltered path. In the vector-payload row, unpinned
+            turbopuffer reaches <strong>382.2 QPS</strong>, ahead of Zilliz Capacity 12CU at
+            <strong>229.4 QPS</strong>. It also stays around <strong>395-400 QPS</strong> for unfiltered
+            IDs-only and scalar-label returns. That is a real strength when the workload is mostly broad,
+            unfiltered retrieval and raw QPS is the primary target.
           </p>
           <p>
-            The Zilliz advantage shows up when throughput is read together with recall and tail behavior.
-            Zilliz Capacity keeps stronger recall in the unfiltered vector run, and it is much cleaner on
-            highly selective integer filters: at the 99.9% integer-filter/vector point, Zilliz Tiered and
-            Capacity are near the <strong>900-950 QPS</strong> range while turbopuffer is around
-            <strong>45 QPS</strong> with multi-second p99. The release-note takeaway is not that one system
-            wins every row; it is that payload and filter shape can completely change the ranking.
+            Zilliz Capacity is more balanced across quality and payload shape. It reaches
+            <strong>376.0 QPS</strong> for IDs-only, <strong>379.5 QPS</strong> for scalar-label payloads,
+            and <strong>229.4 QPS</strong> for vector payloads, while keeping unfiltered recall at
+            <strong>0.9723</strong>. Zilliz Tiered 4CU is naturally smaller at roughly
+            <strong>44-50 QPS</strong>, but it keeps a clear role as lower-cost managed capacity when the
+            workload does not require the larger Capacity profile.
+          </p>
+          <p>
+            Pinecone Serverless provides a useful cautionary baseline. In the current payload-search data it
+            was measured at low paced concurrency because higher unpaced concurrency produced rate-limit
+            responses. Its unfiltered rows sit around <strong>4.5 QPS</strong> for IDs, scalar labels, and
+            vectors, with recall around <strong>0.961</strong>. That makes Pinecone easy to include as a
+            serverless reference point, but not competitive in this particular LAION 100M payload run.
+          </p>
+          <p>
+            For AI applications, the unfiltered result matters most for broad semantic retrieval: image search,
+            media discovery, candidate generation, and general RAG fetches where the app asks for nearest
+            neighbors first and filters later. turbopuffer is strongest when that workflow is dominated by
+            broad fanout and raw response throughput. Zilliz Capacity is a better fit when the application
+            needs the returned vectors or metadata but also needs stronger recall and predictable managed
+            behavior. Pinecone remains a low-ops option for smaller or less latency-sensitive serverless
+            retrieval paths, but the current numbers do not position it as the high-throughput choice here.
           </p>
           <figure class="metric-figure">
-            <div class="metric-title">Unfiltered Vector Payload <span>LAION 100M, topK 100</span></div>
+            <div class="metric-title">Unfiltered Payload Shape <span>LAION 100M, topK 100</span></div>
             <table class="mini-table" aria-label="Payload search excerpt">
               <thead>
                 <tr>
                   <th>Product</th>
-                  <th>Max QPS</th>
+                  <th>IDs only</th>
+                  <th>Scalar label</th>
+                  <th>Vector payload</th>
                   <th>Recall</th>
-                  <th>Read</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Zilliz Tiered 4CU</td>
-                  <td>44.0</td>
+                  <td>49.2 QPS</td>
+                  <td>49.8 QPS</td>
+                  <td>44.0 QPS</td>
                   <td>0.9510</td>
-                  <td>lower-cost tiered profile</td>
                 </tr>
                 <tr>
                   <td>Zilliz Capacity 12CU</td>
-                  <td>229.4</td>
+                  <td>376.0 QPS</td>
+                  <td>379.5 QPS</td>
+                  <td>229.4 QPS</td>
                   <td>0.9723</td>
-                  <td>stronger recall and production profile</td>
                 </tr>
                 <tr>
                   <td>turbopuffer unpinned</td>
-                  <td>382.2</td>
+                  <td>395.7 QPS</td>
+                  <td>399.6 QPS</td>
+                  <td>382.2 QPS</td>
                   <td>0.9321</td>
-                  <td>highest raw QPS in this excerpt</td>
+                </tr>
+                <tr>
+                  <td>Pinecone Serverless</td>
+                  <td>4.6 QPS</td>
+                  <td>4.5 QPS</td>
+                  <td>4.5 QPS</td>
+                  <td>0.9610</td>
                 </tr>
               </tbody>
             </table>
             <figcaption>
-              Payload search should be read as QPS plus recall. turbopuffer can be fast on unfiltered
-              vector returns; Zilliz Capacity is steadier when quality and filtered behavior are included.
+              Unfiltered payload search is the row where turbopuffer looks strongest on raw throughput.
+              Zilliz Capacity trades some raw QPS for stronger recall, while Pinecone is constrained by the
+              paced serverless run shape in this matrix.
             </figcaption>
+          </figure>
+          <h4>Filters change the story again</h4>
+          <p>
+            The Zilliz advantage shows up most clearly when filters are part of the request. At the
+            <strong>99.9%</strong> integer-filter/vector point, Zilliz Tiered 4CU reaches
+            <strong>955.7 QPS</strong> and Zilliz Capacity 12CU reaches <strong>933.0 QPS</strong>. The same
+            row puts turbopuffer unpinned at <strong>45.1 QPS</strong> with roughly <strong>7s p99</strong>,
+            while Pinecone Serverless is around <strong>4.8 QPS</strong> with recall still pending for the
+            filtered rows. Payload and filter shape can therefore flip the ranking completely.
+          </p>
+          <p>
+            That filtered shape maps directly to production AI workloads: per-user memory search, permissioned
+            enterprise RAG, catalog search with category and region constraints, or retrieval over embeddings
+            plus business metadata. In those contexts, Zilliz has the clearer story because the benchmark
+            shows high filtered QPS with low p99 latency. turbopuffer still has a place when the metadata
+            constraints are light or the workload is mostly unfiltered, but the selective-filter rows show
+            why v2 cannot stop at a single unfiltered QPS number.
+          </p>
+          <figure class="metric-figure">
+            <div class="metric-title">Selective Filter Stress Point <span>99.9% integer filter · vector payload</span></div>
+            <table class="mini-table" aria-label="Filtered vector payload excerpt">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Max QPS</th>
+                  <th>Recall</th>
+                  <th>P99 latency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Zilliz Tiered 4CU</td>
+                  <td>955.7</td>
+                  <td>0.9423</td>
+                  <td>0.16s</td>
+                </tr>
+                <tr>
+                  <td>Zilliz Capacity 12CU</td>
+                  <td>933.0</td>
+                  <td>0.9781</td>
+                  <td>0.12s</td>
+                </tr>
+                <tr>
+                  <td>turbopuffer unpinned</td>
+                  <td>45.1</td>
+                  <td>0.9436</td>
+                  <td>7.03s</td>
+                </tr>
+                <tr>
+                  <td>Pinecone Serverless</td>
+                  <td>4.8</td>
+                  <td>pending</td>
+                  <td>3.30s</td>
+                </tr>
+              </tbody>
+            </table>
           </figure>
         </section>
 
         <section class="case-section" id="case-multitenant">
           <h3>CloudMultitenantSearchCase: SaaS-shaped traffic</h3>
           <p>
-            CloudMultitenantSearchCase splits Cohere 10M across <strong>1,000 tenants</strong> and sends
-            queries to random tenants. This is where turbopuffer has its clearest raw-performance edge in
-            the current data. Across the matched multitenant matrix, it leads the max-QPS rows, with
-            IDs-only and scalar-label payloads commonly landing around the <strong>3.9K-4.6K QPS</strong>
-            band.
+            CloudMultitenantSearchCase splits Cohere 10M across <strong>1,000 tenants</strong>, assigns
+            vectors by tenant, and sends each query to a random tenant. That changes the benchmark from
+            "how fast can one large collection search" to "how well does the system behave when traffic is
+            fragmented across many customer spaces." For SaaS AI products, that is often the real shape:
+            customer workspaces, per-account memory, project-level RAG, support copilots, and agent memory
+            stores rarely search one global namespace without tenant boundaries.
+          </p>
+          <h4>Tenant isolation changes the benchmark</h4>
+          <p>
+            The current matched matrix gives turbopuffer its clearest raw-throughput win. With namespaces
+            aligned to tenants, turbopuffer reaches <strong>3,855 QPS</strong> on unfiltered IDs-only search,
+            <strong>3,835 QPS</strong> on the 99.9% integer-filter/vector row, and commonly sits in the
+            <strong>3.9K-4.6K QPS</strong> band for IDs-only or scalar-label payloads. That is a meaningful
+            strength for products where each tenant is naturally small, independent, and serverless-friendly.
           </p>
           <p>
             Zilliz Cloud Capacity 2CU is still the stronger Zilliz profile and stays much more usable than
-            Tiered for vector payloads. Capacity reaches <strong>371 QPS</strong> on unfiltered vector
-            returns and <strong>1,306 QPS</strong> on the highly selective integer-filter/vector excerpt,
-            while the refreshed Tiered 1CU vector rows are materially stronger on selective filters but still
-            trail on heavier vector-return cases. This case therefore gives
-            turbopuffer a fair win on namespace-shaped throughput, while also showing why a fixed-capacity
-            Zilliz deployment remains relevant once cost, recall, and operational guarantees are layered in.
+            Tiered for vector payloads. It reaches <strong>889 QPS</strong> on unfiltered IDs-only search,
+            <strong>371 QPS</strong> when unfiltered queries return vectors, and <strong>1,306 QPS</strong>
+            on the highly selective integer-filter/vector excerpt. Tiered 1CU is more constrained on heavy
+            vector returns, but it remains relevant for smaller tenants, lighter retrieval bodies, and teams
+            trying to keep managed capacity costs low.
+          </p>
+          <h4>Where each product fits</h4>
+          <p>
+            For AI SaaS with many lightweight tenants, turbopuffer has the cleanest story in this case:
+            namespace-per-tenant routing, strong aggregate throughput, and low observed latency on the
+            matched rows. That can be attractive for workspace search, per-customer chatbot memory, or a
+            multi-tenant support assistant where most customers have modest data and the product wants the
+            operational simplicity of serverless scaling.
+          </p>
+          <p>
+            Zilliz Capacity fits a different operating posture. It is more compelling when tenants are
+            larger, more valuable, or more regulated, and when the buyer wants provisioned capacity,
+            predictable behavior, recall governance, and a cost envelope that can be reasoned about ahead of
+            time. In practical terms, that means enterprise RAG deployments, permissioned knowledge bases,
+            internal copilots, or agent platforms where a few high-value tenants may dominate usage and the
+            team would rather reserve stable capacity than let every namespace scale independently.
+          </p>
+          <p>
+            Pinecone Serverless is included as a detached serverless reference, not a like-for-like
+            concurrency comparison. Its multitenant run was collected at concurrency <strong>4</strong>
+            rather than the Zilliz/turbopuffer <strong>60/80</strong> matrix, but the numbers are still
+            useful as a low-ops baseline: most measured rows sit around <strong>500-600 QPS</strong>. That
+            makes Pinecone relevant for teams that prioritize managed serverless ergonomics and moderate
+            tenant traffic, while this v2 case gives Zilliz and turbopuffer more room to show the tradeoff
+            between provisioned governance and namespace-shaped throughput.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">1,000-Tenant Search Excerpt <span>max QPS, topK 50</span></div>
@@ -804,6 +946,7 @@
                   <th>Tiered 1CU</th>
                   <th>Capacity 2CU</th>
                   <th>turbopuffer</th>
+                  <th>Pinecone c4-only</th>
                 </tr>
               </thead>
               <tbody>
@@ -812,30 +955,43 @@
                   <td>481</td>
                   <td>889</td>
                   <td>3,855</td>
+                  <td>569</td>
+                </tr>
+                <tr>
+                  <td>Unfiltered, vector</td>
+                  <td>34</td>
+                  <td>371</td>
+                  <td>1,775</td>
+                  <td>542</td>
                 </tr>
                 <tr>
                   <td>Int filter 99.9%, vector</td>
                   <td>625</td>
                   <td>1,307</td>
                   <td>3,835</td>
+                  <td>526</td>
                 </tr>
                 <tr>
                   <td>Scalar label 1%, vector</td>
                   <td>152</td>
                   <td>588</td>
                   <td>1,767</td>
+                  <td>600</td>
                 </tr>
                 <tr>
                   <td>Scalar label 50%, vector</td>
                   <td>29</td>
                   <td>317</td>
                   <td>1,760</td>
+                  <td>562</td>
                 </tr>
               </tbody>
             </table>
             <figcaption>
-              Excerpt from the 42-row multitenant matrix. This case is search-only and not normalized by
-              cost, but it clearly captures turbopuffer's namespace-throughput strength.
+              Excerpt from the 42-row Zilliz/turbopuffer matrix, plus Pinecone's detached c4-only serverless
+              run. Pinecone is shown for context, but its concurrency is not normalized against the c60/c80
+              rows. This case is search-only and not cost-normalized, so the product takeaway should be read
+              as workload fit rather than a final purchasing answer.
             </figcaption>
           </figure>
         </section>
@@ -855,6 +1011,15 @@
             is a meaningful strength for customers willing to operate a pinned mode. Zilliz Capacity still
             has the lower cold tail in this excerpt, while Zilliz Tiered is marked for rebench because its
             cold tail is much higher than warm.
+          </p>
+          <p>
+            Cold latency is a business problem for AI features that users touch sporadically: an internal
+            knowledge assistant opened a few times per day, a long-tail customer workspace, an on-demand
+            document analysis flow, or an agent that wakes up after idle time. Zilliz Capacity is strongest
+            when the first query needs to feel interactive without special operating modes. turbopuffer
+            pinned mode is a credible answer when a team wants the serverless product but is willing to pay
+            for warmer replicas on latency-sensitive namespaces. Default unpinned behavior is better suited
+            to background, batch, or less interactive retrieval paths where a cold miss is acceptable.
           </p>
           <figure class="metric-figure">
             <div class="metric-title">Cold Latency Excerpt <span>ms, lower is better</span></div>
