@@ -1161,18 +1161,101 @@
 
       <section id="cost">
         <h2>The cost view that actually helps buyers</h2>
+        <h3>Cost is modeled against achievable QPS, not shown as a detached price sheet</h3>
+        <h4>What this view measures</h4>
         <p>
-          The Pareto cost board is the most important new decision surface in CloudLeadboard v2. It shows
-          the estimated cost of each product at different target QPS levels and marks the products that are
-          Pareto-optimal under the benchmark's latency, recall, payload, and readiness constraints.
+          The Pareto cost board turns the benchmark into a buying surface. Instead of asking readers to
+          compare raw QPS tables against pricing pages by hand, it estimates the cost of serving different
+          target QPS levels and marks the products that are Pareto-optimal under the benchmark's latency,
+          recall, payload, readiness, and measured-throughput constraints.
+        </p>
+        <h4>Design logic</h4>
+        <p>
+          The board combines two inputs. First, it uses the measured search limits from the leaderboard as
+          the reachable QPS boundary for each product and mode. For the current single-tenant LAION 100M
+          query-only board, that means the lines stop at measured or capped points such as turbopuffer's
+          tested search range, Zilliz Tiered 4CU's measured max-QPS boundary, Zilliz Capacity 12CU's measured
+          serving boundary, pinned turbopuffer's measured pinned-mode boundary, and Pinecone's current
+          low-QPS reference cap. Second, it applies the actual product price models: Zilliz CU-hour pricing,
+          turbopuffer query/storage or pinned namespace pricing, and Pinecone read-unit/storage pricing.
         </p>
         <p>
-          In the current LAION 100M compute model, turbopuffer is compelling for very low sustained QPS.
-          That is a legitimate strength of pay-per-query serverless pricing. But once traffic crosses the
-          low single-digit QPS range, Zilliz Cloud's flat CU-hour economics become the stronger cost story.
-          The current crossover is at <strong>8 QPS</strong>: from that point onward, the cheapest reachable
-          Zilliz option is less expensive than turbopuffer in this model.
+          That is why the chart is a simulation over real benchmark boundaries rather than a synthetic price
+          calculator. For each target QPS, the board asks: which measured product line can actually reach
+          this QPS, and what would that line cost under the product's published pricing model? The blue
+          "best choice" line is the lower-cost envelope across the reachable options, while crossover points
+          show where one product's economic model overtakes another.
         </p>
+        <h4>What we found</h4>
+        <p>
+          In the current LAION 100M query-only model, turbopuffer is compelling at very low sustained QPS.
+          That is the clean advantage of pay-per-query serverless pricing: if the namespace is queried only
+          occasionally, paying per query can beat reserving a cluster. The crossover in this board is at
+          <strong>8 QPS</strong>. Below that point, turbopuffer has the cheaper active-query line; from that
+          point onward, Zilliz Cloud Tiered 4CU's flat CU-hour cost becomes cheaper than turbopuffer's
+          usage-metered query cost.
+        </p>
+        <p>
+          Zilliz Cloud products become more competitive as QPS rises because the serving cost is mostly flat
+          once the cluster is provisioned. Tiered is the economical active-production line after the low-QPS
+          crossover, while Capacity becomes relevant when the buyer needs the stronger serving envelope,
+          better cold behavior, or more predictable enterprise posture. This is the dedicated-cluster trade:
+          it can look over-provisioned for occasional traffic, but it gets more attractive as sustained load
+          grows.
+        </p>
+        <p>
+          Pinecone Serverless and turbopuffer represent the serverless side of the board, but they should not
+          be read identically. turbopuffer is the clear low-QPS winner in the current LAION 100M query-only
+          curve. Pinecone remains useful as a low-ops serverless reference and can be more relevant in
+          smaller or lighter-traffic scenarios, but in this specific LAION 100M board its read-unit pricing
+          keeps it from becoming the cheapest line. The point is not "serverless is always cheaper"; it is
+          that serverless can win when QPS stays low, while provisioned Zilliz capacity wins once utilization
+          is high enough.
+        </p>
+        <h4>Current board state</h4>
+        <figure class="metric-figure">
+          <div class="metric-title">Cost Pareto Readout <span>single-tenant LAION 100M · query only</span></div>
+          <table class="mini-table" aria-label="Cost Pareto readout">
+            <thead>
+              <tr>
+                <th>Product / mode</th>
+                <th>Cost behavior</th>
+                <th>Current readout</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>turbopuffer</td>
+                <td>Usage-metered query cost</td>
+                <td>Best at very low sustained QPS; crossed by Zilliz at 8 QPS.</td>
+              </tr>
+              <tr>
+                <td>Zilliz Cloud Tiered 4CU</td>
+                <td>Flat CU-hour cost</td>
+                <td>Cheapest reachable Zilliz line after the low-QPS crossover.</td>
+              </tr>
+              <tr>
+                <td>Zilliz Capacity 12CU</td>
+                <td>Higher flat CU-hour cost</td>
+                <td>Higher serving envelope and enterprise posture; not the cheapest low-QPS line.</td>
+              </tr>
+              <tr>
+                <td>turbopuffer pinned, 2 replicas</td>
+                <td>Pinned namespace GB-hour cost</td>
+                <td>Useful for warmer serverless behavior, but priced differently from unpinned search.</td>
+              </tr>
+              <tr>
+                <td>Pinecone Serverless</td>
+                <td>Read-unit serverless pricing</td>
+                <td>Low-ops reference; not the cheapest LAION 100M query-only line in this board.</td>
+              </tr>
+            </tbody>
+          </table>
+          <figcaption>
+            This table summarizes the embedded board below. The board itself is the source of truth because
+            it is rendered from the shared cost model and measured-result manifest.
+          </figcaption>
+        </figure>
 
         <figure>
           <div class="cost-board-frame">
@@ -1190,9 +1273,9 @@
 
         <p>
           This is exactly why v2 needs a cost board. A customer should not have to infer the buying decision
-          from a raw QPS table. The board should say where turbopuffer's low-traffic advantage applies, where
-          Zilliz Tiered becomes the more economical active-production option, and where Zilliz Capacity is
-          the better fit for higher-QPS or latency-sensitive serving.
+          from a raw QPS table. The board should say where the serverless low-traffic advantage applies,
+          where Zilliz Tiered becomes the more economical active-production option, and where Zilliz Capacity
+          is the better fit for higher-QPS, latency-sensitive, or governance-heavy serving.
         </p>
       </section>
 
