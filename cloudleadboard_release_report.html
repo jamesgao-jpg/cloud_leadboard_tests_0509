@@ -426,6 +426,14 @@
         <span>May 14, 2026</span>
         <span>Current focus: Zilliz Cloud Tiered/Capacity and turbopuffer</span>
       </div>
+      <div class="note">
+        <strong>Headline takeaway:</strong> for cloud database buyers, cost is usually the first constraint;
+        throughput only matters if it meets the workload at an acceptable monthly bill. In this v2 slice,
+        Zilliz Tiered is the economical active-production path after utilization crosses the low-QPS
+        serverless range, Zilliz Capacity is the stronger fit for freshness, cold stability, and predictable
+        serving, turbopuffer has clear edges in low-QPS serverless and lightweight multitenant workloads, and
+        Pinecone remains the mature low-ops serverless baseline.
+      </div>
 
       <nav class="toc" aria-label="Contents">
         <strong>In this note</strong>
@@ -451,8 +459,9 @@
         <p>
           The vector database market has moved past a simple "who has the highest QPS?" phase. Most
           production teams now choose managed vector database products under budget, latency, freshness,
-          and operational constraints. In that world, cost often dominates raw throughput: a faster system
-          is not the better choice if it needs meaningfully more monthly spend to satisfy the same workload.
+          and operational constraints. For cloud database buyers, cost is usually the first constraint:
+          a faster system is not the better choice if it needs meaningfully more monthly spend to satisfy
+          the same workload.
         </p>
         <p>
           VDBBench Leaderboard v1 still matters. It gives a clean way to compare raw engine behavior across
@@ -542,7 +551,7 @@
       <section id="candidates">
         <h2>Who we tested this round</h2>
         <p>
-          We are measuring three of the most popular cloud vector databases in the market:
+          We are measuring three commonly evaluated managed cloud vector databases:
           Zilliz Cloud, turbopuffer, and Pinecone.
         </p>
         <table>
@@ -556,7 +565,7 @@
           <tbody>
             <tr>
               <td>Zilliz Cloud</td>
-              <td>Managed cloud vector database with tiered and capacity profiles, strong ready-to-serve behavior, and a production-stability focus.</td>
+              <td>Managed cloud vector database with Tiered for economical active production and Capacity for predictable serving, freshness, and cold stability.</td>
               <td>May 10th, 2026</td>
             </tr>
             <tr>
@@ -566,11 +575,17 @@
             </tr>
             <tr>
               <td>Pinecone</td>
-              <td>Widely adopted serverless vector database with a mature managed service and usage-based pricing model.</td>
+              <td>Widely adopted serverless vector database with mature low-ops ergonomics and usage-based pricing.</td>
               <td>May 10th, 2026</td>
             </tr>
           </tbody>
         </table>
+        <p>
+          The product roles are intentionally different. Zilliz Tiered is the cost-efficient active-serving
+          line after utilization rises; Zilliz Capacity is the higher-control profile for freshness, cold
+          behavior, and predictable enterprise serving; turbopuffer is strongest where serverless economics
+          and namespace-oriented throughput match the workload; Pinecone is the mature low-ops reference.
+        </p>
       </section>
 
       <section id="tests">
@@ -753,6 +768,11 @@
             tenants; Zilliz fits filtered, permissioned, heavier-tenant, or recall-sensitive deployments.
             Pinecone remains the low-ops serverless baseline.
           </p>
+          <p>
+            The cost implication is that raw search QPS should not be read alone. Broad or multitenant
+            throughput only becomes a buying answer after it is translated into the monthly cost of the
+            sustained traffic tier.
+          </p>
           <h4>Measured excerpts</h4>
           <figure class="metric-figure">
             <div class="metric-title">Single-Tenant Payload Shape <span>LAION 100M, topK 100</span></div>
@@ -921,6 +941,11 @@
             Pinecone is useful as a low-ops baseline: cold and warm tails are similar, but both are around
             one second. Zilliz Tiered 4CU stays in the chart for transparency and should be rebenched.
           </p>
+          <p>
+            The cost implication is especially important here: pinned replicas and provisioned capacity can
+            improve first-touch behavior, but they change the economic model. Cold-latency wins should be
+            read together with the cost of keeping that path warm enough for the user experience.
+          </p>
           <h4>Measured excerpt</h4>
           <figure class="metric-figure">
             <div class="metric-title">Cold Latency Table <span>unfiltered, ids-only, lower is better</span></div>
@@ -1079,7 +1104,7 @@
         <p>
           Zilliz gets more competitive as QPS rises because serving cost is mostly flat once provisioned.
           Tiered is the economical active-production line after crossover; Capacity matters when buyers need
-          a stronger serving envelope, better cold behavior, or a more predictable enterprise posture.
+          a stronger serving envelope, better cold behavior, or more predictable enterprise serving.
         </p>
         <p>
           Pinecone remains useful as a low-ops serverless reference, but in this LAION 100M board its
@@ -1111,7 +1136,7 @@
               <tr>
                 <td>Zilliz Capacity 12CU</td>
                 <td>Higher flat CU-hour cost</td>
-                <td>Higher serving envelope and enterprise posture; not the cheapest low-QPS line.</td>
+                <td>Higher serving envelope and predictable serving posture; not the cheapest low-QPS line.</td>
               </tr>
               <tr>
                 <td>turbopuffer pinned, 2 replicas</td>
