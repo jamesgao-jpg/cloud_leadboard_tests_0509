@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T13:26:49.207Z",
+  "generated_at": "2026-05-28T10:03:11.543Z",
   "entries": [
     {
       "path": "cloud_cold_latency/raw_results/pinecone_serverless/int_filter_0.9/result_20260515_pinecone_cloud_cold_latency_laion100m_int_filter_0_9_20260515_pinecone.json",
@@ -2780,6 +2780,342 @@
       "source": "measured"
     },
     {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/0_1p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_0_1p_ids_only_concurrent_qps_reattempt_20260528T022957Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/0_1p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_0_1p_ids_only_serial_recall_reattempt_20260528T022944Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/0_1p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_0_1p_vector_concurrent_qps_reattempt_20260528T023254Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/0_1p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_0_1p_vector_serial_recall_reattempt_20260528T023233Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/10p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_10p_ids_only_concurrent_qps_reattempt_20260528T024139Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/10p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_10p_ids_only_serial_recall_reattempt_20260528T024122Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/10p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_10p_vector_concurrent_qps_reattempt_20260528T024438Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/10p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_10p_vector_serial_recall_reattempt_20260528T024415Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/1p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_1p_ids_only_concurrent_qps_reattempt_20260528T023547Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/1p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_1p_ids_only_serial_recall_reattempt_20260528T023530Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/1p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_1p_vector_concurrent_qps_reattempt_20260528T023846Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/1p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_int_filter_1p_vector_serial_recall_reattempt_20260528T023823Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/50p/ids_only/concurrent_qps/result_20260527_zilliz_cloud_capacity_32cu_new_collection_int_filter_50p_ids_only_concurrent_qps_20260527T154425Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/50p/ids_only/serial_recall/result_20260527_zilliz_cloud_capacity_32cu_new_collection_int_filter_50p_ids_only_serial_recall_20260527T154407Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/50p/vector/concurrent_qps/result_20260527_zilliz_cloud_capacity_32cu_new_collection_int_filter_50p_vector_concurrent_qps_20260527T154726Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/int_filter/50p/vector/serial_recall/result_20260527_zilliz_cloud_capacity_32cu_new_collection_int_filter_50p_vector_serial_recall_20260527T154700Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_1p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_1p_ids_only_concurrent_qps_20260528T065210Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_1p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_1p_ids_only_serial_recall_20260528T065151Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_1p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_1p_vector_concurrent_qps_20260528T065512Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_1p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_1p_vector_serial_recall_20260528T065446Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_2p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_2p_ids_only_concurrent_qps_20260528T065806Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_2p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_2p_ids_only_serial_recall_20260528T065749Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_2p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_2p_vector_concurrent_qps_20260528T070110Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_2p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_2p_vector_serial_recall_20260528T070042Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_5p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_5p_ids_only_concurrent_qps_20260528T070404Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_5p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_5p_ids_only_serial_recall_20260528T070346Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_5p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_5p_vector_concurrent_qps_20260528T070708Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/0_5p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_0_5p_vector_serial_recall_20260528T070640Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/10p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_10p_ids_only_concurrent_qps_20260528T072815Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/10p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_10p_ids_only_serial_recall_20260528T072751Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/10p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_10p_vector_concurrent_qps_20260528T073126Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/10p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_10p_vector_serial_recall_20260528T073051Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/1p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_1p_ids_only_concurrent_qps_20260528T071005Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/1p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_1p_ids_only_serial_recall_20260528T070944Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/1p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_1p_vector_concurrent_qps_20260528T071312Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/1p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_1p_vector_serial_recall_20260528T071241Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/20p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_20p_ids_only_concurrent_qps_20260528T073435Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/20p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_20p_ids_only_serial_recall_20260528T073402Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/20p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_20p_vector_concurrent_qps_20260528T073749Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/20p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_20p_vector_serial_recall_20260528T073710Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/2p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_2p_ids_only_concurrent_qps_20260528T071607Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/2p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_2p_ids_only_serial_recall_20260528T071548Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/2p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_2p_vector_concurrent_qps_20260528T071913Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/2p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_2p_vector_serial_recall_20260528T071843Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/50p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_50p_ids_only_concurrent_qps_20260528T074104Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/50p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_50p_ids_only_serial_recall_20260528T074025Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/50p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_50p_vector_concurrent_qps_20260528T074430Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/50p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_50p_vector_serial_recall_20260528T074340Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/5p/ids_only/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_5p_ids_only_concurrent_qps_20260528T072210Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/5p/ids_only/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_5p_ids_only_serial_recall_20260528T072149Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/5p/vector/concurrent_qps/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_5p_vector_concurrent_qps_20260528T072515Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/scalar_label_filter/5p/vector/serial_recall/result_20260528_zilliz_cloud_capacity_32cu_new_collection_scalar_label_filter_5p_vector_serial_recall_20260528T072446Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/unfiltered/na/ids_only/concurrent_qps/result_20260527_zilliz_cloud_capacity_32cu_new_collection_unfiltered_na_ids_only_concurrent_qps_20260527T153744Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/unfiltered/na/ids_only/serial_recall/result_20260527_zilliz_cloud_capacity_32cu_new_collection_unfiltered_na_ids_only_serial_recall_20260527T153725Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/unfiltered/na/vector/concurrent_qps/result_20260527_zilliz_cloud_capacity_32cu_new_collection_unfiltered_na_vector_concurrent_qps_20260527T154045Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
+      "path": "cloud_payload_search/raw_results/zilliz_cloud_capacity_32cu/unfiltered/na/vector/serial_recall/result_20260527_zilliz_cloud_capacity_32cu_new_collection_unfiltered_na_vector_serial_recall_20260527T154020Z_zillizcloud.json",
+      "family": "cloud_payload_search",
+      "case_id": 500,
+      "source": "measured"
+    },
+    {
       "path": "cloud_payload_search/raw_results/zilliz_cloud_tiered_4cu/int_filter/0_1p/ids_only/concurrent_qps/result_20260511_07e226c8a9fc4f5b902c690863036d4f_zillizcloud.json",
       "family": "cloud_payload_search",
       "case_id": 500,
@@ -3444,7 +3780,7 @@
     "cloud_cold_latency:measured": 10,
     "cloud_insert:measured": 15,
     "cloud_multi_tenant_search:measured": 154,
-    "cloud_payload_search:measured": 368,
+    "cloud_payload_search:measured": 424,
     "cloud_payload_search:mocked": 26
   }
 }

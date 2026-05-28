@@ -25,11 +25,13 @@ ZILLIZ_CAPACITY_PER_CU_HR = 0.248
 
 # --- Measured reference points on LAION 100M (k=100, no filter) ---
 # Tiered 4 CU and 8 CU are index-version-10 reruns.
+# Capacity 32 CU uses the interactive board's unfiltered ids_only payload ceiling.
 ZILLIZ_CONFIGS = [
     ("Tiered 4 CU", 4, ZILLIZ_TIERED_PER_CU_HR, 57.97),
     ("Tiered 8 CU", 8, ZILLIZ_TIERED_PER_CU_HR, 114.37),
     ("Capacity 12 CU", 12, ZILLIZ_CAPACITY_PER_CU_HR, 310.47),
     ("Capacity 16 CU", 16, ZILLIZ_CAPACITY_PER_CU_HR, 405.6),
+    ("Capacity 32 CU", 32, ZILLIZ_CAPACITY_PER_CU_HR, 786.0793),
 ]
 
 # --- LAION 100M namespace size (as Turbopuffer's JS bills it) ---

@@ -13,6 +13,10 @@ const caseFolders = [
   "cloud_cold_latency",
 ];
 
+function shouldSkipDirectory(name) {
+  return name.startsWith("_") || name.endsWith("_archived");
+}
+
 async function walk(dir) {
   let entries;
   try {
@@ -24,6 +28,7 @@ async function walk(dir) {
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
+      if (shouldSkipDirectory(entry.name)) continue;
       files.push(...await walk(full));
     } else if (/^result_.*\.json$/.test(entry.name)) {
       files.push(full);

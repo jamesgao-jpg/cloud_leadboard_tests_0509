@@ -23,6 +23,10 @@ const expectedCaseId = {
 const supportedSearchPhases = new Set(["concurrent_qps", "serial_recall"]);
 const supportedSearchPayloads = new Set(["ids_only", "vector", "scalar_label"]);
 
+function shouldSkipDirectory(name) {
+  return name.startsWith("_") || name.endsWith("_archived");
+}
+
 async function walk(dir) {
   let entries;
   try {
@@ -34,7 +38,10 @@ async function walk(dir) {
   const files = [];
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) files.push(...await walk(full));
+    if (entry.isDirectory()) {
+      if (shouldSkipDirectory(entry.name)) continue;
+      files.push(...await walk(full));
+    }
     else if (/^result_.*\.json$/.test(entry.name)) files.push(full);
   }
   return files;

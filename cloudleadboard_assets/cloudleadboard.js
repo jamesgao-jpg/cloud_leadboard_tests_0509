@@ -8,6 +8,7 @@ const CASE_NAMES = {
 const PRODUCT_LABELS = {
   zilliz_cloud_tiered_4cu: "Zilliz Cloud Tiered 4CU",
   zilliz_cloud_capacity_12cu: "Zilliz Cloud Capacity 12CU",
+  zilliz_cloud_capacity_32cu: "Zilliz Cloud Capacity 32CU",
   zilliz_cloud_tiered_1cu: "Zilliz Cloud Tiered 1CU",
   zilliz_cloud_capacity_2cu: "Zilliz Cloud Capacity 2CU",
   zilliz_cloud_cap_12cu: "Zilliz Cloud Capacity 12CU",
@@ -377,9 +378,12 @@ function zillizInsertHourlyRate(row) {
   const points = state.cost?.scenarios?.single?.points || [];
   const lowerProduct = row.product.toLowerCase();
   const target = lowerProduct.includes("tiered") ? "tiered" : "capacity";
+  const cuMatch = lowerProduct.match(/(\d+)\s*cu/);
   const point = points.find((item) => {
     const lower = item.product.toLowerCase();
-    return lower.includes("zilliz") && lower.includes(target);
+    if (!lower.includes("zilliz") || !lower.includes(target)) return false;
+    if (!cuMatch) return true;
+    return lower.includes(`${cuMatch[1]}cu`) || lower.includes(`${cuMatch[1]} cu`);
   });
   return Number(point?.search_cost_hr || 0);
 }
@@ -1234,6 +1238,8 @@ function costProductSearchAliases(product, scenarioId) {
   const lower = product.toLowerCase();
   if (scenarioId === "single") {
     if (lower.includes("tiered")) return ["zilliz_cloud_tiered_4cu"];
+    if (lower.includes("capacity") && lower.includes("32")) return ["zilliz_cloud_capacity_32cu"];
+    if (lower.includes("capacity") && lower.includes("12")) return ["zilliz_cloud_capacity_12cu", "zilliz_cloud_cap_12cu", "zillz_cloud_cap_12cu"];
     if (lower.includes("capacity")) return ["zilliz_cloud_capacity_12cu", "zilliz_cloud_cap_12cu", "zillz_cloud_cap_12cu"];
     if (lower.includes("pinecone")) return ["pinecone_serverless", "pinecone"];
     if (lower.includes("turbo") && lower.includes("pinned")) return ["turbopuffer_pinned"];
