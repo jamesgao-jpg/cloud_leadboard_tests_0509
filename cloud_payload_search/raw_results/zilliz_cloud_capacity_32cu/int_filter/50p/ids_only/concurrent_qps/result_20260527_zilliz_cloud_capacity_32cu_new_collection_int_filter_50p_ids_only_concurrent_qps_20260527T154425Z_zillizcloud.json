@@ -1,0 +1,106 @@
+{
+  "run_id": "329211883be9407ea2850ad78ad1b713",
+  "task_label": "zilliz_cloud_capacity_32cu_new_collection_int_filter_50p_ids_only_concurrent_qps_20260527T154425Z",
+  "results": [
+    {
+      "metrics": {
+        "max_load_count": 0,
+        "insert_duration": 0.0,
+        "optimize_duration": 0.0,
+        "load_duration": 0.0,
+        "qps": 627.9737,
+        "serial_latency_p99": 0.0,
+        "serial_latency_p95": 0.0,
+        "recall": 0.0,
+        "ndcg": 0.0,
+        "conc_num_list": [
+          60,
+          80
+        ],
+        "conc_qps_list": [
+          619.1305,
+          627.9737
+        ],
+        "conc_latency_p99_list": [
+          0.14626048999605698,
+          0.17305558946507513
+        ],
+        "conc_latency_p95_list": [
+          0.11020384799339808,
+          0.16686793949775164
+        ],
+        "conc_latency_avg_list": [
+          0.09612845520074476,
+          0.12576796557385705
+        ],
+        "payload_profile": "ids_only",
+        "payload_estimated_bytes_per_query": 2000,
+        "inserted_count": 0,
+        "insert_rows_per_second": 0.0,
+        "insert_completion_seconds": 0.0,
+        "searchable_after_insert_seconds": 0.0,
+        "indexed_after_searchable_seconds": 0.0,
+        "additional_parameters": {},
+        "st_ideal_insert_duration": 0,
+        "st_search_stage_list": [],
+        "st_search_time_list": [],
+        "st_max_qps_list_list": [],
+        "st_recall_list": [],
+        "st_ndcg_list": [],
+        "st_serial_latency_p99_list": [],
+        "st_serial_latency_p95_list": [],
+        "st_conc_failed_rate_list": [],
+        "st_conc_num_list_list": [],
+        "st_conc_qps_list_list": [],
+        "st_conc_latency_p99_list_list": [],
+        "st_conc_latency_p95_list_list": [],
+        "st_conc_latency_avg_list_list": []
+      },
+      "task_config": {
+        "db": "ZillizCloud",
+        "db_config": {
+          "db_label": "zilliz_cloud_capacity_32cu_new_collection_int_filter_50p_ids_only_concurrent_qps_20260527T154425Z",
+          "version": "",
+          "note": "",
+          "uri": "**********",
+          "user": "db_admin",
+          "password": "**********",
+          "token": "**********",
+          "num_shards": 1,
+          "collection_name": "cloud_insert_laion100m_cap32cu_bs10k_20260527T121258Z"
+        },
+        "db_case_config": {
+          "index": "AUTOINDEX",
+          "metric_type": "L2",
+          "use_partition_key": false,
+          "level": 1,
+          "num_shards": 1
+        },
+        "case_config": {
+          "case_id": 500,
+          "custom_case": {
+            "payload_profile": "ids_only",
+            "dataset_with_size_type": "Large LAION (768dim, 100M)",
+            "filter_rate": 0.5
+          },
+          "k": 100,
+          "concurrency_search_config": {
+            "num_concurrency": [
+              60,
+              80
+            ],
+            "concurrency_duration": 60,
+            "concurrency_timeout": 3600
+          }
+        },
+        "stages": [
+          "search_concurrent"
+        ],
+        "load_concurrency": 0
+      },
+      "label": ":)"
+    }
+  ],
+  "file_fmt": "result_{}_{}_{}.json",
+  "timestamp": 1779840000.0
+}
