@@ -167,10 +167,15 @@ cost_per_month = cost_per_hour × 720
 ```bash
 python3 cost_calc.py                # default QPS = 1, 10, 100
 python3 cost_calc.py 5 50 500       # custom QPS list
+python3 cost_calc.py --root .. --emit-cost-model
+python3 cost_calc.py --root .. --check-cost-model ../cloudleadboard_data/cost_model.json
 ```
 
-The calculator uses measured QPS ceilings and does not extrapolate
-Zilliz configurations past tested headroom.
+The calculator uses current raw-result ids-only QPS ceilings and does
+not extrapolate Zilliz configurations past tested headroom. The
+`--emit-cost-model` path emits the raw-derived model used by the checked
+in `cloudleadboard_data/cost_model.json`; `--check-cost-model` verifies
+that the checked-in frontend file is still reproducible.
 
 ## Results — LAION 100M unfiltered
 
